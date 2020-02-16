@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jjdz8-4fun.iml" filepath="$PROJECT_DIR$/jjdz8-4fun.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shoppinglist/shoppinglist.iml" filepath="$PROJECT_DIR$/shoppinglist/shoppinglist.iml" />
+    </modules>
+  </component>
+</project>

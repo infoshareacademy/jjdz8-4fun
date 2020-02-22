@@ -1,11 +1,14 @@
 package pl.fourfun;
 
+import pl.fourfun.accountaccess.RegistrationService;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    static void showMainMenu() {
+    static void showMainMenu() throws IOException {
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -15,6 +18,7 @@ public class Menu {
             try {
                 System.out.println("\nWybierz opcję która cię interesuje:");
                 chosenMainMenuNumber = inputValue.nextInt();
+
 
             } catch (Exception e) {
                 inputValue.next();
@@ -46,8 +50,9 @@ public class Menu {
                 "\n2. Zaloguj się jako administrator\n3. Zaloguj się jako użytkownik\n4. Zakończ działanie aplikacji \n");
     }
 
-    static void optionOneMainMenu() {
-        System.out.println("Tu wyświetli się menu dla nowego użytkownika");
+    static void optionOneMainMenu() throws IOException {
+//        System.out.println("Tu wyświetli się menu dla nowego użytkownika");
+        RegistrationService.registration();
     }
 
     static void optionTwoMainMenu() {

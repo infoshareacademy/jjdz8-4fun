@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    static void showMainMenu() throws IOException {
+    public static void showMainMenu() throws IOException {
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -68,7 +68,5 @@ public class Menu {
             System.out.println("\n");
         }
     }
-
-
 }
 

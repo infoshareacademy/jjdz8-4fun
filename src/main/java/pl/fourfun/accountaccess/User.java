@@ -1,28 +1,29 @@
 package pl.fourfun.accountaccess;
 
-import java.util.Arrays;
-
 public class User {
 
     private String name;
     private String surName;
     private String phoneNumber;
     private String email;
-    private char[] password;
+    private String password;
 
-    String blank = "";
 
     public User() {
         name = "";
         surName = "";
         phoneNumber = "";
         email = "";
-        password = blank.toCharArray();
+        password = "";
     }
 
     @Override
     public String toString() {
-        return "  1. First name: " + name + "\n" + "  2. Last name: " + surName + "\n" + "  3. Phone Number: " + phoneNumber + "\n" + "  4. Email: " + email + "\n" + "  5. Password: " + Arrays.toString(password) + "\n";
+        return "  1. First name: " + name + "\n" +
+                "  2. Last name: " + surName + "\n" +
+                "  3. Phone Number: " + phoneNumber + "\n" +
+                "  4. Email: " + email + "\n" +
+                "  5. Password: " + password + "\n";
     }
 
     //----------- Getters & Setters -----------
@@ -34,11 +35,11 @@ public class User {
         this.name = name;
     }
 
-    public String getSurName() {
+    public String getLastName() {
         return surName;
     }
 
-    public void setSurName(String surName) {
+    public void setLastName(String surName) {
         this.surName = surName;
     }
 
@@ -58,11 +59,11 @@ public class User {
         this.email = email;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 }

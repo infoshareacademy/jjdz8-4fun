@@ -1,14 +1,16 @@
-package pl.fourfun;
+package pl.fourfun.menutypes;
+
+import pl.fourfun.menutypes.AdministratorMenu;
 
 import java.util.Scanner;
 
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    static void showMainMenu() {
+    public static void showMainMenu() {
         int chosenMainMenuNumber = 0;
 
-        clearMenu();
+        //clearMenu();
         menu();
 
         do {
@@ -52,6 +54,8 @@ public class Menu {
 
     static void optionTwoMainMenu() {
         System.out.println("Tu wyświetli się menu do logowania administratora");
+        System.out.println();
+        AdministratorMenu.showAdminMenu();
     }
 
     static void optionThreeMainMenu() {

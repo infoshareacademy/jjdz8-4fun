@@ -1,13 +1,9 @@
 package pl.fourfun;
 
-/**
- * Hello world!
- *
- */
-public class App 
+ class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    Menu.showMainMenu();
     }
 }

@@ -1,0 +1,20 @@
+{
+  "productList": [
+    {
+      "name": "Serek z cebulką",
+      "brand": "Almette",
+      "price": 250,
+      "calories": 200,
+      "shop": "AUCHAN",
+      "productCategory": "NABIAŁ"
+    },
+    {
+      "name": "Mrożona mieszanka warzywna",
+      "brand": "Hortex",
+      "price": 400,
+      "calories": 350,
+      "shop": "TESCO",
+      "productCategory": "WARZYWA"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 package pl.fourfun;
 
- class App
+import pl.fourfun.menutypes.Menu;
+
+class App
 {
     public static void main( String[] args )
     {

@@ -14,13 +14,20 @@ public class ProductList {
         this.productList = productList;
     }
 
-    public int size (){
+    public int size() {
         return productList.size();
     }
-    public Product get(int i){
+
+    public Product get(int i) {
         return productList.get(i);
     }
-    public void set(int i, Product product){
+
+    public void set(int i, Product product) {
         productList.set(i, product);
     }
+
+    public void remove(int i) {
+        productList.remove(i);
+    }
+
 }

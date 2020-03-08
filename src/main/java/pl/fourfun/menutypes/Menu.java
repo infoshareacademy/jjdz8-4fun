@@ -1,7 +1,5 @@
 package pl.fourfun.menutypes;
 
-import pl.fourfun.menutypes.AdministratorMenu;
-
 import java.util.Scanner;
 
 public class Menu {
@@ -10,7 +8,7 @@ public class Menu {
     public static void showMainMenu() {
         int chosenMainMenuNumber = 0;
 
-        //clearMenu();
+        clearMenu();
         menu();
 
         do {
@@ -44,30 +42,27 @@ public class Menu {
 
 
     static void menu() {
-        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika" +
-                "\n2. Zaloguj się jako administrator\n3. Zaloguj się jako użytkownik\n4. Zakończ działanie aplikacji \n");
+        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika \n2. Zaloguj się jako użytkownik\n3. Zakończ działanie aplikacji \n");
     }
 
     static void optionOneMainMenu() {
-        System.out.println("Tu wyświetli się menu dla nowego użytkownika");
+        System.out.println("Tu wyświetli się menu dla zarejestrownia użytkownika");
     }
 
     static void optionTwoMainMenu() {
-        System.out.println("Tu wyświetli się menu do logowania administratora");
-        System.out.println();
-        AdministratorMenu.showAdminMenu();
+        System.out.println("Tu wyświetli się menu do zalogowania użytkowanika");
+        LoggedUserMenu.showUserMenu();
     }
 
     static void optionThreeMainMenu() {
-        System.out.println("Tu wyświetli się menu do logowania użytkownika");
+        System.out.println("Tu zakończy się program");
     }
 
     static void clearMenu() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println("\n");
-        }
+        //Clear zastąpiony przez myślniki
+        System.out.println("----------------------------------------------------------------");
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println("\n");
     }
-
-
 }
 

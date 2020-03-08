@@ -21,15 +21,15 @@ public class ReadProductMenu {
             } catch (Exception e) {
             }
             switch (optionMenu) {
-                case 9:
+                case 1:
                     System.out.println("wczytanie pelnej listy produktow.");
                     counter = true;
                     break;
-                case 8:
+                case 2:
                     System.out.println("wczytanie listy produktow dla wskazanej kategorii.");
                     counter = true;
                     break;
-                case 7:
+                case 3:
                     System.out.println("powrot do poprzedniego menu.");
                     LoggedUserMenu.showUserMenu();
                     counter = true;

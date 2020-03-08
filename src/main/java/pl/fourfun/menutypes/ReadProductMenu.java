@@ -1,5 +1,7 @@
 package pl.fourfun.menutypes;
 
+import pl.fourfun.readproducts.ReadProducts;
+
 import java.util.Scanner;
 
 public class ReadProductMenu {
@@ -23,6 +25,7 @@ public class ReadProductMenu {
             switch (optionMenu) {
                 case 1:
                     System.out.println("wczytanie pelnej listy produktow.");
+                    ReadProducts.readAllProducts();
                     counter = true;
                     break;
                 case 2:

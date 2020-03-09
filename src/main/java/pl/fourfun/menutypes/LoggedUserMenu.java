@@ -31,6 +31,7 @@ public class LoggedUserMenu {
                 case 1:
                     clearMenu();
                     ReadProductMenu.readingProductMenu();
+                    break;
                 case 2:
                     clearMenu();
                     //Tu będzie metoda, która umożliwi dodawanie produktu

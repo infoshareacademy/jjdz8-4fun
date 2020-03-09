@@ -4,9 +4,11 @@ import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import pl.fourfun.menutypes.LoggedUserMenu;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class ReadProducts
@@ -67,17 +69,61 @@ public class ReadProducts
         System.out.println("========================Lista produktow - KONIEC======================================================");
     }
 
-    public static void readChoiceProducts(String category) throws FileNotFoundException {
+    public static void readChoiceProducts() throws IOException {
 
-        FileReader jsonFileProductInput = new FileReader("products.json");
+        boolean counter = false;
+        int selectedProductList = 0;
+        String category = null;
+
+        System.out.println("Podaj kategorie produktu: ");
+        System.out.println("1 - NABIAŁ");
+        System.out.println("2 - OWOCE");
+        System.out.println("3 - WARZYWA");
+        System.out.println("4 - powrot do poprzedniego menu.");
+
+        while (!counter) {
+            Scanner userInputOption = new Scanner(System.in);
+            try {
+                selectedProductList = userInputOption.nextInt();
+            } catch (Exception e) {
+            }
+            switch (selectedProductList) {
+                case 1:
+                    category = "NABIAŁ";
+                    counter = true;
+                    break;
+                case 2:
+                    category = "OWOCE";
+                    counter = true;
+                    break;
+                case 3:
+                    category = "WARZYWA";
+                    counter = true;
+                    break;
+                case 4:
+                    LoggedUserMenu.showUserMenu();
+                    counter = true;
+                    break;
+                default: {
+                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1,2,3 lub 4)");
+                    break;
+                }
+            }
+        }
+
+        int numberOfProduct = 0;
+        FileReader jsonFileProductInput = new FileReader("Products.json");
         JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileProductInput);
         JSONArray jsonArrayProducts = (JSONArray) jsonObjectReader.get("productList");
+        System.out.println("========================Lista produktow - START======================================================");
         for (Iterator it = jsonArrayProducts.iterator(); it.hasNext(); ) {
             JSONObject productDetail = (JSONObject) it.next();
             if (productDetail.get("productCategory").equals(category)) {
-                System.out.println("Kategoria: " + productDetail.get("productCategory") + "\t - Nazwa: " + productDetail.get("name") + "\t - Marka: " + productDetail.get("brand") + "\t - Cena: " + productDetail.get("price") + "\t - Kaloryczno��: " + productDetail.get("calories") + "\t - Sklep: " + productDetail.get("shop"));
+                numberOfProduct += 1;
+                System.out.println("Kategoria: " + productDetail.get("productCategory") + "\t - Nazwa: " + productDetail.get("name") + "\t - Marka: " + productDetail.get("brand") + "\t - Cena: " + productDetail.get("price") + "\t - Kalorycznosc: " + productDetail.get("calories") + "\t - Sklep: " + productDetail.get("shop"));
             }
         }
-        System.out.println("========================Lista produkt�w - KONIEC======================================================");
+        if(numberOfProduct == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
+        System.out.println("========================Lista produktow - KONIEC======================================================");
     }
 }

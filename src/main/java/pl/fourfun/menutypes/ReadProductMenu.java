@@ -30,6 +30,7 @@ public class ReadProductMenu {
                     break;
                 case 2:
                     System.out.println("wczytanie listy produktow dla wskazanej kategorii.");
+                    ReadProducts.readChoiceProducts();
                     counter = true;
                     break;
                 case 3:

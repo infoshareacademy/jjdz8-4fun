@@ -1,5 +1,9 @@
 package pl.fourfun;
 
+import pl.fourfun.access.LoginService;
+import pl.fourfun.access.RegistrationService;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -50,15 +54,16 @@ public class Menu {
 
     }
 
-    static void optionTwoMainMenu() {
+    static void optionTwoMainMenu() throws IOException {
         System.out.println("Tu wyświetli się menu do logowania administratora");
-    }
-
-    static void optionThreeMainMenu() throws IOException {
         LoginService.login();
     }
 
-    static void clearMenu() {
+    static void optionThreeMainMenu() throws IOException {
+
+    }
+
+    public static void clearMenu() {
         //Clear zastąpiony przez myślniki
         System.out.println("----------------------------------------------------------------");
 //        for (int i = 0; i < 10; i++) {

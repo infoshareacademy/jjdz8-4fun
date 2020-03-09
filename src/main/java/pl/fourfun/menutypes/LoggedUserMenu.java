@@ -2,7 +2,7 @@ package pl.fourfun.menutypes;
 
 import java.util.Scanner;
 
-import static pl.fourfun.menutypes.Menu.clearMenu;
+import static pl.fourfun.Menu.clearMenu;
 
 public class LoggedUserMenu {
     static Scanner inputAdminValue = new Scanner(System.in);

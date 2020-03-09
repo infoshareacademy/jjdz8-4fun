@@ -1,6 +1,7 @@
 package pl.fourfun.access;
 
 import pl.fourfun.Menu;
+import pl.fourfun.menutypes.LoggedUserMenu;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -51,7 +52,7 @@ public class LoginService extends User {
                 boolean isTruePass = users.getUsers().get(i).getPassword().equals(password);
                 if (isTrueEmail && isTruePass) {
                     System.out.println("Logowanie poprawne...");
-                    System.out.println(users.getUsers().get(i));
+                    LoggedUserMenu.showUserMenu();
                     isLogged = true;
                     break;
                 } else

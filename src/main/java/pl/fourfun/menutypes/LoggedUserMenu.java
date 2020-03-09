@@ -30,7 +30,8 @@ public class LoggedUserMenu {
             switch (chosenUserMenuNumber) {
                 case 1:
                     clearMenu();
-                    //Tu bedzie metoda, która wyświetla produkty
+                    ReadProductMenu.readingProductMenu();
+                    break;
                 case 2:
                     clearMenu();
                     //Tu będzie metoda, która umożliwi dodawanie produktu

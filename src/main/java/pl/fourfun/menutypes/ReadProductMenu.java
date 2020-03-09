@@ -1,13 +1,13 @@
 package pl.fourfun.menutypes;
 
-import pl.fourfun.readproducts.ReadProducts;
+import pl.fourfun.readwriteproducts.ReadProducts;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ReadProductMenu {
 
-    public static void readingProductMenu() {
-
+    public static void readingProductMenu() throws IOException {
 
         int optionMenu = 0;
         boolean counter = false;
@@ -42,7 +42,6 @@ public class ReadProductMenu {
                     break;
                 }
             }
-
         }
     }
 }

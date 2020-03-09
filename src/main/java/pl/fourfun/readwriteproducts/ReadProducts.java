@@ -1,4 +1,4 @@
-package pl.fourfun.readproducts;
+package pl.fourfun.readwriteproducts;
 
 import org.json.JSONException;
 import org.json.simple.JSONArray;

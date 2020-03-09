@@ -1,5 +1,8 @@
 package pl.fourfun.menutypes;
 
+import pl.fourfun.readwriteproducts.AddProductJson;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 import static pl.fourfun.menutypes.Menu.clearMenu;
@@ -7,7 +10,7 @@ import static pl.fourfun.menutypes.Menu.clearMenu;
 public class LoggedUserMenu {
     static Scanner inputAdminValue = new Scanner(System.in);
 
-    public static void showUserMenu() {
+    public static void showUserMenu() throws IOException {
         while (true) {
 
             int chosenUserMenuNumber = 0;
@@ -34,7 +37,8 @@ public class LoggedUserMenu {
                     break;
                 case 2:
                     clearMenu();
-                    //Tu będzie metoda, która umożliwi dodawanie produktu
+                    AddProductJson.addProductJson();
+                    break;
                 case 3:
                     EditProductMenu.editingProductMethod();
                     break;

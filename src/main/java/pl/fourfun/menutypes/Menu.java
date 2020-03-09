@@ -1,11 +1,12 @@
 package pl.fourfun.menutypes;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    public static void showMainMenu() {
+    public static void showMainMenu() throws IOException {
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -49,7 +50,7 @@ public class Menu {
         System.out.println("Tu wyświetli się menu dla zarejestrownia użytkownika");
     }
 
-    static void optionTwoMainMenu() {
+    static void optionTwoMainMenu() throws IOException {
         System.out.println("Tu wyświetli się menu do zalogowania użytkowanika");
         LoggedUserMenu.showUserMenu();
     }

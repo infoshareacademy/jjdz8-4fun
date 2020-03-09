@@ -1,4 +1,4 @@
-package pl.fourfun.accountaccess;
+package pl.fourfun.access;
 
 public class User {
 
@@ -19,11 +19,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "  1. First name: " + name + "\n" +
-                "  2. Last name: " + surName + "\n" +
-                "  3. Phone Number: " + phoneNumber + "\n" +
+        return "  1. Imię: " + name + "\n" +
+                "  2. Nazwisko: " + surName + "\n" +
+                "  3. Numer telefonu: " + phoneNumber + "\n" +
                 "  4. Email: " + email + "\n" +
-                "  5. Password: " + password + "\n";
+                "  5. Hasło: " + password + "\n";
     }
 
     //----------- Getters & Setters -----------

@@ -1,14 +1,11 @@
-package pl.fourfun.accountaccess;
+package pl.fourfun.access;
 
 import java.util.Scanner;
 
 public class Registration {
     Scanner scanner = new Scanner(System.in);
     private boolean isTrue = true;
-    private boolean isReturn = false;
-    private boolean isRegistrationValid = true;
     private String isYes = "";
-    private int choose = 1;
 
     // ----------------- Registration methods -----------------
     public void userSetName(User user) {
@@ -16,21 +13,21 @@ public class Registration {
         do {
             try {
                 scanner = new Scanner(System.in);
-                System.out.println("1. First name: ");
+                System.out.println("1. Imię: ");
                 String name = scanner.nextLine();
                 user.setName(name);
                 System.out.println(user);
-                System.out.println("Your name is: " + name);
-                System.out.println("Is it correct? (y/n)");
+                System.out.println("Twoje imię: " + name);
+                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
                 isYes = scanner.nextLine();
                 if (isYes.equals("n")) {
                     isTrue = false;
-                } else if (isYes.equals("y") || isYes.equals("Y")) {
+                } else if (isYes.equals("t") || isYes.equals("T")) {
                     isTrue = true;
                 } else isTrue = false;
             } catch (Exception e) {
-                System.out.println("its not valid value");
+                System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
             }
         } while (!isTrue);
@@ -40,21 +37,21 @@ public class Registration {
         do {
             try {
                 scanner = new Scanner(System.in);
-                System.out.println("2. Last name: ");
+                System.out.println("2. Nazwisko: ");
                 String lastName = scanner.nextLine();
                 user.setLastName(lastName);
                 System.out.println(user);
-                System.out.println("Your last name is: " + lastName);
-                System.out.println("Is it correct? (y/n)");
+                System.out.println("Twoje nazwisko: " + lastName);
+                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
                 isYes = scanner.nextLine();
                 if (isYes.equals("n")) {
                     isTrue = false;
-                } else if (isYes.equals("y") || isYes.equals("Y")) {
+                } else if (isYes.equals("t") || isYes.equals("T")) {
                     isTrue = true;
                 } else isTrue = false;
             } catch (Exception e) {
-                System.out.println("its not valid value");
+                System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
             }
         } while (!isTrue);
@@ -64,21 +61,21 @@ public class Registration {
         do {
             try {
                 scanner = new Scanner(System.in);
-                System.out.println("3. Phone number: ");
+                System.out.println("3. Numer telefonu: ");
                 String phoneNumber = scanner.nextLine();
                 user.setPhoneNumber(phoneNumber);
                 System.out.println(user);
-                System.out.println("Your phone number is: " + phoneNumber);
-                System.out.println("Is it correct? (y/n)");
+                System.out.println("Twój numer telefonu: " + phoneNumber);
+                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
                 isYes = scanner.nextLine();
                 if (isYes.equals("n")) {
                     isTrue = false;
-                } else if (isYes.equals("y") || isYes.equals("Y")) {
+                } else if (isYes.equals("t") || isYes.equals("T")) {
                     isTrue = true;
                 } else isTrue = false;
             } catch (Exception e) {
-                System.out.println("its not valid value");
+                System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
             }
         } while (!isTrue);
@@ -88,21 +85,30 @@ public class Registration {
         do {
             try {
                 scanner = new Scanner(System.in);
+                System.out.println("(Email jest również Twoim loginem)");
                 System.out.println("4. Email: ");
-                String email = scanner.nextLine();
+                String email;
+                do {
+                    email = scanner.nextLine();
+                    if (!Check.checkEmail(email)) {
+                        System.out.println("Twój mail jest niepoprawny, spróbuj jeszcze raz::");
+                        isTrue = false;
+                    } else isTrue = true;
+                } while (!isTrue);
                 user.setEmail(email);
                 System.out.println(user);
-                System.out.println("Your email is: " + email);
-                System.out.println("Is it correct? (y/n)");
+                System.out.println("Twój email is: " + email);
+                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
                 isYes = scanner.nextLine();
                 if (isYes.equals("n")) {
                     isTrue = false;
-                } else if (isYes.equals("y")) {
+                } else if ((isYes.equals("t") || isYes.equals("T")) && Check.checkEmail(email)) {
                     isTrue = true;
                 } else isTrue = false;
+                System.out.println("Nieprawidłowy email");
             } catch (Exception e) {
-                System.out.println("its not valid value");
+                System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
             }
         } while (!isTrue);
@@ -112,21 +118,21 @@ public class Registration {
         do {
             try {
                 scanner = new Scanner(System.in);
-                System.out.println("5. Password: ");
+                System.out.println("5. Hasło: ");
                 String password = scanner.nextLine();
                 user.setPassword(password);
                 System.out.println(user);
-                System.out.println("Your password is: " + password);
-                System.out.println("Is it correct? (y/n)");
+                System.out.println("Twoje hasło: " + password);
+                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
                 isYes = scanner.nextLine();
                 if (isYes.equals("n")) {
                     isTrue = false;
-                } else if (isYes.equals("y") || isYes.equals("Y")) {
+                } else if (isYes.equals("t") || isYes.equals("T")) {
                     isTrue = true;
                 } else isTrue = false;
             } catch (Exception e) {
-                System.out.println("its not valid value");
+                System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
             }
         } while (!isTrue);

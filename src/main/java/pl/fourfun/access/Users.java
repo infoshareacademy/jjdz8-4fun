@@ -1,4 +1,4 @@
-package pl.fourfun.accountaccess;
+package pl.fourfun.access;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,6 @@ public class Users {
 
     public List<User> getUsers() {
         return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     public void add(User user) {

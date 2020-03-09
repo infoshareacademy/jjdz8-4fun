@@ -1,6 +1,7 @@
 package pl.fourfun;
 
-import pl.fourfun.accountaccess.RegistrationService;
+import pl.fourfun.access.LoginService;
+import pl.fourfun.access.RegistrationService;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class Menu {
             try {
                 System.out.println("\nWybierz opcję która cię interesuje:");
                 chosenMainMenuNumber = inputValue.nextInt();
+//                chosenMainMenuNumber = 1;
 
 
             } catch (Exception e) {
@@ -51,16 +53,16 @@ public class Menu {
     }
 
     static void optionOneMainMenu() throws IOException {
-//        System.out.println("Tu wyświetli się menu dla nowego użytkownika");
         RegistrationService.registration();
+
     }
 
     static void optionTwoMainMenu() {
         System.out.println("Tu wyświetli się menu do logowania administratora");
     }
 
-    static void optionThreeMainMenu() {
-        System.out.println("Tu wyświetli się menu do logowania użytkownika");
+    static void optionThreeMainMenu() throws IOException {
+        LoginService.login();
     }
 
     static void clearMenu() {

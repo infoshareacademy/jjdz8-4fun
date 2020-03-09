@@ -1,6 +1,6 @@
 package pl.fourfun;
 
-import java.io.IOException;
+import pl.fourfun.menutypes.Menu;
 
 class App
 {

@@ -1,9 +1,5 @@
 package pl.fourfun;
 
-import pl.fourfun.access.LoginService;
-import pl.fourfun.access.RegistrationService;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -19,8 +15,6 @@ public class Menu {
             try {
                 System.out.println("\nWybierz opcję która cię interesuje:");
                 chosenMainMenuNumber = inputValue.nextInt();
-//                chosenMainMenuNumber = 1;
-
 
             } catch (Exception e) {
                 inputValue.next();
@@ -48,8 +42,7 @@ public class Menu {
 
 
     static void menu() {
-        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika" +
-                "\n2. Zaloguj się jako administrator\n3. Zaloguj się jako użytkownik\n4. Zakończ działanie aplikacji \n");
+        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika \n2. Zaloguj się jako użytkownik\n3. Zakończ działanie aplikacji \n");
     }
 
     static void optionOneMainMenu() throws IOException {
@@ -66,9 +59,12 @@ public class Menu {
     }
 
     static void clearMenu() {
-        for (int i = 0; i < 50; i++) {
-            System.out.println("\n");
-        }
+        //Clear zastąpiony przez myślniki
+        System.out.println("----------------------------------------------------------------");
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println("\n");
     }
+
+
 }
 

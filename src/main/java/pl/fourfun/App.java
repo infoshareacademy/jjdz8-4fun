@@ -9,6 +9,7 @@ class App
 {
     public static void main( String[] args ) throws IOException, InterruptedException {
 
+        CheckProductFile.checkingExistProductFile();
         Menu.showMainMenu();
 
     }

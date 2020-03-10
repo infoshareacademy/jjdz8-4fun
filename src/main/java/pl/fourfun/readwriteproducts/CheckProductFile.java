@@ -30,7 +30,6 @@ public class CheckProductFile {
         }
     }
 
-
     public static void checkingExistUserFile() throws IOException {
 
         File userProductList = new File("UserProductList.json");
@@ -54,4 +53,3 @@ public class CheckProductFile {
         }
     }
 }
-

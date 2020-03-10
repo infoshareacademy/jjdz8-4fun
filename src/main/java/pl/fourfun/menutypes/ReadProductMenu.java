@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class ReadProductMenu {
 
-    public static void readingProductMenu() throws IOException {
+    public static void readingProductMenu() throws IOException, InterruptedException {
 
         int optionMenu = 0;
         boolean counter = false;
 
-        System.out.println("MENU - wyswietlenie produktow: ");
+        System.out.println("===== menu wyswietlenie produktow =====");
         System.out.println("1 - wyswietlenie pelnej listy produktow.");
         System.out.println("2 - wyswietlenie listy produktow dla wskazanej kategorii.");
         System.out.println("3 - powrot do poprzedniego menu.");

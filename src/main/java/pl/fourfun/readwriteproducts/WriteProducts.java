@@ -35,5 +35,6 @@ public class WriteProducts {
 
         Writer writer = new FileWriter("Products.json");
         jsonObjectReader.writeJSONString(writer);
-        writer.close(); }
+        writer.close();
+    }
 }

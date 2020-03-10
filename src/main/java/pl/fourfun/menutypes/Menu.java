@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    public static void showMainMenu() throws IOException {
+    public static void showMainMenu() throws IOException, InterruptedException {
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -50,7 +50,7 @@ public class Menu {
         System.out.println("Tu wyświetli się menu dla zarejestrownia użytkownika");
     }
 
-    static void optionTwoMainMenu() throws IOException {
+    static void optionTwoMainMenu() throws IOException, InterruptedException {
         System.out.println("Tu wyświetli się menu do zalogowania użytkowanika");
         LoggedUserMenu.showUserMenu();
     }

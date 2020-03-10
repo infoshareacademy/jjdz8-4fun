@@ -10,7 +10,7 @@ import static pl.fourfun.menutypes.Menu.clearMenu;
 public class LoggedUserMenu {
     static Scanner inputAdminValue = new Scanner(System.in);
 
-    public static void showUserMenu() throws IOException {
+    public static void showUserMenu() throws IOException, InterruptedException {
         while (true) {
 
             int chosenUserMenuNumber = 0;

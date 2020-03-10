@@ -56,7 +56,7 @@ public class AddProductMenu {
     public void addProductMenu() throws IOException {
         boolean counter = false;
 
-        System.out.println("===== test menu dodania produktu =====");
+        System.out.println("===== menu dodania produktu =====");
         System.out.println("Wprowadz nazwe produktu: ");
         Scanner scannerProductName = new Scanner(System.in);
         String scannerInputProductName = scannerProductName.nextLine();
@@ -146,9 +146,9 @@ public class AddProductMenu {
             }
         }
 
-        System.out.println("PODSUMOWANIE NOWEGO PRODUKTU: ");
+        System.out.println("\nPODSUMOWANIE NOWEGO PRODUKTU: ");
         System.out.println("nazwa produktu: "+ getName()+", producent: "+ getBrand()+", cena: "+ getPrice()+", kalorycznosc: "+ getCalories()+", sklep: "+ getShop()+", kategoria: "+ getProductCategory() );
-
         WriteProducts.writingProduct(getName(),getBrand(),getPrice(),getCalories(),getShop(),getProductCategory());
+        System.out.println("\n Dodano nowy produkt.");
     }
 }

@@ -69,7 +69,7 @@ public class ReadProducts
         System.out.println("========================Lista produktow - KONIEC======================================================");
     }
 
-    public static void readChoiceProducts() throws IOException {
+    public static void readChoiceProducts() throws IOException, InterruptedException {
 
         boolean counter = false;
         int selectedProductList = 0;

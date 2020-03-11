@@ -1,12 +1,17 @@
-package pl.fourfun.menutypes;
+package pl.fourfun;
 
+
+import pl.fourfun.access.LoginService;
+import pl.fourfun.access.RegistrationService;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
+
     public static void showMainMenu() throws IOException, InterruptedException {
+
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -46,24 +51,29 @@ public class Menu {
         System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika \n2. Zaloguj się jako użytkownik\n3. Zakończ działanie aplikacji \n");
     }
 
-    static void optionOneMainMenu() {
-        System.out.println("Tu wyświetli się menu dla zarejestrownia użytkownika");
+    static void optionOneMainMenu() throws IOException {
+        RegistrationService.registration();
+
     }
+
 
     static void optionTwoMainMenu() throws IOException, InterruptedException {
         System.out.println("Tu wyświetli się menu do zalogowania użytkowanika");
         LoggedUserMenu.showUserMenu();
+
     }
 
-    static void optionThreeMainMenu() {
-        System.out.println("Tu zakończy się program");
+    static void optionThreeMainMenu() throws IOException {
+
     }
 
-    static void clearMenu() {
+    public static void clearMenu() {
         //Clear zastąpiony przez myślniki
         System.out.println("----------------------------------------------------------------");
 //        for (int i = 0; i < 10; i++) {
 //            System.out.println("\n");
     }
+
+
 }
 

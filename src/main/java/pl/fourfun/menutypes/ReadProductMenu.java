@@ -1,18 +1,18 @@
 package pl.fourfun.menutypes;
 
-import pl.fourfun.readproducts.ReadProducts;
+import pl.fourfun.readwriteproducts.ReadProducts;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class ReadProductMenu {
 
-    public static void readingProductMenu() {
-
+    public static void readingProductMenu() throws IOException, InterruptedException {
 
         int optionMenu = 0;
         boolean counter = false;
 
-        System.out.println("MENU - wyswietlenie produktow: ");
+        System.out.println("===== menu wyswietlenie produktow =====");
         System.out.println("1 - wyswietlenie pelnej listy produktow.");
         System.out.println("2 - wyswietlenie listy produktow dla wskazanej kategorii.");
         System.out.println("3 - powrot do poprzedniego menu.");
@@ -30,6 +30,7 @@ public class ReadProductMenu {
                     break;
                 case 2:
                     System.out.println("wczytanie listy produktow dla wskazanej kategorii.");
+                    ReadProducts.readChoiceProducts();
                     counter = true;
                     break;
                 case 3:
@@ -42,7 +43,6 @@ public class ReadProductMenu {
                     break;
                 }
             }
-
         }
     }
 }

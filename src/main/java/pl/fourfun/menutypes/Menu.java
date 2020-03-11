@@ -1,15 +1,17 @@
 package pl.fourfun;
 
+
 import pl.fourfun.access.LoginService;
 import pl.fourfun.access.RegistrationService;
-
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
     static Scanner inputValue = new Scanner(System.in);
 
-    public static void showMainMenu() throws IOException {
+
+    public static void showMainMenu() throws IOException, InterruptedException {
+
         int chosenMainMenuNumber = 0;
 
         clearMenu();
@@ -54,9 +56,11 @@ public class Menu {
 
     }
 
-    static void optionTwoMainMenu() throws IOException {
-        System.out.println("Tu wyświetli się menu do logowania administratora");
-        LoginService.login();
+
+    static void optionTwoMainMenu() throws IOException, InterruptedException {
+        System.out.println("Tu wyświetli się menu do zalogowania użytkowanika");
+        LoggedUserMenu.showUserMenu();
+
     }
 
     static void optionThreeMainMenu() throws IOException {

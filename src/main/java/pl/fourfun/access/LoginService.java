@@ -10,11 +10,11 @@ public class LoginService extends User {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static void login() throws IOException {
+    public static void login() throws IOException, InterruptedException {
         System.out.println("Zaloguj się na konto");
         System.out.println("Wybierz numer: ");
         System.out.println("1 Zaloguj ");
-        System.out.println("2 Wyjdź ");
+        System.out.println("2 Powrót do menu ");
 
         boolean isReturn;
         int choose = 1;
@@ -37,7 +37,7 @@ public class LoginService extends User {
         }
     }
 
-    public static void userLogin() {
+    public static void userLogin() throws IOException, InterruptedException {
         scanner = new Scanner(System.in);
         Users users = JsonConverterUsers.readUsersJsonFile();
         boolean isLogged = false;

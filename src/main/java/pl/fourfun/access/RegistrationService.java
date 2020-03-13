@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class RegistrationService extends User {
 
-    public static void registration() throws IOException {
+    public static void registration() throws IOException, InterruptedException {
 
         System.out.println("\n" + "ZALÓŻ KONTO" + "\n");
         System.out.println("Aby się zarejestrować, wypełnij poniższe pola:");
@@ -17,7 +17,7 @@ public class RegistrationService extends User {
         userRegistration(user);
     }
 
-    public static void userRegistration(User user) throws IOException {
+    public static void userRegistration(User user) throws IOException, InterruptedException {
         Users users = JsonConverterUsers.readUsersJsonFile();
 
         Scanner scanner;

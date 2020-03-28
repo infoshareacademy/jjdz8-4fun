@@ -1,6 +1,6 @@
 package pl.fourfun.access;
 
-import pl.fourfun.Menu;
+import pl.fourfun.menutypes.Menu;
 
 import java.io.IOException;
 import java.util.Scanner;

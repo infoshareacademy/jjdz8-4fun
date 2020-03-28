@@ -1,4 +1,4 @@
-package pl.fourfun;
+package pl.fourfun.menutypes;
 
 
 import pl.fourfun.access.LoginService;

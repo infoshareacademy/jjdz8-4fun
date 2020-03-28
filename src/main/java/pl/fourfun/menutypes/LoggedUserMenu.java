@@ -5,7 +5,7 @@ import pl.fourfun.readwriteproducts.AddProductJson;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static pl.fourfun.Menu.clearMenu;
+import static pl.fourfun.menutypes.Menu.clearMenu;
 
 public class LoggedUserMenu {
     static Scanner inputAdminValue = new Scanner(System.in);

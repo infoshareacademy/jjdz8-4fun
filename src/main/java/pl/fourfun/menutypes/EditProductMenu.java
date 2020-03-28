@@ -7,7 +7,7 @@ import pl.fourfun.datatypes.ProductList;
 import pl.fourfun.datatypes.Shop;
 import java.util.Scanner;
 
-import static pl.fourfun.Menu.clearMenu;
+import static pl.fourfun.menutypes.Menu.clearMenu;
 
 
 public class EditProductMenu {

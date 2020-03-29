@@ -1,6 +1,8 @@
 package pl.fourfun.menutypes;
 
+import pl.fourfun.readwriteproducts.AddProductToUserList;
 import pl.fourfun.readwriteproducts.ReadProducts;
+import pl.fourfun.readwriteproducts.ReadUserProducts;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -15,7 +17,9 @@ public class ReadProductMenu {
         System.out.println("===== menu wyswietlenie produktow =====");
         System.out.println("1 - wyswietlenie pelnej listy produktow.");
         System.out.println("2 - wyswietlenie listy produktow dla wskazanej kategorii.");
-        System.out.println("3 - powrot do poprzedniego menu.");
+        System.out.println("3 - wyswietlenie wlasnej listy.");
+        System.out.println("4 - dodanie produktu do wlasnej listy.");
+        System.out.println("5 - powrot do poprzedniego menu.");
         while (!counter) {
             Scanner userInputOption = new Scanner(System.in);
             try {
@@ -34,12 +38,22 @@ public class ReadProductMenu {
                     counter = true;
                     break;
                 case 3:
+                    System.out.println("wyswietlenie wlasnej listy.");
+                    ReadUserProducts.readAllProductsUserList();
+                    counter = true;
+                    break;
+                case 4:
+                    System.out.println("dodanie produktu do wlasnej listy.");
+                    AddProductToUserList.readAllProductsToUserList();
+                    counter = true;
+                    break;
+                case 5:
                     System.out.println("powrot do poprzedniego menu.");
                     LoggedUserMenu.showUserMenu();
                     counter = true;
                     break;
                 default: {
-                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1,2,3)");
+                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1-5)");
                     break;
                 }
             }

@@ -8,6 +8,7 @@ import pl.fourfun.JsonConverterForProducts;
 import pl.fourfun.datatypes.Product;
 import pl.fourfun.datatypes.ProductList;
 import pl.fourfun.menutypes.LoggedUserMenu;
+import pl.fourfun.menutypes.ReadProductMenu;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,7 +17,7 @@ import java.util.*;
 
 public class ReadProducts
 {
-    public static void readAllProducts() {
+    public static void readAllProducts() throws IOException, InterruptedException {
         FileReader jsonFileProductInput = null;
         JSONObject jsonObjectReader = null;
         try {
@@ -92,6 +93,8 @@ public class ReadProducts
                     System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
                 }
                 System.out.println("========================Lista produktow - KONIEC======================================================");
+
+                ReadProductMenu.readingProductMenu();
             }
         }
     }
@@ -180,6 +183,8 @@ public class ReadProducts
 
         if(numberOfProduct == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
         System.out.println("========================Lista produktow - KONIEC======================================================");
+
+        ReadProductMenu.readingProductMenu();
     }
 
 
@@ -271,6 +276,8 @@ public class ReadProducts
 
         if(numberOfShop == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
         System.out.println("========================Lista produktow - KONIEC======================================================");
+
+        ReadProductMenu.readingProductMenu();
     }
 
     public static void readChoiceBrandProducts() throws IOException, InterruptedException {
@@ -329,6 +336,8 @@ public class ReadProducts
 
         if(numberOfBrand == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
         System.out.println("========================Lista produktow - KONIEC======================================================");
+
+        ReadProductMenu.readingProductMenu();
     }
 
     public static void readChoiceNameProducts() throws IOException, InterruptedException {
@@ -388,6 +397,8 @@ public class ReadProducts
 
         if(numberOfName == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
         System.out.println("========================Lista produktow - KONIEC======================================================");
+
+        ReadProductMenu.readingProductMenu();
     }
 
     public static String countSpacesAndUpdate(String name, int maxLength){

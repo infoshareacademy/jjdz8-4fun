@@ -12,6 +12,7 @@ class App
     public static void main( String[] args ) throws IOException, InterruptedException {
 
         CheckProductFile.checkingExistProductFile();
+        CheckProductFile.checkingExistUserFile();
         Menu.showMainMenu();
 
     }

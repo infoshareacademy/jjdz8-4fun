@@ -29,8 +29,8 @@ public class ReadProductMenu {
                     counter = true;
                     break;
                 case 2:
-                    System.out.println("wczytanie listy produktow dla wskazanej kategorii.");
-                    ReadProducts.readChoiceProducts();
+                    System.out.println("wczytanie listy produktow dla wskazanych kryteriow.");
+                    SelectCriteriaProductMenu.selectingCriteriaProductMenu();
                     counter = true;
                     break;
                 case 3:

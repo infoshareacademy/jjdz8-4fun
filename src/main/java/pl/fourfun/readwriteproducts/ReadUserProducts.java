@@ -4,13 +4,14 @@ import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import pl.fourfun.menutypes.ReadProductMenu;
 
 import java.io.*;
 import java.util.*;
 
 public class ReadUserProducts {
 
-    public static void readAllProductsUserList() {
+    public static void readAllProductsUserList() throws IOException, InterruptedException {
         FileReader jsonFileProductInput = null;
         JSONObject jsonObjectReader = null;
         try {
@@ -85,6 +86,8 @@ public class ReadUserProducts {
                     System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
                 }
                 System.out.println("========================Wlasna lista produktow - KONIEC======================================================");
+
+                ReadProductMenu.readingProductMenu();
             }
         }
     }

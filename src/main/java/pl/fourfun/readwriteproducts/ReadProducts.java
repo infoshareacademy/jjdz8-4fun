@@ -62,12 +62,12 @@ public class ReadProducts
                 }
                 System.out.println("========================Lista produktow - START======================================================");
 
-                    int maxNameLength = 0;
-                    int maxBrandLength = 0;
-                    int maxPriceLength = 0;
-                    int maxCloriesLength = 0;
-                    int maxShopLength = 0;
-                    int maxProductCategoryLength = 0;
+                int maxNameLength = 0;
+                int maxBrandLength = 0;
+                int maxPriceLength = 0;
+                int maxCloriesLength = 0;
+                int maxShopLength = 0;
+                int maxProductCategoryLength = 0;
 
                 for (Iterator it = sortedJsonArrayProductsPerProduct.iterator(); it.hasNext(); ) {
                     Object objIterator = it.next();
@@ -96,17 +96,19 @@ public class ReadProducts
         }
     }
 
-    public static void readChoiceProducts() throws IOException, InterruptedException {
+    public static void readChoiceCategoryProducts() throws IOException, InterruptedException {
 
         boolean counter = false;
         int selectedProductList = 0;
         String category = null;
 
-        System.out.println("Podaj kategorie produktu: ");
+        System.out.println("Kategorie produktów: ");
         System.out.println("1 - NABIAŁ");
         System.out.println("2 - OWOCE");
         System.out.println("3 - WARZYWA");
         System.out.println("4 - powrot do poprzedniego menu.");
+
+        System.out.println("Podaj kategorie produktu: ");
 
         while (!counter) {
             Scanner userInputOption = new Scanner(System.in);
@@ -177,6 +179,214 @@ public class ReadProducts
         }
 
         if(numberOfProduct == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
+        System.out.println("========================Lista produktow - KONIEC======================================================");
+    }
+
+
+
+
+///////////////////////////////////////////////////////
+
+    public static void readChoiceShopProducts() throws IOException, InterruptedException {
+
+        boolean counter = false;
+        int selectedShopList = 0;
+        String shop = null;
+
+        System.out.println("Sklepy do wyboru: ");
+        System.out.println("1 - AUCHAN");
+        System.out.println("2 - PIOTRiPAWEŁ");
+        System.out.println("3 - TESCO");
+        System.out.println("4 - powrot do poprzedniego menu.");
+
+        System.out.println("Podaj nazwe sklepu: ");
+
+        while (!counter) {
+            Scanner userInputOption = new Scanner(System.in);
+            try {
+                selectedShopList = userInputOption.nextInt();
+            } catch (Exception e) {
+            }
+            switch (selectedShopList) {
+                case 1:
+                    shop = "AUCHAN";
+                    counter = true;
+                    break;
+                case 2:
+                    shop = "PIOTRiPAWEŁ";
+                    counter = true;
+                    break;
+                case 3:
+                    shop = "TESCO";
+                    counter = true;
+                    break;
+                case 4:
+                    LoggedUserMenu.showUserMenu();
+                    counter = true;
+                    break;
+                default: {
+                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1,2,3 lub 4)");
+                    break;
+                }
+            }
+        }
+
+        int numberOfShop = 0;
+        FileReader jsonFileShopInput = new FileReader("Products.json");
+        JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileShopInput);
+        JSONArray jsonArrayShop = (JSONArray) jsonObjectReader.get("productList");
+        System.out.println("========================Lista produktow - START======================================================");
+
+        int maxNameLength = 0;
+        int maxBrandLength = 0;
+        int maxPriceLength = 0;
+        int maxCloriesLength = 0;
+        int maxShopLength = 0;
+        int maxProductCategoryLength = 0;
+
+        for (Iterator it = jsonArrayShop.iterator(); it.hasNext(); ) {
+            JSONObject shopDetail = (JSONObject) it.next();
+            if (shopDetail.get("shop").equals(shop)) {
+                maxNameLength = Integer.max(maxNameLength, shopDetail.get("name").toString().length());
+                maxBrandLength = Integer.max(maxBrandLength, shopDetail.get("brand").toString().length());
+                maxPriceLength = Integer.max(maxPriceLength, shopDetail.get("price").toString().length());
+                maxCloriesLength = Integer.max(maxCloriesLength, shopDetail.get("calories").toString().length());
+                maxShopLength = Integer.max(maxShopLength, shopDetail.get("shop").toString().length());
+                maxProductCategoryLength = Integer.max(maxProductCategoryLength, shopDetail.get("productCategory").toString().length());
+                numberOfShop += 1;
+            }
+        }
+
+        for (Iterator it = jsonArrayShop.iterator(); it.hasNext(); ) {
+            JSONObject shopDetail = (JSONObject) it.next();
+            if (shopDetail.get("shop").equals(shop)) {
+                System.out.print("Kategoria produktu: " + countSpacesAndUpdate(shopDetail.get("productCategory").toString(), maxProductCategoryLength) + " || ");
+                System.out.print("Nazwa: " + countSpacesAndUpdate(shopDetail.get("name").toString(), maxNameLength) +  " || ");
+                System.out.print("Producent: " + countSpacesAndUpdate(shopDetail.get("brand").toString(), maxBrandLength) + " || ");
+                System.out.print("Cena: " + countSpacesAndUpdate(shopDetail.get("price").toString(), maxPriceLength) + " || ");
+                System.out.print("Kaloryka: " + countSpacesAndUpdate(shopDetail.get("calories").toString(), maxCloriesLength) + " || ");
+                System.out.println("Sklep: " + countSpacesAndUpdate(shopDetail.get("shop").toString(), maxShopLength) + " || ");
+            }
+        }
+
+        if(numberOfShop == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
+        System.out.println("========================Lista produktow - KONIEC======================================================");
+    }
+
+    public static void readChoiceBrandProducts() throws IOException, InterruptedException {
+
+        boolean counter = false;
+        String selectedBrandList = null;
+
+        System.out.println("Podaj nazwe producenta: ");
+
+        while (!counter) {
+            Scanner userInputOption = new Scanner(System.in);
+            try {
+                selectedBrandList = userInputOption.next();
+                counter = true;
+            } catch (Exception e) {
+            }
+            System.out.println(selectedBrandList);
+        }
+        int numberOfBrand = 0;
+        FileReader jsonFileBrandInput = new FileReader("Products.json");
+        JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileBrandInput);
+        JSONArray jsonArrayBrand = (JSONArray) jsonObjectReader.get("productList");
+        System.out.println("========================Lista produktow - START======================================================");
+
+        int maxNameLength = 0;
+        int maxBrandLength = 0;
+        int maxPriceLength = 0;
+        int maxCloriesLength = 0;
+        int maxShopLength = 0;
+        int maxProductCategoryLength = 0;
+
+        for (Iterator it = jsonArrayBrand.iterator(); it.hasNext(); ) {
+            JSONObject brandDetail = (JSONObject) it.next();
+            if (brandDetail.get("brand").toString().toLowerCase().contains(selectedBrandList)) {
+                maxNameLength = Integer.max(maxNameLength, brandDetail.get("name").toString().length());
+                maxBrandLength = Integer.max(maxBrandLength, brandDetail.get("brand").toString().length());
+                maxPriceLength = Integer.max(maxPriceLength, brandDetail.get("price").toString().length());
+                maxCloriesLength = Integer.max(maxCloriesLength, brandDetail.get("calories").toString().length());
+                maxShopLength = Integer.max(maxShopLength, brandDetail.get("shop").toString().length());
+                maxProductCategoryLength = Integer.max(maxProductCategoryLength, brandDetail.get("productCategory").toString().length());
+                numberOfBrand += 1;
+            }
+        }
+
+        for (Iterator it = jsonArrayBrand.iterator(); it.hasNext(); ) {
+            JSONObject brandDetail = (JSONObject) it.next();
+            if (brandDetail.get("brand").toString().toLowerCase().contains(selectedBrandList)) {
+                System.out.print("Kategoria produktu: " + countSpacesAndUpdate(brandDetail.get("productCategory").toString(), maxProductCategoryLength) + " || ");
+                System.out.print("Nazwa: " + countSpacesAndUpdate(brandDetail.get("name").toString(), maxNameLength) +  " || ");
+                System.out.print("Producent: " + countSpacesAndUpdate(brandDetail.get("brand").toString(), maxBrandLength) + " || ");
+                System.out.print("Cena: " + countSpacesAndUpdate(brandDetail.get("price").toString(), maxPriceLength) + " || ");
+                System.out.print("Kaloryka: " + countSpacesAndUpdate(brandDetail.get("calories").toString(), maxCloriesLength) + " || ");
+                System.out.println("Sklep: " + countSpacesAndUpdate(brandDetail.get("shop").toString(), maxShopLength) + " || ");
+            }
+        }
+
+        if(numberOfBrand == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
+        System.out.println("========================Lista produktow - KONIEC======================================================");
+    }
+
+    public static void readChoiceNameProducts() throws IOException, InterruptedException {
+
+        boolean counter = false;
+        String selectedNameList = null;
+
+        System.out.println("Podaj zawartosc nazwy produktu: ");
+
+        while (!counter) {
+            Scanner userInputOption = new Scanner(System.in);
+            try {
+                selectedNameList = userInputOption.next();
+                counter = true;
+            } catch (Exception e) {
+            }
+            System.out.println(selectedNameList);
+        }
+        int numberOfName = 0;
+        FileReader jsonFileNameInput = new FileReader("Products.json");
+        JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileNameInput);
+        JSONArray jsonArrayName = (JSONArray) jsonObjectReader.get("productList");
+        System.out.println("========================Lista produktow - START======================================================");
+
+        int maxNameLength = 0;
+        int maxBrandLength = 0;
+        int maxPriceLength = 0;
+        int maxCloriesLength = 0;
+        int maxShopLength = 0;
+        int maxProductCategoryLength = 0;
+
+        for (Iterator it = jsonArrayName.iterator(); it.hasNext(); ) {
+            JSONObject nameDetail = (JSONObject) it.next();
+            if (nameDetail.get("name").toString().toLowerCase().contains(selectedNameList)) {
+                maxNameLength = Integer.max(maxNameLength, nameDetail.get("name").toString().length());
+                maxBrandLength = Integer.max(maxBrandLength, nameDetail.get("brand").toString().length());
+                maxPriceLength = Integer.max(maxPriceLength, nameDetail.get("price").toString().length());
+                maxCloriesLength = Integer.max(maxCloriesLength, nameDetail.get("calories").toString().length());
+                maxShopLength = Integer.max(maxShopLength, nameDetail.get("shop").toString().length());
+                maxProductCategoryLength = Integer.max(maxProductCategoryLength, nameDetail.get("productCategory").toString().length());
+                numberOfName += 1;
+            }
+        }
+
+        for (Iterator it = jsonArrayName.iterator(); it.hasNext(); ) {
+            JSONObject nameDetail = (JSONObject) it.next();
+            String nazwa = nameDetail.get("name").toString().toLowerCase();
+            if (nameDetail.get("name").toString().toLowerCase().contains(selectedNameList)) {
+                System.out.print("Kategoria produktu: " + countSpacesAndUpdate(nameDetail.get("productCategory").toString(), maxProductCategoryLength) + " || ");
+                System.out.print("Nazwa: " + countSpacesAndUpdate(nameDetail.get("name").toString(), maxNameLength) +  " || ");
+                System.out.print("Producent: " + countSpacesAndUpdate(nameDetail.get("brand").toString(), maxBrandLength) + " || ");
+                System.out.print("Cena: " + countSpacesAndUpdate(nameDetail.get("price").toString(), maxPriceLength) + " || ");
+                System.out.print("Kaloryka: " + countSpacesAndUpdate(nameDetail.get("calories").toString(), maxCloriesLength) + " || ");
+                System.out.println("Sklep: " + countSpacesAndUpdate(nameDetail.get("shop").toString(), maxShopLength) + " || ");
+            }
+        }
+
+        if(numberOfName == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
         System.out.println("========================Lista produktow - KONIEC======================================================");
     }
 

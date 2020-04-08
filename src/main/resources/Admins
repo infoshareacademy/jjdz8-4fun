@@ -1,0 +1,25 @@
+{
+  "admins": [
+    {
+      "name": "admin",
+      "surName": "admin",
+      "phoneNumber": "666666666",
+      "email": "admin@gmail.com",
+      "password": "admin"
+    },
+    {
+      "name": "admin2",
+      "surName": "admin2",
+      "phoneNumber": "222222222",
+      "email": "admin2@gmail.com",
+      "password": "admin2"
+    },
+    {
+      "name": "admin3",
+      "surName": "admin3",
+      "phoneNumber": "333333333",
+      "email": "admin3@gmail.com",
+      "password": "admin3"
+    }
+  ]
+}

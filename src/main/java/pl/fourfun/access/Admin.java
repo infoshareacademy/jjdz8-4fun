@@ -1,6 +1,6 @@
 package pl.fourfun.access;
 
-public class User {
+public class Admin {
 
     private String name;
     private String surName;
@@ -8,7 +8,15 @@ public class User {
     private String email;
     private String password;
 
-    public User() {
+    public Admin(String name, String surName, String phoneNumber, String email, String password) {
+        this.name = name;
+        this.surName = surName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Admin() {
         name = "";
         surName = "";
         phoneNumber = "";
@@ -65,4 +73,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

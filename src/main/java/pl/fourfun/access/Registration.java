@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Registration {
     Scanner scanner = new Scanner(System.in);
     private boolean isTrue = true;
-    private String isYes = "";
 
     // ----------------- Registration methods -----------------
     public void userSetName(User user) {
@@ -18,14 +17,7 @@ public class Registration {
                 user.setName(name);
                 System.out.println(user);
                 System.out.println("Twoje imię: " + name);
-                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
-                isYes = scanner.nextLine();
-                if (isYes.equals("n")) {
-                    isTrue = false;
-                } else if (isYes.equals("t") || isYes.equals("T")) {
-                    isTrue = true;
-                } else isTrue = false;
             } catch (Exception e) {
                 System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
@@ -42,14 +34,7 @@ public class Registration {
                 user.setLastName(lastName);
                 System.out.println(user);
                 System.out.println("Twoje nazwisko: " + lastName);
-                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
-                isYes = scanner.nextLine();
-                if (isYes.equals("n")) {
-                    isTrue = false;
-                } else if (isYes.equals("t") || isYes.equals("T")) {
-                    isTrue = true;
-                } else isTrue = false;
             } catch (Exception e) {
                 System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
@@ -66,14 +51,7 @@ public class Registration {
                 user.setPhoneNumber(phoneNumber);
                 System.out.println(user);
                 System.out.println("Twój numer telefonu: " + phoneNumber);
-                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
-                isYes = scanner.nextLine();
-                if (isYes.equals("n")) {
-                    isTrue = false;
-                } else if (isYes.equals("t") || isYes.equals("T")) {
-                    isTrue = true;
-                } else isTrue = false;
             } catch (Exception e) {
                 System.out.println("Nieprawidłowa wartość");
                 isTrue = false;
@@ -91,19 +69,15 @@ public class Registration {
                 do {
                     email = scanner.nextLine();
                     if (!Check.checkEmail(email)) {
-                        System.out.println("Twój mail jest niepoprawny, spróbuj jeszcze raz::");
+                        System.out.println("Twój mail jest niepoprawny, spróbuj jeszcze raz:");
                         isTrue = false;
                     } else isTrue = true;
                 } while (!isTrue);
                 user.setEmail(email);
                 System.out.println(user);
                 System.out.println("Twój email is: " + email);
-                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
-                isYes = scanner.nextLine();
-                if (isYes.equals("n")) {
-                    isTrue = false;
-                } else if ((isYes.equals("t") || isYes.equals("T")) && Check.checkEmail(email)) {
+                if (Check.checkEmail(email)) {
                     isTrue = true;
                 } else isTrue = false;
                 System.out.println("Nieprawidłowy email");
@@ -123,14 +97,7 @@ public class Registration {
                 user.setPassword(password);
                 System.out.println(user);
                 System.out.println("Twoje hasło: " + password);
-                System.out.println("Czy to się zgadza? (t/n)");
                 System.out.println("----------------------------------------");
-                isYes = scanner.nextLine();
-                if (isYes.equals("n")) {
-                    isTrue = false;
-                } else if (isYes.equals("t") || isYes.equals("T")) {
-                    isTrue = true;
-                } else isTrue = false;
             } catch (Exception e) {
                 System.out.println("Nieprawidłowa wartość");
                 isTrue = false;

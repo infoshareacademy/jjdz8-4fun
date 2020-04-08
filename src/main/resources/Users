@@ -20,6 +20,27 @@
       "phoneNumber": "230972972",
       "email": "mail@gmail.com",
       "password": "111"
-    }
+    },
+    {
+      "name": "sf",
+      "surName": "dsfs",
+      "phoneNumber": "sdfds",
+      "email": "gg@gmail.com",
+      "password": "sdfds"
+    },
+    {
+      "name": "Pawel",
+      "surName": "Nowak",
+      "phoneNumber": "4353443636",
+      "email": "pawel@gmail.com",
+      "password": "777"
+    },
+    {
+      "name": "Maria",
+      "surName": "dfgd",
+      "phoneNumber": "34534",
+      "email": "kkk@gmail.com",
+      "password": "111"
+    },
   ]
 }

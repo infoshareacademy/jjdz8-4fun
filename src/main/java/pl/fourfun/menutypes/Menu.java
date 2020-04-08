@@ -53,7 +53,7 @@ public class Menu {
     }
 
     static void optionOneMainMenu() throws IOException, InterruptedException {
-        RegistrationService.registration();
+        RegistrationService.registrationStart();
     }
 
     static void optionTwoMainMenu() throws IOException, InterruptedException {

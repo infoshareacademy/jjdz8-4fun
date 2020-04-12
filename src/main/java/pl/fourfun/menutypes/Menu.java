@@ -49,19 +49,24 @@ public class Menu {
 
 
     static void menu() {
-        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika \n2. Zaloguj się jako użytkownik\n3. Zakończ działanie aplikacji \n");
+        System.out.print("Witaj w naszym programie! " +
+                "\n1. Zaloguj się jako Admin" +
+                "\n2. Zarejestruj nowego użytkownika " +
+                "\n3. Zaloguj się jako użytkownik " +
+                "\n4. Zakończ działanie aplikacji \n");
     }
+
 
     static void optionOneMainMenu() throws IOException, InterruptedException {
-        RegistrationService.registration();
-    }
-
-    static void optionTwoMainMenu() throws IOException, InterruptedException {
         LoginService.login();
     }
 
-    static void optionThreeMainMenu() throws IOException {
+    static void optionTwoMainMenu() throws IOException, InterruptedException {
+        RegistrationService.registration();
+    }
 
+    static void optionThreeMainMenu() throws IOException, InterruptedException {
+        LoginService.login();
     }
 
     public static void clearMenu() {

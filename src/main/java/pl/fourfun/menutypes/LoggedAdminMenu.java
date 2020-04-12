@@ -7,20 +7,20 @@ import java.util.Scanner;
 
 import static pl.fourfun.menutypes.Menu.clearMenu;
 
-public class LoggedUserMenu {
+public class LoggedAdminMenu {
     static Scanner inputAdminValue = new Scanner(System.in);
 
-    public static void showUserMenu() throws IOException, InterruptedException {
+    public static void showAdminMenu() throws IOException, InterruptedException {
         while (true) {
 
             int chosenUserMenuNumber = 0;
 
             clearMenu();
-            userMenu();
+            adminMenu();
 
             do {
                 try {
-                    System.out.println("\nUżytkowniku wybierz czynność:");
+                    System.out.println("\nAdminie wybierz czynność:");
                     chosenUserMenuNumber = inputAdminValue.nextInt();
 
                 } catch (Exception e) {
@@ -28,24 +28,28 @@ public class LoggedUserMenu {
                 }
             }
 
-            while ((3 < chosenUserMenuNumber) || (chosenUserMenuNumber < 0));
+            while ((4 < chosenUserMenuNumber) || (chosenUserMenuNumber < 0));
 
             switch (chosenUserMenuNumber) {
                 case 1:
                     clearMenu();
-                    ReadProductMenu.readingUserProductMenu();
+                    ReadProductMenu.readingProductMenu();
                     break;
                 case 2:
-                    ReadProductMenu.readingAddedUserProductMenu();
                     clearMenu();
+                    AddProductJson.addProductJson();
                     break;
                 case 3:
+                    EditProductMenu.editingProductMethod();
+                    break;
+                case 4:
                     Menu.showMainMenu();
+                    break;
             }
         }
     }
 
-    public static void userMenu() {
-        System.out.print("\nUżytkowniku! Poniżej masz zakres czynności do wyboru: \n1. Wyświetl swoją listę zakupów \n2. Zarządzaj swoją listą zakupów \n3. Wróć do menu głównego");
+    public static void adminMenu() {
+        System.out.print("\nAdminie! Poniżej masz zakres czynności do wyboru: \n1. Wyświetl listę produktów \n2. Dodaj produkt \n3. Edytuj produkt \n4. Wróć do menu głównego");
     }
 }

@@ -8,7 +8,7 @@ import java.util.Scanner;
 import static pl.fourfun.menutypes.Menu.clearMenu;
 
 public class LoggedUserMenu {
-    static Scanner inputAdminValue = new Scanner(System.in);
+    static Scanner inputUserValue = new Scanner(System.in);
 
     public static void showUserMenu() throws IOException, InterruptedException {
         while (true) {
@@ -21,10 +21,10 @@ public class LoggedUserMenu {
             do {
                 try {
                     System.out.println("\nUżytkowniku wybierz czynność:");
-                    chosenUserMenuNumber = inputAdminValue.nextInt();
+                    chosenUserMenuNumber = inputUserValue.nextInt();
 
                 } catch (Exception e) {
-                    inputAdminValue.next();
+                    inputUserValue.next();
                 }
             }
 

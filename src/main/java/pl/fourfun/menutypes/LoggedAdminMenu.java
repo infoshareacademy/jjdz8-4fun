@@ -13,7 +13,7 @@ public class LoggedAdminMenu {
     public static void showAdminMenu() throws IOException, InterruptedException {
         while (true) {
 
-            int chosenUserMenuNumber = 0;
+            int chosenAdminMenuNumber = 0;
 
             clearMenu();
             adminMenu();
@@ -21,16 +21,16 @@ public class LoggedAdminMenu {
             do {
                 try {
                     System.out.println("\nAdminie wybierz czynność:");
-                    chosenUserMenuNumber = inputAdminValue.nextInt();
+                    chosenAdminMenuNumber = inputAdminValue.nextInt();
 
                 } catch (Exception e) {
                     inputAdminValue.next();
                 }
             }
 
-            while ((4 < chosenUserMenuNumber) || (chosenUserMenuNumber < 0));
+            while ((4 < chosenAdminMenuNumber) || (chosenAdminMenuNumber < 0));
 
-            switch (chosenUserMenuNumber) {
+            switch (chosenAdminMenuNumber) {
                 case 1:
                     clearMenu();
                     ReadProductMenu.readingProductMenu();

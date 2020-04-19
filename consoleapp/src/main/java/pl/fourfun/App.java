@@ -1,10 +1,10 @@
 package pl.fourfun;
 
 
+import pl.fourfun.menutypes.Menu;
 import pl.fourfun.readwriteproducts.CheckProductFile;
 
 import java.io.IOException;
-import pl.fourfun.menutypes.Menu;
 
 class App
 {

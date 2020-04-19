@@ -8,7 +8,7 @@ import java.io.*;
 public class JsonConverterUsers {
 
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private static final String jsonUsersFile = "src/main/resources/Users";
+    private static final String jsonUsersFile = "consoleapp/src/main/resources/Users";
 
 
     public static void saveUsersToJsonFile(Users users) {

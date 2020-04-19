@@ -7,14 +7,13 @@ import java.util.Scanner;
 
 public class RegistrationService extends User {
 
-    public static void registrationStart() throws IOException, InterruptedException {
+    public static void registration() throws IOException, InterruptedException {
 
         System.out.println("\n" + "ZALÓŻ KONTO" + "\n");
         System.out.println("Aby się zarejestrować, wypełnij poniższe pola:");
         System.out.println("----------------------------------------");
 
         User user = new User();
-        AdminRegistrationService.adminRegistration();
         userRegistration(user);
     }
 

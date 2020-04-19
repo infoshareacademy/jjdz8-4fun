@@ -47,7 +47,7 @@ public class SelectCriteriaProductMenu {
                     break;
                 case 5:
                     System.out.println("powrot do glownego menu.");
-                    LoggedUserMenu.showUserMenu();
+                    LoggedAdminMenu.showAdminMenu();
                     counter = true;
                     break;
                 default: {

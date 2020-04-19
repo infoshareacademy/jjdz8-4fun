@@ -55,7 +55,7 @@ public class ReadUserProducts {
                 for (int k = 0; k < jsonArrayProductsPerProduct.length(); k++) {
                     sortedJsonArrayProductsPerProduct.add(listProduct.get(k));
                 }
-                System.out.println("========================Wlasna lista produktow - START=======================================================");
+                System.out.println("========================Wlasna lista zakupow - START=======================================================");
 
                 int maxNameLength = 0;
                 int maxBrandLength = 0;
@@ -85,9 +85,9 @@ public class ReadUserProducts {
                     System.out.print("Kaloryka: " + countSpacesAndUpdate(productDetail.get("calories").toString(), maxCloriesLength) + " || ");
                     System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
                 }
-                System.out.println("========================Wlasna lista produktow - KONIEC======================================================");
+                System.out.println("========================Wlasna lista zakupow - KONIEC======================================================");
 
-                ReadProductMenu.readingProductMenu();
+                ReadProductMenu.readingUserProductMenu();
             }
         }
     }

@@ -1,5 +1,6 @@
 package pl.fourfun.access;
 
+import pl.fourfun.menutypes.LoggedAdminMenu;
 import pl.fourfun.menutypes.Menu;
 import pl.fourfun.menutypes.LoggedUserMenu;
 
@@ -9,33 +10,6 @@ import java.util.Scanner;
 public class LoginService extends User {
 
     static Scanner scanner = new Scanner(System.in);
-
-    public static void login() throws IOException, InterruptedException {
-        System.out.println("Zaloguj się na konto");
-        System.out.println("Wybierz numer: ");
-        System.out.println("1 Zaloguj ");
-        System.out.println("2 Powrót do menu ");
-
-        boolean isReturn;
-        int choose = 1;
-        do {
-            try {
-                scanner = new Scanner(System.in);
-                choose = scanner.nextInt();
-                isReturn = false;
-            } catch (Exception e) {
-                System.out.println("Nieprawidłowa wartość, spróbuj jeszcze raz: ");
-                isReturn = true;
-            }
-        } while (isReturn);
-
-        switch (choose) {
-            case 1:
-                userLogin();
-            case 2:
-                Menu.showMainMenu();
-        }
-    }
 
     public static void userLogin() throws IOException, InterruptedException {
         scanner = new Scanner(System.in);
@@ -50,9 +24,15 @@ public class LoginService extends User {
             for (int i = 0; i < users.getUsers().size(); i++) {
                 boolean isTrueEmail = users.getUsers().get(i).getEmail().equals(email) && Check.checkEmail(users.getUsers().get(i).getEmail());
                 boolean isTruePass = users.getUsers().get(i).getPassword().equals(password);
+                boolean isAdmin = users.getUsers().get(i).isAdmin();
                 if (isTrueEmail && isTruePass) {
                     System.out.println("Logowanie poprawne...");
-                    LoggedUserMenu.showUserMenu();
+                    if (isAdmin){
+                        LoggedAdminMenu.showAdminMenu();
+                    }
+                    else {
+                        LoggedUserMenu.showUserMenu();
+                    }
                     isLogged = true;
                     break;
                 } else

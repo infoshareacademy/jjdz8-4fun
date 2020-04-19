@@ -27,7 +27,7 @@ public class Menu {
                 inputValue.next();
             }
         }
-        while (4 < chosenMainMenuNumber || chosenMainMenuNumber < 1);
+        while (3 < chosenMainMenuNumber || chosenMainMenuNumber < 1);
 
         switch (chosenMainMenuNumber) {
             case 1:
@@ -39,29 +39,26 @@ public class Menu {
                 optionTwoMainMenu();
                 break;
             case 3:
-                clearMenu();
-                optionThreeMainMenu();
-                break;
-            case 4:
                 System.exit(0);
+                break;
         }
     }
 
 
     static void menu() {
-        System.out.print("Witaj w naszym programie! \n1. Zarejestruj nowego użytkownika \n2. Zaloguj się jako użytkownik\n3. Zakończ działanie aplikacji \n");
+        System.out.print("Witaj w naszym programie! " +
+                "\n1. Zaloguj się" +
+                "\n2. Zarejestruj się " +
+                "\n3. Zakończ działanie aplikacji \n");
     }
 
+
     static void optionOneMainMenu() throws IOException, InterruptedException {
-        RegistrationService.registrationStart();
+        LoginService.userLogin();
     }
 
     static void optionTwoMainMenu() throws IOException, InterruptedException {
-        LoginService.login();
-    }
-
-    static void optionThreeMainMenu() throws IOException {
-
+        RegistrationService.registration();
     }
 
     public static void clearMenu() {

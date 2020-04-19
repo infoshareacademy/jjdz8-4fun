@@ -7,6 +7,7 @@ public class User {
     private String phoneNumber;
     private String email;
     private String password;
+    private boolean isAdmin;
 
     public User() {
         name = "";
@@ -14,6 +15,7 @@ public class User {
         phoneNumber = "";
         email = "";
         password = "";
+        isAdmin = false;
     }
 
     @Override
@@ -64,5 +66,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 }

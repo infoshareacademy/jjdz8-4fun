@@ -22,7 +22,7 @@ public class EditProductMenu {
             displayProductList(productList);
             do {
                 System.out.println();
-                System.out.println("Wybierz numer produktu na liście, który chcesz edytować lub wciśnij 0 by wrócić do menu Użytkownika : ");
+                System.out.println("Wybierz numer produktu na liście, który chcesz edytować lub wciśnij 0 by wrócić do menu Admina : ");
                 numberOfProduct = scanner.nextInt();
             } while (numberOfProduct > productList.size() || numberOfProduct < -1);
             if (numberOfProduct == 0) {
@@ -35,7 +35,7 @@ public class EditProductMenu {
 
     private static void displayProductList(ProductList productList) {
         clearMenu();
-        System.out.println("Twoja list produktów:");
+        System.out.println("Twoja lista produktów:");
         int maxNameLength = 0;
         int maxBrandLength = 0;
         int maxPriceLength = 0;

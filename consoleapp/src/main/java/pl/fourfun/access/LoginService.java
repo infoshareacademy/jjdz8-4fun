@@ -1,7 +1,6 @@
 package pl.fourfun.access;
 
 import pl.fourfun.menutypes.LoggedAdminMenu;
-import pl.fourfun.menutypes.Menu;
 import pl.fourfun.menutypes.LoggedUserMenu;
 
 import java.io.IOException;

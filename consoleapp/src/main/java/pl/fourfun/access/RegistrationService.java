@@ -20,6 +20,7 @@ public class RegistrationService extends User {
     public static void userRegistration(User user) throws IOException, InterruptedException {
         Users users = JsonConverterUsers.readUsersJsonFile();
 
+
         Scanner scanner;
 
         boolean isRegistrationValid = true;
@@ -32,7 +33,7 @@ public class RegistrationService extends User {
             System.out.println("1 Imię: " + user.getName());
             System.out.println("2 Nazwisko: " + user.getLastName());
             System.out.println("3 Numer telefonu: " + user.getPhoneNumber());
-            System.out.println("4 Email(będzie też loginem): " + user.getEmail());
+            System.out.println("4 Email(to również Twój login): " + user.getEmail());
             System.out.println("5 Hasło: " + user.getPassword());
             System.out.println("6 Zapisz");
             System.out.println("7 Wyjdź");
@@ -77,22 +78,18 @@ public class RegistrationService extends User {
                         JsonConverterUsers.saveUsersToJsonFile(users);
 
                         System.out.println("Liczba użytkowników: " + users.getUsers().size());
+                        userRegistration(user);
                         System.out.println("Dziękuję, Twoje konto zostało zarejestrowane :)");
-                        System.out.println("Czy chcesz zarejestrować nowe konto? (t/n)");
-                        isCorrect = scanner.nextLine();
                         System.out.println("----------------------------------------");
-                        if (isCorrect.equals("t") || isCorrect.equals("T")) {
-                            RegistrationService.registration();
-                        }
-                    } else if (isCorrect.equals("n") || isCorrect.equals("N")) {
+
+                    } else {
                         isRegistrationValid = false;
                         userRegistration(user);
-                    }
+            }
                 case 7:
+                    Menu.showMainMenu();
             }
 
-        } while (!isRegistrationValid);
-        Menu.showMainMenu();
+        } while (!isRegistrationValid) ;
     }
-
 }

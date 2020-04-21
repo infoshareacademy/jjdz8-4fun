@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import static pl.fourfun.menutypes.LoggedUserMenu.showUserMenu;
+import static pl.fourfun.menutypes.Menu.clearMenu;
+
 public class ReadProductMenu {
 
     public static void readingProductMenu() throws IOException, InterruptedException {
@@ -28,16 +31,19 @@ public class ReadProductMenu {
             }
             switch (optionMenu) {
                 case 1:
+                    clearMenu();
                     System.out.println("wczytanie pelnej listy produktow.");
                     ReadProducts.readAllProducts();
                     counter = true;
                     break;
                 case 2:
+                    clearMenu();
                     System.out.println("wczytanie listy produktow dla wskazanych kryteriow.");
                     SelectCriteriaProductMenu.selectingCriteriaProductMenu();
                     counter = true;
                     break;
                 case 3:
+                    clearMenu();
                     System.out.println("powrot do poprzedniego menu.");
                     LoggedAdminMenu.showAdminMenu();
                     counter = true;
@@ -65,13 +71,15 @@ public class ReadProductMenu {
             }
             switch (optionMenu) {
                 case 1:
+                    clearMenu();
                     System.out.println("wyswietlenie wlasnej listy zakupow.");
                     ReadUserProducts.readAllProductsUserList();
                     counter = true;
                     break;
                 case 2:
+                    clearMenu();
                     System.out.println("powrot do poprzedniego menu.");
-                    LoggedUserMenu.showUserMenu();
+                    showUserMenu();
                     counter = true;
                     break;
                 default:
@@ -86,9 +94,9 @@ public class ReadProductMenu {
         int optionMenu = 0;
         boolean counter = false;
 
-        System.out.println("===== menu wyswietlenie produktow =====");
-        System.out.println("1 - dodanie produktu do wlasnej listy zakupow.");
-        System.out.println("2 - powrot do poprzedniego menu.");
+        System.out.println("===== menu wyświetlenie produktów =====");
+        System.out.println("1 - dodanie produktu do własnej listy zakupów.");
+        System.out.println("2 - powrót do poprzedniego menu.");
         while (!counter) {
             Scanner userInputOption = new Scanner(System.in);
             try {
@@ -97,17 +105,19 @@ public class ReadProductMenu {
             }
             switch (optionMenu) {
                 case 1:
-                    System.out.println("dodanie produktu do wlasnej listy zakupow.");
+                    clearMenu();
+                    System.out.println("dodanie produktu do własnej listy zakupów.");
                     readAllProductsToUserList();
                     counter = true;
                     break;
                 case 2:
-                    System.out.println("powrot do poprzedniego menu.");
-                    LoggedUserMenu.showUserMenu();
+                    clearMenu();
+                    System.out.println("powrót do poprzedniego menu.");
+                    showUserMenu();
                     counter = true;
                     break;
                 default:
-                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1-2)");
+                    System.out.println("Niepoprawna operacja, wskaż prawidłowa (1-2)");
                     break;
             }
         }
@@ -120,7 +130,7 @@ public class ReadProductMenu {
     }
 
     public static int chooseProductIDToAddToCart(JSONArray sortedJsonArrayProductsPerProduct) {
-        System.out.println("========================Lista produktow - START=======================================================");
+        System.out.println("========================Lista produktów - START=======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -154,7 +164,7 @@ public class ReadProductMenu {
             System.out.println("Sklep: " + ReadProducts.countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
             IDProducts += 1;
         }
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
         System.out.println("Podaj ID produktu , który chcesz dodać do listy : ");
         System.out.println("Wpisz 0 ,by powrócić do poprzedniego menu.");
 
@@ -165,18 +175,21 @@ public class ReadProductMenu {
             try {
                 choiceID = inputUserText.nextInt();
                 if (0 == choiceID) {
-                    readingProductMenu();
+                    showUserMenu();
                     counter = true;
                     break;
                 }
                 if (0 < choiceID && choiceID <= sortedJsonArrayProductsPerProduct.size()) {
-                    System.out.println("ok wartosc z zakresu");
+                    clearMenu();
+                    System.out.println("[ok dodałem produkt do własnej listy]");
                     counter = true;
+                    readAllProductsToUserList();
+                    break;
                 } else {
-                    System.out.println("wybierz prawidlowa wartosc z ID, podaj prawidłową: ");
+                    System.out.println("wybierz prawidłową wartość z ID, podaj prawidłową: ");
                 }
             } catch (Exception e) {
-                System.out.println("wybierz prawidlowa wartosc z ID, podaj prawidłową: ");
+                System.out.println("wybierz prawidłową wartość z ID, podaj prawidłową: ");
             }
         }
         return choiceID;

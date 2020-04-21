@@ -36,8 +36,8 @@ public class LoggedUserMenu {
                     ReadProductMenu.readingUserProductMenu();
                     break;
                 case 2:
-                    ReadProductMenu.readingAddedUserProductMenu();
                     clearMenu();
+                    ReadProductMenu.readingAddedUserProductMenu();
                     break;
                 case 3:
                     Menu.showMainMenu();

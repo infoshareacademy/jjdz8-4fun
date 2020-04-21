@@ -57,13 +57,13 @@ public class AddProductMenu {
         boolean counter = false;
 
         System.out.println("===== menu dodania produktu =====");
-        System.out.println("Wprowadz nazwe produktu: ");
+        System.out.println("Wprowadź nazwe produktu: ");
         Scanner scannerProductName = new Scanner(System.in);
         String scannerInputProductName = scannerProductName.nextLine();
         setName(scannerInputProductName);
 
         while (!counter) {
-            System.out.println("Wprowadz kategorie produktu: (nabiał, owoce, warzywa)");
+            System.out.println("Wprowadź kategorie produktu: (nabiał, owoce, warzywa)");
             Scanner scannerProductCategory = new Scanner(System.in);
             String scannerInputProductCategory = scannerProductCategory.nextLine();
             switch (scannerInputProductCategory.toUpperCase()) {
@@ -83,14 +83,14 @@ public class AddProductMenu {
                     break;
                 }
                 default: {
-                    System.out.println("niepoprawny wybor");
+                    System.out.println("niepoprawny wybór");
                 }
             }
         }
 
         counter = false;
         while (!counter) {
-            System.out.println("Wprowadz sklep gdzie jest dostepny produkt: (Auchan, PiotriPawel, Tesco)");
+            System.out.println("Wprowadź sklep gdzie jest dostępny produkt: (Auchan, PiotriPawel, Tesco)");
             Scanner scannerProductShop = new Scanner(System.in);
             String scannerInputProductShop = scannerProductShop.nextLine();
             switch (scannerInputProductShop.toUpperCase()) {
@@ -110,44 +110,44 @@ public class AddProductMenu {
                     break;
                 }
                 default: {
-                    System.out.println("niepoprawny wybor");
+                    System.out.println("niepoprawny wybór");
                 }
             }
         }
 
-        System.out.println("Wprowadz producenta produktu: ");
+        System.out.println("Wprowadź producenta produktu: ");
         Scanner scannerProductBrand = new Scanner(System.in);
         String scannerInputProductBrand = scannerProductBrand.nextLine();
         setBrand(scannerInputProductBrand);
 
         counter = false;
         while (!counter) {
-            System.out.println("Wprowadz cene produktu: (w groszach)");
+            System.out.println("Wprowadź cenę produktu: (w groszach)");
             Scanner scannerProductPrice = new Scanner(System.in);
             try {
                 Integer scannerInputProductPrice = scannerProductPrice.nextInt();
                 setPrice(scannerInputProductPrice);
                 counter = true;
             } catch (Exception e) {
-                System.out.println("niepoprawny wybor");
+                System.out.println("niepoprawny wybór");
             }
         }
 
         counter = false;
         while (!counter) {
-            System.out.println("Wprowadz kalorycznosc produktu: ");
+            System.out.println("Wprowadź kaloryczność produktu: ");
             Scanner scannerProductCalory = new Scanner(System.in);
             try {
                 Integer scannerInputProductCalory = scannerProductCalory.nextInt();
                 setCalories(scannerInputProductCalory);
                 counter = true;
             } catch (Exception e) {
-                System.out.println("niepoprawny wybor");
+                System.out.println("niepoprawny wybór");
             }
         }
 
         System.out.println("\nPODSUMOWANIE NOWEGO PRODUKTU: ");
-        System.out.println("nazwa produktu: "+ getName()+", producent: "+ getBrand()+", cena: "+ getPrice()+", kalorycznosc: "+ getCalories()+", sklep: "+ getShop()+", kategoria: "+ getProductCategory() );
+        System.out.println("nazwa produktu: "+ getName()+", producent: "+ getBrand()+", cena: "+ getPrice()+", kaloryczność: "+ getCalories()+", sklep: "+ getShop()+", kategoria: "+ getProductCategory() );
         WriteProducts.writingProduct(getName(),getBrand(),getPrice(),getCalories(),getShop(),getProductCategory());
         System.out.println("\n Dodano nowy produkt.");
     }

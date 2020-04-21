@@ -9,7 +9,7 @@ public class RegistrationService extends User {
 
     public static void registration() throws IOException, InterruptedException {
 
-        System.out.println("\n" + "ZALÓŻ KONTO" + "\n");
+        System.out.println("\n" + "ZAŁÓŻ KONTO" + "\n");
         System.out.println("Aby się zarejestrować, wypełnij poniższe pola:");
         System.out.println("----------------------------------------");
 

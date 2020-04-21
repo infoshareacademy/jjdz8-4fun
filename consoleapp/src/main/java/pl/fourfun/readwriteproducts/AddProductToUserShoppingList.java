@@ -22,7 +22,7 @@ public class AddProductToUserShoppingList {
                 FileReader jsonFileProductInput2 = new FileReader("UserProductList.json");
                 JSONObject jsonObjectReader2 = (JSONObject) JSONValue.parse(jsonFileProductInput2);
                 JSONArray jsonArrayProducts2 = (JSONArray) jsonObjectReader2.get("productList");
-                System.out.println("wielkosc jsonArrayProducts2 : " + jsonArrayProducts2.size());
+                System.out.println("wielkość własnej listy produktów : " + jsonArrayProducts2.size());
 
                 int idProduktuListaDoADD2 = jsonArrayProducts2.size();
                 JSONObject milestone12 = new JSONObject();

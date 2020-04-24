@@ -21,7 +21,7 @@ public class ReadProducts
     public static void readAllProducts() throws IOException, InterruptedException {
         JSONArray sortedJsonArrayProductsPerProduct = getSortedProductList();
 
-        System.out.println("========================Lista produktow - START======================================================");
+        System.out.println("========================Lista produktów - START======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -52,7 +52,7 @@ public class ReadProducts
             System.out.print("Kaloryka: " + countSpacesAndUpdate(productDetail.get("calories").toString(), maxCloriesLength) + " || ");
             System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
         }
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
 
         ReadProductMenu.readingProductMenu();
     }
@@ -67,7 +67,7 @@ public class ReadProducts
         System.out.println("1 - NABIAŁ");
         System.out.println("2 - OWOCE");
         System.out.println("3 - WARZYWA");
-        System.out.println("4 - powrot do poprzedniego menu.");
+        System.out.println("4 - powrót do poprzedniego menu.");
 
         System.out.println("Podaj kategorie produktu: ");
 
@@ -95,7 +95,7 @@ public class ReadProducts
                     counter = true;
                     break;
                 default: {
-                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1,2,3 lub 4)");
+                    System.out.println("Niepoprawna operacja, wskaż prawidłową (1,2,3 lub 4)");
                     break;
                 }
             }
@@ -105,7 +105,7 @@ public class ReadProducts
         FileReader jsonFileProductInput = new FileReader("Products.json");
         JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileProductInput);
         JSONArray jsonArrayProducts = (JSONArray) jsonObjectReader.get("productList");
-        System.out.println("========================Lista produktow - START======================================================");
+        System.out.println("========================Lista produktów - START======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -139,8 +139,8 @@ public class ReadProducts
             }
         }
 
-        if(numberOfProduct == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        if(numberOfProduct == 0 ) System.out.println("Brak produktów w wybranej kategorii.");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
 
         ReadProductMenu.readingProductMenu();
     }
@@ -160,7 +160,7 @@ public class ReadProducts
         System.out.println("1 - AUCHAN");
         System.out.println("2 - PIOTRiPAWEŁ");
         System.out.println("3 - TESCO");
-        System.out.println("4 - powrot do poprzedniego menu.");
+        System.out.println("4 - powrót do poprzedniego menu.");
 
         System.out.println("Podaj nazwe sklepu: ");
 
@@ -188,7 +188,7 @@ public class ReadProducts
                     counter = true;
                     break;
                 default: {
-                    System.out.println("Niepoprawna operacja, wskaz prawidlowa (1,2,3 lub 4)");
+                    System.out.println("Niepoprawna operacja, wskaż prawidłową (1,2,3 lub 4)");
                     break;
                 }
             }
@@ -198,7 +198,7 @@ public class ReadProducts
         FileReader jsonFileShopInput = new FileReader("Products.json");
         JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileShopInput);
         JSONArray jsonArrayShop = (JSONArray) jsonObjectReader.get("productList");
-        System.out.println("========================Lista produktow - START======================================================");
+        System.out.println("========================Lista produktów - START======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -232,8 +232,8 @@ public class ReadProducts
             }
         }
 
-        if(numberOfShop == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        if(numberOfShop == 0 ) System.out.println("Brak produktów w wybranej kategorii.");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
 
         ReadProductMenu.readingProductMenu();
     }
@@ -258,7 +258,7 @@ public class ReadProducts
         FileReader jsonFileBrandInput = new FileReader("Products.json");
         JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileBrandInput);
         JSONArray jsonArrayBrand = (JSONArray) jsonObjectReader.get("productList");
-        System.out.println("========================Lista produktow - START======================================================");
+        System.out.println("========================Lista produktów - START======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -292,8 +292,8 @@ public class ReadProducts
             }
         }
 
-        if(numberOfBrand == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        if(numberOfBrand == 0 ) System.out.println("Brak produktów w wybranej kategorii.");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
 
         ReadProductMenu.readingProductMenu();
     }
@@ -303,7 +303,7 @@ public class ReadProducts
         boolean counter = false;
         String selectedNameList = null;
 
-        System.out.println("Podaj zawartosc nazwy produktu: ");
+        System.out.println("Podaj zawartość nazwy produktu: ");
 
         while (!counter) {
             Scanner userInputOption = new Scanner(System.in);
@@ -318,7 +318,7 @@ public class ReadProducts
         FileReader jsonFileNameInput = new FileReader("Products.json");
         JSONObject jsonObjectReader = (JSONObject) JSONValue.parse(jsonFileNameInput);
         JSONArray jsonArrayName = (JSONArray) jsonObjectReader.get("productList");
-        System.out.println("========================Lista produktow - START======================================================");
+        System.out.println("========================Lista produktów - START======================================================");
 
         int maxNameLength = 0;
         int maxBrandLength = 0;
@@ -353,8 +353,8 @@ public class ReadProducts
             }
         }
 
-        if(numberOfName == 0 ) System.out.println("Brak produktow w wybranej kategorii.");
-        System.out.println("========================Lista produktow - KONIEC======================================================");
+        if(numberOfName == 0 ) System.out.println("Brak produktów w wybranej kategorii.");
+        System.out.println("========================Lista produktów - KONIEC======================================================");
 
         ReadProductMenu.readingProductMenu();
     }

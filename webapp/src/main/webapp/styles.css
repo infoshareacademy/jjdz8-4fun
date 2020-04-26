@@ -1,0 +1,23 @@
+main {
+    min-height: 90vh;
+}
+
+footer {
+    margin-top: 2vh;
+    border-top: 2px solid black;
+    padding-top: 2vh;
+}
+
+.logo {
+    opacity: 1;
+    text-transform: lowercase;
+}
+
+.logo::first-letter {
+    text-transform: uppercase;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transition: opacity 0.1s ease-in-out;
+}

@@ -1,4 +1,4 @@
-package com.infoshare;
+package com.infoshare.fourfan;
 
 public class Main {
     public static void main( String[] args ){

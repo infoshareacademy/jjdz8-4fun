@@ -21,14 +21,7 @@ public class NewProductAdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Product product = new Product(req.getParameter("name"),req.getParameter("brand"),Integer.parseInt(req.getParameter("price")),Integer.parseInt(req.getParameter("calories")),Shop.valueOf(req.getParameter("shop")),ProductCategory.valueOf(req.getParameter("category")));
-//        newProduct.setName(req.getParameter("name"));
-//        newProduct.setBrand(req.getParameter("brand"));
-//        newProduct.setPrice(Integer.parseInt(req.getParameter("price")));
-//        newProduct.setCalories(Integer.parseInt(req.getParameter("calories")));
-//        newProduct.setShop(Shop.valueOf(req.getParameter("shop")));
-//        newProduct.setProductCategory(ProductCategory.valueOf(req.getParameter("category")));
 
         adminService.save(product);
-
     }
 }

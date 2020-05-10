@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Strona agencji fotograficznej" />
-    <title>4Fun</title>
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
-    />
-    <link href="styles.css" rel="stylesheet" />
-</head>
-
-<body>
-<nav class="navbar navbar-dark bg-dark">
-
-    <div>
-    <img  class="navbar-brand logo" src="https://galeriastaraujezdzalnia.pl/app/webp-express/webp-images/doc-root/web/app/uploads/2019/08/logo-4F-1-0x87-c-default.jpg.webp">
-    </div>
-    <div id="navigation">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Strona główna</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="/hello">kontakt</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<#include "common/header.ftlh">
 
 <header class="jumbotron">
     <div class="container">
@@ -80,8 +48,4 @@
     </div>
 </main>
 
-<footer class="container">
-    <p>4Fun - wszelkie prawa dozwolone</p>
-</footer>
-</body>
-</html>
+<#include "common/copyright-footer.ftlh">

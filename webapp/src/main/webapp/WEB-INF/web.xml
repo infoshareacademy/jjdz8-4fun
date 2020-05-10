@@ -4,4 +4,12 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+<!--  <servlet>-->
+<!--    <servlet-name>HomePageServlet</servlet-name>-->
+<!--    <servlet-class>com.infoshare.fourfan.servlet.HomePageServlet</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>HomePageServlet</servlet-name>-->
+<!--    <url-pattern>/</url-pattern>-->
+<!--  </servlet-mapping>-->
 </web-app>

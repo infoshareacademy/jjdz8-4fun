@@ -18,49 +18,34 @@
   </properties>
 
   <dependencies>
-
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
       <version>8.0.1</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</ groupId>
       <artifactId>junit-jupiter-engine</ artifactId>
       <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-params</artifactId>
-      <version>5.6.2</version>
-      <scope>test</scope>
-    </dependency>
-
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
-      <version>3.11.1</version>
+      <version>3.16.1</version>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
-
     <finalName>shoppinglist-web</finalName>
-
     <plugins>
-
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
@@ -69,13 +54,11 @@
           <target>10</target>
         </configuration>
       </plugin>
-
       <plugin>
         <artifactId>maven-surefire-plugin</ artifactId>
         <version>2.22.2</version>
       </plugin>
-
     </plugins>
-
   </build>
+
 </project>

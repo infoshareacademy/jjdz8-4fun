@@ -1,6 +1,5 @@
 package com.infoshare.fourfan.domain.access;
-
-import org.apache.commons.lang3.StringUtils;
+//TODO adjust apache.commons - import might be wrongly implemented; to veryfie
 
 public class User {
 
@@ -21,16 +20,21 @@ public class User {
     }
 
     public User(UserBuilder builder) {
-
+        this.name = builder.name;
+        this.surName = builder.surName;
+        this.phoneNumber = builder.phoneNumber;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.isAdmin = builder.isAdmin;
     }
 
     @Override
     public String toString() {
-        return "  1. Imię: " + name + "\n" +
-                "  2. Nazwisko: " + surName + "\n" +
-                "  3. Numer telefonu: " + phoneNumber + "\n" +
+        return "  1. Name: " + name + "\n" +
+                "  2. Surname: " + surName + "\n" +
+                "  3. Phone number: " + phoneNumber + "\n" +
                 "  4. Email: " + email + "\n" +
-                "  5. Hasło: " + password + "\n";
+                "  5. Password: " + password + "\n";
     }
 
     //----------- Getters & Setters -----------
@@ -38,17 +42,19 @@ public class User {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    //    if 'final' to stay -> setter no longer in use
+    //    public void setName(String name) {
+    //        this.name = name;
+    //    }
 
     public String getLastName() {
         return surName;
     }
 
-    public void setLastName(String surName) {
-        this.surName = surName;
-    }
+    //    if 'final' to stay -> setter no longer in use
+    //    public void setLastName(String surName) {
+    //        this.surName = surName;
+    //    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -87,15 +93,39 @@ public class User {
         private boolean isAdmin;
 
         public UserBuilder(String name, String surName) {
-            if (StringUtils.isEmpty(name)) {
-                throw new IllegalArgumentException("Name is a mandatory field");
+            if (name.isEmpty()) {
+                throw new IllegalArgumentException("Name is a mandatory field, cannot be empty");
             }
             this.name = name;
 
-            if (StringUtils.isEmpty(surName)) {
-                throw new IllegalArgumentException("Name is a mandatory field");
+            if (surName.isEmpty()) {
+                throw new IllegalArgumentException("Name is a mandatory field, cannot be empty");
             }
             this.surName = surName;
+        }
+
+        public UserBuilder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public UserBuilder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public UserBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UserBuilder isAdmin(boolean isAdmin) {
+            this.isAdmin = isAdmin;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
         }
     }
 }

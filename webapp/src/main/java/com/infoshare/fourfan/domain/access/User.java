@@ -1,9 +1,11 @@
 package com.infoshare.fourfan.domain.access;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class User {
 
-    private String name;
-    private String surName;
+    private final String name;
+    private final String surName;
     private String phoneNumber;
     private String email;
     private String password;
@@ -16,6 +18,10 @@ public class User {
         email = "";
         password = "";
         isAdmin = false;
+    }
+
+    public User(UserBuilder builder) {
+
     }
 
     @Override
@@ -70,5 +76,26 @@ public class User {
 
     public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public static class UserBuilder {
+        private final String name;
+        private final String surName;
+        private String phoneNumber;
+        private String email;
+        private String password;
+        private boolean isAdmin;
+
+        public UserBuilder(String name, String surName) {
+            if (StringUtils.isEmpty(name)) {
+                throw new IllegalArgumentException("Name is a mandatory field");
+            }
+            this.name = name;
+
+            if (StringUtils.isEmpty(surName)) {
+                throw new IllegalArgumentException("Name is a mandatory field");
+            }
+            this.surName = surName;
+        }
     }
 }

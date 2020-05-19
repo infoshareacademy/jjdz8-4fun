@@ -1,6 +1,8 @@
 package com.infoshare.fourfun.domain.access;
 
 import com.infoshare.fourfan.domain.access.User;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 public class UserTest {
 //TODO check Junit library correct implementation for @Test to work

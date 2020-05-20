@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class UserTest {
     //TODO check Junit library correct implementation for @Test to work
@@ -20,5 +21,6 @@ public class UserTest {
         // then
         assertEquals("Piotr", user.getName());
         assertEquals("Kowalski", user.getLastName());
+        assertNotEquals("Pawel",user.getName());
     }
 }

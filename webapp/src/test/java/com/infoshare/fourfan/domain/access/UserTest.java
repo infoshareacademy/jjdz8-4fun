@@ -14,12 +14,10 @@ public class UserTest {
         // given
 
         // when
-
-        // then
-
         User user = new User.UserBuilder("Piotr", "Kowalski")
                 .build();
         System.out.println(user);
+        // then
         assertEquals("Piotr", user.getName());
         assertEquals("Kowalski", user.getLastName());
     }

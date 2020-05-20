@@ -93,14 +93,10 @@ public class User {
         private boolean isAdmin;
 
         public UserBuilder(String name, String surName) {
-            if (name.isEmpty()) {
-                throw new IllegalArgumentException("Name is a mandatory field, cannot be empty");
+            if ((name.isEmpty() || name.isBlank())||(surName.isEmpty() || surName.isBlank())) {
+                throw new IllegalArgumentException("Name and surname are mandatory fields, cannot be empty");
             }
             this.name = name;
-
-            if (surName.isEmpty()) {
-                throw new IllegalArgumentException("Name is a mandatory field, cannot be empty");
-            }
             this.surName = surName;
         }
 

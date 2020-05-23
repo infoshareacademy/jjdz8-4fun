@@ -14,7 +14,7 @@ public class User {
     private boolean isAdmin;
 
 //TODO:
-// - to verifie with team - if this constructor due to security should be created
+// - to verify with team - if this constructor due to security should be created
 // - Exception better to be thrown to assure user is not created unless name & surname given
 //    public User() {
 //        name = "";
@@ -48,7 +48,6 @@ public class User {
     }
 
     //----------- Getters & Setters -----------
-
 
     public String getLogin() {
         return login;

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserTest {
 
     @Test
-    @DisplayName("Verifies if user created/exists with input login and password provided in constructor's arguments")
+    @DisplayName("Verifies as group assertions if user created/exists with input login and password provided in constructor's arguments")
     public void testIfUserCreatedForValidLoginAndPassword() {
         // given & when
         User user = new User("Peter", "peter-password");

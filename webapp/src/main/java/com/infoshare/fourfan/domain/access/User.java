@@ -1,7 +1,6 @@
 package com.infoshare.fourfan.domain.access;
 //TODO adjust apache.commons - import might be wrongly implemented; to veryfie
 
-import freemarker.template.utility.StringUtil;
 import org.apache.commons.lang3.StringUtils;
 
 public class User {
@@ -31,15 +30,13 @@ public class User {
     }
 
     public User(String login, String password) {
-        if (StringUtils.isEmpty(login)) {
+        if ((StringUtils.isEmpty(login) || StringUtils.isBlank(login)) || ((StringUtils.isEmpty(password)) || StringUtils.isBlank(password)))
+        {
             throw new IllegalArgumentException("Login is necessary to be given for user to be created");
+        } else{
+            this.login = login;
+            this.password = password;
         }
-        this.login = login;
-
-        if (StringUtils.isEmpty(password)) {
-            throw new IllegalArgumentException("Password is necessary to be given for user to be created");
-        }
-        this.password = password;
     }
 
 //    public User() {

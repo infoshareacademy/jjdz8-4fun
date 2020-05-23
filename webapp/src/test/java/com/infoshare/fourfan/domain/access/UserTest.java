@@ -51,7 +51,7 @@ public class UserTest {
 //}
 
     @Test
-    @DisplayName("Verifies if user created/exists with input login and password data provided as constructor arguments")
+    @DisplayName("Verifies if user created/exists with input login and password provided in constructor's arguments")
     public void testIfUserCreatedForValidLoginAndPassword() {
 
         // given & when
@@ -61,15 +61,22 @@ public class UserTest {
         assertEquals("Peter", user.getLogin());
         assertEquals("peter-password", user.getPassword());
         assertNotEquals("peter", user.getLogin());
+        assertNotNull(user);
+    }
 
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case of empty login")
+    public void testIfExceptionThrownInCaseOfEmptyLogin() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User("","password"));
+        assertThrows(IllegalArgumentException.class, () -> new User(" ","password"));
     }
 
     @Test
     @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank login")
-    public void testIfExceptionThrownInCaseOfEmptyLogin() {
-        // given & when
-        User user = new User("", "password-check");
-        assertThrows(IllegalArgumentException.class, () -> new User("", "password-check"));
+    public void testIfExceptionThrownInCaseOfEmptyPassword() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User("","password"));
     }
 
     @Test

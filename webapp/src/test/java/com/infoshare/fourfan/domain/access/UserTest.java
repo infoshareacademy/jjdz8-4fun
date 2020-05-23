@@ -3,8 +3,7 @@ package com.infoshare.fourfan.domain.access;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
     //TODO check Junit library correct implementation for @Test to work
@@ -63,5 +62,14 @@ public class UserTest {
         assertEquals("peter-password", user.getPassword());
         assertNotEquals("peter", user.getLogin());
 
+    }
+
+    @Test
+    @DisplayName("Checks if Exception thrown in case of emty/bank login")
+    public void testIfExceptionThrownInCaseOfEmptyLogin(){
+        // given & when
+        User user = new User("","password-check");
+        assertThrows(IllegalArgumentException.class, ()->new User("","password-check"));
+        
     }
 }

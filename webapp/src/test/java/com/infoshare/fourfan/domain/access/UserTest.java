@@ -51,8 +51,8 @@ public class UserTest {
 //}
 
     @Test
-    @DisplayName("Verifies if user created/exists with input name and surname data provided as constructor arguments")
-    public void testIfUserCreatedForValidNameAndSurname() {
+    @DisplayName("Verifies if user created/exists with input login and password data provided as constructor arguments")
+    public void testIfUserCreatedForValidLoginAndPassword() {
 
         // given & when
         User user = new User("Peter", "peter-password");
@@ -92,4 +92,7 @@ public class UserTest {
         // given, when & then
         assertThrows(IllegalArgumentException.class, () -> new User("Peter", null));
     }
+
+
+
 }

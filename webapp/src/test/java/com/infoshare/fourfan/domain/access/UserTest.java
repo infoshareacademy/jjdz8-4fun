@@ -73,7 +73,7 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("Checks if IllegalArgumentException was thrown in case of efault constructor creation")
+    @DisplayName("Checks if IllegalArgumentException was thrown in case of default constructor creation")
     public void testIfExceptionThrownForDefaultConstructor(){
         // given, when & then
         assertThrows(IllegalArgumentException.class, () -> new User());
@@ -84,5 +84,12 @@ public class UserTest {
     public void testIfExceptionThrownForNullLogin() {
         // given, when & then
         assertThrows(IllegalArgumentException.class, () -> new User(null, "password-check"));
+    }
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case password is null")
+    public void testIfExceptionThrownForNullPassword() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User("Peter", null));
     }
 }

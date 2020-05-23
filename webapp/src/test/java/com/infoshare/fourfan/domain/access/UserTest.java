@@ -10,15 +10,13 @@ public class UserTest {
     @Test
     @DisplayName("Verifies if user created/exists with input login and password provided in constructor's arguments")
     public void testIfUserCreatedForValidLoginAndPassword() {
-
         // given & when
         User user = new User("Peter", "peter-password");
 
         // then
-        assertEquals("Peter", user.getLogin());
-        assertEquals("peter-password", user.getPassword());
-        assertNotEquals("peter", user.getLogin());
-        assertNotNull(user);
+        assertAll(() -> assertEquals("Peter", user.getLogin()),
+                () -> assertEquals("peter-password", user.getPassword()),
+                () -> assertNotEquals("peter", user.getLogin()));
     }
 
     @Test

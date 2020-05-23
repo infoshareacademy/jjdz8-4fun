@@ -65,11 +65,24 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("Checks if Exception thrown in case of emty/bank login")
-    public void testIfExceptionThrownInCaseOfEmptyLogin(){
+    @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank login")
+    public void testIfExceptionThrownInCaseOfEmptyLogin() {
         // given & when
-        User user = new User("","password-check");
-        assertThrows(IllegalArgumentException.class, ()->new User("","password-check"));
-        
+        User user = new User("", "password-check");
+        assertThrows(IllegalArgumentException.class, () -> new User("", "password-check"));
+    }
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException was thrown in case of efault constructor creation")
+    public void testIfExceptionThrownForDefaultConstructor(){
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User());
+    }
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case login is null")
+    public void testIfExceptionThrownForNullLogin() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User(null, "password-check"));
     }
 }

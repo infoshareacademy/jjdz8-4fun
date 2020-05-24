@@ -13,18 +13,6 @@ public class User {
     private String phoneNumber;
     private boolean isAdmin;
 
-//TODO:
-// - to verify with team - if this constructor due to security should be created
-// - Exception better to be thrown to assure user is not created unless name & surname given
-//    public User() {
-//        name = "";
-//        surName = "";
-//        phoneNumber = "";
-//        email = "";
-//        password = "";
-//        isAdmin = false;
-//    }
-
     public User() {
         throw new IllegalArgumentException("Login and password are necessary to be given for user to be created");
     }

@@ -23,16 +23,16 @@ public class UserTest {
     @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank login")
     public void testIfExceptionThrownInCaseOfEmptyLogin() {
         // given, when & then
-        assertThrows(IllegalArgumentException.class, () -> new User("", "password"));
-        assertThrows(IllegalArgumentException.class, () -> new User(" ", "password"));
+        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> new User("", "password")),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User(" ", "password")));
     }
 
     @Test
     @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank password")
     public void testIfExceptionThrownInCaseOfEmptyPassword() {
         // given, when & then
-        assertThrows(IllegalArgumentException.class, () -> new User("Peter", ""));
-        assertThrows(IllegalArgumentException.class, () -> new User("Peter", " "));
+        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> new User("Peter", "")),
+                () -> assertThrows(IllegalArgumentException.class, () -> new User("Peter", " ")));
     }
 
     @Test

@@ -3,71 +3,75 @@ package com.infoshare.fourfan.domain.access;
 
 import org.apache.commons.lang3.StringUtils;
 
+import javax.validation.constraints.NotEmpty;
+
 public class User {
 
-    private String login;
+    private String email;
     private String password;
     private String name;
     private String surName;
-    private String email;
     private String phoneNumber;
     private boolean isAdmin;
 
     public User() {
-        throw new IllegalArgumentException("Login and password are necessary to be given for user to be created");
+        throw new IllegalArgumentException("Email and password are necessary to be given for user to be created");
     }
 
-    public User(String login, String password) {
-        if ((StringUtils.isEmpty(login) || StringUtils.isBlank(login)) || ((StringUtils.isEmpty(password)) || StringUtils.isBlank(password))) {
-            throw new IllegalArgumentException("Login is necessary to be given for user to be created");
+    public User(String email, String password, String name, String surName, String phoneNumber) {
+        if (StringUtils.isBlank(email) || (StringUtils.isBlank(password)) || (StringUtils.isBlank(name)) || (StringUtils.isBlank(surName)) || (StringUtils.isBlank(phoneNumber))) {
+            throw new IllegalArgumentException("All fields (email, password, name, surname and your phone number are mandatory to be given for user's successful registration");
         } else {
-            this.login = login;
+            this.email = email;
             this.password = password;
+            this.name = name;
+            this.surName = surName;
+            this.phoneNumber = phoneNumber;
         }
     }
 
     @Override
     public String toString() {
-        return "  1. Name: " + name + "\n" +
-                "  2. Surname: " + surName + "\n" +
-                "  3. Phone number: " + phoneNumber + "\n" +
-                "  4. Email: " + email + "\n" +
-                "  5. Password: " + password + "\n";
+        return "User{" +
+                "email='" + email + '\'' +
+                ", Imie='" + name + '\'' +
+                ", Nazwisko='" + surName + '\'' +
+                ", Numer telefonu='" + phoneNumber + '\'' +
+                '}';
     }
 
     //----------- Getters & Setters -----------
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
-        if (StringUtils.isEmpty(password)) {
-            throw new IllegalArgumentException("Password is not allowed to be empty!");
+        if (StringUtils.isBlank(password)) {
+            throw new IllegalArgumentException("Password is not allowed to be empty");
         }
+        ;
         this.password = password;
     }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
+        if (StringUtils.isBlank(name)) {
+            throw new IllegalArgumentException("Name is not allowed to be empty");
+        }
         this.name = name;
     }
 
-    public String getLastName() {
+    public String getSurName() {
         return surName;
     }
 
-    public void setLastName(String surName) {
+    public void setSurName(String surName) {
+        if (StringUtils.isBlank(surName)) {
+            throw new IllegalArgumentException("Surname is not allowed to be empty");
+        }
         this.surName = surName;
     }
 
@@ -76,13 +80,20 @@ public class User {
     }
 
     public void setEmail(String email) {
+        if (StringUtils.isBlank(email)) {
+            throw new IllegalArgumentException("Email is not allowed to be empty");
+        }
         this.email = email;
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if (StringUtils.isBlank(phoneNumber)) {
+            throw new IllegalArgumentException("Phone number is not allowed to be empty");
+        }
         this.phoneNumber = phoneNumber;
     }
 

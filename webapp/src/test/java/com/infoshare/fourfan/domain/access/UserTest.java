@@ -8,31 +8,47 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserTest {
 
     @Test
-    @DisplayName("Verifies as group assertions if user created/exists with input login and password provided in constructor's arguments")
+    @DisplayName("Verifies as group assertions if user created/exists with input necessary parameters (email, password, name, surName & phoneNumber) provided in constructor's arguments")
     public void testIfUserCreatedForValidLoginAndPassword() {
         // given & when
-        User user = new User("Peter", "peter-password");
+        User user = new User("Peter@gmail.com", "peter-password", "Peter","Kowalski","512222999");
 
         // then
-        assertAll(() -> assertEquals("Peter", user.getLogin()),
+        assertAll(() -> assertEquals("Peter@gmail.com", user.getEmail()),
                 () -> assertEquals("peter-password", user.getPassword()),
-                () -> assertNotEquals("peter", user.getLogin()));
+                () -> assertEquals("Peter", user.getName()),
+                () -> assertEquals("Kowalski", user.getSurName()),
+                () -> assertEquals("512222999", user.getPhoneNumber()),
+                () -> assertNotEquals("Kowalcki", user.getSurName()),
+                () -> assertNotEquals("512229999", user.getPhoneNumber()));
     }
 
     @Test
-    @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank login")
-    public void testIfExceptionThrownInCaseOfEmptyLogin() {
+    @DisplayName("Checks if IllegalArgumentException thrown in case of empty email")
+    public void testIfExceptionThrownInCaseOfEmptyEmail() {
         // given, when & then
-        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> new User("", "password")),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User(" ", "password")));
+        assertThrows(IllegalArgumentException.class, () -> new User("", "peter-password", "Peter","Kowalski","512222999"));
     }
 
     @Test
-    @DisplayName("Checks if IllegalArgumentException thrown in case of empty/blank password")
+    @DisplayName("Checks if IllegalArgumentException thrown in case of blank email")
+    public void testIfExceptionThrownInCaseOfBlankEmail() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User(" ", "peter-password", "Peter","Kowalski","512222999"));
+    }
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case of empty password")
     public void testIfExceptionThrownInCaseOfEmptyPassword() {
         // given, when & then
-        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> new User("Peter", "")),
-                () -> assertThrows(IllegalArgumentException.class, () -> new User("Peter", " ")));
+      assertThrows(IllegalArgumentException.class, () -> new User("Peter@gmail.com", "", "Peter","Kowalski","512222999"));
+    }
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case of blank password")
+    public void testIfExceptionThrownInCaseOfBlankPassword() {
+        // given, when & then
+        assertThrows(IllegalArgumentException.class, () -> new User("Peter@gmail.com", " ", "Peter","Kowalski","512222999"));
     }
 
     @Test
@@ -43,16 +59,16 @@ public class UserTest {
     }
 
     @Test
-    @DisplayName("Checks if IllegalArgumentException thrown in case of null login")
-    public void testIfExceptionThrownForNullLogin() {
+    @DisplayName("Checks if IllegalArgumentException thrown in case of null email")
+    public void testIfExceptionThrownForNullEmail() {
         // given, when & then
-        assertThrows(IllegalArgumentException.class, () -> new User(null, "password-check"));
+        assertThrows(IllegalArgumentException.class, () -> new User(null, "peter-password", "Peter","Kowalski","512222999"));
     }
 
     @Test
     @DisplayName("Checks if IllegalArgumentException thrown in case of null password")
     public void testIfExceptionThrownForNullPassword() {
         // given, when & then
-        assertThrows(IllegalArgumentException.class, () -> new User("Peter", null));
+        assertThrows(IllegalArgumentException.class, () -> new User("Peter@gmail.com", null, "Peter","Kowalski","512222999"));
     }
 }

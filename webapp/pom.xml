@@ -46,8 +46,13 @@
             <version>3.16.1</version>
             <scope>test</scope>
         </dependency>
+      <dependency>
+      <groupId>org.freemarker</groupId>
+      <artifactId>freemarker</artifactId>
+      <version>2.3.30</version>
+    </dependency>
     </dependencies>
-
+  
     <build>
         <finalName>shoppinglist-web</finalName>
         <plugins>
@@ -57,5 +62,5 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
+

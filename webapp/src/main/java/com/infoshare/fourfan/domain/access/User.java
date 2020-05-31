@@ -33,10 +33,10 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "email='" + email + '\'' +
-                ", Imie='" + name + '\'' +
-                ", Nazwisko='" + surName + '\'' +
-                ", Numer telefonu='" + phoneNumber + '\'' +
+                "1. email='" + email + '\'' +
+                "2. Imie='" + name + '\'' +
+                "3. Nazwisko='" + surName + '\'' +
+                "4. Numer telefonu='" + phoneNumber + '\'' +
                 '}';
     }
 

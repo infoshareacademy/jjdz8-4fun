@@ -15,7 +15,7 @@
 
 
 
-            <form method="post" action="/addProduct">
+            <form method="post" action="/addProduct" accept-charset="utf-8">
                 Nazwa: <input type="text" name="name" required/><br/><br/>
                 Producent: <input type="text" name="brand" required/><br/><br/>
                 Cena: <input type="text" name="price" required/><br/><br/>

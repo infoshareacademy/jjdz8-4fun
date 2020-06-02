@@ -16,10 +16,10 @@
 
 
             <form method="post" action="/addProduct">
-                Nazwa: <input type="text" name="name"/><br/><br/>
-                Producent: <input type="text" name="brand"/><br/><br/>
-                Cena: <input type="text" name="price"/><br/><br/>
-                Kaloryczność: <input type="text" name="calories"/><br/><br/>
+                Nazwa: <input type="text" name="name" required/><br/><br/>
+                Producent: <input type="text" name="brand" required/><br/><br/>
+                Cena: <input type="text" name="price" required/><br/><br/>
+                Kaloryczność: <input type="text" name="calories" required/><br/><br/>
 
                 Sklep: <select name="shop">
                     <option value="AUCHAN">AUCHAN</option>
@@ -30,9 +30,8 @@
                     <option value="WARZYWA">WARZYWA</option>
                     <option value="OWOCE">OWOCE</option>
                     <option value="NABIAŁ">NABIAŁ</option>
-                    <!-- NABIA&#321 ISO-8859-1-->
                 </select>
-                <input type="submit" name="save" value="save"/><br/><br/>
+                <input type="submit" name="save" value="Zapisz Produkt"/><br/><br/>
             </form>
         </div>
     </div>

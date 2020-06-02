@@ -37,6 +37,7 @@ public class NewProductAdminServlet extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+
         PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);

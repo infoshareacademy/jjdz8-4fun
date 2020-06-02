@@ -1,6 +1,7 @@
 package pl.fourfun.menutypes;
 
 import pl.fourfun.readwriteproducts.AddProductJson;
+import pl.fourfun.readwriteproducts.ReadUserProducts;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -33,7 +34,7 @@ public class LoggedUserMenu {
             switch (chosenUserMenuNumber) {
                 case 1:
                     clearMenu();
-                    ReadProductMenu.readingUserProductMenu();
+                    ReadUserProducts.readAllProductsUserList();
                     break;
                 case 2:
                     clearMenu();

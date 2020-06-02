@@ -2,7 +2,7 @@ package pl.fourfun.menutypes;
 
 import org.json.simple.JSONArray;
 import pl.fourfun.readwriteproducts.AddProductToUserShoppingList;
-import pl.fourfun.readwriteproducts.EditUserListOLD;
+import pl.fourfun.readwriteproducts.EditUserList;
 import pl.fourfun.readwriteproducts.ReadProducts;
 import pl.fourfun.readwriteproducts.ReadUserProducts;
 
@@ -97,7 +97,7 @@ public class ReadProductMenu {
 
         System.out.println("===== menu wyświetlenie produktów =====");
         System.out.println("1 - dodanie produktu do własnej listy zakupów.");
-        System.out.println("2 - edycja ilości produktu na liście zakupów");
+        System.out.println("2 - edycja ilości produktów na liście zakupów");
         System.out.println("3 - usunięcie produktu z własnej listy zakupów");
         System.out.println("4 - usunięcie całej listy zakupów");
         System.out.println("5 - powrót do poprzedniego menu.");
@@ -112,25 +112,25 @@ public class ReadProductMenu {
                     clearMenu();
                     System.out.println("dodanie produktu do własnej listy zakupów.");
                     AddProductToUserShoppingList.readAllProductsToUserList();
-                    ReadProductMenu.readingUserProductMenu();
+                    ReadUserProducts.readAllProductsUserList();
                     counter = true;
                     break;
                 case 2:
                     clearMenu();
                     System.out.println("edycja ilości");
-                    EditUserListOLD.changeAmount();
+                    EditUserList.changeAmount();
                     counter = true;
                     break;
                 case 3:
                     clearMenu();
                     System.out.println("usunięcie produktu ");
-                    EditUserListOLD.removeOneFromUserList();
+                    EditUserList.removeOneFromUserList();
                     counter = true;
                     break;
                 case 4:
                     clearMenu();
                     System.out.println("usunięcie całej listy");
-                    EditUserListOLD.removeAllProductsFromUserList();
+                    EditUserList.removeAllProductsFromUserList();
                     counter = true;
                     break;
 

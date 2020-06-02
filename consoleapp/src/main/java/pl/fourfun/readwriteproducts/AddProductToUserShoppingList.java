@@ -9,7 +9,7 @@ import pl.fourfun.menutypes.ReadProductMenu;
 import java.io.*;
 import java.util.*;
 
-import static pl.fourfun.readwriteproducts.EditUserListOLD.countSpacesAndUpdate;
+import static pl.fourfun.readwriteproducts.EditUserList.countSpacesAndUpdate;
 
 public class AddProductToUserShoppingList {
 
@@ -123,7 +123,7 @@ public class AddProductToUserShoppingList {
                     System.out.print("Cena: " + countSpacesAndUpdate(productDetail.get("price").toString(), maxPriceLength) + " || ");
                     System.out.print("Kaloryka: " + countSpacesAndUpdate(productDetail.get("calories").toString(), maxCloriesLength) + " || ");
                     System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
-                    System.out.println("Ilość: "+productDetail.get("amount"));
+                    System.out.println("Ilość: " + productDetail.get("amount"));
                     IDProducts += 1;
                 }
                 System.out.println("========================Lista produktow - KONIEC======================================================");
@@ -136,16 +136,16 @@ public class AddProductToUserShoppingList {
                     Scanner inputUserText = new Scanner(System.in);
                     try {
                         choiceID = inputUserText.nextInt();
-                        if( 0 == choiceID){
-                            ReadProductMenu.readingProductMenu();
+                        if (0 == choiceID) {
+                            ReadProductMenu.readingAddedUserProductMenu();
                             counter = true;
                             break;
-                        };
-                        if( 0 < choiceID && choiceID <= jsonArrayProducts.size()){
+                        }
+                        ;
+                        if (0 < choiceID && choiceID <= jsonArrayProducts.size()) {
                             System.out.println("ok wartosc z zakresu");
                             counter = true;
-                        }else
-                        {
+                        } else {
                             System.out.println("wybierz prawidlowa wartosc z ID, podaj prawidłową: ");
                         }
                     } catch (Exception e) {
@@ -157,7 +157,7 @@ public class AddProductToUserShoppingList {
                 for (Iterator it = sortedJsonArrayProductsPerProduct.iterator(); it.hasNext(); ) {
                     Object objIterator = it.next();
                     org.json.JSONObject productDetail = (org.json.JSONObject) objIterator;
-                    if(choiceID == IDProducts){
+                    if (choiceID == IDProducts) {
 
                         FileReader jsonFileProductInput2 = new FileReader("UserProductList.json");
                         JSONObject jsonObjectReader2 = (JSONObject) JSONValue.parse(jsonFileProductInput2);
@@ -170,15 +170,49 @@ public class AddProductToUserShoppingList {
                         Scanner inputValue = new Scanner(System.in);
                         int inputQuantity = inputValue.nextInt();
 
-                        milestone12.put("name", productDetail.get("name").toString());
-                        milestone12.put("brand", productDetail.get("brand").toString());
-                        milestone12.put("price", productDetail.get("price").toString());
-                        milestone12.put("calories", productDetail.get("calories").toString());
-                        milestone12.put("shop", productDetail.get("shop").toString());
-                        milestone12.put("productCategory", productDetail.get("productCategory").toString());
-                        milestone12.put("amount", inputQuantity);
 
-                        jsonArrayProducts2.add(idProduktuListaDoADD2, milestone12);
+                        if (jsonArrayProducts2.size() == 0) {
+                            milestone12.put("name", productDetail.get("name").toString());
+                            milestone12.put("brand", productDetail.get("brand").toString());
+                            milestone12.put("price", productDetail.get("price").toString());
+                            milestone12.put("calories", productDetail.get("calories").toString());
+                            milestone12.put("shop", productDetail.get("shop").toString());
+                            milestone12.put("productCategory", productDetail.get("productCategory").toString());
+                            milestone12.put("amount", inputQuantity);
+                            jsonArrayProducts2.add(idProduktuListaDoADD2, milestone12);
+                        } else {
+                            int idCounter = 0;
+                            String nameOfModified = "";
+                            String nameOfModified2 = "";
+                            for (int j = 0; j < jsonArrayProducts2.size(); j++) {
+                                JSONObject jsonObjectReader222 = (JSONObject) jsonArrayProducts2.get(j);
+                                nameOfModified = jsonObjectReader222.get("name").toString();
+                                nameOfModified2 = productDetail.get("name").toString();
+                                if (nameOfModified.equals(nameOfModified2)) {
+                                    idCounter = j;
+                                    break;
+                                }
+                            }
+
+
+                            JSONObject jsonObjectReader222 = (JSONObject) jsonArrayProducts2.get(idCounter);
+                            if (nameOfModified.equals(nameOfModified2) || (nameOfModified.isEmpty() && !nameOfModified2.isEmpty()) || (nameOfModified2.isEmpty() && !nameOfModified.isEmpty())) {
+                                int oldValue = Integer.parseInt(jsonObjectReader222.get("amount").toString());
+                                int newValue = inputQuantity + oldValue;
+                                jsonObjectReader222.put("amount", newValue);
+
+                            } else {
+                                milestone12.put("name", productDetail.get("name").toString());
+                                milestone12.put("brand", productDetail.get("brand").toString());
+                                milestone12.put("price", productDetail.get("price").toString());
+                                milestone12.put("calories", productDetail.get("calories").toString());
+                                milestone12.put("shop", productDetail.get("shop").toString());
+                                milestone12.put("productCategory", productDetail.get("productCategory").toString());
+                                milestone12.put("amount", inputQuantity);
+                                jsonArrayProducts2.add(idProduktuListaDoADD2, milestone12);
+                            }
+                        }
+
 
                         Writer writer2 = new FileWriter("UserProductList.json");
 

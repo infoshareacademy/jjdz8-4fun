@@ -11,7 +11,7 @@
 
 <main role="main">
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <h2> :) Nowy produkt został dodany. :) </h2>
         </div>
     </div>

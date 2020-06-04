@@ -6,7 +6,8 @@
       "price": 250,
       "calories": 200,
       "shop": "AUCHAN",
-      "productCategory": "NABIAŁ"
+      "productCategory": "NABIAŁ",
+      "amount": "1"
     },
     {
       "name": "Mrożona mieszanka warzywna",
@@ -14,7 +15,8 @@
       "price": 400,
       "calories": 350,
       "shop": "TESCO",
-      "productCategory": "WARZYWA"
+      "productCategory": "NABIAŁ",
+      "amount": "1"
     }
   ]
 }

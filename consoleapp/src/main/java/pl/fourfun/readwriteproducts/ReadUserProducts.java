@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
-import pl.fourfun.menutypes.ReadProductMenu;
 
 import java.io.*;
 import java.util.*;
@@ -63,6 +62,7 @@ public class ReadUserProducts {
                 int maxCloriesLength = 0;
                 int maxShopLength = 0;
                 int maxProductCategoryLength = 0;
+                int productOnListAmount = 0;
 
                 for (Iterator it = sortedJsonArrayProductsPerProduct.iterator(); it.hasNext(); ) {
                     Object objIterator = it.next();
@@ -78,16 +78,18 @@ public class ReadUserProducts {
                 for (Iterator it = sortedJsonArrayProductsPerProduct.iterator(); it.hasNext(); ) {
                     Object objIterator = it.next();
                     org.json.JSONObject productDetail = (org.json.JSONObject) objIterator;
+                    productOnListAmount++;
+                    System.out.print("ID: " + productOnListAmount + " || ");
                     System.out.print("Kategoria produktu: " + countSpacesAndUpdate(productDetail.get("productCategory").toString(), maxProductCategoryLength) + " || ");
                     System.out.print("Nazwa: " + countSpacesAndUpdate(productDetail.get("name").toString(), maxNameLength) + " || ");
                     System.out.print("Producent: " + countSpacesAndUpdate(productDetail.get("brand").toString(), maxBrandLength) + " || ");
                     System.out.print("Cena: " + countSpacesAndUpdate(productDetail.get("price").toString(), maxPriceLength) + " || ");
                     System.out.print("Kaloryka: " + countSpacesAndUpdate(productDetail.get("calories").toString(), maxCloriesLength) + " || ");
-                    System.out.println("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
+                    System.out.print("Sklep: " + countSpacesAndUpdate(productDetail.get("shop").toString(), maxShopLength) + " || ");
+                    System.out.println("Ilość: " + productDetail.get("amount"));
                 }
                 System.out.println("========================Wlasna lista zakupów - KONIEC======================================================");
                 System.out.println();
-                ReadProductMenu.readingUserProductMenu();
             }
         }
     }

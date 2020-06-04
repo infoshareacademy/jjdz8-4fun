@@ -1,8 +1,9 @@
 package com.infoshare.fourfan.service;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.repository.ProductRepository;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
+import com.infoshare.fourfan.repository.ProductRepository;
+import org.json.simple.JSONObject;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -17,29 +18,23 @@ public class ProductService {
     @EJB
     private ProductRepository productRepository;
 
-    private static final Logger logger = Logger.getLogger(ProductService.class.getName());
-
-    public void save(Product product) throws IOException {
-        productRepository.save(product);
+    public List<Product> findAllJson() throws IOException {
+        return productRepository.findAllJson();
     }
 
-    public Optional<Product> findByName(String name) throws IOException {
-        return productRepository.findByName(name);
+    public void saveToJson(ProductList productList) throws IOException {
+        productRepository.saveToJson(productList);
     }
 
-    public List<Product> findAll() throws IOException {
-        return productRepository.findAll();
+    public Product findProductById(Long id) throws IOException {
+        return productRepository.findProductById(id).orElse(null);
     }
 
-    public void delete(Product product) throws IOException {
-        productRepository.delete(product);
+    public Product findProductByName(String name) throws IOException {
+        return productRepository.findProductByName(name).orElse(null);
     }
 
-    public void saveProductsToJsonFile(ProductList productList) {
-        productRepository.saveProductsToJsonFile(productList);
-    }
-
-    public ProductList readProductsJsonFile() {
-        return productRepository.readProductsJsonFile();
+    public void deleteProductFromJson(Product product) throws IOException {
+        productRepository.deleteProductFromJson(product);
     }
 }

@@ -11,16 +11,14 @@ import java.util.Optional;
 @Local
 public interface ProductRepository {
 
-    void save(Product product) throws IOException;
+    Optional<Product> findProductByName(String name) throws IOException;
 
-    Optional<Product> findByName(String name) throws IOException;
+    Optional<Product> findProductById(Long id) throws IOException;
 
-    List<Product> findAll() throws IOException;
+    List<Product> findAllJson() throws IOException;
 
-    void delete(Product product) throws IOException;
+    void saveToJson(ProductList productList) throws IOException;
 
-    void saveProductsToJsonFile(ProductList productList);
-
-    ProductList readProductsJsonFile();
+    void deleteProductFromJson(Product product) throws IOException;
 
 }

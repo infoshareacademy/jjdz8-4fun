@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 public class Product {
+    Long id;
     String name;
     String brand;
     //Cena reprezentowana w groszach
@@ -9,7 +10,8 @@ public class Product {
     Shop shop;
     ProductCategory productCategory;
 
-    public Product(String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    public Product(Long id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+        this.id = id;
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -68,5 +70,13 @@ public class Product {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

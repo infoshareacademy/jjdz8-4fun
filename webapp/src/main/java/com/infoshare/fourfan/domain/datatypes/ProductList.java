@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductList {
+
     List<Product> productList = new ArrayList<>();
 
     public List<Product> getProductList() {
@@ -28,6 +29,14 @@ public class ProductList {
 
     public void remove(int i) {
         productList.remove(i);
+    }
+
+    public void add(Product product) {
+        productList.add(product);
+    }
+
+    public void delete(Product product) {
+        productList.remove(product);
     }
 
 }

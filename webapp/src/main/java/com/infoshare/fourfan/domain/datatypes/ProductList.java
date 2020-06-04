@@ -30,4 +30,12 @@ public class ProductList {
         productList.remove(i);
     }
 
+    public void add(Product product) {
+        productList.add(product);
+    }
+
+    public void delete(Product product) {
+        productList.remove(product);
+    }
+
 }

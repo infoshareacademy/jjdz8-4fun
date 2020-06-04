@@ -49,8 +49,12 @@
                 <nav class="nav-menu d-none d-lg-block">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li><a href="/about">O nas</a></li>
+                        <li class="drop-down"><a href="">Wyszukaj produkty</a>
+                            <ul>
+                                <li><a href="/filterUserProductsByCategory">Po kategorii</a> </li>
+                            </ul>
+                        </li>
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li><a href="#pricing">Pricing</a></li>
                         <li class="drop-down"><a href="">Drop Down</a>

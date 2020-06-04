@@ -20,19 +20,13 @@
             <div class="col-md-4">
                 <h3>Produkcja</h3>
                 <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                    fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                    magna mollis euismod. Donec sed odio dui.
+                    Elo.
                 </p>
             </div>
             <div class="col-md-4">
                 <h3>Dystrybucja</h3>
                 <p>
-                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                    tellus ac cursus commodo, tortor mauris condimentum nibh, ut
-                    fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                    magna mollis euismod. Donec sed odio dui.
+                    Joł.
                 </p>
             </div>
             <div class="col-md-4">

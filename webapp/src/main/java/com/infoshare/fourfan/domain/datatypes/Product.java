@@ -8,6 +8,7 @@ public class Product {
     Integer calories;
     Shop shop;
     ProductCategory productCategory;
+    Long id;
 
     public Product(String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
         this.name = name;
@@ -16,6 +17,10 @@ public class Product {
         this.calories = calories;
         this.shop = shop;
         this.productCategory = productCategory;
+    }
+
+    public Product(){
+
     }
 
     public String getName() {
@@ -42,6 +47,9 @@ public class Product {
         return productCategory;
     }
 
+    public Long getId() {
+        return id;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -64,5 +72,14 @@ public class Product {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String toString(){
+        return name + " " + brand + " " + price + " " + calories + " " + productCategory;
+
     }
 }

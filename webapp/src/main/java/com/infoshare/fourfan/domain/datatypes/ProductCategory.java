@@ -5,3 +5,4 @@ public enum ProductCategory {
     OWOCE,
     NABIAŁ;
 }
+

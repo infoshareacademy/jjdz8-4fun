@@ -38,6 +38,7 @@ public class AdminRepositoryBean implements AdminRepository {
         jsonObjectNewProduct.put("calories", product.getCalories());
         jsonObjectNewProduct.put("shop", product.getShop().toString());
         jsonObjectNewProduct.put("productCategory", product.getProductCategory().toString());
+        jsonObjectNewProduct.put("amount", 1);
 
         jsonArrayProducts.add(0, jsonObjectNewProduct);
 

@@ -19,10 +19,7 @@ public class ConfigProvider {
             configuration.setLogTemplateExceptions(false);
             configuration.setWrapUncheckedExceptions(true);
         }
-
         return configuration;
-
-
     }
 }
 

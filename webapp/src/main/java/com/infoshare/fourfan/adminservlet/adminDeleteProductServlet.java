@@ -45,7 +45,7 @@ public class adminDeleteProductServlet extends HttpServlet {
 
         Product product = productService.findProductById(Long.parseLong(idParam));
         productService.deleteProductFromJson(product);
-        new ProductList().delete(product);
+
         printWriter.println("<script>\n" +
                 "        alert(\"" + product.getName() + " has been deleted\")\n" +
                 "    </script>");

@@ -1,5 +1,7 @@
 package com.infoshare.fourfan.domain.datatypes;
 
+import java.util.Objects;
+
 public class Product {
     Long id;
     String name;
@@ -78,5 +80,24 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Objects.equals(id, product.id) &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(brand, product.brand) &&
+                Objects.equals(price, product.price) &&
+                Objects.equals(calories, product.calories) &&
+                shop == product.shop &&
+                productCategory == product.productCategory;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, brand, price, calories, shop, productCategory);
     }
 }

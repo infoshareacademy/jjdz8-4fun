@@ -33,9 +33,9 @@ public class ProductRepositoryBean implements ProductRepository {
         JsonService.saveProductsToJsonFile(productList);
     }
 
-    @Override
     public void deleteProductFromJson(Product product) {
-        JsonService.readProductsJsonFile().delete(product);
+        ProductList productList = JsonService.readProductsJsonFile();
+        productList.delete(product);
+        JsonService.saveProductsToJsonFile(productList);
     }
-
 }

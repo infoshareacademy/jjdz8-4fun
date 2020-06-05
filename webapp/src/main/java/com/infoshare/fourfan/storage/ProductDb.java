@@ -22,7 +22,7 @@ public class ProductDb {
         product1.setName("Pomarańcz");
         product1.setBrand("Java");
         product1.setPrice(250);
-        product1.setCalories(50);
+        product1.setCalories(220);
         product1.setShop(Shop.TESCO);
         product1.setProductCategory(ProductCategory.OWOCE);
         productList.add(product1);
@@ -31,7 +31,7 @@ public class ProductDb {
         product2.setName("Jogurt");
         product2.setBrand("Danone");
         product2.setPrice(450);
-        product2.setCalories(69);
+        product2.setCalories(100);
         product2.setShop(Shop.AUCHAN);
         product2.setProductCategory(ProductCategory.NABIAŁ);
         productList.add(product2);
@@ -40,7 +40,7 @@ public class ProductDb {
         product3.setName("Sałata siewna");
         product3.setBrand("No brand");
         product3.setPrice(400);
-        product3.setCalories(16);
+        product3.setCalories(50);
         product3.setShop(Shop.TESCO);
         product3.setProductCategory(ProductCategory.WARZYWA);
         productList.add(product3);
@@ -48,8 +48,8 @@ public class ProductDb {
         Product product4 = new Product();
         product4.setName("Kalafior");
         product4.setBrand("Hortex");
-        product4.setPrice(400);
-        product4.setCalories(16);
+        product4.setPrice(123);
+        product4.setCalories(160);
         product4.setShop(Shop.PIOTRiPAWEŁ);
         product4.setProductCategory(ProductCategory.WARZYWA);
         productList.add(product4);
@@ -58,7 +58,7 @@ public class ProductDb {
         product5.setName("Pierogi");
         product5.setBrand("Iglo");
         product5.setPrice(400);
-        product5.setCalories(16);
+        product5.setCalories(230);
         product5.setShop(Shop.PIOTRiPAWEŁ);
         product5.setProductCategory(ProductCategory.NABIAŁ);
         productList.add(product5);
@@ -67,7 +67,7 @@ public class ProductDb {
         product6.setName("Kiwi");
         product6.setBrand("Alpaka");
         product6.setPrice(250);
-        product6.setCalories(50);
+        product6.setCalories(300);
         product6.setShop(Shop.TESCO);
         product6.setProductCategory(ProductCategory.OWOCE);
         productList.add(product6);

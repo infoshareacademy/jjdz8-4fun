@@ -2,7 +2,7 @@
 
 <header class="jumbotron">
     <div class="container">
-        <h1 class="display-3">Shopping list - wyszukiwarka</h1>
+        <h1 class="display-3">Shopping list - wyszukaj po kategorii</h1>
         <p>
             Strona 4Fun
         </p>
@@ -27,18 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <#if products??>
-                <ol>
-                    <p>Wynik wyszukiwania:</p>
-                    <#list products as product>
-                        <li>
-                            ${product.getName()} - ${product.getBrand()}
-                        </li>
-                    </#list>
-                </ol>
-            </#if>
-        </div>
+        <#include "common/searchResults.ftlh">
     </div>
 </main>
 

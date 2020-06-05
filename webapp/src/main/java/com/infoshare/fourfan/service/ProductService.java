@@ -3,6 +3,7 @@ package com.infoshare.fourfan.service;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
+import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.repository.ProductRepository;
 import com.infoshare.fourfan.storage.ProductDb;
 import org.json.simple.JSONObject;
@@ -52,9 +53,17 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
-    public List<Product> filterByCalories(Integer calories){
+    public List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax){
         return productList.getProductList().stream()
-                .filter(cal -> cal.getCalories()<= calories)
+                .filter(cal -> cal.getCalories()<= caloriesMax && cal.getCalories() >= caloriesMin)
                 .collect(Collectors.toList());
+    }
+
+    public Map<Shop, List<Product>> filterByPriceAndGroupByShop(Integer priceMin, Integer priceMax){
+        return productList.getProductList().stream()
+                .filter(n -> n.getPrice() <= priceMax && n.getPrice()>= priceMin)
+                .sorted(Comparator.comparing(Product::getPrice))
+                .collect(Collectors.groupingBy(Product::getShop));
+
     }
 }

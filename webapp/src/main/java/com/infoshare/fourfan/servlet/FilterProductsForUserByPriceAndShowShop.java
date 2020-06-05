@@ -1,7 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
+import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/filterUserProductsByCategory")
-public class FilterProductsForUserByCategory extends HttpServlet {
+@WebServlet("/filterByPriceAndShop")
+public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
 
     @Inject
     private ProductService productService;
@@ -33,22 +33,20 @@ public class FilterProductsForUserByCategory extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        String category = req.getParameter("category");
-
-        Template template = templateProvider.getTemplate(getServletContext(), "filterByCategory.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "filterByPriceAndShop.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("nabial", ProductCategory.NABIAŁ.ordinal());
-        dataModel.put("warzywa", ProductCategory.WARZYWA.ordinal());
-        dataModel.put("owoce", ProductCategory.OWOCE.ordinal());
 
-        if(category != null && !category.equals("Wybierz") ){
-            Integer categoryInt = Integer.parseInt(category);
-            List<Product> products = productService.filterByCategory(categoryInt);
-            dataModel.put("products", products);
+        String priceAndShop = req.getParameter("price");
+
+        //TODO: Jak ktos wpisze slowo to sie aplikacja scrushuje
+        if(priceAndShop != null && !priceAndShop.isEmpty()) {
+            Integer priceInt = Integer.parseInt(priceAndShop);
+            Map<Shop, List<Product>> productMap = productService.filterByPriceAndGroupByShop(0, priceInt);
+            dataModel.put("productsMap", productMap);
         }
 
         try {

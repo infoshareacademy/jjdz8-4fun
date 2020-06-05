@@ -12,25 +12,25 @@
 <main role="main">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <h3 class="display-5">Nasze usługi</h3>
-            </div>
-        </div>
-        <div class="row">
             <div class="col-md-4">
-                <h3>Produkcja</h3>
+                <h4>Misja</h4>
                 <p>
-                    Elo.
+                    Misją naszego zespołu jest stworzenie aplikacji, która ułatwiłaby użytkownikom naszego produktu przygotowanie się
+                    w sposób szybszy, bardziej wydajny i bardziej wygodny do zakupów w wybranych przez siebie
+                    sklepach stacjonarnych.
                 </p>
             </div>
             <div class="col-md-4">
-                <h3>Dystrybucja</h3>
+                <h4>Co oferujemy</h4>
                 <p>
-                    Joł.
+                    Każdy subskrybent ma możliwość skomponowania swojej własnej listy zakupów w oparciu o najważniejsze
+                    dla niego atrybuty. Mogą nimi być: cena produktu, sklep, w którym można nabyć dany produkt, marka danego produktu,
+                    jego kaloryczność i wiele innych.
+
                 </p>
             </div>
             <div class="col-md-4">
-                <h3>Cośtam</h3>
+                <h4>Cośtam</h4>
                 <p>
                     Donec sed odio dui. Cras justo odio, dapibus ac facilisis in,
                     egestas eget quam. Vestibulum id ligula porta felis euismod

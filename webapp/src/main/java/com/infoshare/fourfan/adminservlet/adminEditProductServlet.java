@@ -50,7 +50,13 @@ public class adminEditProductServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        if (req.getMethod().equalsIgnoreCase("POST") &&
+//                req.getParameter("_method") != null &&
+//                req.getParameter("_method").equalsIgnoreCase("PUT")) {
+//            doPut(req, resp);
+//        }
+
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
@@ -74,18 +80,19 @@ public class adminEditProductServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
         Product product = productService.findProductById(idParam);
 
+        product.setId(idParam);
+        product.setName(nameParam);
+        product.setBrand(brandParam);
+        product.setPrice(priceParam);
+        product.setCalories(calParam);
+        product.setShop(shopParam);
+        product.setProductCategory(catParam);
+
         Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/admin-edit-product.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null){
             dataModel.put("product", product);
-            product.setId(idParam);
-            product.setName(nameParam);
-            product.setBrand(brandParam);
-            product.setPrice(priceParam);
-            product.setCalories(calParam);
-            product.setShop(shopParam);
-            product.setProductCategory(catParam);
-            productService.saveToJson(product);
+
         } else {
             dataModel.put("errorMessage", "User has not been found.");
         }

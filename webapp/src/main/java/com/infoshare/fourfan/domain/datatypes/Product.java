@@ -3,7 +3,7 @@ package com.infoshare.fourfan.domain.datatypes;
 import java.util.Objects;
 
 public class Product {
-
+    private static long nextid = new ProductList().size();
     Long id;
     String name;
     String brand;
@@ -28,6 +28,10 @@ public class Product {
     }
 
     public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
+    }
+
+    public static long getNextid() {
+        return nextid;
     }
 
     public String getName() {
@@ -84,6 +88,11 @@ public class Product {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setNextId() {
+        id = nextid;
+        nextid++;
     }
 
     @Override

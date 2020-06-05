@@ -16,9 +16,11 @@ public interface ProductRepository {
 
     boolean contains(Optional<Product> product);
 
-    Optional<Product> findById(UUID id);
+    Optional<Product> findById(Long id);
 
     List<Product> findByName(String name);
+
+    List<Product> findByBrand(String brand);
 
     List<Product> findByPrice(Integer price);
 

@@ -18,16 +18,16 @@ public class ProductList {
         return productList.size();
     }
 
-    public Product get(int i) {
-        return productList.get(i);
+    public Product get(Long id) {
+        return productList.get(id);
     }
 
-    public void set(int i, Product product) {
-        productList.set(i, product);
+    public void set(Long id, Product product) {
+        productList.set(id, product);
     }
 
-    public void remove(int i) {
-        productList.remove(i);
+    public void remove(Long id) {
+        productList.remove(id);
     }
 
 }

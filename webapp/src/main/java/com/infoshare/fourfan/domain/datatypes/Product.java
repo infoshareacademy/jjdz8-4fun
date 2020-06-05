@@ -1,21 +1,28 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 public class Product {
-    String name;
-    String brand;
-    //Cena reprezentowana w groszach
-    Integer price;
-    Integer calories;
-    Shop shop;
-    ProductCategory productCategory;
 
-    public Product(String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    private Long id;
+    private String name;
+    private String brand;
+    //Cena reprezentowana w groszach
+    private Integer price;
+    private Integer calories;
+    private Shop shop;
+    private ProductCategory productCategory;
+
+    public Product(Long id,String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+        this.id = id;
         this.name = name;
         this.brand = brand;
         this.price = price;
         this.calories = calories;
         this.shop = shop;
         this.productCategory = productCategory;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {

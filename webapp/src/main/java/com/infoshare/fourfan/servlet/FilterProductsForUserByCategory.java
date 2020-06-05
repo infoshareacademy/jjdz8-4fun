@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -39,6 +38,7 @@ public class FilterProductsForUser extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         String category = req.getParameter("category");
+        String calories = req.getParameter("calories");
 
         Template template = templateProvider.getTemplate(getServletContext(), "filter.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
@@ -50,7 +50,7 @@ public class FilterProductsForUser extends HttpServlet {
             Integer categoryInt = Integer.parseInt(category);
             List<Product> products = productService.filterByCategory(categoryInt);
             dataModel.put("products", products);
-        }
+        } else if (calories != null && !calories.equals())
 
         try {
             template.process(dataModel, printWriter);

@@ -8,14 +8,13 @@
 <div>
     <ul>
         <#list products as product>
-            <li>Id: ${product.id}</li>
             <li>Name: ${product.name}</li>
             <li>Brand: ${product.brand}</li>
             <li>Price: ${product.price}</li>
             <li>Calories: ${product.calories}</li>
             <li>Shop: ${product.shop}</li>
             <li>Product Category: ${(product.productCategory)!}</li>
-            <form method="post" action="admin-delete-product?id=${product.id}">
+            <form method="post" action="admin-delete-product?name=${product.name}">
                 <input type="submit" name="findById" value="delete"/><br/><br/>
             </form>
             <#sep><br/></#sep>

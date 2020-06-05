@@ -26,6 +26,14 @@
       "calories": 350,
       "shop": "TESCO",
       "productCategory": "WARZYWA"
+    },
+    {
+      "name": "Ogórki po kaszubsku ",
+      "brand": "Tesco",
+      "price": 549,
+      "calories": 34,
+      "shop": "TESCO",
+      "productCategory": "WARZYWA"
     }
   ]
 }

@@ -3,6 +3,7 @@ package com.infoshare.fourfan.domain.datatypes;
 import java.util.Objects;
 
 public class Product {
+
     Long id;
     String name;
     String brand;
@@ -24,6 +25,9 @@ public class Product {
 
     public Product() {
 
+    }
+
+    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
     }
 
     public String getName() {

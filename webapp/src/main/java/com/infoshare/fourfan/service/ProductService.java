@@ -22,8 +22,8 @@ public class ProductService {
         return productRepository.findAllJson();
     }
 
-    public void saveToJson(ProductList productList) throws IOException {
-        productRepository.saveToJson(productList);
+    public void saveToJson(Product product) throws IOException {
+        productRepository.saveToJson(product);
     }
 
     public Product findProductById(Long id) throws IOException {

@@ -36,14 +36,14 @@ public class adminDeleteProductServlet extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/product-list.ftlh");
         PrintWriter printWriter = resp.getWriter();
-        String idParam = req.getParameter("id");
+        String nameParam = req.getParameter("name");
 
-        if (idParam == null || idParam.isEmpty()) {
+        if (nameParam == null || nameParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = productService.findProductById(Long.parseLong(idParam));
+        Product product = productService.findProductByName(nameParam);
         productService.deleteProductFromJson(product);
 
         printWriter.println("<script>\n" +

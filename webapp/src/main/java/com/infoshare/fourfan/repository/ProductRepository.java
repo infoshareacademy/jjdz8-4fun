@@ -17,8 +17,10 @@ public interface ProductRepository {
 
     List<Product> findAllJson() throws IOException;
 
-    void saveToJson(ProductList productList) throws IOException;
+    void saveToJson(Product product) throws IOException;
 
     void deleteProductFromJson(Product product) throws IOException;
+
+
 
 }

@@ -29,7 +29,9 @@ public class ProductRepositoryBean implements ProductRepository {
     }
 
     @Override
-    public void saveToJson(ProductList productList) {
+    public void saveToJson(Product product) {
+        ProductList productList = JsonService.readProductsJsonFile();
+        productList.add(product);
         JsonService.saveProductsToJsonFile(productList);
     }
 

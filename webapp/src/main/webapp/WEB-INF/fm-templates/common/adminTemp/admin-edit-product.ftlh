@@ -12,7 +12,7 @@
     </form>
     <h1>Find Product by Name</h1>
     <form method="get" action="admin-find-product-by-name">
-        Id: <input type="text" name="name"/><br/><br/>
+        Name: <input type="text" name="name"/><br/><br/>
         <input type="submit" name="findByName" value="find"/><br/><br/>
     </form>
 

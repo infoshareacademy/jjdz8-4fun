@@ -42,7 +42,6 @@ public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
 
         String priceAndShop = req.getParameter("price");
 
-        //TODO: Jak ktos wpisze slowo to sie aplikacja scrushuje
         if(priceAndShop != null && !priceAndShop.isEmpty()) {
             Integer priceInt = Integer.parseInt(priceAndShop);
             Map<Shop, List<Product>> productMap = productService.filterByPriceAndGroupByShop(0, priceInt);

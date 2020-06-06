@@ -51,11 +51,6 @@ public class adminEditProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        if (req.getMethod().equalsIgnoreCase("POST") &&
-//                req.getParameter("_method") != null &&
-//                req.getParameter("_method").equalsIgnoreCase("PUT")) {
-//            doPut(req, resp);
-//        }
 
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");

@@ -11,26 +11,25 @@
 
                 <nav class="nav-menu d-none d-lg-block">
                     <ul>
-                        <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li class="active"><a href="/home">Strona główna</a></li>
+                        <li><a href="/about">O nas</a></li>
+                        <li><a href="/about">Usługi</a></li>
                         <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li class="drop-down"><a href="">Products</a>
+                        <li><a href="#pricing">Cennik</a></li>
+                        <li class="drop-down"><a href="">Produkty</a>
                             <ul>
-                                <li><a href="/product-list">Product list</a></li>
-                                <li class="drop-down"><a href="#">Deep Drop Down</a>
-                                    <ul>
-                                        <li><a href="#">Deep Drop Down 1</a></li>
-                                        <li><a href="#">Deep Drop Down 2</a></li>
-                                        <li><a href="#">Deep Drop Down 3</a></li>
-                                        <li><a href="#">Deep Drop Down 4</a></li>
-                                        <li><a href="#">Deep Drop Down 5</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="/admin-edit-product">Edit product</a></li>
-                                <li><a href="#">Drop Down 3</a></li>
-                                <li><a href="#">Drop Down 4</a></li>
+                                <li><a href="/product-list">Lista produktów</a></li>
+<#--                                <li class="drop-down"><a href="#">Inne</a>-->
+<#--                                    <ul>-->
+<#--                                        <li><a href="#">Lista 1</a></li>-->
+<#--                                        <li><a href="#">Lista 2</a></li>-->
+<#--                                        <li><a href="#">Lista 3</a></li>-->
+<#--                                        <li><a href="#">Lista 4</a></li>-->
+<#--                                        <li><a href="#">Lista 5</a></li>-->
+<#--                                    </ul>-->
+<#--                                </li>-->
+                                <li><a href="/addProduct">Dodaj produkt</a></li>
+                                <li><a href="/admin-edit-product">Wyszukaj i zedytuj produkt</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Contact</a></li>

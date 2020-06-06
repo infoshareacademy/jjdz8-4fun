@@ -1,7 +1,7 @@
 {
   "productList": [
     {
-      "id": 1,
+      "id": 1 ,
       "name": "Serek z cebulką ",
       "brand": "Almette",
       "price": 250,
@@ -28,10 +28,11 @@
       "productCategory": "WARZYWA"
     },
     {
+      "id": 4,
       "name": "Ogórki po kaszubsku",
       "brand": "Tesco",
       "price": 549,
-      "calories": 34,
+      "calories": 340,
       "shop": "TESCO",
       "productCategory": "WARZYWA"
     }

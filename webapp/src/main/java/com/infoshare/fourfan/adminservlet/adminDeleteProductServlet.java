@@ -47,7 +47,7 @@ public class adminDeleteProductServlet extends HttpServlet {
         productService.deleteProductFromJson(product);
 
         printWriter.println("<script>\n" +
-                "        alert(\"" + product.getName() + " has been deleted\")\n" +
+                "        alert(\"" + product.getName() + " został usunięty!\")\n" +
                 "    </script>");
 
         Map<String, Object> dataModel = new HashMap<>();

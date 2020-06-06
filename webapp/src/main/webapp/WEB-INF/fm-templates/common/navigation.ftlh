@@ -14,6 +14,13 @@
                         <li class="active"><a href="/home">Strona główna</a></li>
                         <li><a href="/about">O nas</a></li>
                         <li><a href="/about">Usługi</a></li>
+                        <li class="drop-down"><a href="">Wyszukaj wszystkie produkty</a>
+                            <ul>
+                                <li><a href="/filterUserProductsByCategory">Po kategorii</a> </li>
+                                <li><a href="/filterUserProductsByCalories">Po kaloryce</a> </li>
+                                <li><a href="/filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
+                            </ul>
+                        </li>
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li><a href="#pricing">Cennik</a></li>
                         <li class="drop-down"><a href="">Produkty</a>

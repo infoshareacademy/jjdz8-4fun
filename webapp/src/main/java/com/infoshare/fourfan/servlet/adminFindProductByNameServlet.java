@@ -1,4 +1,4 @@
-package com.infoshare.fourfan.adminservlet;
+package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;

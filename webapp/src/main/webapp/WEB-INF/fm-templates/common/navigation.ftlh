@@ -32,7 +32,7 @@
                                 <li><a href="/admin-edit-product">Wyszukaj i zedytuj produkt</a></li>
                             </ul>
                         </li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
 
                     </ul>
                 </nav><!-- .nav-menu -->

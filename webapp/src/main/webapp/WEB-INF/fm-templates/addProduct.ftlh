@@ -35,7 +35,7 @@
                                 <option value="OWOCE">OWOCE</option>
                                 <option value="NABIAŁ">NABIAŁ</option>
                             </select></label>
-                        <label><span> </span><input type="submit" value="Zapisz Produkt" /></label>
+                        <label><span> </span><input type="submit" style="background: #009961" value="Zapisz Produkt" /></label>
                     </form>
                 </div>
             </div>

@@ -23,8 +23,8 @@
                     <form method="post" action="/addProduct" accept-charset="utf-8">
                         <label><span>Nazwa <span class="ANPrequired">*</span></span><input type="text" class="ANPinput-field" name="name" value="" required/></label>
                         <label><span>Producent <span class="ANPrequired">*</span></span><input type="text" class="ANPinput-field" name="brand" value="" required/></label>
-                        <label><span>Cena <span class="ANPrequired">*</span></span><input type="text" class="ANPinput-field" name="price" value="" pattern="[0-9]{1-10}" title="Wartość liczbowa podana w groszach" required/></label>
-                        <label><span>Kaloryczność <span class="ANPrequired">*</span></span><input type="text" class="ANPinput-field" name="calories" value="" pattern="[0-9]{1-10}" title="Wartość liczbowa" required/></label>
+                        <label><span>Cena <span class="ANPrequired">*</span></span><input type="number" class="ANPinput-field" name="price" value="" pattern="[0-9]{1-10}" title="Wartość liczbowa podana w groszach" required/></label>
+                        <label><span>Kaloryczność <span class="ANPrequired">*</span></span><input type="number" class="ANPinput-field" name="calories" value="" pattern="[0-9]{1-10}" title="Wartość liczbowa" required/></label>
                         <label><span>Sklep</span><select name="shop" class="ANPselect-field">
                                 <option value="AUCHAN">AUCHAN</option>
                                 <option value="PIOTRiPAWEŁ">PIOTRiPAWEŁ</option>

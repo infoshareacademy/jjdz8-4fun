@@ -14,7 +14,7 @@ public interface ProductRepository {
 
     void delete(Product product);
 
-    boolean contains(Optional<Product> product);
+    boolean contains(Product product);
 
     Optional<Product> findById(Long id);
 

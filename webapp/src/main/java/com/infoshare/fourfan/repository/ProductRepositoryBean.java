@@ -18,17 +18,16 @@ import static com.infoshare.fourfan.domain.datatypes.ProductList.getProductList;
 
 @RequestScoped
 public class ProductRepositoryBean implements ProductRepository{
+
     private final ProductList productList = JsonReader.create(new ProductList(), FileNames.USERS_JSON);
+
     @Inject
     private ProductsJsonStorage productsJsonStorage;
 
     @Override
     public void add(Product product) {
         getProductList().add(product);
-
     }
-
-
 
     //TODO consider form of method baring in mind WebInfPathResolver
     @Override
@@ -36,13 +35,11 @@ public class ProductRepositoryBean implements ProductRepository{
     }
 
     @Override
-    public boolean contains(Optional<Product> product) {
-        if(product.isEmpty())
+    public boolean contains(Product product) {
+        if{(product.isEmpty()) {
             return false;
-        else{
-
-            //TODO - to continue
-//            return productList.
+        }else{
+            return true;
         }
     }
 
@@ -74,7 +71,11 @@ public class ProductRepositoryBean implements ProductRepository{
 
     @Override
     public List<Product> findByPrice(Integer price) {
-        return null;
+        return this.productsJsonStorage.load()
+                .getProductList()
+                .stream()
+                .filter(product -> product.getPrice().equals(price))
+                .collect(Collectors.toList());
     }
 
     @Override

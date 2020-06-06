@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductList {
-    List<Product> productList = new ArrayList<>();
+
+    private static List<Product> productList = new ArrayList<>();
 
     public List<Product> getProductList() {
+        if (productList.size() == 0) {
+            System.out.println("No products saved yet.");
+        }
         return productList;
     }
 

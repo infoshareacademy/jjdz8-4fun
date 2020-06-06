@@ -14,6 +14,7 @@ import static com.infoshare.fourfan.domain.access.Users.getUsers;
 @RequestScoped
 @Named("UserRepositoryBean")
 public class UserRepositoryBean implements UserRepository {
+
     private final Users users = JsonReader.create(new Users(), FileNames.USERS_JSON);
 
     @Override

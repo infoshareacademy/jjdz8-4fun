@@ -14,17 +14,6 @@ public class OptionsFromProductJsonFile {
     Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     String jsonFilePath = this.getClass().getClassLoader().getResource("Products.json").getPath();
 
-    public JSONObject readProductsJsonFile() {
-        JSONObject jsonObjectReader = null;
-        try (FileReader reader = new FileReader(jsonFilePath)) {
-            jsonObjectReader = GSON.fromJson(reader, JSONObject.class);
-            return jsonObjectReader;
-        } catch (IOException e) {
-            System.out.println("Products json file not found or broken: " + e.getMessage());
-        }
-        return null;
-    }
-
     public JSONObject saveProductsJsonFile(JSONObject inputNewProductsToProductsJsonFile) {
 
         try (Writer writerProductsJsonFile = new FileWriter(jsonFilePath)) {

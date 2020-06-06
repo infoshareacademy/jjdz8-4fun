@@ -8,6 +8,7 @@
 <div>
     <ul>
         <#list products as product>
+            <li>Id: ${(product.id)!}</li>
             <li>Name: ${product.name}</li>
             <li>Brand: ${product.brand}</li>
             <li>Price: ${product.price}</li>

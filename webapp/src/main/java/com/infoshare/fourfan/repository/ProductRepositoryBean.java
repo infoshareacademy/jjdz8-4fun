@@ -5,6 +5,7 @@ import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.service.JsonService;
 
 import javax.ejb.Stateless;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 

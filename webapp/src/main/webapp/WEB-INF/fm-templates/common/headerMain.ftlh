@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -28,7 +28,12 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <link href="ANPstyles.css" rel="stylesheet">
+
+    <style>
+        .footer {
+            color: white;
+        }
+    </style>
 
 </head>
 
@@ -37,14 +42,14 @@
 <#include "navigation.ftlh">
 
 <!-- ======= Hero Section ======= -->
-<section id="heroShort" class="d-flex flex-column justify-content-center">
+<section id="hero" class="d-flex flex-column justify-content-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8">
                 <h1>Shopping List</h1>
-                <#--                <h2>We are team of designers making websites with Bootstrap and shopping lists</h2>-->
-                <#--                <a href="https://www.youtube.com/watch?v=qO28fCnCyes" class="venobox play-btn mb-4" data-vbtype="video"-->
-                <#--                   data-autoplay="true"></a>-->
+                <h2>We are team of designers making websites with Bootstrap and shopping lists</h2>
+                <a href="https://www.youtube.com/watch?v=qO28fCnCyes" class="venobox play-btn mb-4" data-vbtype="video"
+                   data-autoplay="true"></a>
             </div>
         </div>
     </div>

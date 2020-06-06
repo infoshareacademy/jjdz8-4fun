@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -15,22 +16,27 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/confirmNewProduct")
-public class ConfirmNewProduct extends HttpServlet {
+@WebServlet("/product-list")
+public class adminProductListServlet extends HttpServlet {
 
-    private static final Logger logger
-            = Logger.getLogger(ConfirmNewProduct.class.getName());
+    @Inject
+    private ProductService productService;
 
     @Inject
     private TemplateProvider templateProvider;
+
+    private static final Logger logger = Logger.getLogger(adminProductListServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "confirmNewProduct.ftlh");
-        Map<String, Object> dataModel = new HashMap<>();
+        Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/product-list.ftlh");
         PrintWriter printWriter = resp.getWriter();
+
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("products", productService.findAllJson());
+
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

@@ -28,7 +28,6 @@ public class HomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-
         Template template = templateProvider.getTemplate(getServletContext(), "index.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         PrintWriter printWriter = resp.getWriter();

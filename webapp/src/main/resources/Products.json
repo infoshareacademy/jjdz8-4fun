@@ -1,7 +1,8 @@
 {
   "productList": [
     {
-      "name": "Serek z cebulką",
+      "id": 1 ,
+      "name": "Serek z cebulką ",
       "brand": "Almette",
       "price": 250,
       "calories": 200,
@@ -9,6 +10,7 @@
       "productCategory": "NABIAŁ"
     },
     {
+      "id": 2,
       "name": "Mrożona mieszanka warzywna",
       "brand": "Hortex",
       "price": 400,
@@ -17,10 +19,20 @@
       "productCategory": "WARZYWA"
     },
     {
+      "id": 3,
       "name": "Mrożona mieszanka warzywna",
       "brand": "Hortex",
       "price": 400,
       "calories": 350,
+      "shop": "TESCO",
+      "productCategory": "WARZYWA"
+    },
+    {
+      "id": 4,
+      "name": "Ogórki po kaszubsku",
+      "brand": "Tesco",
+      "price": 549,
+      "calories": 340,
       "shop": "TESCO",
       "productCategory": "WARZYWA"
     }

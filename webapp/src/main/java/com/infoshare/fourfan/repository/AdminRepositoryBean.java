@@ -14,14 +14,6 @@ import java.util.Objects;
 @Stateless
 public class AdminRepositoryBean implements AdminRepository {
 
-    /*
-    metoda roboczaShowAllProducts - jest tylko na potrzeby weryfikacji poprawnosci dodania produktu
-    do pliku json, analogicznie serwlet - RoboczyServletShowProduct
-     */
-    public JSONObject roboczaShowAllProducts() {
-        return new OptionsFromProductJsonFile().readProductsJsonFile();
-    }
-
     @Override
     public void saveNewProduct(Product product) throws IOException {
         JSONObject jsonObjectReader = null;
@@ -32,6 +24,7 @@ public class AdminRepositoryBean implements AdminRepository {
 
         JSONArray jsonArrayProducts = (JSONArray) jsonObjectReader.get("productList");
         JSONObject jsonObjectNewProduct = new JSONObject();
+        jsonObjectNewProduct.put("id", jsonArrayProducts.size()+1);
         jsonObjectNewProduct.put("name", product.getName());
         jsonObjectNewProduct.put("brand", product.getBrand());
         jsonObjectNewProduct.put("price", product.getPrice());

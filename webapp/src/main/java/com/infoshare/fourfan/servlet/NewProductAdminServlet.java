@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("addProduct")
+@WebServlet("/addProduct")
 public class NewProductAdminServlet extends HttpServlet {
 
     private static final Logger logger
@@ -57,8 +57,8 @@ public class NewProductAdminServlet extends HttpServlet {
         Integer calories = Integer.parseInt(req.getParameter("calories"));
         Shop shop = Shop.valueOf(req.getParameter("shop"));
         ProductCategory category = ProductCategory.valueOf(req.getParameter("category"));
-
-        Product product = new Product(name,brand,price,calories,shop,category);
+        Long id = 0L;
+        Product product = new Product(id,name,brand,price,calories,shop,category);
 
         adminService.saveNewProduct(product);
 

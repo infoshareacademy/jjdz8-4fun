@@ -8,7 +8,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,9 +40,9 @@ public class FilterProductsForUserByCategory extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "filterByCategory.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("nabial", ProductCategory.NABIAŁ.ordinal());
-        dataModel.put("warzywa", ProductCategory.WARZYWA.ordinal());
-        dataModel.put("owoce", ProductCategory.OWOCE.ordinal());
+        dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
+        dataModel.put("vegies", ProductCategory.WARZYWA.ordinal());
+        dataModel.put("fruits", ProductCategory.OWOCE.ordinal());
 
         if(category != null && !category.equals("Wybierz") ){
             Integer categoryInt = Integer.parseInt(category);

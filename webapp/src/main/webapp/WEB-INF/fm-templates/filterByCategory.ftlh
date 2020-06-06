@@ -18,9 +18,9 @@
                     <form method="get" action="/filterUserProductsByCategory" accept-charset="utf-8">
                         <label><span>Kategoria</span><select name="category" class="ANPselect-field">
                                 <option selected value="Wybierz">WYBIERZ KATEGORIĘ</option>
-                                <option value="${nabial}">NABIAŁ</option>
-                                <option value="${owoce}">OWOCE</option>
-                                <option value="${warzywa}">WARZYWA</option>
+                                <option value="${dairy}">NABIAŁ</option>
+                                <option value="${fruits}">OWOCE</option>
+                                <option value="${vegies}">WARZYWA</option>
                             </select></label>
                         <input type="submit" value="Szukaj">
                     </form>

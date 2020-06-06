@@ -42,9 +42,9 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
             Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
             Map<String, Object> dataModel = new HashMap<>();
-            dataModel.put("przedzialPierwszy", CaloriesRangeEnum.PRZEDZIAL_0_150);
-            dataModel.put("przedzialDrugi", CaloriesRangeEnum.PRZEDZIAL_151_300);
-            dataModel.put("przedzialTrzeci", CaloriesRangeEnum.PRZEDZIAL_301_450);
+            dataModel.put("firstRange", CaloriesRangeEnum.PRZEDZIAL_0_150);
+            dataModel.put("secondRange", CaloriesRangeEnum.PRZEDZIAL_151_300);
+            dataModel.put("thirdRange", CaloriesRangeEnum.PRZEDZIAL_301_450);
 
             if(calories != null && !calories.equals("Przedzial") ) {
                 CaloriesRangeEnum caloriesRangeEnum = CaloriesRangeEnum.valueOf(calories);
@@ -54,15 +54,15 @@ public class FilterProductsForUserByCalories extends HttpServlet {
                 dataModel.put("products", productService.filterByCalories(productMin, productMax));
                 switch (caloriesRangeEnum) {
                     case PRZEDZIAL_0_150:
-                        dataModel.put("przedzialPierwszySelected", "checked");
+                        dataModel.put("firstChoiceSelected", "checked");
                         break;
 
                     case PRZEDZIAL_151_300:
-                        dataModel.put("przedzialDrugiSelected", "checked");
+                        dataModel.put("secondChoiceSelected", "checked");
                         break;
 
                     case PRZEDZIAL_301_450:
-                        dataModel.put("przedzialTrzeciSelected", "checked");
+                        dataModel.put("thirdChoiceSelected", "checked");
                         break;
                 }
             }

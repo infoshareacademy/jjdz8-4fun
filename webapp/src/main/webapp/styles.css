@@ -10,7 +10,11 @@
 }
 
 .scrollList{
-    height: 40vh;
+    height: 50vh;
     overflow: scroll;
 
+}
+
+input[type="range"] {
+    width:800px;
 }

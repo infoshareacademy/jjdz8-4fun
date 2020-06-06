@@ -16,7 +16,12 @@
                 <div class="ANPform-style-2">
                     <div class="ANPform-style-2-heading">Wyświetlenie sklepów po podanej cenie produktu jako filtr</div>
                     <form method="get" action="/filterByPriceAndShop" accept-charset="utf-8">
-                                <label><span> Podaj cenę <span class="ANPrequired">*</span></span><input type="text" class="ANPinput-field" name="price" value="" pattern="[0-9]{1-10}" title="Wartość liczbowa podana w groszach" required/></label>
+                                <label>
+                                    <span> Podaj cenę <span class="ANPrequired">*</span>
+                                    </span>
+                                    <input id="price" type="range" name="price" min="0" max="10000" step="50" value="5000"/>
+                                    <span id="priceSpan"> Wybrana wartość: </span>
+                                </label>
                         <input type="submit" value="Szukaj">
                     </form>
                 </div>
@@ -47,3 +52,18 @@
         </div>
     </div>
 </main>
+
+<#include "common/copyright-footer.ftlh">
+
+<script>
+    $(document).ready(function() {
+
+        const $valueSpan = $('#priceSpan');
+        const $value = $('#price');
+        $valueSpan.html($value.val()/100 + " zł");
+        $value.on('input change', () => {
+
+            $valueSpan.html($value.val()/100 + " zł");
+        });
+    });
+</script>

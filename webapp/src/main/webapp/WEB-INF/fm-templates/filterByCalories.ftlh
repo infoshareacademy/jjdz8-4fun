@@ -20,12 +20,12 @@
                         <span>Wybierz przedział: </span>
                             </p>
                         <br/>
-                                <input ${przedzialPierwszySelected!} type="radio" id="przedzialPierwszy" name="calories" value="${przedzialPierwszy}">
-                                <label for = "przedzialPierwszy" >0-150 kcal/100g</label><br>
-                                <input ${przedzialDrugiSelected!} type="radio" id="przedzialDrugi" name="calories" value="${przedzialDrugi}">
-                                <label for = "przedzialDrugi">151-300 kcal/100g</label><br>
-                                <input ${przedzialTrzeciSelected!} type="radio" id="przedzialTrzeci" name="calories" value="${przedzialTrzeci}">
-                                <label for = "przedzialTrzeci">301-450 kcal/100g</label><br>
+                                <input ${firstChoiceSelected!} type="radio" id="firstRange" name="calories" value="${firstRange}">
+                                <label for = "firstRange" >0-150 kcal/100g</label><br>
+                                <input ${secondChoiceSelected!} type="radio" id="secondRange" name="calories" value="${secondRange}">
+                                <label for = "secondRange">151-300 kcal/100g</label><br>
+                                <input ${thirdChoiceSelected!} type="radio" id="thirdRange" name="calories" value="${thirdRange}">
+                                <label for = "thirdRange">301-450 kcal/100g</label><br>
                         <input type="submit" value="Szukaj">
                     </form>
                 </div>

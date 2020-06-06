@@ -30,6 +30,7 @@
     <link href="styles.css" rel="stylesheet">
     <link href="ANPstyles.css" rel="stylesheet">
 
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
 </head>
 
 <body>

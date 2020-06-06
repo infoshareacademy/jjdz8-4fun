@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="utf-8">
@@ -28,6 +28,7 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
+    <link href="ANPstyles.css" rel="stylesheet">
 
 </head>
 

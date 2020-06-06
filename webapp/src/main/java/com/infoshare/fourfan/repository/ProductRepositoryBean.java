@@ -93,6 +93,11 @@ public class ProductRepositoryBean implements ProductRepository{
     }
 
     @Override
+    public List<Product> findAllProducts() {
+        return getProductList();
+    }
+
+    @Override
     public List<Product> findAllProductsForShop(Shop shop) {
         return null;
     }
@@ -141,4 +146,6 @@ public class ProductRepositoryBean implements ProductRepository{
     public void updateProductCategory(Product product) {
 
     }
+
+
 }

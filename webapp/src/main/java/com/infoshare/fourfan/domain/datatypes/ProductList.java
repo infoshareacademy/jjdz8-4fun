@@ -7,7 +7,7 @@ public class ProductList {
 
     private static List<Product> productList = new ArrayList<>();
 
-    public List<Product> getProductList() {
+    public static List<Product> getProductList() {
         if (productList.size() == 0) {
             System.out.println("No products saved yet.");
         }

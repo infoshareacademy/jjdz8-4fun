@@ -30,6 +30,8 @@ public interface ProductRepository {
 
     List<Product> findByProductCategory(ProductCategory productCategory);
 
+    List<Product>findAllProducts();
+
     List<Product> findAllProductsForShop(Shop shop);
 
     List<Product> findAllProductsForName(String name);

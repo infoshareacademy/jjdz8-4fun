@@ -10,3 +10,12 @@
 #container {
     height:100%;
 }
+
+.scrollList{
+    height: 50vh;
+    overflow: scroll;
+}
+
+input[type="range"] {
+    width:800px;
+}

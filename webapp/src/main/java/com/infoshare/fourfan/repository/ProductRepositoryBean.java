@@ -2,12 +2,15 @@ package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
+import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.service.JsonService;
 
 import javax.ejb.Stateless;
-import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Stateless
 public class ProductRepositoryBean implements ProductRepository {
@@ -40,5 +43,27 @@ public class ProductRepositoryBean implements ProductRepository {
         ProductList productList = JsonService.readProductsJsonFile();
         productList.delete(product);
         JsonService.saveProductsToJsonFile(productList);
+    }
+
+    @Override
+    public List<Product> filterByCategory(Integer category) {
+        return findAllJson().stream()
+                .filter(n -> n.getProductCategory().ordinal() == category)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax) {
+        return findAllJson().stream()
+                .filter(cal -> cal.getCalories() <= caloriesMax && cal.getCalories() >= caloriesMin)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<Shop, List<Product>> filterByPriceAndGroupByShop(Integer priceMin, Integer priceMax) {
+        return findAllJson().stream()
+                .filter(n -> n.getPrice() <= priceMax && n.getPrice() >= priceMin)
+                .sorted(Comparator.comparing(Product::getPrice))
+                .collect(Collectors.groupingBy(Product::getShop));
     }
 }

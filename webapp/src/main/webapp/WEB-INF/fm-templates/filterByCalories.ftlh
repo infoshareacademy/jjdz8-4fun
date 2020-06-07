@@ -1,38 +1,38 @@
 <#include "common/headerShort.ftlh">
-
-<header class="jumbotron" xmlns="http://www.w3.org/1999/html">
-    <div class="container">
-        <h1 class="display-3">Shopping list - wyszukaj po kaloriach</h1>
-        <p>
-            Strona 4Fun
-        </p>
+<header class="jumbotron">
+    <div class="container" style="height: 40px">
+        <h1 class="display-3" style="font-size: 40px">Shopping list - wyszukaj po kaloriach</h1>
     </div>
-</header>
+    </br>
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="ANPform-style-2">
+                        <div class="ANPform-style-2-heading">Filtorwnie produktów po kaloryczności</div>
 
-<main role="main">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="ANPform-style-2">
-                    <div class="ANPform-style-2-heading">Filtorwnie produktów po kaloryczności</div>
-                    <form method="get" action="/filterUserProductsByCalories" accept-charset="utf-8">
-                        <p>
-                        <span>Wybierz przedział: </span>
+                        <form method="get" action="/filterUserProductsByCalories" accept-charset="utf-8">
+                            <p>
+                                <span>Wybierz przedział: </span>
                             </p>
-                        <br/>
-                                <input ${firstChoiceSelected!} type="radio" id="firstRange" name="calories" value="${firstRange}">
-                                <label for = "firstRange" >0-150 kcal/100g</label><br>
-                                <input ${secondChoiceSelected!} type="radio" id="secondRange" name="calories" value="${secondRange}">
-                                <label for = "secondRange">151-300 kcal/100g</label><br>
-                                <input ${thirdChoiceSelected!} type="radio" id="thirdRange" name="calories" value="${thirdRange}">
-                                <label for = "thirdRange">301-450 kcal/100g</label><br>
-                        <input type="submit" value="Szukaj">
-                    </form>
+                            <br/>
+                            <input ${firstChoiceSelected!} type="radio" id="firstRange" name="calories"
+                                                           value="${firstRange}">
+                            <label for="firstRange">0-150 kcal/100g</label><br>
+                            <input ${secondChoiceSelected!} type="radio" id="secondRange" name="calories"
+                                                            value="${secondRange}">
+                            <label for="secondRange">151-300 kcal/100g</label><br>
+                            <input ${thirdChoiceSelected!} type="radio" id="thirdRange" name="calories"
+                                                           value="${thirdRange}">
+                            <label for="thirdRange">301-450 kcal/100g</label><br>
+                            <input type="submit" style="background: #009961" value="Szukaj">
+                        </form>
+                    </div>
                 </div>
             </div>
+            <#include "common/searchResults.ftlh">
         </div>
-        <#include "common/searchResults.ftlh">
-    </div>
-</main>
+    </main>
+</header>
 
 <#include "common/copyright-footer.ftlh">

@@ -4,7 +4,8 @@
     <div class="container" style="height: 40px">
         <h1 class="display-3" style="font-size: 40px">Lista produktów</h1>
     </div>
-
+    </br>
+    </br>
     <div>
         <ul>
             <#list products as product>

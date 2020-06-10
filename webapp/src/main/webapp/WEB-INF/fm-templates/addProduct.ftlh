@@ -30,14 +30,14 @@
                                                                                               class="ANPinput-field"
                                                                                               name="price" value=""
                                                                                               pattern="[0-9]{1,10}"
-                                                                                              title="Wartość liczbowa podana w groszach"
+                                                                                              title="min:1,max:10 , Wartość liczbowa podana w groszach"
                                                                                               required/></label>
                             <label><span>Kaloryczność <span class="ANPrequired">*</span></span><input type="text"
                                                                                                       class="ANPinput-field"
                                                                                                       name="calories"
                                                                                                       value=""
                                                                                                       pattern="[0-9]{1,10}"
-                                                                                                      title="Wartość liczbowa"
+                                                                                                      title="min:1,max:10 , Wartość liczbowa"
                                                                                                       required/></label>
                             <label><span>Sklep</span><select name="shop" class="ANPselect-field">
                                     <option value="AUCHAN">AUCHAN</option>

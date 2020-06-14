@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @WebServlet("/admin-edit-product")
-public class adminEditProductServlet extends HttpServlet {
+public class adminEditProductServlet2 extends HttpServlet {
 
     @Inject
     ProductService productService;
@@ -29,7 +29,7 @@ public class adminEditProductServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(adminEditProductServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(adminEditProductServlet2.class.getName());
 
 
     @Override

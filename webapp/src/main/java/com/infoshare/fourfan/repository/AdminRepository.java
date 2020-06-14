@@ -4,9 +4,12 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 
 import javax.ejb.Local;
 import java.io.IOException;
+import java.util.Optional;
 
 @Local
 public interface AdminRepository {
 
     void saveNewProduct(Product product) throws IOException;
+
+    public Optional<Product>
 }

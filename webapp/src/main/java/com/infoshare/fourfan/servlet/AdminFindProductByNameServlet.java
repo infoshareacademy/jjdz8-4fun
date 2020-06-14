@@ -17,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-find-product-by-id")
-public class adminFindProductByIdServlet extends HttpServlet {
+@WebServlet("/admin-find-product-by-name")
+public class AdminFindProductByNameServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
@@ -26,20 +26,20 @@ public class adminFindProductByIdServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(adminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFindProductByNameServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        String idParam = req.getParameter("id");
+        String nameParam = req.getParameter("name");
 
-        if (idParam == null || idParam.isEmpty()) {
+        if (nameParam == null || nameParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = productService.findProductById(Long.valueOf(idParam));
+        Product product = productService.findProductByName(nameParam);
         PrintWriter printWriter = resp.getWriter();
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");

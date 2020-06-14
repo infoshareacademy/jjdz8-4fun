@@ -25,7 +25,7 @@
                         <li><a href="#pricing">Cennik</a></li>
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
-                                <li><a href="/product-list">Lista produktów</a></li>
+                                <li><a href="/productList">Lista produktów</a></li>
 <#--                                <li class="drop-down"><a href="#">Inne</a>-->
 <#--                                    <ul>-->
 <#--                                        <li><a href="#">Lista 1</a></li>-->

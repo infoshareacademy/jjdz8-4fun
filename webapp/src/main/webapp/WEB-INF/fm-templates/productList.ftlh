@@ -1,4 +1,4 @@
-<#include "../headerShort.ftlh">
+<#include "common/headerShort.ftlh">
 <body>
 <header class="jumbotron">
     <div class="container" style="height: 40px">
@@ -29,5 +29,5 @@
     </div>
 </header>
 </body>
-<#include "../copyright-footer.ftlh">
+<#include "common/copyright-footer.ftlh">
 </html>

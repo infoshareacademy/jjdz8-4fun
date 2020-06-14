@@ -1,5 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
@@ -16,8 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/product-list")
-public class adminProductListServlet extends HttpServlet {
+@WebServlet("/admin-find-product-by-id")
+public class AdminFindProductByIdServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
@@ -25,18 +26,29 @@ public class adminProductListServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(adminProductListServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/product-list.ftlh");
+        String idParam = req.getParameter("id");
+
+        if (idParam == null || idParam.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        Product product = productService.findProductById(Long.valueOf(idParam));
         PrintWriter printWriter = resp.getWriter();
 
+        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", productService.findAllJson());
-
+        if (dataModel != null){
+            dataModel.put("product", product);
+        } else {
+            dataModel.put("errorMessage", "User has not been found.");
+        }
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

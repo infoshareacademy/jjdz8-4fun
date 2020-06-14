@@ -64,9 +64,9 @@ public class EditProductServlet extends HttpServlet {
         Long id = 0L;
         Product product = new Product(id,name,brand,price,calories,shop,category);
 
-        adminService.saveNewProduct(product);
+        adminService.editProduct(id, product);
 
-        resp.sendRedirect("/confirmEditProduct");
+        resp.sendRedirect("/confirmEditProduct?id="+product.getId());
     }
 }
 

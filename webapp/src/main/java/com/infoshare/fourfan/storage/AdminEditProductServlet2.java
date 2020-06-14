@@ -1,4 +1,4 @@
-package com.infoshare.fourfan.servlet;
+package com.infoshare.fourfan.storage;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductCategory;

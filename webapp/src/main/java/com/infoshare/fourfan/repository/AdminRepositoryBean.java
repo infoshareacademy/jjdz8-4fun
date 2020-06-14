@@ -1,18 +1,28 @@
 package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.service.OptionsFromProductJsonFile;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Stateless
 public class AdminRepositoryBean implements AdminRepository {
+
+    @Override
+    public ProductList showAllProducts() throws IOException {
+        return new OptionsFromProductJsonFile().readProductsJsonFile();
+    }
 
     @Override
     public void saveNewProduct(Product product) throws IOException {
@@ -36,5 +46,15 @@ public class AdminRepositoryBean implements AdminRepository {
         jsonArrayProducts.add(0, jsonObjectNewProduct);
 
         JSONObject zxc = new OptionsFromProductJsonFile().saveProductsJsonFile(jsonObjectReader);
+    }
+
+    @Override
+    public Product findProductById(Integer id) throws IOException {
+        return showAllProducts().getProductList().get(id);
+    }
+
+        @Override
+    public void editProduct(Long id, Product product) throws IOException {
+        Collections.replaceAll(showAllProducts().getProductList(), findProductById(Math.toIntExact(id)), product);
     }
 }

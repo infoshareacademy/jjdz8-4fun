@@ -1,9 +1,12 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
-public class ProductList {
+public class ProductList{
 
     List<Product> productList = new ArrayList<>();
 

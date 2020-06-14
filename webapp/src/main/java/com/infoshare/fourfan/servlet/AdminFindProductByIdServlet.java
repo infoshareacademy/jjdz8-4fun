@@ -39,7 +39,7 @@ public class AdminFindProductByIdServlet extends HttpServlet {
             return;
         }
 
-        Product product = productService.findProductById(Long.valueOf(idParam));
+        Product product = productService.findProductById(Integer.valueOf(idParam));
         PrintWriter printWriter = resp.getWriter();
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");

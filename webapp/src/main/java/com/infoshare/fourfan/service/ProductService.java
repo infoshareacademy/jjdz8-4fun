@@ -29,7 +29,7 @@ public class ProductService {
         productRepository.saveToJson(product);
     }
 
-    public Product findProductById(Long id) throws IOException {
+    public Product findProductById(Integer id) throws IOException {
         return productRepository.findProductById(id).orElse(null);
     }
 

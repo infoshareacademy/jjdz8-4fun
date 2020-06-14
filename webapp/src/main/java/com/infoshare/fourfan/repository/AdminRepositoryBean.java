@@ -54,7 +54,7 @@ public class AdminRepositoryBean implements AdminRepository {
     }
 
         @Override
-    public void editProduct(Long id, Product product) throws IOException {
+    public void editProduct(Integer id, Product product) throws IOException {
         Collections.replaceAll(showAllProducts().getProductList(), findProductById(Math.toIntExact(id)), product);
     }
 }

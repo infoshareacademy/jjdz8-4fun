@@ -55,7 +55,7 @@ public class AdminEditProductServlet2 extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        Long idParam = Long.parseLong(req.getParameter("id"));
+        Integer idParam = Integer.valueOf(req.getParameter("id"));
         String nameParam = req.getParameter("name");
         String brandParam = req.getParameter("brand");
         Integer priceParam = Integer.parseInt(req.getParameter("price"));

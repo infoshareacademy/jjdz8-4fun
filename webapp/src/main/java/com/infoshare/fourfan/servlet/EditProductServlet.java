@@ -32,9 +32,6 @@ public class EditProductServlet extends HttpServlet {
     @Inject
     private AdminService adminService;
 
-    @Inject
-    private ProductService productService;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -61,7 +58,7 @@ public class EditProductServlet extends HttpServlet {
         Integer calories = Integer.parseInt(req.getParameter("calories"));
         Shop shop = Shop.valueOf(req.getParameter("shop"));
         ProductCategory category = ProductCategory.valueOf(req.getParameter("category"));
-        Long id = 0L;
+        Integer id = 0;
         Product product = new Product(id,name,brand,price,calories,shop,category);
 
         adminService.editProduct(id, product);
@@ -69,4 +66,5 @@ public class EditProductServlet extends HttpServlet {
         resp.sendRedirect("/confirmEditProduct?id="+product.getId());
     }
 }
+
 

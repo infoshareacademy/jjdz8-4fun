@@ -3,8 +3,8 @@ package com.infoshare.fourfan.domain.datatypes;
 import java.util.Objects;
 
 public class Product {
-    private static long nextid = new ProductList().size();
-    Long id;
+    private static Integer nextid = new ProductList().size();
+    Integer id;
     String name;
     String brand;
     //Cena reprezentowana w groszach
@@ -13,7 +13,7 @@ public class Product {
     Shop shop;
     ProductCategory productCategory;
 
-    public Product(Long id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -30,7 +30,7 @@ public class Product {
     public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
     }
 
-    public static long getNextid() {
+    public static Integer getNextid() {
         return nextid;
     }
 
@@ -82,11 +82,11 @@ public class Product {
         this.productCategory = productCategory;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

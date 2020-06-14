@@ -29,16 +29,20 @@ public class RoboczyServletShowProduct extends HttpServlet {
 
         writer.println("<!DOCTYPE html><html><body>");
 
-        Product product = new AdminRepositoryBean().findProductById(1);
 
-        Product product1 = new Product();
-        product1.setName("Zupa ogórkowa");
-        ProductList productList = new ProductList();
+        Product product = adminService.findProductById(1);
+//
+//        resp.getWriter().println(new AdminRepositoryBean().showAllProducts().size());
+//        resp.getWriter().println(adminService.findProductById(1));
+//        resp.getWriter().println(adminService.findProductById(1));
 
-        resp.getWriter().println(new AdminRepositoryBean().showAllProducts().size());
-        resp.getWriter().println(adminService.findProductById(1));
-        resp.getWriter().println(adminService.findProductById(1));
+        adminService.showAllProducts().getProductList();
 
+        resp.getWriter().println(adminService.showAllProducts().getProductList());
+        resp.getWriter().println("=====");
+        resp.getWriter().println(adminService.findProductById(Math.toIntExact(product.getId())));
+        resp.getWriter().println("=====");
+        resp.getWriter().println(product);
 
 
 

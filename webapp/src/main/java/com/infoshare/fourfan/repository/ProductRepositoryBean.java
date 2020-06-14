@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class ProductRepositoryBean implements ProductRepository {
 
     @Override
-    public Optional<Product> findProductById(Long id) {
+    public Optional<Product> findProductById(Integer id) {
         return findAllJson().stream()
                 .filter(product -> product.getId().equals(id)).findFirst();
     }

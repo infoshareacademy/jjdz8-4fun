@@ -15,5 +15,5 @@ public interface AdminRepository {
 
     Product findProductById(Integer id) throws IOException;
 
-    void editProduct(Long id, Product product) throws IOException;
+    void editProduct(Integer id, Product product) throws IOException;
 }

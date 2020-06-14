@@ -24,7 +24,7 @@ public class AdminService {
         return adminRepository.findProductById(id);
     }
 
-    public void editProduct(Long id, Product product) throws IOException {
+    public void editProduct(Integer id, Product product) throws IOException {
         adminRepository.editProduct(id, product);
     }
 }

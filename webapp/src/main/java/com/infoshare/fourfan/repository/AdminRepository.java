@@ -5,6 +5,7 @@ import com.infoshare.fourfan.domain.datatypes.ProductList;
 
 import javax.ejb.Local;
 import java.io.IOException;
+import java.util.Optional;
 
 @Local
 public interface AdminRepository {
@@ -13,7 +14,8 @@ public interface AdminRepository {
 
     ProductList showAllProducts() throws IOException;
 
-    Product findProductById(Integer id) throws IOException;
+    Optional<Product> findProductById(Integer id) throws IOException;
 
-    void editProduct(Integer id, Product product) throws IOException;
+    void editProduct(Integer id, Product newProduct) throws IOException;
+
 }

@@ -24,7 +24,8 @@
                 <div class="col-md-6">
                     <div class="ANPform-style-2">
                         <div class="ANPform-style-2-heading">Edytuj ${product.name}</div>
-                        <form method="post" action="/editProduct" accept-charset="utf-8">
+                        <form method="post" action="/editProduct?id=${productId}" accept-charset="utf-8">
+                            <input type="hidden" id="custId" name="id" value="${product.id}">
                             <label><span>Nazwa</span><input type="text"
                                                             class="ANPinput-field"
                                                             name="name" value="${product.name}"

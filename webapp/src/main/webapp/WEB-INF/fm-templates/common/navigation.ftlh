@@ -36,7 +36,7 @@
 <#--                                    </ul>-->
 <#--                                </li>-->
                                 <li><a href="/addProduct">Dodaj produkt</a></li>
-                                <li><a href="/admin-edit-product">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/editProduct">Wyszukaj i zedytuj produkt</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

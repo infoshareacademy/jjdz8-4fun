@@ -3,13 +3,12 @@ package com.infoshare.fourfan.repository;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.JsonService;
 
 import javax.ejb.Stateless;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Stateless

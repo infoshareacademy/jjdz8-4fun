@@ -46,6 +46,7 @@ public class AdminFindProductByIdServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null){
             dataModel.put("product", product);
+            dataModel.put("productId", idParam);
         } else {
             dataModel.put("errorMessage", "User has not been found.");
         }

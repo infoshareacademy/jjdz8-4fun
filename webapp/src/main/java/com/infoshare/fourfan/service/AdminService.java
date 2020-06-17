@@ -21,10 +21,10 @@ public class AdminService {
     }
 
     public Product findProductById(Integer id) throws IOException {
-        return adminRepository.findProductById(id);
+        return adminRepository.findProductById(id).orElse(null);
     }
 
-    public void editProduct(Integer id, Product product) throws IOException {
-        adminRepository.editProduct(id, product);
+    public void editProduct(Integer id, Product newProduct) throws IOException {
+        adminRepository.editProduct(id, newProduct);
     }
 }

@@ -18,11 +18,19 @@
                 <li>Product Category: ${(product.productCategory)!}</li>
                 <div class="col-md-6">
                     <div class="ANPform-style-2">
-                        <form method="post" action="admin-delete-product?name=${product.name}">
+                        <form method="post" style="float: left" action="admin-delete-product?name=${product.name}">
                             <input type="submit" name="findById" style="background: #009961" value="Usuń"/><br/><br/>
+                        </form>
+                        <form method="get" style="float: left; margin-left: 10px"
+                              action="admin-find-product-by-id?id=${product.id}">
+                            <button type="submit" name="id"
+                                    style="background: #009961; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px;"
+                                    value="${product.id}">Edytuj
+                            </button>
                         </form>
                     </div>
                 </div>
+                </br>
                 <#sep><br/></#sep>
             </#list>
         </ul>

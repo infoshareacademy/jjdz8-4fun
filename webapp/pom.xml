@@ -73,14 +73,6 @@
                 <version>2.22.2</version>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>Products.json</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
 

@@ -53,7 +53,7 @@ public class AdminRepositoryBean implements AdminRepository {
     @Override
     public void editProduct(Integer id, Product newProduct) throws IOException {
         ProductList productList = showAllProducts();
-        productList.getProductList().set(id, newProduct);
+        productList.set(id, newProduct);
         JsonService.saveProductsToJsonFile(productList);
     }
 }

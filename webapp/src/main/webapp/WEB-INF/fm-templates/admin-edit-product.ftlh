@@ -17,7 +17,7 @@
     <div class="col-md-6">
         <div class="ANPform-style-2">
             <div class="ANPform-style-2-heading">Wyszukaj produkt po Nazwie</div>
-            <form method="get" action="/admin-find-product-by-name" accept-charset="utf-8">
+            <form method="get" action="/admin-find-product-by-name?" accept-charset="utf-8">
             Name: <input type="text" class="ANPinput-field" name="name"/><br/><br/>
             <input type="submit" name="findByName" class="ANPinput-field" style="background: #009961" value="Szukaj"/><br/><br/>
             </form>

@@ -1,9 +1,6 @@
 package com.infoshare.fourfan.domain.datatypes;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductList{
@@ -26,8 +23,13 @@ public class ProductList{
         return productList.get(i);
     }
 
-    public void set(int i, Product product) {
-        productList.set(i, product);
+    public void set(int productId, Product product) {
+        Optional<Integer> index = productList.stream().filter(p -> p.id == productId).map(p -> productList.indexOf(p)).findFirst();
+        if (index.isPresent()) {
+            productList.set(index.get(), product);
+        } else {
+            productList.add(product);
+        }
     }
 
     public void remove(int i) {

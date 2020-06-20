@@ -6,23 +6,32 @@
 
     </br>
     <#if errorMessage??>
-        <span style="color: #ff0000;">${errorMessage}</span><br/><br/>
+    <span style="color: #ff0000;">${errorMessage}</span><br/><br/>
     <#else>
     <main role="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
                     <h3>${product.name}</h3>
-                        <ul>
-                            <li>Id: ${(product.id)!}</li>
-                            <li>Name: ${product.name}</li>
-                            <li>Brand: ${product.brand}</li>
-                            <li>Price: ${product.price}</li>
-                            <li>Calories: ${product.calories}</li>
-                            <li>Shop: ${product.shop}</li>
-                            <li>Product Category: ${(product.productCategory)!}</li>
-                        </ul>
+                    <ul>
+                        <li>Id: ${(product.id)!}</li>
+                        <li>Name: ${product.name}</li>
+                        <li>Brand: ${product.brand}</li>
+                        <li>Price: ${product.price}</li>
+                        <li>Calories: ${product.calories}</li>
+                        <li>Shop: ${product.shop}</li>
+                        <li>Product Category: ${(product.productCategory)!}</li>
+                    </ul>
+                    <div class="col-md-6">
+                        <div class="ANPform-style-2">
+                            <form method="get" style="float: left" action="editProduct">
+                                <input type="submit" name="findById" style="background: #009961"
+                                       value="Powrót"/><br/><br/>
+                            </form>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="ANPform-style-2">
                         <div class="ANPform-style-2-heading">Edytuj ${product.name}</div>
@@ -74,6 +83,7 @@
         document.getElementById("${product.shop}").selected = "true";
         document.getElementById("${product.productCategory}").selected = "true";
     }
+
     checkSelected();
 </script>
 <#include "common/copyright-footer.ftlh">

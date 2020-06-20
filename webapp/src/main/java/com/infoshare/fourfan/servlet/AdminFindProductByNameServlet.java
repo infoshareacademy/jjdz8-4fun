@@ -1,5 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.service.ProductService;
 import com.isa.usersengine.domain.User;
 import com.isa.usersengine.service.UserService;
 
@@ -15,39 +17,40 @@ import java.util.logging.Logger;
 @WebServlet("/admin-find-product-by-id")
 public class AdminFindProductByNameServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(com.isa.usersengine.servlet.FindUserByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFindProductByNameServlet.class.getName());
 
     @Inject
-    private UserService userService;
+    private ProductService productService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String idParam = req.getParameter("id");
+        String nameParam = req.getParameter("name");
 
-        if (idParam == null || idParam.isEmpty()) {
+        if (nameParam == null || nameParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        User user = userService.findById(Long.parseLong(idParam));
+        Product product = productService.findProductByName(nameParam);
 
         PrintWriter writer = resp.getWriter();
         writer.println("<!DOCTYPE html>");
         writer.println("<html>");
         writer.println("<body>");
 
-        if (user != null) {
-            writer.println("ID: " + user.getId() + "<br>");
-            writer.println("Name: " + user.getName() + "<br>");
-            writer.println("Login: " + user.getLogin() + "<br>");
-            writer.println("Password: " + user.getPassword() + "<br>");
-            writer.println("Age: " + user.getAge() + "<br>");
+        if (product != null) {
+            writer.println("ID: " + product.getId() + "<br>");
+            writer.println("Name: " + product.getName() + "<br>");
+            writer.println("Brand: " + product.getBrand() + "<br>");
+            writer.println("Price: " + product.getPrice() + "<br>");
+            writer.println("Calories: " + product.getCalories() + "<br>");
+            writer.println("Shop: " + product.getShop() + "<br>");
+            writer.println("Product category: " + product.getProductCategory() + "<br>");
         } else {
             writer.println("User has not been found - no ID available");
         }
 
         writer.println("</body>");
         writer.println("</html>");
-
     }
 }

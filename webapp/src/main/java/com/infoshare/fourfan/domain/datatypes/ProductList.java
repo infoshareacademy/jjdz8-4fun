@@ -8,6 +8,9 @@ public class ProductList {
     List<Product> productList = new ArrayList<>();
 
     public List<Product> getProductList() {
+        if (productList.size() == 0) {
+            System.out.println("No products saved yet.");
+        }
         return productList;
     }
 
@@ -38,5 +41,4 @@ public class ProductList {
     public void delete(Product product) {
         productList.remove(product);
     }
-
 }

@@ -16,6 +16,12 @@ public interface ProductRepository {
 
     Optional<Product> findProductById(Long id) throws IOException;
 
+    List<Product> filterByBrand (String brand);
+
+    List<Product> filterBySinglePrice(Integer price);
+
+    List<Product> filterByShop(Shop shop);
+
     List<Product> findAllJson() throws IOException;
 
     void saveToJson(Product product) throws IOException;

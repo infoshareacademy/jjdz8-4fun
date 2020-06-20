@@ -37,6 +37,18 @@ public class ProductService {
         return productRepository.findProductByName(name).orElse(null);
     }
 
+    public List<Product> filterBySinglePrice (Integer price){
+        return productRepository.filterBySinglePrice(price);
+    }
+
+    public List<Product> filterByBrand (String brand) {
+        return productRepository.filterByBrand(brand);
+    }
+
+    public List<Product> filterByShop (Shop shop) {
+        return productRepository.filterByShop(shop);
+    }
+
     public void deleteProductFromJson(Product product) throws IOException {
         productRepository.deleteProductFromJson(product);
     }

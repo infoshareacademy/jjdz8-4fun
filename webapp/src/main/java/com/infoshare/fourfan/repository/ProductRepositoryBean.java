@@ -18,18 +18,46 @@ public class ProductRepositoryBean implements ProductRepository {
     @Override
     public Optional<Product> findProductById(Long id) {
         return findAllJson().stream()
-                .filter(product -> product.getId().equals(id)).findFirst();
+                .filter(product -> product.getId().equals(id))
+                .findFirst();
+    }
+
+    @Override
+    public List<Product> filterByBrand(String brand) {
+        return findAllJson()
+                .stream()
+                .filter(product -> product.getBrand().equals(brand))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> filterBySinglePrice(Integer price) {
+        return findAllJson()
+                .stream()
+                .filter(product -> product.getPrice().equals(price))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> filterByShop(Shop shop) {
+        return findAllJson()
+                .stream()
+                .filter(product -> product.getShop().equals(shop))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Product> findProductByName(String name) {
         return findAllJson().stream()
-                .filter(product -> product.getName().toUpperCase().contains(name.toUpperCase())).findFirst();
+                .filter(product -> product.getName().toUpperCase().contains(name.toUpperCase()))
+                .findFirst();
     }
 
     @Override
     public List<Product> findAllJson() {
-        return JsonService.readProductsJsonFile().getProductList();
+        return JsonService
+                .readProductsJsonFile()
+                .getProductList();
     }
 
     @Override

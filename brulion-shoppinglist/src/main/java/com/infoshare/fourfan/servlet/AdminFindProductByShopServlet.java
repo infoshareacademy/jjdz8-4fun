@@ -1,6 +1,5 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.service.ProductService;
 import com.isa.usersengine.domain.User;
 import com.isa.usersengine.service.UserService;
 
@@ -14,12 +13,12 @@ import java.io.PrintWriter;
 import java.util.logging.Logger;
 
 @WebServlet("/admin-find-product-by-id")
-public class AdminFindProductByPriceServlet extends HttpServlet {
+public class AdminFindProductByShopServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(AdminFindProductByPriceServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(com.isa.usersengine.servlet.FindUserByIdServlet.class.getName());
 
     @Inject
-    private ProductService productService;
+    private UserService userService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -5,11 +5,14 @@
     </div>
 
     </br>
+    <#if errorMessage??>
+        <span style="color: #ff0000;">${errorMessage}</span><br/><br/>
+    <#else>
     <main role="main">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <#if product??><h3>${product.name}</h3>
+                    <h3>${product.name}</h3>
                         <ul>
                             <li>Id: ${(product.id)!}</li>
                             <li>Name: ${product.name}</li>
@@ -19,7 +22,6 @@
                             <li>Shop: ${product.shop}</li>
                             <li>Product Category: ${(product.productCategory)!}</li>
                         </ul>
-                    </#if>
                 </div>
                 <div class="col-md-6">
                     <div class="ANPform-style-2">
@@ -66,6 +68,7 @@
         </div>
     </main>
 </header>
+</#if>
 <script>
     function checkSelected() {
         document.getElementById("${product.shop}").selected = "true";

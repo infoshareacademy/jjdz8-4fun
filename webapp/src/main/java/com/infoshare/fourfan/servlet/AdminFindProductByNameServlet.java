@@ -44,11 +44,11 @@ public class AdminFindProductByNameServlet extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null){
+        if (dataModel != null && product != null){
             dataModel.put("product", product);
             dataModel.put("productId", product.getId());
         } else {
-            dataModel.put("errorMessage", "User has not been found.");
+            dataModel.put("errorMessage", "Product has not been found.");
         }
         try {
             template.process(dataModel, printWriter);

@@ -12,4 +12,13 @@
 <!--    <servlet-name>HomePageServlet</servlet-name>-->
 <!--    <url-pattern>/</url-pattern>-->
 <!--  </servlet-mapping>-->
+  <data-source>
+    <name>java:ds/companyDS</name>
+    <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
+    <url>jdbc:mysql://0.0.0.0:3307/company?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+    <user>root</user>
+    <password>root</password>
+  </data-source>
+
+
 </web-app>

@@ -3,8 +3,8 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
-<!--  <servlet>-->
+<!--  <display-name>Archetype Created Web Application</display-name>-->
+  <servlet>
 <!--    <servlet-name>HomePageServlet</servlet-name>-->
 <!--    <servlet-class>com.infoshare.fourfan.servlet.HomePageServlet</servlet-class>-->
 <!--  </servlet>-->
@@ -19,6 +19,4 @@
     <user>root</user>
     <password>root</password>
   </data-source>
-
-
 </web-app>

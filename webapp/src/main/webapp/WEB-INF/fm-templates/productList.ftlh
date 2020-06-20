@@ -4,38 +4,62 @@
     <div class="container" style="height: 40px">
         <h1 class="display-3" style="font-size: 40px">Lista produktów</h1>
     </div>
-    </br>
-    </br>
-    <div>
-        <ul>
-            <#list products as product>
-                <li>Id: ${(product.id)!}</li>
-                <li>Name: ${product.name}</li>
-                <li>Brand: ${product.brand}</li>
-                <li>Price: ${product.price}</li>
-                <li>Calories: ${product.calories}</li>
-                <li>Shop: ${product.shop}</li>
-                <li>Product Category: ${(product.productCategory)!}</li>
-                <div class="col-md-6">
-                    <div class="ANPform-style-2">
-                        <form method="post" style="float: left" action="admin-delete-product?name=${product.name}">
-                            <input type="submit" name="findById" style="background: #009961" value="Usuń"/><br/><br/>
-                        </form>
-                        <form method="get" style="float: left; margin-left: 10px"
-                              action="admin-find-product-by-id?id=${product.id}">
-                            <button type="submit" name="id"
-                                    style="background: #009961; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px;"
-                                    value="${product.id}">Edytuj
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                </br>
-                <#sep><br/></#sep>
-            </#list>
-        </ul>
-    </div>
 </header>
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Price</th>
+        <th scope="col">Calories</th>
+        <th scope="col">Shop</th>
+        <th scope="col">Category</th>
+        <th scope="col">Edytuj</th>
+        <th scope="col">Usuń</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <#list products as product>
+    <tr>
+        <th scope="row">${(product.id)!}</th>
+        <th>${product.name}</th>
+        <th>${product.brand}</th>
+        <th>${product.price}</th>
+        <th>${product.calories}</th>
+        <th>${product.shop}</th>
+        <th>${(product.productCategory)!}</th>
+        <th>
+            <div class="col-md-6">
+                <div class="ANPform-style-2">
+                    <form method="get"
+                    "
+                    action="admin-find-product-by-id?id=${product.id}">
+                    <button type="submit" name="id"
+                            style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
+                            value="${product.id}">Edytuj
+                    </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+        <th>
+            <div class="col-md-6">
+                <div class="ANPform-style-2">
+                    <form method="post" action="admin-delete-product?name=${product.name}">
+                        <button type="submit" name="id"
+                                style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
+                                value="${product.id}">Usuń
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </th>
+    </tr>
+    </#list>
+    </tbody>
+</table>
 </body>
 <#include "common/copyright-footer.ftlh">
 </html>

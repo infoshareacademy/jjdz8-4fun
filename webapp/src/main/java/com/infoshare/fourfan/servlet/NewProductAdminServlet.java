@@ -5,6 +5,7 @@ import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.AdminService;
+import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 

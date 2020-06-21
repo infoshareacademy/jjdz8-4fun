@@ -1,17 +1,34 @@
 package com.infoshare.fourfan.domain.datatypes;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product {
     private static Integer nextid = new ProductList().size();
-    Integer id;
-    String name;
-    String brand;
-    //Cena reprezentowana w groszach
-    Integer price;
-    Integer calories;
-    Shop shop;
-    ProductCategory productCategory;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer id;
+
+    @Basic
+    private String name;
+
+    @Basic
+    private String brand;
+
+    @Basic
+    private Integer price;      //Cena reprezentowana w groszach
+
+    @Basic
+    private Integer calories;
+
+    @Basic
+    private Shop shop;
+
+    @Column(name = "product_category")
+    private ProductCategory productCategory;
 
     public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
         this.id = id;

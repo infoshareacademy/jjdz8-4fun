@@ -9,12 +9,12 @@
     <thead>
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Brand</th>
-        <th scope="col">Price</th>
-        <th scope="col">Calories</th>
-        <th scope="col">Shop</th>
-        <th scope="col">Category</th>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Firma</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Kalorie</th>
+        <th scope="col">Sklep</th>
+        <th scope="col">Kategoria</th>
         <th scope="col">Edytuj</th>
         <th scope="col">Usuń</th>
     </tr>

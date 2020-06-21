@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @WebServlet("/admin-find-product-by-id")
-public class adminFindProductByIdServlet extends HttpServlet {
+public class AdminFindProductByIdServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
@@ -26,7 +26,7 @@ public class adminFindProductByIdServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(adminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -39,15 +39,16 @@ public class adminFindProductByIdServlet extends HttpServlet {
             return;
         }
 
-        Product product = productService.findProductById(Long.valueOf(idParam));
+        Product product = productService.findProductById(Integer.valueOf(idParam));
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/admin-find-product.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null){
+        if (dataModel != null && product!= null){
             dataModel.put("product", product);
+            dataModel.put("productId", idParam);
         } else {
-            dataModel.put("errorMessage", "User has not been found.");
+            dataModel.put("errorMessage", "Product has not been found.");
         }
         try {
             template.process(dataModel, printWriter);

@@ -17,24 +17,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-delete-product")
-public class adminDeleteProductServlet extends HttpServlet {
+@WebServlet("/admin-find-product-by-name")
+public class AdminFindProductByNameServlet extends HttpServlet {
 
     @Inject
-    ProductService productService;
+    private ProductService productService;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(adminDeleteProductServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFindProductByNameServlet.class.getName());
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "common/adminTemp/product-list.ftlh");
-        PrintWriter printWriter = resp.getWriter();
         String nameParam = req.getParameter("name");
 
         if (nameParam == null || nameParam.isEmpty()) {
@@ -43,19 +40,17 @@ public class adminDeleteProductServlet extends HttpServlet {
         }
 
         Product product = productService.findProductByName(nameParam);
-        productService.deleteProductFromJson(product);
+        PrintWriter printWriter = resp.getWriter();
 
-        printWriter.println("<script>\n" +
-                "        alert(\"" + product.getName() + " został usunięty!\")\n" +
-                "    </script>");
-
+        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null) {
-            dataModel.put("products", productService.findAllJson());
-
+        if (dataModel != null && product != null){
+            dataModel.put("product", product);
+            dataModel.put("productId", product.getId());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
-        } try {
+        }
+        try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.severe(e.getMessage());

@@ -25,7 +25,7 @@
                         <li><a href="#pricing">Cennik</a></li>
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
-                                <li><a href="/product-list">Lista produktów</a></li>
+                                <li><a href="/productList">Lista produktów</a></li>
 <#--                                <li class="drop-down"><a href="#">Inne</a>-->
 <#--                                    <ul>-->
 <#--                                        <li><a href="#">Lista 1</a></li>-->
@@ -36,7 +36,7 @@
 <#--                                    </ul>-->
 <#--                                </li>-->
                                 <li><a href="/addProduct">Dodaj produkt</a></li>
-                                <li><a href="/admin-edit-product">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/editProduct">Wyszukaj i zedytuj produkt</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

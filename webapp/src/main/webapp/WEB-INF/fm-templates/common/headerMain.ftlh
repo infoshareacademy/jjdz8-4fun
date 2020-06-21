@@ -49,8 +49,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-8">
                 <h1>Shopping List</h1>
-                <h2>We are team of designers making websites with Bootstrap and shopping lists</h2>
-                <a href="https://www.youtube.com/watch?v=qO28fCnCyes" class="venobox play-btn mb-4" data-vbtype="video"
+                <h2>Jesteśmy grupą designerów tworzącą aplikacje webowe</h2>
+                <a href="https://www.youtube.com/watch?v=qO28fCnCyes" target="_blank" class="venobox play-btn mb-4" data-vbtype="video"
                    data-autoplay="true"></a>
             </div>
         </div>

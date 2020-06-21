@@ -10,7 +10,7 @@
       "productCategory": "NABIAŁ"
     },
     {
-      "id": 2,
+      "id": 2 ,
       "name": "Mrożona mieszanka warzywna",
       "brand": "Hortex",
       "price": 400,
@@ -19,7 +19,7 @@
       "productCategory": "WARZYWA"
     },
     {
-      "id": 3,
+      "id": 3 ,
       "name": "Mrożona mieszanka warzywna",
       "brand": "Hortex",
       "price": 400,
@@ -28,13 +28,31 @@
       "productCategory": "WARZYWA"
     },
     {
-      "id": 4,
+      "id": 4 ,
       "name": "Ogórki po kaszubsku",
       "brand": "Tesco",
       "price": 549,
       "calories": 340,
       "shop": "TESCO",
       "productCategory": "WARZYWA"
+    },
+    {
+      "id": 5 ,
+      "name": "Jogurt Danone",
+      "brand": "Danone",
+      "price": 450,
+      "calories": 69,
+      "shop": "AUCHAN",
+      "productCategory": "NABIAŁ"
+    },
+    {
+      "id": 6 ,
+      "name": "Pomarańcz",
+      "brand": "Java",
+      "price": 150,
+      "calories": 50,
+      "shop": "TESCO",
+      "productCategory": "OWOCE"
     }
   ]
 }

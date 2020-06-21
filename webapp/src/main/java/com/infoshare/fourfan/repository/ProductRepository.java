@@ -14,7 +14,7 @@ public interface ProductRepository {
 
     Optional<Product> findProductByName(String name) throws IOException;
 
-    Optional<Product> findProductById(Long id) throws IOException;
+    Optional<Product> findProductById(Integer id) throws IOException;
 
     List<Product> findAllJson() throws IOException;
 

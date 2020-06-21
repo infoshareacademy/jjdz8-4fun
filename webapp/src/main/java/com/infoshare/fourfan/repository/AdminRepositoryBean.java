@@ -9,12 +9,17 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 @Stateless
 public class AdminRepositoryBean implements AdminRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
     public ProductList showAllProducts() throws IOException {

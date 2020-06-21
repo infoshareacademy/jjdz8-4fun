@@ -1,9 +1,6 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Application</display-name>
+
 <!--  <servlet>-->
 <!--    <servlet-name>HomePageServlet</servlet-name>-->
 <!--    <servlet-class>com.infoshare.fourfan.servlet.HomePageServlet</servlet-class>-->
@@ -12,4 +9,15 @@
 <!--    <servlet-name>HomePageServlet</servlet-name>-->
 <!--    <url-pattern>/</url-pattern>-->
 <!--  </servlet-mapping>-->
+
+    <data-source>
+        <name>java:ds/companyDS</name>
+        <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
+        <url>jdbc:mysql://0.0.0.0:3307/shoppingList?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+        <user>root</user>
+        <password>root</password>
+    </data-source>
+
 </web-app>
+
+

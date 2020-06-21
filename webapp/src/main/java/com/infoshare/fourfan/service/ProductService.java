@@ -1,5 +1,7 @@
 package com.infoshare.fourfan.service;
 
+import com.infoshare.fourfan.dao.Dao;
+import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.domain.datatypes.Shop;
@@ -20,6 +22,14 @@ public class ProductService {
 
     @EJB
     private ProductRepository productRepository;
+
+    @EJB
+    private ProductDao productDao;
+
+    
+
+
+    //------------------------------------------------------------
 
     public List<Product> findAllJson() throws IOException {
         return productRepository.findAllJson();

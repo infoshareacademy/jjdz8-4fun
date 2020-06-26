@@ -12,7 +12,7 @@ public class UserTest {
     public void testIfUserCreatedForValidLoginAndPassword() {
         User user = new User("Peter@gmail.com", "peter-password", "Peter", "Kowalski", "512222999");
 
-        assertAll(
+        assertAll(() -> assertEquals("Peter@gmail.com", user.getEmail()),
                 () -> assertEquals("peter-password", user.getPassword()),
                 () -> assertEquals("Peter", user.getName()),
                 () -> assertEquals("Kowalski", user.getSurName()),

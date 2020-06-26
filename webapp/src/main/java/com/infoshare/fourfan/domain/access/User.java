@@ -1,9 +1,6 @@
 package com.infoshare.fourfan.domain.access;
-//TODO adjust apache.commons - import might be wrongly implemented; to veryfie
 
 import org.apache.commons.lang3.StringUtils;
-
-import javax.validation.constraints.NotEmpty;
 
 public class User {
 
@@ -40,7 +37,6 @@ public class User {
                 '}';
     }
 
-    //----------- Getters & Setters -----------
     public String getPassword() {
         return password;
     }
@@ -49,7 +45,6 @@ public class User {
         if (StringUtils.isBlank(password)) {
             throw new IllegalArgumentException("Password is not allowed to be empty");
         }
-        ;
         this.password = password;
     }
 

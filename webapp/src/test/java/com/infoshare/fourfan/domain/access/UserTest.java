@@ -69,4 +69,16 @@ public class UserTest {
 
         assertThrows(IllegalArgumentException.class, () -> new User("Peter@gmail.com", null, "Peter", "Kowalski", "512222999"));
     }
+
+    @Test
+    @DisplayName("Checks if true returned if user has administrator's credentials")
+    void isAdmin() {
+        // given
+        User user = new User("Peter@gmail.com", "peter-password", "Peter", "Kowalski", "512222999");
+        // when
+
+
+        // then
+
+    }
 }

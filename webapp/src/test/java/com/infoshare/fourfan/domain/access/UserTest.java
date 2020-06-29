@@ -3,6 +3,7 @@ package com.infoshare.fourfan.domain.access;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
@@ -36,13 +37,14 @@ public class UserTest {
         assertThrows(IllegalArgumentException.class, () -> new User(" ", "peter-password", "Peter", "Kowalski", "512222999", false));
     }
 
-//    @Test
-//    @DisplayName("Check if admin credentials submitted in case admin field filled in as true")
-//    public void testIfAdminCredentialsSetUpInCaseOfTrueValue(){
-//        User user = new User("Peter@gmail.com", "peter-password", "Peter", "Kowalski", "512222999", false);
-//        // When & then
-//        assertThat(user.isAdmin()).isTrue();
-//    }
+
+    @Test
+    @DisplayName("Checks that user shoule have false admin credentials")
+    public void testIfAdminCredentialsSetUpInCaseOfTrueValue() {
+        User user = new User("Peter@gmail.com", "peter-password", "Peter", "Kowalski", "512222999", false);
+        // When & then
+        assertThat(user.isAdmin()).isFalse();
+    }
 
     @Test
     @DisplayName("Checks if IllegalArgumentException thrown in case of empty password")
@@ -92,6 +94,20 @@ public class UserTest {
         assertFalse(result);
     }
 
+
+    @Test
+    @DisplayName("Checks if IllegalArgumentException thrown in case of empty phone number")
+    public void testIfExceptionThrownInCaseOfEmptyPhoneNumber() {
+        assertThrows(IllegalArgumentException.class, () -> new User("Peter@gmail.com", "password", "Peter", "Kowalski", "", false));
+    }
+
+    @Test
+    @DisplayName("Checks if phone number set up for valid data input")
+    public void testIfPhoneNumberSetUpAfterValidDataInput() {
+        User user = new User("Peter@gmail.com", "peter-newPassword", "Peter", "Kowalski", "512222999", false);
+        assertEquals("512222999", user.getPhoneNumber());
+    }
+
     @Test
     @DisplayName("Check if password set up accurately after valid data input")
     public void testIfPasswordSetUpAfterValidDataInput() {
@@ -105,11 +121,11 @@ public class UserTest {
         User user = new User("Peter@gmail.com", "peter-Password", "Peter", "Kowalski", "512222999", false);
 
         assertEquals("User{" +
-                "1. email=" + "Peter@gmail.com"" + '\'' +
+                "1. email=" + "Peter@gmail.com" + '\'' +
                 " 2. Imie=" + "Peter" + '\'' +
                 " 3. Nazwisko=" + "Kowalski" + '\'' +
-                " 4. Numer telefonu=" + phoneNumber + '\'' +
-                " 5. Czy to admin?=" + isAdmin +
-                '}', user.toString);
+                " 4. Numer telefonu=" + "512222999" + '\'' +
+                " 5. Czy to admin?=" + false +
+                '}', user.toString());
     }
 }

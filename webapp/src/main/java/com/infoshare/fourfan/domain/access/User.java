@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.domain.access;
 
-import static javax.faces.component.UIInput.isEmpty;
+import java.util.Objects;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class User {
@@ -10,12 +11,11 @@ public class User {
     private String name;
     private String surName;
     private String phoneNumber;
-    private Boolean isAdmin;
+    private Boolean isAdmin = false;
 
     public User() {
         throw new IllegalArgumentException("All fields are mandatory to be given for user to be created");
     }
-
 
     public User(String email, String password, String name, String surName, String phoneNumber, Boolean isAdmin) {
         if (isBlank(email) || (isBlank(password)) || (isBlank(name)) || (isBlank(surName)) || (isBlank(phoneNumber))) {
@@ -26,11 +26,7 @@ public class User {
             this.name = name;
             this.surName = surName;
             this.phoneNumber = phoneNumber;
-        }
-        if (isEmpty(isAdmin)) {
             this.isAdmin = false;
-        } else {
-            this.isAdmin = true;
         }
     }
 
@@ -94,13 +90,31 @@ public class User {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if (isBlank(phoneNumber)) {
-            throw new IllegalArgumentException("Phone number is not allowed to be empty");
+        if(phoneNumber==null){
+            throw new IllegalArgumentException("Phone number is a mandatory field");
         }
         this.phoneNumber = phoneNumber;
     }
 
     public Boolean isAdmin() {
         return isAdmin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return Objects.equals(getEmail(), user.getEmail()) &&
+                Objects.equals(getPassword(), user.getPassword()) &&
+                Objects.equals(getName(), user.getName()) &&
+                Objects.equals(getSurName(), user.getSurName()) &&
+                Objects.equals(getPhoneNumber(), user.getPhoneNumber()) &&
+                Objects.equals(isAdmin, user.isAdmin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getPassword(), getName(), getSurName(), getPhoneNumber(), isAdmin);
     }
 }

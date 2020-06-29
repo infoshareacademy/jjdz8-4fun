@@ -28,7 +28,7 @@ public class User {
             this.phoneNumber = phoneNumber;
         }
         if (isEmpty(isAdmin)) {
-            this.isAdmin = isAdmin;
+            this.isAdmin = false;
         } else {
             this.isAdmin = true;
         }
@@ -37,10 +37,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "1. email='" + email + '\'' +
-                "2. Imie='" + name + '\'' +
-                "3. Nazwisko='" + surName + '\'' +
-                "4. Numer telefonu='" + phoneNumber + '\'' +
+                "1. email=" + email + '\'' +
+                " 2. Imie=" + name + '\'' +
+                " 3. Nazwisko=" + surName + '\'' +
+                " 4. Numer telefonu=" + phoneNumber + '\'' +
+                " 5. Czy to admin?=" + isAdmin +
                 '}';
     }
 

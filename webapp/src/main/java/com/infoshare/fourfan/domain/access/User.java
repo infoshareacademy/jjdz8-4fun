@@ -30,15 +30,15 @@ public class User {
         }
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "1. email=" + email + '\'' +
-                " 2. Imie=" + name + '\'' +
-                " 3. Nazwisko=" + surName + '\'' +
-                " 4. Numer telefonu=" + phoneNumber + '\'' +
-                " 5. Czy to admin?=" + isAdmin +
-                '}';
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (isBlank(email)) {
+            throw new IllegalArgumentException("Email is not allowed to be empty");
+        }
+        this.email = email;
     }
 
     public String getPassword() {
@@ -74,17 +74,6 @@ public class User {
         this.surName = surName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        if (isBlank(email)) {
-            throw new IllegalArgumentException("Email is not allowed to be empty");
-        }
-        this.email = email;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -102,6 +91,17 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "1. email=" + email + '\'' +
+                " 2. Imie=" + name + '\'' +
+                " 3. Nazwisko=" + surName + '\'' +
+                " 4. Numer telefonu=" + phoneNumber + '\'' +
+                " 5. Czy to admin?=" + isAdmin +
+                '}';
     }
 
     @Override

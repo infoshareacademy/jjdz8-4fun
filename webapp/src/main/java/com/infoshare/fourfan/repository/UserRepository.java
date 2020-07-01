@@ -9,14 +9,15 @@ import java.util.Optional;
 @Local
 public interface UserRepository {
 
-    public void add(User user);
+    void add(User user);
 
-    public boolean doesUserExist(String email);
+    boolean doesUserByEmailExist(String email);
 
-    public Optional<User> findByEmailUser(String email);
+    Optional<User> findUserByEmail(String email);
 
+    Optional<User> findUserBySurName(String surName);
 
-    public void deleteUser(User user);
+//    void deleteUser(User user);
 
-    public List<User> getAllUsers();
+    List<String> printAllUsersNames();
 }

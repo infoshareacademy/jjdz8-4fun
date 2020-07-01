@@ -1,49 +1,75 @@
 package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.access.User;
+import com.infoshare.fourfan.storage.UserDb;
 
 import javax.ejb.Stateless;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Stateless
-public class UserRepositoryBean implements UserRepository{
+public class UserRepositoryBean implements UserRepository {
 
-    private final UserRepository userRepository;
 
-    public UserRepositoryBean(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    @Override
+    public void add(User user) {
+        getUsersRepository().add(user);
     }
 
     @Override
-    public boolean doesUserExist(String email) {
+    public Optional<User> findUserByEmail(String email) {
+        return findAllUsers()
+                .stream()
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst();
+    }
 
-        return userRepository.
-        User user = findUser(email);
-        if (user!=null){
+    @Override
+    public Optional<User> findUserBySurName(String surName) {
+        return findAllUsers()
+                .stream()
+                .filter(user -> user.getSurName().equals(surName))
+                .findFirst();
+    }
+
+//    @Override
+//    public void deleteUser(User user) {
+//      UserRepository.de
+//
+//    }
+
+    public List<User> findAllUsers() {
+        return UserDb.getUserRepository();
+    }
+
+    @Override
+    public List<String> printAllUsersNames() {
+        return findAllUsers()
+                .stream()
+                .map(user -> user.getName())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean doesUserByEmailExist(String email) {
+        Optional<User> user = findUserByEmail(email);
+        if (user != null) {
             return true;
         }
         return false;
     }
 
-    @Override
-    public Optional<User> findByEmailUser(String email) {
-        return
-    }
+//    public static boolean containsUser(User user) {
+//        List<User> repository = getUsersRepository();
+//        for (User userFromList : repository) {
+//            if (userFromList.getEmail() == user.getEmail()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-    public void add(User user) {
-        users.add(user);
-    }
 
-    @Override
-    public void deleteUser(User user) {
-        userRepository
-                .deleteUser(user);
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository
-                .getAllUsers();
-    }
 }

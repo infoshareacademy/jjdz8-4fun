@@ -41,7 +41,6 @@ public class Product {
     }
 
     public Product() {
-
     }
 
     public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {

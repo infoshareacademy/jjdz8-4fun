@@ -11,7 +11,7 @@ public class User {
     private String name;
     private String surName;
     private String phoneNumber;
-    private Boolean isAdmin = false;
+    private boolean isAdmin;
 
     public User() {
         throw new IllegalArgumentException("All fields are mandatory to be given for user to be created");
@@ -90,14 +90,18 @@ public class User {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        if(phoneNumber==null){
+        if (phoneNumber == null) {
             throw new IllegalArgumentException("Phone number is a mandatory field");
         }
         this.phoneNumber = phoneNumber;
     }
 
-    public Boolean isAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
+    }
+
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override

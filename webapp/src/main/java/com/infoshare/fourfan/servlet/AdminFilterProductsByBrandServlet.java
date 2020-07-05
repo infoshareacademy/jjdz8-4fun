@@ -1,7 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.AdminService;
+import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,43 +13,36 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-find-product-by-id")
-public class AdminFindProductByIdServlet extends HttpServlet {
+@WebServlet("/admin-filter-products-by-brand")
+public class AdminFilterProductsByBrandServlet extends HttpServlet {
 
-    private final String FIND_PRODUCT_BY_ID_PATH = "admin-find-product-by-id.ftlh";
+    private final String FILTER_PRODUCT_BY_BRAND_PATH = "admin-filter-products-by-brand.ftlh";
 
-    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(com.infoshare.fourfan.servlet.AdminFilterProductsByBrandServlet.class.getName());
 
     @Inject
     private ProductService productService;
 
-    @Inject
-    private AdminService adminService;
-
-    @Inject
-    private TemplateProvider templateProvider;
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        String idParam = req.getParameter("id");
+        String brandParam = req.getParameter("brand");
         PrintWriter writer = resp.getWriter();
 
-        if (idParam == null || idParam.isEmpty()) {
+        Template template = templateProvider.getTemplate(getServletContext(), FILTER_PRODUCT_BY_BRAND_PATH);
+        Map<String, Object> dataModel = new HashMap<>();
+
+        if (brandParam != null || brandParam.isBlank()) {
+            Integer brandInt = Integer.parseInt(brandParam);
+            List<Product> products = productService.filterProductsByBrand(brandInt);
+            dataModel.put("products", products);
+        } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
-        }
-
-        Template template = templateProvider.getTemplate(getServletContext(), FIND_PRODUCT_BY_ID_PATH);
-
-        Map<String, Object> dataModel = new HashMap<>();
-        if (product != null) {
-            dataModel.put("product", product);
-        } else {
-            dataModel.put("errorMessage", "Product has not been found.");
         }
 
         try {
@@ -58,5 +50,6 @@ public class AdminFindProductByIdServlet extends HttpServlet {
         } catch (TemplateException e) {
             logger.severe(e.getMessage());
         }
+
     }
 }

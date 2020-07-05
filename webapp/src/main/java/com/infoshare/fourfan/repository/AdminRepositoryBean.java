@@ -21,10 +21,10 @@ public class AdminRepositoryBean implements AdminRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public ProductList showAllProducts() throws IOException {
-        return new OptionsFromProductJsonFile().readProductsJsonFile();
-    }
+//    @Override
+//    public ProductList showAllProducts() throws IOException {
+//        return new OptionsFromProductJsonFile().readProductsJsonFile();
+//    }
 
     @Override
     public void saveNewProduct(Product product) throws IOException {

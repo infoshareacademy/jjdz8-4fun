@@ -1,7 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -14,21 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-find-product-by-id")
-public class AdminFindProductByIdServlet extends HttpServlet {
+@WebServlet("/admin-filter-products-by-category")
+public class AdminFilterProductsByCategory extends HttpServlet {
 
-    private final String FIND_PRODUCT_BY_ID_PATH = "admin-find-product-by-id.ftlh";
-
-    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminFilterProductsByCategory.class.getName());
 
     @Inject
     private ProductService productService;
-
-    @Inject
-    private AdminService adminService;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -36,21 +33,22 @@ public class AdminFindProductByIdServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        String idParam = req.getParameter("id");
+        String catParam = req.getParameter("category");
         PrintWriter writer = resp.getWriter();
 
-        if (idParam == null || idParam.isEmpty()) {
+        Template template = templateProvider.getTemplate(getServletContext(), "admin-filter-products-by-category.ftlh");
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
+        dataModel.put("veggies", ProductCategory.WARZYWA.ordinal());
+        dataModel.put("fruits", ProductCategory.OWOCE.ordinal());
+
+        if (catParam != null && (!catParam.equals("Wybierz")) || catParam.isBlank()) {
+            Integer categoryInt = Integer.parseInt(catParam);
+            List<Product> products = productService.filterByCategory(categoryInt);
+            dataModel.put("products", products);
+        } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
-        }
-
-        Template template = templateProvider.getTemplate(getServletContext(), FIND_PRODUCT_BY_ID_PATH);
-
-        Map<String, Object> dataModel = new HashMap<>();
-        if (product != null) {
-            dataModel.put("product", product);
-        } else {
-            dataModel.put("errorMessage", "Product has not been found.");
         }
 
         try {

@@ -1,0 +1,40 @@
+version: "3.7"
+services:
+  app:
+    container_name: "shopping_list_webapp"
+    image: "shopping-list-image"
+    build: .
+    environment:
+      - WILDFLY_USER=admin
+      - WILDFLY_PASS=adminPassword
+      - DB_NAME=shoppingList
+      - DB_USER=mysql
+      - DB_PASS=mysql
+      - DB_URI=db:3308
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+  db:
+    container_name: "shoppingListDb"
+    image: "mysql:latest"
+    environment:
+      - MYSQL_DATABASE=shoppingList
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=password
+#    volumes:
+#    - ./workdir/db/init/:/docker-entrypoint-initdb.d/
+#    - ./workdir/db/data/:/var/lib/mysql/
+    ports:
+    - "3308:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+networks:
+  default:
+    driver: bridge
+
+
+

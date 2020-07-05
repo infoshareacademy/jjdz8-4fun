@@ -13,7 +13,7 @@
     <data-source>
         <name>java:ds/companyDS</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://0.0.0.0:3308/shoppingList?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
+        <url>jdbc:mysql://localhost:3308/shoppingList?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
         <user>mysql</user>
         <password>mysql</password>
     </data-source>

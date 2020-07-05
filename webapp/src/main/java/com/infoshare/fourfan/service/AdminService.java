@@ -24,6 +24,10 @@ public class AdminService {
         return adminRepository.findProductById(id).orElse(null);
     }
 
+    public Product findProductByName(String name) throws IOException {
+        return adminRepository.findProductById(id).orElse(null);
+    }
+
     public void editProduct(Integer id, Product newProduct) throws IOException {
         adminRepository.editProduct(id, newProduct);
     }

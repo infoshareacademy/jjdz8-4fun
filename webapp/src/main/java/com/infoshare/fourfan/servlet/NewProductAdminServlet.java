@@ -61,7 +61,8 @@ public class NewProductAdminServlet extends HttpServlet {
         Integer id = 0;
         Product product = new Product(id,name,brand,price,calories,shop,category);
 
-        adminService.saveNewProduct(product);
+//        adminService.saveNewProduct(product);
+        adminService.saveNewProductDB(product);
 
         resp.sendRedirect("/confirmNewProduct");
     }

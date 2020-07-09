@@ -39,7 +39,7 @@ public class ProductListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-//        dataModel.put("products", productService.findAllJson());
+//      dataModel.put("products", productService.findAllJson());
         dataModel.put("products", productServiceDb.getProducts());
 
         try {

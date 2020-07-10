@@ -61,15 +61,15 @@ public class UserRepositoryBean implements UserRepository {
         return false;
     }
 
-//    public static boolean containsUser(User user) {
-//        List<User> repository = getUsersRepository();
-//        for (User userFromList : repository) {
-//            if (userFromList.getEmail() == user.getEmail()) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public static boolean containsUser(User user) {
+        List<User> repository = getUsersRepository();
+        for (User userFromList : repository) {
+            if (userFromList.getEmail() == user.getEmail()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 }

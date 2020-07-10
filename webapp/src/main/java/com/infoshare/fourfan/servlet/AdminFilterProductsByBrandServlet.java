@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -27,6 +28,9 @@ public class AdminFilterProductsByBrandServlet extends HttpServlet {
     @Inject
     private ProductService productService;
 
+    @Inject
+    private TemplateProvider templateProvider;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -38,7 +42,7 @@ public class AdminFilterProductsByBrandServlet extends HttpServlet {
 
         if (brandParam != null || brandParam.isBlank()) {
             Integer brandInt = Integer.parseInt(brandParam);
-            List<Product> products = productService.filterProductsByBrand(brandInt);
+            List<Product> products = productService.filterProductsByBrand(String.valueOf(brandInt));
             dataModel.put("products", products);
         } else {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);

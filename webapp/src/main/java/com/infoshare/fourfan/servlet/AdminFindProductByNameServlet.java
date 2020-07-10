@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 @WebServlet("/admin-find-product-by-name")
 public class AdminFindProductByNameServlet extends HttpServlet {
 
+    private final String FIND_PRODUCT_BY_NAME_PATH = "admin-find-product-by-name.ftlh";
+
     @Inject
     private ProductService productService;
 
@@ -42,7 +44,7 @@ public class AdminFindProductByNameServlet extends HttpServlet {
         Product product = productService.findProductByName(nameParam);
         PrintWriter printWriter = resp.getWriter();
 
-        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), FIND_PRODUCT_BY_NAME_PATH);
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null && product != null){
             dataModel.put("product", product);
@@ -50,6 +52,7 @@ public class AdminFindProductByNameServlet extends HttpServlet {
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         }
+
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

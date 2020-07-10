@@ -1,5 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
@@ -39,6 +40,8 @@ public class AdminFindProductByIdServlet extends HttpServlet {
         String idParam = req.getParameter("id");
         PrintWriter writer = resp.getWriter();
 
+        Product product = adminService.findProductById(Integer.valueOf(idParam));
+
         if (idParam == null || idParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
@@ -48,7 +51,7 @@ public class AdminFindProductByIdServlet extends HttpServlet {
 
         Map<String, Object> dataModel = new HashMap<>();
         if (product != null) {
-            dataModel.put("product", product);
+            dataModel.put("product", adminService.findProductById(Integer.valueOf(idParam)));
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         }

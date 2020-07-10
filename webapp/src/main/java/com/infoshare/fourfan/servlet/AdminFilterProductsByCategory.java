@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 @WebServlet("/admin-filter-products-by-category")
 public class AdminFilterProductsByCategory extends HttpServlet {
 
+    private final String FILTER_PRODUCTS_BY_CATEGORY_PATH = "admin-filter-products-by-category.ftlh";
+
     private static final Logger logger = Logger.getLogger(AdminFilterProductsByCategory.class.getName());
 
     @Inject
@@ -36,7 +38,7 @@ public class AdminFilterProductsByCategory extends HttpServlet {
         String catParam = req.getParameter("category");
         PrintWriter writer = resp.getWriter();
 
-        Template template = templateProvider.getTemplate(getServletContext(), "admin-filter-products-by-category.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), FILTER_PRODUCTS_BY_CATEGORY_PATH);
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
         dataModel.put("veggies", ProductCategory.WARZYWA.ordinal());

@@ -16,7 +16,10 @@
                         <li><a href="/about">Usługi</a></li>
                         <li class="drop-down"><a href="">Wyszukaj wszystkie produkty</a>
                             <ul>
+                                <li><a href="/admin-find-product-by-id">administrator - Po numerze ID produktu</a> </li>
+                                <li><a href="/admin-find-product-by-name">Po nazwie produktu</a> </li>
                                 <li><a href="/filterUserProductsByCategory">Po kategorii</a> </li>
+                                <li><a href="/admin-filter-products-by-brand">Po marce produktu</a> </li>
                                 <li><a href="/filterUserProductsByCalories">Po kaloryce</a> </li>
                                 <li><a href="/filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
                             </ul>

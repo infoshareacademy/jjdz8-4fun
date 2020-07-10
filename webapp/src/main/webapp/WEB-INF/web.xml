@@ -11,7 +11,7 @@
 <!--  </servlet-mapping>-->
 
     <data-source>
-        <name>java:ds/companyDS</name>
+        <name>java:ds/shoppingListDS</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
         <url>jdbc:mysql://localhost:3308/shoppingList?useLegacyDatetimeCode=false&amp;serverTimezone=Europe/Warsaw</url>
         <user>mysql</user>

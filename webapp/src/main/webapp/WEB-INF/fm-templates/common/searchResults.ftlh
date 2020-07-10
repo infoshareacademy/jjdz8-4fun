@@ -5,7 +5,7 @@
             <#list products as product>
                 <li>
                     <p> Nazwa: ${product.getName()} </p>
-                    <p> Brand: ${product.getBrand()} </p>
+                    <p> Marka: ${product.getBrand()} </p>
                     <p> Cena: ${product.getPrice()} gr </p>
                     <p> Kaloryczność: ${product.getCalories()} kcal/100g </p>
                     <p> Sklep: ${product.getShop()}</p>

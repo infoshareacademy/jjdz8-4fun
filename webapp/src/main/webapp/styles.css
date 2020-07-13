@@ -20,6 +20,10 @@ input[type="range"] {
     width:800px;
 }
 
+.tdGreen {
+    background-color: #009961;
+}
+
 .buttonStyle {
     border: none;
     padding: 8px 8px 8px 8px;

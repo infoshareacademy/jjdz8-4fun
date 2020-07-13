@@ -3,7 +3,6 @@
     <div class="container" style="height: 40px">
         <h1 class="display-3" style="font-size: 40px">Shopping list - wyszukaj po cenie</h1>
     </div>
-    </br>
     <main role="main">
         <div class="container">
             <div class="row">
@@ -23,29 +22,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row scrollList">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Firma</th>
+                    <th scope="col">Cena</th>
+                    <th scope="col">Kalorie</th>
+                    <th scope="col">Sklep</th>
+                    <th scope="col">Kategoria</th>
+                </tr>
+                </thead>
+                <tbody>
                 <#if productsMap??>
                     <ul>
                         <p>Wynik wyszukiwania:</p>
                         <#list productsMap as shop, products>
-                            <li><strong> Produkty sklepu ${shop} </strong>:
+                            <td colspan="6" class="tdGreen"><strong> Produkty sklepu ${shop} </strong>:
                                 <ol>
                                     <#list products as product>
-                                        <li>
-                                            <p> Nazwa: ${product.getName()} </p>
-                                            <p> Brand: ${product.getBrand()} </p>
-                                            <p> Cena: ${product.getPrice()} gr </p>
-                                            <p> Kaloryczność: ${product.getCalories()} kcal/100g </p>
-                                            <p> Sklep: ${product.getShop()}</p>
-                                            <p> Kategoria: ${product.getProductCategory()}</p>
-                                        </li>
+                                        <tr>
+                                            <td> ${product.getName()} </td>
+                                            <td> ${product.getBrand()} </td>
+                                            <td> ${product.getPrice()} gr</td>
+                                            <td> ${product.getCalories()} kcal/100g</td>
+                                            <td> ${product.getShop()}</td>
+                                            <td> ${product.getProductCategory()}</td>
+                                        </tr>
                                     </#list>
                                 </ol>
-                            </li>
+                            </td>
                         </#list>
                     </ul>
                 </#if>
-            </div>
+                </tbody>
+            </table>
         </div>
     </main>
 </header>

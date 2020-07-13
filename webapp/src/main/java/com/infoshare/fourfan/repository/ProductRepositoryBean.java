@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Comparator.comparing;
+
 @Stateless
 public class ProductRepositoryBean implements ProductRepository {
 
@@ -48,6 +50,7 @@ public class ProductRepositoryBean implements ProductRepository {
     public List<Product> filterByCategory(Integer category) {
         return findAllJson().stream()
                 .filter(n -> n.getProductCategory().ordinal() == category)
+                .sorted(Comparator.comparing(Product::getName))
                 .collect(Collectors.toList());
     }
 
@@ -55,6 +58,7 @@ public class ProductRepositoryBean implements ProductRepository {
     public List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax) {
         return findAllJson().stream()
                 .filter(cal -> cal.getCalories() <= caloriesMax && cal.getCalories() >= caloriesMin)
+                .sorted(Comparator.comparing(Product::getCalories))
                 .collect(Collectors.toList());
     }
 
@@ -62,7 +66,7 @@ public class ProductRepositoryBean implements ProductRepository {
     public Map<Shop, List<Product>> filterByPriceAndGroupByShop(Integer priceMin, Integer priceMax) {
         return findAllJson().stream()
                 .filter(n -> n.getPrice() <= priceMax && n.getPrice() >= priceMin)
-                .sorted(Comparator.comparing(Product::getPrice))
+                .sorted(comparing(Product::getPrice))
                 .collect(Collectors.groupingBy(Product::getShop));
     }
 }

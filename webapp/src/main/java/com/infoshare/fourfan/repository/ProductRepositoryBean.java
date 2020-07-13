@@ -55,7 +55,7 @@ public class ProductRepositoryBean implements ProductRepository {
     }
 
     @Override
-    public List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax) {
+    public List<Product> filterByCalories(Integer caloriesMin, Long caloriesMax) {
         return findAllJson().stream()
                 .filter(cal -> cal.getCalories() <= caloriesMax && cal.getCalories() >= caloriesMin)
                 .sorted(Comparator.comparing(Product::getCalories))

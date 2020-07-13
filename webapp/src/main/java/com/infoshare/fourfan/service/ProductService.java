@@ -55,7 +55,7 @@ public class ProductService {
         return productRepository.filterByCategory(category);
     }
 
-    public List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax){
+    public List<Product> filterByCalories(Integer caloriesMin, Long caloriesMax){
         return productRepository.filterByCalories(caloriesMin, caloriesMax);
     }
 

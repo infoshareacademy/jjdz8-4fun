@@ -21,8 +21,8 @@
                                 <li><a href="/filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
                             </ul>
                         </li>
-                        <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="#pricing">Cennik</a></li>
+<#--                        <li><a href="#portfolio">Portfolio</a></li>-->
+<#--                        <li><a href="#pricing">Cennik</a></li>-->
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
                                 <li><a href="/productList">Lista produktów</a></li>
@@ -44,8 +44,8 @@
                     </ul>
                 </nav><!-- .nav-menu -->
                 <div class="aWrap">
-                    <a href="#about" class="get-started-btn scrollto">Zaloguj</a>
-                    <a href="#about" class="get-started-btn scrollto">Zarejestruj</a>
+                    <a href="#about" class="get-started-btn scrollto" style="float: left; display: inline-block; margin-left: 40px">Zaloguj</a>
+                    <a href="#about" class="get-started-btn scrollto" style="float: revert; display: block; margin-left: 145px">Zarejestruj</a>
                 </div>
             </div>
         </div>

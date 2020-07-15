@@ -24,6 +24,10 @@ input[type="range"] {
     background-color: #009961;
 }
 
+.emptyResults {
+    color: red;
+}
+
 .buttonStyle {
     border: none;
     padding: 8px 8px 8px 8px;

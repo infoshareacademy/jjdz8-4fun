@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class FilterProductsForUserByCalories extends HttpServlet {
 
     public enum CaloriesRangeEnum {
-        PRZEDZIAL_0_150,
-        PRZEDZIAL_151_300,
-        PRZEDZIAL_OD_301;
+        RANGE_0_150,
+        RANGE_151_300,
+        RANGE_FROM_301;
     }
         @Inject
         private ProductService productService;
@@ -42,9 +42,9 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
             Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
             Map<String, Object> dataModel = new HashMap<>();
-            dataModel.put("firstRange", CaloriesRangeEnum.PRZEDZIAL_0_150);
-            dataModel.put("secondRange", CaloriesRangeEnum.PRZEDZIAL_151_300);
-            dataModel.put("thirdRange", CaloriesRangeEnum.PRZEDZIAL_OD_301);
+            dataModel.put("firstRange", CaloriesRangeEnum.RANGE_0_150);
+            dataModel.put("secondRange", CaloriesRangeEnum.RANGE_151_300);
+            dataModel.put("thirdRange", CaloriesRangeEnum.RANGE_FROM_301);
 
             if(calories != null && !calories.equals("Przedzial") ) {
                 CaloriesRangeEnum caloriesRangeEnum = CaloriesRangeEnum.valueOf(calories);
@@ -53,15 +53,15 @@ public class FilterProductsForUserByCalories extends HttpServlet {
                 long productMax = caloriesRange.getProductMax();
                 dataModel.put("products", productService.filterByCalories(productMin, productMax));
                 switch (caloriesRangeEnum) {
-                    case PRZEDZIAL_0_150:
+                    case RANGE_0_150:
                         dataModel.put("firstChoiceSelected", "checked");
                         break;
 
-                    case PRZEDZIAL_151_300:
+                    case RANGE_151_300:
                         dataModel.put("secondChoiceSelected", "checked");
                         break;
 
-                    case PRZEDZIAL_OD_301:
+                    case RANGE_FROM_301:
                         dataModel.put("thirdChoiceSelected", "checked");
                         break;
                 }
@@ -96,15 +96,15 @@ public class FilterProductsForUserByCalories extends HttpServlet {
             productMax = 1000000000;
 
             switch (caloriesRange) {
-                case PRZEDZIAL_0_150:
+                case RANGE_0_150:
                     productMin = 0;
                     productMax = 150;
                     break;
-                case PRZEDZIAL_151_300:
+                case RANGE_151_300:
                     productMin = 151;
                     productMax = 300;
                     break;
-                case PRZEDZIAL_OD_301:
+                case RANGE_FROM_301:
                     productMin = 301;
                     productMax = 100000000;
                     break;

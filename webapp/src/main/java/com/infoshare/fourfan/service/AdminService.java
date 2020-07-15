@@ -1,5 +1,6 @@
 package com.infoshare.fourfan.service;
 
+import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.repository.AdminRepository;
@@ -15,6 +16,7 @@ public class AdminService {
     private AdminRepository adminRepository;
 
     public void saveNewProduct(Product product) throws IOException { adminRepository.saveNewProduct(product);}
+
 
     public ProductList showAllProducts() throws IOException {
         return adminRepository.showAllProducts();

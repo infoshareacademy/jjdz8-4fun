@@ -5,9 +5,21 @@ import com.infoshare.fourfan.dto.ProductDto;
 
 import javax.ejb.Local;
 import java.util.List;
+import java.util.Optional;
 
 @Local
 public interface ProductDao extends Dao<Product> {
+
+
+    void save(Product product);
+
+    void update(Product product);
+
+    void delete(Product product);
+
+    Optional<Product> findById(Integer id);
+
+    List<Product> findAll();
 
     List<ProductDto> findAllDto();
 

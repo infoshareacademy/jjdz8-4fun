@@ -1,8 +1,6 @@
 package com.infoshare.fourfan.dao;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.dto.ProductDto;
 
 import javax.ejb.Stateless;

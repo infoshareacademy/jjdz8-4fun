@@ -4,7 +4,6 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -30,7 +29,7 @@ public class NewProductAdminServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private AdminService adminService;
+    private ProductServiceDb productServiceDb;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -61,7 +60,7 @@ public class NewProductAdminServlet extends HttpServlet {
         Integer id = 0;
         Product product = new Product(id,name,brand,price,calories,shop,category);
 
-        adminService.saveNewProduct(product);
+        productServiceDb.saveProduct(product);
 
         resp.sendRedirect("/confirmNewProduct");
     }

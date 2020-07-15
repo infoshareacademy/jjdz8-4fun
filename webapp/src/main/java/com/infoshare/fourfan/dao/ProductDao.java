@@ -15,9 +15,13 @@ public interface ProductDao extends Dao<Product> {
 
     void update(Product product);
 
+    void updateDb(Integer productId, Product product);
+
     void delete(Product product);
 
     Optional<Product> findById(Integer id);
+
+    Product findByName(String name);
 
     List<Product> findAll();
 

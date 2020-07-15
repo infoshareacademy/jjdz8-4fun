@@ -21,9 +21,6 @@ import java.util.logging.Logger;
 public class ProductListServlet extends HttpServlet {
 
     @Inject
-    private ProductService productService;
-
-    @Inject
     private TemplateProvider templateProvider;
 
     @Inject
@@ -39,8 +36,7 @@ public class ProductListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-//      dataModel.put("products", productService.findAllJson());
-        dataModel.put("products", productServiceDb.getProducts());
+        dataModel.put("products", productServiceDb.findAll());
 
         try {
             template.process(dataModel, printWriter);

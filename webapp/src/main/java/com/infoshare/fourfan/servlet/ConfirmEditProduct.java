@@ -4,6 +4,7 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -28,7 +29,8 @@ public class ConfirmEditProduct extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private AdminService adminService;
+    private ProductServiceDb productServiceDb;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -36,7 +38,7 @@ public class ConfirmEditProduct extends HttpServlet {
 
         Long idParam = Long.parseLong(req.getParameter("id"));
 
-        Product product = adminService.findProductById(Math.toIntExact(idParam));
+        Product product = productServiceDb.findById(Math.toIntExact(idParam));
 
         Template template = templateProvider.getTemplate(getServletContext(), "confirmEditProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();

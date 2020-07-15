@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -24,6 +25,9 @@ public class AdminFindProductByIdServlet extends HttpServlet {
     private ProductService productService;
 
     @Inject
+    private ProductServiceDb productServiceDb;
+
+    @Inject
     private TemplateProvider templateProvider;
 
     private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
@@ -39,7 +43,8 @@ public class AdminFindProductByIdServlet extends HttpServlet {
             return;
         }
 
-        Product product = productService.findProductById(Integer.valueOf(idParam));
+//      Product product = productService.findProductById(Integer.valueOf(idParam));
+        Product product = productServiceDb.findById(Integer.valueOf(idParam));
         PrintWriter printWriter = resp.getWriter();
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");

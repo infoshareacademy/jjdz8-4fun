@@ -6,6 +6,7 @@ import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -30,10 +31,7 @@ public class EditProductServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private AdminService adminService;
-
-    @Inject
-    private ProductService productService;
+    private ProductServiceDb productServiceDb;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -44,7 +42,7 @@ public class EditProductServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", productService.findAllJson());
+        dataModel.put("products", productServiceDb.getProducts());
 
         try {
             template.process(dataModel, printWriter);
@@ -59,7 +57,8 @@ public class EditProductServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         Integer productId = Integer.valueOf(req.getParameter("id"));
-        Product oldProduct = productService.findProductById(productId);
+
+        Product oldProduct = productServiceDb.findById(productId);
 
         oldProduct.setName(req.getParameter("name"));
         oldProduct.setBrand(req.getParameter("brand"));
@@ -68,8 +67,7 @@ public class EditProductServlet extends HttpServlet {
         oldProduct.setShop(Shop.valueOf(req.getParameter("shop")));
         oldProduct.setProductCategory(ProductCategory.valueOf(req.getParameter("category")));
 
-        adminService.editProduct(productId, oldProduct);
-
+        productServiceDb.updateDb(productId, oldProduct);
 
         resp.sendRedirect("/confirmEditProduct?id=" + oldProduct.getId());
     }

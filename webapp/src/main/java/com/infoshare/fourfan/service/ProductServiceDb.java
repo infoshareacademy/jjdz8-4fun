@@ -15,9 +15,7 @@ public class ProductServiceDb {
     @EJB
     private ProductDao productDao;
 
-
     public void saveProduct(Product product) {
-
 
         Product newProduct = new Product();
         newProduct.setName(product.getName());
@@ -27,7 +25,6 @@ public class ProductServiceDb {
         newProduct.setShop(product.getShop());
         newProduct.setProductCategory(product.getProductCategory());
 
-
         productDao.save(newProduct);
     }
 
@@ -35,13 +32,19 @@ public class ProductServiceDb {
         productDao.update(product);
     }
 
+    public void updateDb(Integer productId, Product product) {
+        productDao.update(product);
+    }
+
     public void delete(Product product) {
         productDao.delete(product);
     }
 
-    public Optional<Product> findById(Integer id) {
-        return productDao.findById(id);
+    public Product findById(Integer id) {
+        return productDao.findById(id).orElseThrow();
     }
+
+    public Product findByName(String name) { return productDao.findByName(name); }
 
     public List<Product> findAll() {
         return productDao.findAll();

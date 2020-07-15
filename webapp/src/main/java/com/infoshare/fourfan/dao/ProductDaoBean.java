@@ -26,6 +26,11 @@ public class ProductDaoBean implements ProductDao {
     }
 
     @Override
+    public void updateDb(Integer productId, Product product) {
+        entityManager.merge(product);
+    }
+
+    @Override
     public void delete(Product product) {
         entityManager.remove(product);
     }
@@ -33,6 +38,11 @@ public class ProductDaoBean implements ProductDao {
     @Override
     public Optional<Product> findById(Integer id) {
         return Optional.of(entityManager.find(Product.class, id));
+    }
+
+    @Override
+    public Product findByName(String name) {
+        return (Product) entityManager.createQuery("SELECT new com.infoshare.fourfan.domain.datatypes.Product(p.id, p.name, p.brand, p.price, p.calories, p.shop, p.productCategory) FROM Product p WHERE p.name LIKE :custName").setParameter("custName", name).getSingleResult();
     }
 
     @Override

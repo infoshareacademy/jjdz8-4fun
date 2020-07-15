@@ -76,7 +76,7 @@
             </table>
             <#if productsMap??>
             <#else>
-                <p class="emptyResults">Brak produktów</p>
+                <p class="emptyResults"> Brak produktów </p>
             </#if>
         </div>
     </main>

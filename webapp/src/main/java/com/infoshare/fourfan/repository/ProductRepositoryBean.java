@@ -3,11 +3,9 @@ package com.infoshare.fourfan.repository;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductList;
 import com.infoshare.fourfan.domain.datatypes.Shop;
-import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.JsonService;
 
 import javax.ejb.Stateless;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,7 +48,7 @@ public class ProductRepositoryBean implements ProductRepository {
     public List<Product> filterByCategory(Integer category) {
         return findAllJson().stream()
                 .filter(n -> n.getProductCategory().ordinal() == category)
-                .sorted(Comparator.comparing(Product::getName))
+                .sorted((s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()))
                 .collect(Collectors.toList());
     }
 

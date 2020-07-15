@@ -41,7 +41,7 @@ public class FilterProductsForUserByCategory extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "filterByCategory.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
-        dataModel.put("vegies", ProductCategory.WARZYWA.ordinal());
+        dataModel.put("veggies", ProductCategory.WARZYWA.ordinal());
         dataModel.put("fruits", ProductCategory.OWOCE.ordinal());
 
         if(category != null && !category.equals("Wybierz") ){

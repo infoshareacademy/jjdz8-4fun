@@ -14,7 +14,7 @@
                                     <option selected value="Wybierz">WYBIERZ KATEGORIĘ</option>
                                     <option value="${dairy}">NABIAŁ</option>
                                     <option value="${fruits}">OWOCE</option>
-                                    <option value="${vegies}">WARZYWA</option>
+                                    <option value="${veggies}">WARZYWA</option>
                                 </select></label>
                             <input type="submit" style="background: #009961" value="Szukaj">
                         </form>

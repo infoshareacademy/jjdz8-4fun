@@ -1,11 +1,12 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.domain.datatypes.db_Product;
+import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
+import com.infoshare.fourfan.domain.datatypes.db_Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.AdminService;
-import com.infoshare.fourfan.service.ProductServiceDb;
+import com.infoshare.fourfan.service.db_AdminService;
+import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @WebServlet("/addProduct")
@@ -30,7 +32,13 @@ public class NewProductAdminServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private AdminService adminService;
+    private db_AdminService db_adminService;
+
+    @Inject
+    private db_ShopServiceRobocze db_shopServiceRobocze;
+
+    @Inject
+    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -39,7 +47,11 @@ public class NewProductAdminServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
+        dataModel.put("shops", db_shopServiceRobocze.getShops());
+        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+
         PrintWriter printWriter = resp.getWriter();
+
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
@@ -56,13 +68,10 @@ public class NewProductAdminServlet extends HttpServlet {
         String brand = req.getParameter("brand");
         Integer price = Integer.parseInt(req.getParameter("price"));
         Integer calories = Integer.parseInt(req.getParameter("calories"));
-        Shop shop = Shop.valueOf(req.getParameter("shop"));
-        ProductCategory category = ProductCategory.valueOf(req.getParameter("category"));
-        Integer id = 0;
-        Product product = new Product(id,name,brand,price,calories,shop,category);
+        Integer shop = Integer.parseInt(req.getParameter("shop"));
+        Integer productCategory = Integer.parseInt(req.getParameter("category"));
 
-//        adminService.saveNewProduct(product);
-        adminService.saveNewProductDB(product);
+        db_adminService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
 
         resp.sendRedirect("/confirmNewProduct");
     }

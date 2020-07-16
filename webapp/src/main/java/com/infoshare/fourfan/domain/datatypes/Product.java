@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "products")
+@Table(name = "productsOLD")
 public class Product {
     private static Integer nextid = new ProductList().size();
 

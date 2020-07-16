@@ -1,17 +1,29 @@
-<div class="row scrollList">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">Nazwa</th>
+        <th scope="col">Firma</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Kalorie</th>
+        <th scope="col">Sklep</th>
+        <th scope="col">Kategoria</th>
+    </tr>
+    </thead>
+    <tbody>
     <#if products??>
         <ol>
             <p>Wynik wyszukiwania:</p>
             <#list products as product>
-                <li>
-                    <p> Nazwa: ${product.getName()} </p>
-                    <p> Brand: ${product.getBrand()} </p>
-                    <p> Cena: ${product.getPrice()} gr </p>
-                    <p> Kaloryczność: ${product.getCalories()} kcal/100g </p>
-                    <p> Sklep: ${product.getShop()}</p>
-                    <p> Kategoria: ${product.getProductCategory()}</p>
-                </li>
+                <tr>
+                    <td> ${product.getName()} </td>
+                    <td> ${product.getBrand()} </td>
+                    <td> ${product.getPrice()} gr</td>
+                    <td> ${product.getCalories()} kcal/100g</td>
+                    <td> ${product.getShop()}</td>
+                    <td> ${product.getProductCategory()}</td>
+                </tr>
             </#list>
         </ol>
     </#if>
-</div>
+    </tbody>
+</table>

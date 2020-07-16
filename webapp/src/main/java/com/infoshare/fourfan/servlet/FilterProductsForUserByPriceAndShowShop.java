@@ -40,12 +40,17 @@ public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "filterByPriceAndShop.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        String priceAndShop = req.getParameter("price");
+        String priceMinAndShop = req.getParameter("priceMin");
+        String priceMaxAndShop = req.getParameter("priceMax");
 
-        if(priceAndShop != null && !priceAndShop.isEmpty()) {
-            Integer priceInt = Integer.parseInt(priceAndShop);
-            Map<Shop, List<Product>> productMap = productService.filterByPriceAndGroupByShop(0, priceInt);
+        if(priceMinAndShop != null && !priceMinAndShop.isEmpty() && priceMaxAndShop != null && !priceMaxAndShop.isEmpty()) {
+            Integer priceMinInt = Integer.parseInt(priceMinAndShop);
+            Integer priceMaxInt = Integer.parseInt(priceMaxAndShop);
+            Map<Shop, List<Product>> productMap = productService.filterByPriceAndGroupByShop(priceMinInt, priceMaxInt);
             dataModel.put("productsMap", productMap);
+            dataModel.put("priceMin", priceMinAndShop);
+            dataModel.put("priceMax", priceMaxAndShop);
+
         }
 
         try {

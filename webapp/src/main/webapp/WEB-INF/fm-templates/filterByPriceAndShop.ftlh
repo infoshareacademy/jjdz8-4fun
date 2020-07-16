@@ -1,11 +1,5 @@
 <#include "common/headerShort.ftlh">
 <header class="jumbotron">
-    <style>
-        table tbody {
-            height: 300px;
-            overflow-y: scroll;
-        }
-    </style>
     <div class="container" style="height: 40px">
         <h1 class="display-3" style="font-size: 40px">Shopping list - wyszukaj po cenie</h1>
     </div>
@@ -48,7 +42,6 @@
                     <th scope="col">Kategoria</th>
                 </tr>
                 </thead>
-                <div style="height:100px;overflow-y:auto;">
                     <#if productsMap??>
                         <tbody>
                         <ul>
@@ -72,7 +65,6 @@
                         </ul>
                         </tbody>
                     </#if>
-                </div>
             </table>
             <#if productsMap??>
             <#else>

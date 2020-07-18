@@ -44,8 +44,8 @@
                     </ul>
                 </nav><!-- .nav-menu -->
                 <div class="aWrap">
-                    <a href="#about" class="get-started-btn scrollto">Zaloguj</a>
-                    <a href="#about" class="get-started-btn scrollto">Zarejestruj</a>
+                    <a href="/loginUser" class="get-started-btn scrollto">Zaloguj</a>
+                    <a href="/createUser" class="get-started-btn scrollto">Zarejestruj</a>
                 </div>
             </div>
         </div>

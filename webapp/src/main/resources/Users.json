@@ -1,0 +1,52 @@
+{
+  "users": [
+    {
+      "name": "Krzysztof",
+      "surName": "Kampa",
+      "phoneNumber": "topSecret",
+      "email": "krzysztofkampa7@gmail.com",
+      "password": "666",
+      "isAdmin": false
+    },
+    {
+      "name": "Developer",
+      "surName": "Architect",
+      "phoneNumber": "555777777",
+      "email": "testmail@gmail.com",
+      "password": "password",
+      "isAdmin": false
+    },
+    {
+      "name": "TestUser",
+      "surName": "Testowski",
+      "phoneNumber": "230972972",
+      "email": "mail@gmail.com",
+      "password": "111",
+      "isAdmin": false
+    },
+    {
+      "name": "U",
+      "surName": "U",
+      "phoneNumber": "230972972",
+      "email": "u@gmail.com",
+      "password": "u",
+      "isAdmin": false
+    },
+    {
+      "name": "A",
+      "surName": "A",
+      "phoneNumber": "111",
+      "email": "a@gmail.com",
+      "password": "a",
+      "isAdmin": true
+    },
+    {
+      "name": "B",
+      "surName": "B",
+      "phoneNumber": "111",
+      "email": "b@gmail.com",
+      "password": "b",
+      "isAdmin": true
+    }
+  ]
+}

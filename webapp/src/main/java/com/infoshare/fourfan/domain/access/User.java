@@ -15,7 +15,6 @@ public class User {
     private boolean isAdmin;
 
     public User() {
-        throw new IllegalArgumentException("All fields are mandatory to be given for user to be created");
     }
 
     public User(String email, String password, String name, String surName, String phoneNumber) {

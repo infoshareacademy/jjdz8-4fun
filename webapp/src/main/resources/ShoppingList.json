@@ -1,14 +1,15 @@
 {
-  "productList": [
+  "shoppingList": [
     {
       "id": 1 ,
-      "name": "Serek z cebulką ",
+      "name": "dupa ",
       "brand": "Almette",
       "price": 250,
       "calories": 200,
       "shop": "AUCHAN",
       "productCategory": "NABIAŁ",
       "amount": 1
+
     },
     {
       "id": 2 ,

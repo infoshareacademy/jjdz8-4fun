@@ -8,29 +8,32 @@ import java.util.Objects;
 public class Product {
     private static Integer nextid = new ProductList().size();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    @Basic
+//    @Basic
     private String name;
 
-    @Basic
+  //  @Basic
     private String brand;
 
-    @Basic
+    //@Basic
     private Integer price;      //Cena reprezentowana w groszach
 
-    @Basic
+    //@Basic
     private Integer calories;
 
-    @Basic
+    //@Basic
     private Shop shop;
 
-    @Column(name = "product_category")
+    //@Column(name = "product_category")
     private ProductCategory productCategory;
 
-    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    //@Basic
+    private Integer amount;
+
+    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory, Integer amount) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -38,6 +41,7 @@ public class Product {
         this.calories = calories;
         this.shop = shop;
         this.productCategory = productCategory;
+        this.amount = amount;
     }
 
     public Product() {
@@ -105,6 +109,14 @@ public class Product {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public void setNextId() {

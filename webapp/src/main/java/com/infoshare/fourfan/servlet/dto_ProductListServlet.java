@@ -2,7 +2,6 @@ package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -24,10 +23,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @WebServlet("/productList")
-public class ProductListServlet extends HttpServlet {
-
-    @Inject
-    private ProductService productService;
+public class dto_ProductListServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
@@ -44,9 +40,15 @@ public class ProductListServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
         PrintWriter printWriter = resp.getWriter();
 
+        List<ProductDto> productDtos = ClientBuilder
+                .newClient()
+                .target(UriBuilder.fromPath("http://127.0.0.1:8080/shoppingList/resources/products"))
+                .request(MediaType.APPLICATION_JSON)
+                .get()
+                .readEntity(new GenericType<List<ProductDto>>() {});
+
         Map<String, Object> dataModel = new HashMap<>();
-//        dataModel.put("products", productService.findAllJson());
-        dataModel.put("products", productServiceDb.getProducts());
+        dataModel.put("products", productDtos);
 
         try {
             template.process(dataModel, printWriter);

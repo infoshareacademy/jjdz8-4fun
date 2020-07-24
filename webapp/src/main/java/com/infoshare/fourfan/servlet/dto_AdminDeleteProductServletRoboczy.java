@@ -1,5 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
@@ -23,11 +24,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/productList")
-public class ProductListServlet extends HttpServlet {
-
-    @Inject
-    private ProductService productService;
+@WebServlet("/admin-delete-product")
+public class dto_AdminDeleteProductServletRoboczy extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
@@ -35,19 +33,40 @@ public class ProductListServlet extends HttpServlet {
     @Inject
     private ProductServiceDb productServiceDb;
 
-    private static final Logger logger = Logger.getLogger(ProductListServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(dto_AdminDeleteProductServletRoboczy.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
         resp.setContentType("text/html;charset=UTF-8");
 
         Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
         PrintWriter printWriter = resp.getWriter();
+        String nameParam = req.getParameter("name");
+        Integer idParam = Integer.valueOf(req.getParameter("id"));
+
+        if (nameParam == null || nameParam.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        Product product = productServiceDb.findById(idParam);
+        productServiceDb.delete(product);
+
+        printWriter.println("<script>\n" +
+                "        alert(\"" + product.getName() + " został usunięty!\")\n" +
+                "    </script>");
+
+        List<ProductDto> productDtos = ClientBuilder
+                .newClient()
+                .target(UriBuilder.fromPath("http://127.0.0.1:8080/shoppingList/resources/products"))
+                .request(MediaType.APPLICATION_JSON)
+                .delete()
+                .readEntity(new GenericType<List<ProductDto>>() {
+                });
 
         Map<String, Object> dataModel = new HashMap<>();
-//        dataModel.put("products", productService.findAllJson());
-        dataModel.put("products", productServiceDb.getProducts());
-
+        dataModel.put("products", productDtos);
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

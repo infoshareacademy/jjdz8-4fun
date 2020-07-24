@@ -14,14 +14,14 @@
                         <form method="get" action="/filterByPriceAndShop" accept-charset="utf-8">
                             <label>
                                 <span style="width: 800px"> Podaj minimalną cenę po jakiej chcesz filtrować produkty </span>
-                                <input id="priceMin" type="range" name="priceMin" min="0" max="10000" step="50"
-                                       value="${priceMin ! 5000}"/>
+                                <input id="priceMin" type="range" name="priceMin" min="0" max="10000" step="10"
+                                       value="${priceMin ! 0}"/>
                                 <p>Wybrana wartość minimalna:
                                     <span id="priceSpanMin"> </span>
                                 </p>
                                 <span style="width: 800px"> Podaj maksymalną cenę po jakiej chcesz filtrować produkty </span>
                                 <input id="priceMax" type="range" name="priceMax" min="0" max="10000" step="50"
-                                       value="${priceMax ! 5000}"/>
+                                       value="${priceMax ! "10000"}"/>
                                 <p>Wybrana wartość maksymalna:
                                     <span id="priceSpanMax"> </span>
                                 </p>
@@ -42,29 +42,29 @@
                     <th scope="col">Kategoria</th>
                 </tr>
                 </thead>
-                    <#if productsMap??>
-                        <tbody>
-                        <ul>
-                            <p>Wynik wyszukiwania:</p>
-                            <#list productsMap as shop, products>
-                                <td colspan="6" class="tdGreen"><strong> Produkty sklepu ${shop} </strong>:
-                                    <ol>
-                                        <#list products as product>
-                                            <tr>
-                                                <td> ${product.getName()} </td>
-                                                <td> ${product.getBrand()} </td>
-                                                <td> ${product.getPrice()} gr</td>
-                                                <td> ${product.getCalories()} kcal/100g</td>
-                                                <td> ${product.getShop()}</td>
-                                                <td> ${product.getProductCategory()}</td>
-                                            </tr>
-                                        </#list>
-                                    </ol>
-                                </td>
-                            </#list>
-                        </ul>
-                        </tbody>
-                    </#if>
+                <#if productsMap??>
+                    <tbody>
+                    <ul>
+                        <p>Wynik wyszukiwania:</p>
+                        <#list productsMap as shop, products>
+                            <td colspan="6" class="tdGreen"><strong> Produkty sklepu ${shop} </strong>:
+                                <ol>
+                                    <#list products as product>
+                                        <tr>
+                                            <td> ${product.getName()} </td>
+                                            <td> ${product.getBrand()} </td>
+                                            <td> ${product.getPrice()} gr</td>
+                                            <td> ${product.getCalories()} kcal/100g</td>
+                                            <td> ${product.getShop()}</td>
+                                            <td> ${product.getProductCategory()}</td>
+                                        </tr>
+                                    </#list>
+                                </ol>
+                            </td>
+                        </#list>
+                    </ul>
+                    </tbody>
+                </#if>
             </table>
             <#if productsMap??>
             <#else>
@@ -81,10 +81,10 @@
 
         const $valueSpan = $('#priceSpanMin');
         const $value = $('#priceMin');
-        $valueSpan.html($value.val() / 100 + " zł");
+        $valueSpan.html(('' + $value.val() / 100 + " zł").replace('.', ','));
         $value.on('input change', () => {
 
-            $valueSpan.html($value.val() / 100 + " zł");
+            $valueSpan.html(('' + $value.val() / 100 + " zł").replace('.', ','));
         });
     });
 </script>
@@ -94,10 +94,10 @@
 
         const $valueSpan = $('#priceSpanMax');
         const $value = $('#priceMax');
-        $valueSpan.html($value.val() / 100 + " zł");
+        $valueSpan.html(('' + $value.val() / 100 + " zł").replace('.', ','));
         $value.on('input change', () => {
 
-            $valueSpan.html($value.val() / 100 + " zł");
+            $valueSpan.html(('' + $value.val() / 100 + " zł").replace('.', ','));
         });
     });
 </script>

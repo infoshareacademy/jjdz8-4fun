@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>KnightOne Bootstrap Template - Index</title>
+    <title>ShoppingListApp</title>
     <meta content="" name="descriptison">
     <meta content="" name="keywords">
 
@@ -39,11 +39,10 @@
 <#include "navigation.ftlh">
 
 <!-- ======= Hero Section ======= -->
-<section id="heroShort" class="d-flex flex-column justify-content-center">
+<section id="heroShort" class="d-flex flex-column justify-content-center content">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-xl-8">
-                <h1>Shopping List</h1>
                 <#--                <h2>We are team of designers making websites with Bootstrap and shopping lists</h2>-->
                 <#--                <a href="https://www.youtube.com/watch?v=qO28fCnCyes" class="venobox play-btn mb-4" data-vbtype="video"-->
                 <#--                   data-autoplay="true"></a>-->
@@ -51,3 +50,18 @@
         </div>
     </div>
 </section><!-- End Hero -->
+
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("heroShort");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
+    }
+</script>

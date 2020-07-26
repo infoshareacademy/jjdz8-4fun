@@ -3,7 +3,6 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,7 +24,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @WebServlet("/admin-delete-product")
-public class dto_AdminDeleteProductServletRoboczy extends HttpServlet {
+public class AdminDeleteProductServletDto extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
@@ -33,7 +32,7 @@ public class dto_AdminDeleteProductServletRoboczy extends HttpServlet {
     @Inject
     private ProductServiceDb productServiceDb;
 
-    private static final Logger logger = Logger.getLogger(dto_AdminDeleteProductServletRoboczy.class.getName());
+    private static final Logger logger = Logger.getLogger(AdminDeleteProductServletDto.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

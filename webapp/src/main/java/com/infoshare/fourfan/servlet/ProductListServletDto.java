@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 @WebServlet("/productList")
-public class dto_ProductListServlet extends HttpServlet {
+public class ProductListServletDto extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
@@ -42,7 +42,7 @@ public class dto_ProductListServlet extends HttpServlet {
 
         List<ProductDto> productDtos = ClientBuilder
                 .newClient()
-                .target(UriBuilder.fromPath("http://127.0.0.1:8080/shoppingList/resources/products"))
+                .target(UriBuilder.fromPath("http://127.0.0.1:8080/api/resources/products"))
                 .request(MediaType.APPLICATION_JSON)
                 .get()
                 .readEntity(new GenericType<List<ProductDto>>() {});

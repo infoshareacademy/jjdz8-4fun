@@ -4,30 +4,26 @@ import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.Shop;
 
 public class ProductDto {
-
-    public Integer id;
-
+    private Integer id;
     private String name;
-
     private String brand;
-
     private Integer price;
-
     private Integer calories;
-
     private Shop shop;
-
     private ProductCategory productCategory;
+    private Long created;
+    private Long lastModified;
 
-    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.calories = calories;
-        this.shop = shop;
-        this.productCategory = productCategory;
-    }
+
+//    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+//        this.id = id;
+//        this.name = name;
+//        this.brand = brand;
+//        this.price = price;
+//        this.calories = calories;
+//        this.shop = shop;
+//        this.productCategory = productCategory;
+//    }
 
     //---------------------------- G & S -----------------------------------------
 
@@ -86,5 +82,22 @@ public class ProductDto {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
+    public Long getCreated() {
+        return created;
+    }
+
+
+    public Long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Long lastModified) {
+        this.lastModified = lastModified;
     }
 }

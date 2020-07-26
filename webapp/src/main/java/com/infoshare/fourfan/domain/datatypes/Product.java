@@ -11,21 +11,21 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-
     @Basic
     private String name;
-
     @Basic
     private String brand;
-
     @Basic
     private Integer price;      //Cena reprezentowana w groszach
-
     @Basic
     private Integer calories;
-
     @Basic
     private Shop shop;
+    @Basic
+    private Long created;
+    @Basic
+    private Long lastModified;
+
 
     @Column(name = "product_category")
     private ProductCategory productCategory;
@@ -107,6 +107,14 @@ public class Product {
         this.id = id;
     }
 
+    public Long getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Long lastModified) {
+        this.lastModified = lastModified;
+    }
+
     public void setNextId() {
         id = nextid;
         nextid++;
@@ -129,5 +137,13 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, brand, price, calories, shop, productCategory);
+    }
+
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
+    public Long getCreated() {
+        return created;
     }
 }

@@ -22,11 +22,11 @@ public class db_Product {
     @Basic
     private Integer calories;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shop_id")
     private db_Shop db_shop;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private db_ProductCategory db_productCategory;
 

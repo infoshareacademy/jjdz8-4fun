@@ -1,8 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_DefaultProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -17,32 +15,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/db_productList")
-public class db_ProductListServlet extends HttpServlet {
+@WebServlet("/db_confirmDeleteProduct")
+public class ConfirmDeleteProduct extends HttpServlet {
 
-    @Inject
-    private db_DefaultProductService db_defaultProductService;
+    private static final Logger logger = Logger.getLogger(ConfirmDeleteProduct.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
-
-    @Inject
-    private db_ProductService db_productService;
-
-    private static final Logger logger = Logger.getLogger(db_ProductListServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "db_productList.ftlh");
-        PrintWriter printWriter = resp.getWriter();
-
-        db_defaultProductService.createDefaultProduct();
-
+        Template template = templateProvider.getTemplate(getServletContext(), "db_confirmDeleteProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", db_productService.getProducts());
-
+        PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

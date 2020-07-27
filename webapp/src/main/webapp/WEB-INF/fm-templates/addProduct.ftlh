@@ -43,17 +43,11 @@
                                     <#list shops as shop>
                                             <option value=${(shop.id)!}>${shop.shop}</option>
                                     </#list>
-<#--                                    <option value="AUCHAN">AUCHAN</option>-->
-<#--                                    <option value="PIOTRiPAWEŁ">PIOTRiPAWEŁ</option>-->
-<#--                                    <option value="TESCO">TESCO</option>-->
                                 </select></label>
                             <label><span>Kategoria</span><select name="category" class="ANPselect-field">
                                     <#list categories as category>
                                         <option value=${(category.id)!}>${category.category}</option>
                                     </#list>
-<#--                                    <option value="WARZYWA">WARZYWA</option>-->
-<#--                                    <option value="OWOCE">OWOCE</option>-->
-<#--                                    <option value="NABIAŁ">NABIAŁ</option>-->
                                 </select></label>
                             <label><span> </span><input type="submit" style="background: #009961"
                                                         value="Zapisz Produkt"/></label>

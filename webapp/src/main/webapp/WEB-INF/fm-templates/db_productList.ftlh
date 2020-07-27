@@ -33,10 +33,10 @@
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">
-                    <form method="get" action="admin-find-product-by-id?id=${product.id}">
+                    <form method="get" action="db_findProductById?id=${product.id}">
                         <button type="submit" name="id"
-                                style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
-                                value="${product.id}">Edytuj
+                            style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
+                            value="${product.id}">Edytuj
                         </button>
                     </form>
                 </div>
@@ -45,7 +45,7 @@
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">
-                    <form method="post" action="admin-delete-product?name=${product.name}">
+                    <form method="post" action="db_deleteProduct?id=${product.id}">
                         <button type="submit" name="id"
                                 style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
                                 value="${product.id}">Usuń

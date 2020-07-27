@@ -2,7 +2,6 @@ package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_DefaultProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -17,33 +16,43 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/db_productList")
-public class db_ProductListServlet extends HttpServlet {
-
-    @Inject
-    private db_DefaultProductService db_defaultProductService;
-
-    @Inject
-    private TemplateProvider templateProvider;
+@WebServlet("/db_deleteProduct")
+public class db_deleteProductServlet extends HttpServlet {
 
     @Inject
     private db_ProductService db_productService;
 
-    private static final Logger logger = Logger.getLogger(db_ProductListServlet.class.getName());
+    @Inject
+    private TemplateProvider templateProvider;
+
+    private static final Logger logger = Logger.getLogger(db_deleteProductServlet.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
         Template template = templateProvider.getTemplate(getServletContext(), "db_productList.ftlh");
         PrintWriter printWriter = resp.getWriter();
+        String idParam = req.getParameter("id");
 
-        db_defaultProductService.createDefaultProduct();
+        if (idParam == null || idParam.isEmpty()) {
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
+        db_productService.deleteProduct(Integer.parseInt(idParam));
+
+        printWriter.println("<script>\n" +
+                "        alert(\"Produkt został usunięty!\")\n" +
+                "    </script>");
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", db_productService.getProducts());
+        if (dataModel != null) {
+            dataModel.put("products", db_productService.getProducts());
 
-        try {
+        } else {
+            dataModel.put("errorMessage", "Product has not been found.");
+        } try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.severe(e.getMessage());

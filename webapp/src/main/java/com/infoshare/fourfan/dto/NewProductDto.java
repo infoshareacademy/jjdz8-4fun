@@ -1,7 +1,5 @@
 package com.infoshare.fourfan.dto;
 
-import com.infoshare.fourfan.domain.datatypes.Shop;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

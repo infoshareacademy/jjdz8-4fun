@@ -96,14 +96,14 @@ public class ProductRepositoryRestTest {
     }
 
     @Test
-    void shouldThrowAccountNotFoundExceptionOnRemove() {
+    void shouldThrowProductNotFoundExceptionOnRemove() {
         Assertions.assertThrows(AccountNotFoundException.class, () -> {
             this.productRepositoryRest.removeProduct("not existing id");
         });
     }
 
     @Test
-    void shouldThrowAccountNotFoundExceptionOnGetAccount() {
+    void shouldThrowProductNotFoundExceptionOnGetAccount() {
         Assertions.assertThrows(AccountNotFoundException.class, () -> {
             this.productRepositoryRest.getProduct("not existing id");
         });

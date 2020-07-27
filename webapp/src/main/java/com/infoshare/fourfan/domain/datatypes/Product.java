@@ -115,6 +115,14 @@ public class Product {
         this.lastModified = lastModified;
     }
 
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
+    public Long getCreated() {
+        return created;
+    }
+
     public void setNextId() {
         id = nextid;
         nextid++;
@@ -131,19 +139,13 @@ public class Product {
                 Objects.equals(price, product.price) &&
                 Objects.equals(calories, product.calories) &&
                 shop == product.shop &&
+                Objects.equals(created, product.created) &&
+                Objects.equals(lastModified, product.lastModified) &&
                 productCategory == product.productCategory;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, brand, price, calories, shop, productCategory);
-    }
-
-    public void setCreated(Long created) {
-        this.created = created;
-    }
-
-    public Long getCreated() {
-        return created;
+        return Objects.hash(id, name, brand, price, calories, shop, created, lastModified, productCategory);
     }
 }

@@ -7,7 +7,6 @@ import com.infoshare.fourfan.repository.ProductRepositoryRest;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -61,7 +60,7 @@ public class ProductServiceRest {
                 .collect(Collectors.toList());
     }
 
-    public ProductDto getProduct(String id) throws AccountNotFoundException {
+    public ProductDto getProduct(String id) {
         Product product = productRepositoryRest.getProduct(id);
 
         ProductDto productDto = new ProductDto();
@@ -74,7 +73,7 @@ public class ProductServiceRest {
         return productDto;
     }
 
-    public ProductDto updateProduct(String id, NewProductDto newProductDto) throws AccountNotFoundException {
+    public ProductDto updateProduct(String id, NewProductDto newProductDto) {
         Product product = productRepositoryRest.getProduct(id);
         product.setName(newProductDto.getName());
         product.setBrand(newProductDto.getBrand());
@@ -92,7 +91,7 @@ public class ProductServiceRest {
 
     }
 
-    public void removeProduct(String id) throws AccountNotFoundException {
+    public void removeProduct(String id) {
         productRepositoryRest.removeProduct(id);
     }
 }

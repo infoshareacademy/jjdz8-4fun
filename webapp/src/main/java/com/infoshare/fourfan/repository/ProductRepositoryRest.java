@@ -1,8 +1,8 @@
 package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.exception.ProductNotFoundException;
 
-import javax.security.auth.login.AccountNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,11 +27,11 @@ public class ProductRepositoryRest {
         products.put(String.valueOf(product.getId()), product);
     }
 
-    public Product getProduct(String id) throws AccountNotFoundException {
+    public Product getProduct(String id) {
         Product product = products.get(id);
 
         if (product == null) {
-            throw new AccountNotFoundException(String.format("Product with id %s not found.", id));
+            throw new ProductNotFoundException(String.format("Product with id %s not found.", id));
         }
 
         Product productToReturn = new Product();
@@ -48,11 +48,11 @@ public class ProductRepositoryRest {
         return productToReturn;
     }
 
-    public void removeProduct(String id) throws AccountNotFoundException {
+    public void removeProduct(String id) {
         Product product = products.get(id);
 
         if (product == null) {
-            throw new AccountNotFoundException(String.format("Product with id %s not found.", id));
+            throw new ProductNotFoundException(String.format("Product with id %s not found.", id));
         }
         products.remove(id);
     }

@@ -59,7 +59,8 @@ public class NewProductAdminServlet extends HttpServlet {
         Shop shop = Shop.valueOf(req.getParameter("shop"));
         ProductCategory category = ProductCategory.valueOf(req.getParameter("category"));
         Integer id = 0;
-        Product product = new Product(id,name,brand,price,calories,shop,category);
+        Integer amount =1;
+        Product product = new Product(id,name,brand,price,calories,shop,category, amount);
 
         adminService.saveNewProduct(product);
 

@@ -30,7 +30,18 @@ public class Product {
     @Column(name = "product_category")
     private ProductCategory productCategory;
 
-    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Basic
+    private Integer amount;
+
+    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory, Integer amount) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -38,13 +49,14 @@ public class Product {
         this.calories = calories;
         this.shop = shop;
         this.productCategory = productCategory;
+        this.amount = amount;
     }
 
     public Product() {
 
     }
 
-    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
+    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam, Integer amountParam) {
     }
 
     public static Integer getNextid() {

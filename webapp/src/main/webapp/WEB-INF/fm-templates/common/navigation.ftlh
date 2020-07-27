@@ -16,9 +16,9 @@
                         <li><a href="/about">Usługi</a></li>
                         <li class="drop-down"><a href="">Wyszukaj wszystkie produkty</a>
                             <ul>
-                                <li><a href="/filterUserProductsByCategory">Po kategorii</a> </li>
-                                <li><a href="/filterUserProductsByCalories">Po kaloryce</a> </li>
-                                <li><a href="/filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
+                                <li><a href="/db_filterUserProductsByCategory">Po kategorii</a> </li>
+                                <li><a href="/db_filterUserProductsByCalories">Po kaloryce</a> </li>
+                                <li><a href="/db_filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
                             </ul>
                         </li>
                         <li><a href="#portfolio">Portfolio</a></li>
@@ -31,18 +31,9 @@
 
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
-                                <li><a href="/productList">Lista produktów</a></li>
-<#--                                <li class="drop-down"><a href="#">Inne</a>-->
-<#--                                    <ul>-->
-<#--                                        <li><a href="#">Lista 1</a></li>-->
-<#--                                        <li><a href="#">Lista 2</a></li>-->
-<#--                                        <li><a href="#">Lista 3</a></li>-->
-<#--                                        <li><a href="#">Lista 4</a></li>-->
-<#--                                        <li><a href="#">Lista 5</a></li>-->
-<#--                                    </ul>-->
-<#--                                </li>-->
-                                <li><a href="/addProduct">Dodaj produkt</a></li>
-                                <li><a href="/editProduct">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/db_productList">Lista produktów</a></li>
+                                <li><a href="/db_addProduct">Dodaj produkt</a></li>
+                                <li><a href="/db_editProduct">Wyszukaj i zedytuj produkt</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

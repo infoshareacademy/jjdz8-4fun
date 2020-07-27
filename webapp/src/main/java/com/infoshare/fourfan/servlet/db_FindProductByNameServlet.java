@@ -3,7 +3,8 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.*;
+import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
+import com.infoshare.fourfan.service.db_ShopServiceRobocze;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -19,8 +20,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@WebServlet("/db_findProductById")
-public class db_FindProductByIdServlet extends HttpServlet {
+@WebServlet("/db_findProductByName")
+public class db_FindProductByNameServlet extends HttpServlet {
 
     @Inject
     private db_ProductDao db_productDao;
@@ -34,22 +35,22 @@ public class db_FindProductByIdServlet extends HttpServlet {
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(db_FindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(db_FindProductByNameServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "db_findProductById.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "db_findProductByName.ftlh");
         PrintWriter printWriter = resp.getWriter();
-        String idParam = req.getParameter("id");
+        String nameParam = req.getParameter("name");
 
-        if (idParam == null || idParam.isEmpty()) {
+        if (nameParam == null || nameParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Optional<db_ProductDto> db_product = db_productDao.findProductIdDto(Integer.parseInt(idParam));
+        Optional<db_ProductDto> db_product = db_productDao.findProductNameDto(nameParam);
 
         Map<String, Object> dataModel = new HashMap<>();
         if (db_product.isPresent()){

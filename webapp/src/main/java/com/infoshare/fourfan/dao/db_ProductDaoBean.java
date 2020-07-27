@@ -47,7 +47,7 @@ public class db_ProductDaoBean implements db_ProductDao {
     }
 
     @Override
-    public Optional<db_ProductDto> findProductDto(Integer id) {
+    public Optional<db_ProductDto> findProductIdDto(Integer id) {
         TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
                 "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.id = :idParm", db_ProductDto.class);
 
@@ -56,6 +56,64 @@ public class db_ProductDaoBean implements db_ProductDao {
         try{
             return Optional.of(query.getSingleResult());
 
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<db_ProductDto> findProductNameDto(String name) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.name = :nameParm", db_ProductDto.class);
+
+        query.setParameter("nameParm", name);
+
+        try{
+            return Optional.of(query.getSingleResult());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<List<db_ProductDto>> findProductCategoryDto(Integer category) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.db_productCategory.id = :categoryParm", db_ProductDto.class);
+
+        query.setParameter("categoryParm", category);
+
+        try{
+            return Optional.of(query.getResultList());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<List<db_ProductDto>> findProductCaloriesDto(Integer minCalories, Integer maxCalories) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.calories BETWEEN :minCaloriesParm and :maxCaloriesParm", db_ProductDto.class);
+
+        query.setParameter("minCaloriesParm", minCalories);
+        query.setParameter("maxCaloriesParm", maxCalories);
+
+        try{
+            return Optional.of(query.getResultList());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public Optional<List<db_ProductDto>> filterByPrice(Integer priceMin, Integer priceMax) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.price BETWEEN :minPriceParm and :maxPriceParm ORDER BY p.db_shop.shop", db_ProductDto.class);
+
+        query.setParameter("minPriceParm", priceMin);
+        query.setParameter("maxPriceParm", priceMax);
+
+        try{
+            return Optional.of(query.getResultList());
         } catch(NoResultException e){
             return Optional.empty();
         }

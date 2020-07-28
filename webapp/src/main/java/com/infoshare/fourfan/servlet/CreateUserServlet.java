@@ -1,10 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.domain.access.User;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductServiceDb;
+import com.infoshare.fourfan.service.UserServiceJson;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -19,23 +17,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/addProduct")
-public class NewProductAdminServlet extends HttpServlet {
+@WebServlet("/createUser")
+public class CreateUserServlet extends HttpServlet {
 
     private static final Logger logger
-            = Logger.getLogger(NewProductAdminServlet.class.getName());
+            = Logger.getLogger(com.infoshare.fourfan.servlet.CreateUserServlet.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private ProductServiceDb productServiceDb;
+    private UserServiceJson userServiceJson;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "createUser.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
         PrintWriter printWriter = resp.getWriter();
@@ -52,17 +50,17 @@ public class NewProductAdminServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         String name = req.getParameter("name");
-        String brand = req.getParameter("brand");
-        Integer price = Integer.parseInt(req.getParameter("price"));
-        Integer calories = Integer.parseInt(req.getParameter("calories"));
-        Shop shop = Shop.valueOf(req.getParameter("shop"));
-        ProductCategory category = ProductCategory.valueOf(req.getParameter("category"));
-        Integer id = 0;
-        Integer amount =1;
-        Product product = new Product(id,name,brand,price,calories,shop,category, amount);
-
-        productServiceDb.saveProduct(product);
-
-        resp.sendRedirect("/confirmNewProduct");
+        String surName = req.getParameter("surName");
+        String phoneNumber = req.getParameter("phoneNumber");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String confirmPassword = req.getParameter("confirmPassword");
+        if(password.equals(confirmPassword)) {
+            User user = new User(email, password, name, surName, phoneNumber);
+            userServiceJson.createNewUser(user);
+            resp.sendRedirect("/confirmNewUser");
+        } else {
+            resp.sendRedirect("/createUser");
+        }
     }
 }

@@ -24,7 +24,7 @@ public interface ProductRepository {
 
     List<Product> filterByCategory(Integer category);
 
-    List<Product> filterByCalories(Integer caloriesMin, Integer caloriesMax);
+    List<Product> filterByCalories(Integer caloriesMin, Long caloriesMax);
 
     Map<Shop, List<Product>> filterByPriceAndGroupByShop(Integer priceMin, Integer priceMax);
 

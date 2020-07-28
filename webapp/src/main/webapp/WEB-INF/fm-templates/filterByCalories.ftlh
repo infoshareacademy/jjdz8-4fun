@@ -3,7 +3,6 @@
     <div class="container" style="height: 40px">
         <h1 class="display-3" style="font-size: 40px">Shopping list - wyszukaj po kaloriach</h1>
     </div>
-    </br>
     <main role="main">
         <div class="container">
             <div class="row">
@@ -24,7 +23,7 @@
                             <label for="secondRange">151-300 kcal/100g</label><br>
                             <input ${thirdChoiceSelected!} type="radio" id="thirdRange" name="calories"
                                                            value="${thirdRange}">
-                            <label for="thirdRange">301-450 kcal/100g</label><br>
+                            <label for="thirdRange">od 301 kcal/100g</label><br>
                             <input type="submit" style="background: #009961" value="Szukaj">
                         </form>
                     </div>

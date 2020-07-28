@@ -22,7 +22,13 @@
                             </ul>
                         </li>
 <#--                        <li><a href="#portfolio">Portfolio</a></li>-->
-<#--                        <li><a href="#pricing">Cennik</a></li>-->
+                        <li class="drop-down"><a href="#pricing">Lista zakupow</a>
+                            <ul>
+                                <li><a href="/addToShoppingList">Dodaj produkt do listy zakupów</a></li>
+                                <li><a href="/showShoppingList">Wyświetl listę zakupów</a></li>
+                            </ul>
+                        </li>
+
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
                                 <li><a href="/productList">Lista produktów</a></li>

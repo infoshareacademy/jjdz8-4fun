@@ -20,9 +20,9 @@ import java.util.logging.Logger;
 public class FilterProductsForUserByCalories extends HttpServlet {
 
     public enum CaloriesRangeEnum {
-        PRZEDZIAL_0_150,
-        PRZEDZIAL_151_300,
-        PRZEDZIAL_301_450;
+        RANGE_0_150,
+        RANGE_151_300,
+        RANGE_FROM_301;
     }
         @Inject
         private ProductService productService;
@@ -42,26 +42,26 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
             Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
             Map<String, Object> dataModel = new HashMap<>();
-            dataModel.put("firstRange", CaloriesRangeEnum.PRZEDZIAL_0_150);
-            dataModel.put("secondRange", CaloriesRangeEnum.PRZEDZIAL_151_300);
-            dataModel.put("thirdRange", CaloriesRangeEnum.PRZEDZIAL_301_450);
+            dataModel.put("firstRange", CaloriesRangeEnum.RANGE_0_150);
+            dataModel.put("secondRange", CaloriesRangeEnum.RANGE_151_300);
+            dataModel.put("thirdRange", CaloriesRangeEnum.RANGE_FROM_301);
 
             if(calories != null && !calories.equals("Przedzial") ) {
                 CaloriesRangeEnum caloriesRangeEnum = CaloriesRangeEnum.valueOf(calories);
                 CaloriesRange caloriesRange = new CaloriesRange(caloriesRangeEnum).invoke();
                 int productMin = caloriesRange.getProductMin();
-                int productMax = caloriesRange.getProductMax();
+                long productMax = caloriesRange.getProductMax();
                 dataModel.put("products", productService.filterByCalories(productMin, productMax));
                 switch (caloriesRangeEnum) {
-                    case PRZEDZIAL_0_150:
+                    case RANGE_0_150:
                         dataModel.put("firstChoiceSelected", "checked");
                         break;
 
-                    case PRZEDZIAL_151_300:
+                    case RANGE_151_300:
                         dataModel.put("secondChoiceSelected", "checked");
                         break;
 
-                    case PRZEDZIAL_301_450:
+                    case RANGE_FROM_301:
                         dataModel.put("thirdChoiceSelected", "checked");
                         break;
                 }
@@ -77,7 +77,7 @@ public class FilterProductsForUserByCalories extends HttpServlet {
     private static class CaloriesRange {
         private CaloriesRangeEnum caloriesRange;
         private int productMin;
-        private int productMax;
+        private long productMax;
 
         public CaloriesRange(CaloriesRangeEnum caloriesRange) {
             this.caloriesRange = caloriesRange;
@@ -87,26 +87,26 @@ public class FilterProductsForUserByCalories extends HttpServlet {
             return productMin;
         }
 
-        public int getProductMax() {
+        public long getProductMax() {
             return productMax;
         }
 
         public CaloriesRange invoke() {
             productMin = -1;
-            productMax = 1000;
+            productMax = 1000000000;
 
             switch (caloriesRange) {
-                case PRZEDZIAL_0_150:
+                case RANGE_0_150:
                     productMin = 0;
                     productMax = 150;
                     break;
-                case PRZEDZIAL_151_300:
+                case RANGE_151_300:
                     productMin = 151;
                     productMax = 300;
                     break;
-                case PRZEDZIAL_301_450:
+                case RANGE_FROM_301:
                     productMin = 301;
-                    productMax = 450;
+                    productMax = 100000000;
                     break;
             }
             return this;

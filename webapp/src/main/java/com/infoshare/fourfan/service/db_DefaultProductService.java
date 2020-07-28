@@ -8,18 +8,22 @@ import com.infoshare.fourfan.domain.datatypes.db_Shop;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 
 @ApplicationScoped
 public class db_DefaultProductService {
 
-    @EJB
-    private db_ProductDao productdbDao;
-
-    @EJB
+    @Inject
     private db_ShopDao db_shopDao;
 
-    @EJB
-    private db_ProductCategoryDao db_productCategoryDao;
+    @Inject
+    db_ProductCategoryDao db_productCategoryDao;
+
+    @Inject
+    private db_ShopServiceRobocze db_shopServiceRobocze;
+
+    @Inject
+    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
 
     public void createDefaultProduct() {
 
@@ -39,23 +43,15 @@ public class db_DefaultProductService {
 //        db_product.setDb_productCategory(db_productCategory);
 
         // 2 testowy produkt
-//        db_Product db_product2 = new db_Product();
-//        db_product2.setBrand("brand2");
-//        db_product2.setCalories(2222);
-//        db_product2.setName("name2");
-//        db_product2.setPrice(2222);
-
-        db_Shop db_shop2 = new db_Shop();
-        db_shop2.setShop("sklep2");
-//        db_product2.setDb_shop(db_shop2);
-
-        db_ProductCategory db_productCategory2 = new db_ProductCategory();
-        db_productCategory2.setCategory("kategoria2");
-//        db_product2.setDb_productCategory(db_productCategory2);
-
-//        productdbDao.save(db_product);
-//        productdbDao.save(db_product2);
-        db_shopDao.save(db_shop2);
-        db_productCategoryDao.save(db_productCategory2);
+        if (db_shopServiceRobocze.getShops().size() == 0) {
+            db_Shop db_shop2 = new db_Shop();
+            db_shop2.setShop("sklep2");
+            db_shopDao.save(db_shop2);
+        }
+        if (db_productCategoryServiceRobocze.getCategory().size() == 0) {
+            db_ProductCategory db_productCategory2 = new db_ProductCategory();
+            db_productCategory2.setCategory("kategoria2");
+            db_productCategoryDao.save(db_productCategory2);
+        }
     }
 }

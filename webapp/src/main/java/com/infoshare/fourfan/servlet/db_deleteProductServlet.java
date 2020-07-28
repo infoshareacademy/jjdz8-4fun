@@ -49,7 +49,6 @@ public class db_deleteProductServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {
             dataModel.put("products", db_productService.getProducts());
-
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         } try {

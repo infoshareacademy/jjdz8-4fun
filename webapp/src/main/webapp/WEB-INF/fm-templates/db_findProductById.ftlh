@@ -4,7 +4,6 @@
         <h1 class="display-3" style="font-size: 40px">Shopping list - edycja produktu</h1>
     </div>
 
-    </br>
     <#if errorMessage??>
     <span style="color: #ff0000;">${errorMessage}</span><br/><br/>
     <#else>

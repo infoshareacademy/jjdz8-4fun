@@ -19,7 +19,6 @@ public class db_Shop {
     @Column(name = "timestamp")
     private Timestamp timestamp;
 
-
     @OneToMany(mappedBy = "db_shop")
     private Set<db_Product> products = new HashSet<>();
 
@@ -54,10 +53,5 @@ public class db_Shop {
     public void setProducts(Set<db_Product> products) {
         this.products = products;
     }
-
-    public void addProduct(db_Product db_product) {
-        this.products.add(db_product);
-    }
-
 
 }

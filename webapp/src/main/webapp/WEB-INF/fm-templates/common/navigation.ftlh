@@ -25,7 +25,7 @@
                         <li class="drop-down"><a href="#pricing">Lista zakupow</a>
                             <ul>
                                 <li><a href="/addToShoppingList">Dodaj produkt do listy zakupów</a></li>
-                                <li><a href="/showShoppingList">Wyświetl listę zakupów</a></li>
+                                <li><a href="/db_showShoppingList">Wyświetl listę zakupów</a></li>
                             </ul>
                         </li>
 

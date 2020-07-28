@@ -1,6 +1,8 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -22,8 +24,8 @@ public class db_Product {
     @Basic
     private Integer calories;
 
-    @Basic
-    private Integer amount;
+//    @Basic
+//    private Integer amount = 1;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shop_id")
@@ -32,6 +34,11 @@ public class db_Product {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private db_ProductCategory db_productCategory;
+
+    //-----
+    @OneToMany(mappedBy = "db_product")
+    private Set<db_UserProducts> userProducts = new HashSet<>();
+    //-----
 
     public Integer getId() {
         return id;
@@ -69,13 +76,13 @@ public class db_Product {
         return calories;
     }
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+//    public Integer getAmount() {
+//        return amount;
+//    }
+//
+//    public void setAmount(Integer amount) {
+//        this.amount = amount;
+//    }
 
     public void setCalories(Integer calories) {
         this.calories = calories;

@@ -76,13 +76,23 @@ public class db_UserProductsDaoBean implements db_UserProductsDao {
         }
     }
 
-//    @Override
-//    public List<db_UserProducts> deleteAllUserShoppingList() {
-//        return entityManager.createQuery("SELECT p FROM db_UserProducts p", db_UserProducts.class).getResultList();
-//    }
     @Override
     public void deleteAllUserShoppingList(Integer id) {
         Query query = entityManager.createQuery("DELETE FROM db_UserProducts u WHERE u.useridInt = :idParm");
         query.setParameter("idParm", id).executeUpdate();
+    }
+
+    @Override
+    public Optional<db_UserProductsDto> findUserProductNameDto(String name) {
+        TypedQuery<db_UserProductsDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_UserProductsDto(" +
+                "p.id, p.useridInt, p.db_product.name, p.db_product.brand, p.db_product.price, p.db_product.calories, p.db_product.db_shop.shop, p.db_product.db_productCategory.category, p.amount) FROM db_UserProducts p WHERE p.db_product.name = :nameParm", db_UserProductsDto.class);
+
+        query.setParameter("nameParm", name);
+
+        try{
+            return Optional.of(query.getSingleResult());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
     }
 }

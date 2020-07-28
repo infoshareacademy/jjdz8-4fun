@@ -42,7 +42,6 @@ public class db_ProductListServlet extends HttpServlet {
 
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("products", db_productService.getProducts());
-
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

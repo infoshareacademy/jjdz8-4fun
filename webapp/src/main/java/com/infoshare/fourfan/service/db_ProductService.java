@@ -34,11 +34,9 @@ public class db_ProductService {
         return db_productDao.findAllDto();
     };
 
-    //----
     public List<db_UserProductsDto> getUserListProducts(){
         return db_userProductsDao.findAllDto();
     };
-    //----
 
     @Transactional
     public void saveNewProductDB(String name, String brand, Integer price, Integer calories, Integer shop, Integer category)
@@ -54,15 +52,15 @@ public class db_ProductService {
         db_productCategoryDao.findById(category).ifPresent(c -> {db_product.setDb_productCategory(c); db_productDao.update(db_product);});
     }
 
-    //-----
     @Transactional
-    public void saveProductToUserList(Integer productId)
+    public void saveProductToUserList(Integer userId, Integer productId)
     {
         db_UserProducts db_userProducts = new db_UserProducts();
-        db_userProducts.setUseridInt(1);
+        db_userProducts.setUseridInt(userId);
         db_userProductsDao.save(db_userProducts);
 
         db_productDao.findById(productId).ifPresent(s -> {db_userProducts.setDb_product(s); db_userProductsDao.update(db_userProducts);});
+
     }
 
     @Transactional
@@ -79,8 +77,6 @@ public class db_ProductService {
     {
         db_userProductsDao.findById(id).ifPresent(db_product -> db_userProductsDao.delete(db_product));
     }
-    //-----
-
 
     @Transactional
     public void deleteProduct(Integer id)

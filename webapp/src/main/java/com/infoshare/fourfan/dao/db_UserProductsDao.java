@@ -16,7 +16,8 @@ public interface db_UserProductsDao extends db_Dao<db_UserProducts> {
 
     Optional<db_UserProductsDto> findOneProductUserIdDto(Integer id);
 
-    void deleteAllUserShoppingList(Integer id);
+    Optional<db_UserProductsDto> findUserProductNameDto(String name);
 
+    void deleteAllUserShoppingList(Integer id);
 
 }

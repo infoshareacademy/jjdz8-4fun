@@ -24,7 +24,7 @@
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li class="drop-down"><a href="#pricing">Lista zakupow</a>
                             <ul>
-                                <li><a href="/addToShoppingList">Dodaj produkt do listy zakupów</a></li>
+                                <li><a href="/db_addToShoppingList">Dodaj produkt do listy zakupów</a></li>
                                 <li><a href="/db_showShoppingList">Wyświetl listę zakupów</a></li>
                             </ul>
                         </li>

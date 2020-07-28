@@ -5,18 +5,18 @@ import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.repository.ProductRepositoryRest;
 
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
-import javax.inject.Inject;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Singleton
 public class ProductServiceRest {
 
+    @EJB
     private ProductRepositoryRest productRepositoryRest;
 
-    @Inject
+
     public ProductServiceRest(ProductRepositoryRest productRepositoryRest) {
         this.productRepositoryRest = productRepositoryRest;
     }
@@ -24,14 +24,15 @@ public class ProductServiceRest {
     public ProductServiceRest() {
     }
 
+
     public ProductDto createProduct(NewProductDto newProductDto) {
-        String id = UUID.randomUUID().toString();
+        Integer id = productRepositoryRest.getProducts().size() + 1;
         Long timestamp = System.currentTimeMillis();
         Product product = new Product();
         product.setName(newProductDto.getName());
         product.setBrand(newProductDto.getBrand());
         product.setCreated(timestamp);
-        product.setId(Integer.valueOf(id));
+        product.setId(id);
 
         productRepositoryRest.saveProduct(product);
 
@@ -39,7 +40,7 @@ public class ProductServiceRest {
         productDto.setName(newProductDto.getName());
         productDto.setBrand(newProductDto.getBrand());
         productDto.setCreated(timestamp);
-        productDto.setId(Integer.valueOf(id));
+        productDto.setId(id);
 
         return productDto;
     }
@@ -60,7 +61,7 @@ public class ProductServiceRest {
                 .collect(Collectors.toList());
     }
 
-    public ProductDto getProduct(String id) {
+    public ProductDto getProduct(Integer id) {
         Product product = productRepositoryRest.getProduct(id);
 
         ProductDto productDto = new ProductDto();
@@ -73,7 +74,7 @@ public class ProductServiceRest {
         return productDto;
     }
 
-    public ProductDto updateProduct(String id, NewProductDto newProductDto) {
+    public ProductDto updateProduct(Integer id, NewProductDto newProductDto) {
         Product product = productRepositoryRest.getProduct(id);
         product.setName(newProductDto.getName());
         product.setBrand(newProductDto.getBrand());
@@ -91,7 +92,7 @@ public class ProductServiceRest {
 
     }
 
-    public void removeProduct(String id) {
+    public void removeProduct(Integer id) {
         productRepositoryRest.removeProduct(id);
     }
 }

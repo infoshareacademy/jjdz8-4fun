@@ -2,11 +2,10 @@ package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductCategory;
+import com.infoshare.fourfan.exception.ProductNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.security.auth.login.AccountNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -40,7 +39,7 @@ public class ProductRepositoryRestTest {
     }
 
     @Test
-    void shouldReturnProduct() throws AccountNotFoundException {
+    void shouldReturnProduct() {
         Product product = new Product();
         Integer id = 1;
         Long created = System.currentTimeMillis();
@@ -53,11 +52,11 @@ public class ProductRepositoryRestTest {
         product.setProductCategory(ProductCategory.NABIAŁ);
         Assertions.assertEquals(this.productRepositoryRest.getProducts().size(), 0);
         this.productRepositoryRest.saveProduct(product);
-        Assertions.assertEquals(this.productRepositoryRest.getProduct(String.valueOf(id)), product);
+        Assertions.assertEquals(this.productRepositoryRest.getProduct(id), product);
     }
 
     @Test
-    void shouldRemoveProduct() throws AccountNotFoundException {
+    void shouldRemoveProduct() {
         Product product = new Product();
         Integer id = 1;
         Long created = System.currentTimeMillis();
@@ -71,13 +70,13 @@ public class ProductRepositoryRestTest {
         Assertions.assertEquals(this.productRepositoryRest.getProducts().size(), 0);
         this.productRepositoryRest.saveProduct(product);
         Assertions.assertEquals(this.productRepositoryRest.getProducts().size(), 1);
-        this.productRepositoryRest.removeProduct(String.valueOf(id));
+        this.productRepositoryRest.removeProduct(id);
         Assertions.assertEquals(this.productRepositoryRest.getProducts().size(), 0);
 
     }
 
     @Test
-    void objectsInMapAreUnmodifiable() throws AccountNotFoundException {
+    void objectsInMapAreUnmodifiable() {
         Product product = new Product();
         Integer id = 1;
         Long created = System.currentTimeMillis();
@@ -90,22 +89,22 @@ public class ProductRepositoryRestTest {
         product.setProductCategory(ProductCategory.NABIAŁ);
         Assertions.assertEquals(this.productRepositoryRest.getProducts().size(), 0);
         this.productRepositoryRest.saveProduct(product);
-        Product returnedProduct = this.productRepositoryRest.getProduct(String.valueOf(id));
+        Product returnedProduct = this.productRepositoryRest.getProduct(id);
         returnedProduct.setName("Chocolate");
         Assertions.assertNotEquals(returnedProduct, product);
     }
 
     @Test
     void shouldThrowProductNotFoundExceptionOnRemove() {
-        Assertions.assertThrows(AccountNotFoundException.class, () -> {
-            this.productRepositoryRest.removeProduct("not existing id");
+        Assertions.assertThrows(ProductNotFoundException.class, () -> {
+            this.productRepositoryRest.removeProduct(999999999);
         });
     }
 
     @Test
     void shouldThrowProductNotFoundExceptionOnGetAccount() {
-        Assertions.assertThrows(AccountNotFoundException.class, () -> {
-            this.productRepositoryRest.getProduct("not existing id");
+        Assertions.assertThrows(ProductNotFoundException.class, () -> {
+            this.productRepositoryRest.getProduct(999999999);
         });
     }
 

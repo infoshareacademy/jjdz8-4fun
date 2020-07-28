@@ -1,31 +1,23 @@
 package com.infoshare.fourfan.controller;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
-import com.infoshare.fourfan.service.ProductServiceDb;
 import com.infoshare.fourfan.service.ProductServiceRest;
 
 import javax.inject.Inject;
-import javax.security.auth.login.AccountNotFoundException;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import java.util.List;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Path("/resources")
 public class ProductController {
 
-    private ProductServiceRest productServiceRest;
 
     @Inject
-    public ProductController(ProductServiceRest productServiceRest) {
-        this.productServiceRest = productServiceRest;
-    }
+    private ProductServiceRest productServiceRest;
 
     @GET
     @Path("/products")
@@ -45,21 +37,21 @@ public class ProductController {
 
     @GET
     @Path("/products/{id}")
-    public Response getProduct(@PathParam(value = "id") String id) {
+    public Response getProduct(@PathParam(value = "id") Integer id) {
         ProductDto productDto = productServiceRest.getProduct(id);
         return Response.status(Response.Status.OK).entity(productDto).build();
     }
 
     @PUT
     @Path("/products/{id}")
-    public Response updateProduct(@PathParam(value = "id") String id, @Valid NewProductDto newProductDto) {
+    public Response updateProduct(@PathParam(value = "id") Integer id, @Valid NewProductDto newProductDto) {
         ProductDto productDto = productServiceRest.updateProduct(id, newProductDto);
         return Response.status(Response.Status.OK).entity(productDto).build();
     }
 
     @DELETE
     @Path("/products/{id}")
-    public Response deleteProduct(@PathParam(value = "id") String id, @Valid NewProductDto newProductDto) {
+    public Response deleteProduct(@PathParam(value = "id") Integer id, @Valid NewProductDto newProductDto) {
         productServiceRest.removeProduct(id);
         return Response.status(Response.Status.NO_CONTENT).build();
     }

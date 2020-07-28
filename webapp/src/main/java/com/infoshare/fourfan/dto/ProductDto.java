@@ -15,15 +15,19 @@ public class ProductDto {
     private Long lastModified;
 
 
-//    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
-//        this.id = id;
-//        this.name = name;
-//        this.brand = brand;
-//        this.price = price;
-//        this.calories = calories;
-//        this.shop = shop;
-//        this.productCategory = productCategory;
-//    }
+    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.calories = calories;
+        this.shop = shop;
+        this.productCategory = productCategory;
+    }
+
+    public ProductDto() {
+
+    }
 
     //---------------------------- G & S -----------------------------------------
 
@@ -99,5 +103,9 @@ public class ProductDto {
 
     public void setLastModified(Long lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public void setId(String id) {
+        this.id = Integer.valueOf(id);
     }
 }

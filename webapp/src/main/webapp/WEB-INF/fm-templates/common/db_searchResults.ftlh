@@ -17,14 +17,13 @@
                 <tr>
                     <td> ${product.getName()} </td>
                     <td> ${product.getBrand()} </td>
-                    <td> ${product.getPrice()} gr </td>
-                    <td> ${product.getCalories()} kcal/100g </td>
+                    <td> ${product.getPrice()} gr</td>
+                    <td> ${product.getCalories()} kcal/100g</td>
                     <td> ${product.getShop()}</td>
                     <td> ${product.getProductCategory()}</td>
                 </tr>
             </#list>
         </ol>
-    <#else><b>Brak Produktow do wyswietlenia</b>
     </#if>
     </tbody>
 </table>

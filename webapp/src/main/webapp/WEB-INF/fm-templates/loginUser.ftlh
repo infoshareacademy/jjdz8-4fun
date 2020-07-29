@@ -47,4 +47,7 @@
             </div>
         </div>
         <br><br>
-        <#include "common/copyright-footer.ftlh">
+</header>
+        <footer style="position: relative;">
+            <#include "common/copyright-footer.ftlh">
+        </footer>

@@ -2,7 +2,7 @@
 <body>
 <header class="jumbotron">
     <div class="container" style="height: 40px">
-        <h1 class="display-3" style="font-size: 40px">Lista sklepow</h1>
+        <h1 class="display-3" style="font-size: 40px">Lista sklepów</h1>
     </div>
 </header>
 <table class="table table-striped table-dark">

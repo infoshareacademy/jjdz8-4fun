@@ -11,9 +11,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Comparator.comparing;
-
-
 @Stateless
 public class db_ProductDaoBean implements db_ProductDao {
 
@@ -124,6 +121,18 @@ public class db_ProductDaoBean implements db_ProductDao {
         }
     }
 
+    @Override
+    public Optional<db_ProductDto> findAlreadyExistProductDto(String name,String brand) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.name = :nameParm and p.brand = :brandParm", db_ProductDto.class);
 
+        query.setParameter("nameParm", name);
+        query.setParameter("brandParm", brand);
 
+        try{
+            return Optional.of(query.getSingleResult());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
 }

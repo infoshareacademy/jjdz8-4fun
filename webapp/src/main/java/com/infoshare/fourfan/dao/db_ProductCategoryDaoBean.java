@@ -62,4 +62,18 @@ public class db_ProductCategoryDaoBean implements db_ProductCategoryDao {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<db_ProductCategoryDto> findAlreadyExistProductCategoryDto(String name) {
+        TypedQuery<db_ProductCategoryDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductCategoryDto(" +
+                "p.id, p.category) FROM db_ProductCategory p WHERE p.category = :nameParm", db_ProductCategoryDto.class);
+
+        query.setParameter("nameParm", name);
+
+        try{
+            return Optional.of(query.getSingleResult());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
 }

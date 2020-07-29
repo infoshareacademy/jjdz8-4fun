@@ -14,4 +14,6 @@ public interface db_ProductCategoryDao extends db_Dao<db_ProductCategory> {
 
     Optional<db_ProductCategoryDto> findCategoryIdDto(Integer id);
 
+    Optional<db_ProductCategoryDto> findAlreadyExistProductCategoryDto(String name);
+
 }

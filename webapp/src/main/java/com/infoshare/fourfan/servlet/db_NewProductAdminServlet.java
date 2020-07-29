@@ -1,9 +1,11 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.dao.db_ProductCategoryDao;
+import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dao.db_ShopDao;
 import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.db_Shop;
+import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
 import com.infoshare.fourfan.service.db_ProductService;
@@ -20,6 +22,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/db_addProduct")
@@ -35,6 +38,9 @@ public class db_NewProductAdminServlet extends HttpServlet {
 
     @Inject
     private db_ShopDao db_shopDao;
+
+    @Inject
+    private db_ProductDao db_productDao;
 
     @Inject
     private db_ProductCategoryDao db_productCategoryDao;
@@ -79,6 +85,7 @@ public class db_NewProductAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter printWriter = resp.getWriter();
 
         String name = req.getParameter("name");
         String brand = req.getParameter("brand");
@@ -87,8 +94,16 @@ public class db_NewProductAdminServlet extends HttpServlet {
         Integer shop = Integer.parseInt(req.getParameter("shop"));
         Integer productCategory = Integer.parseInt(req.getParameter("category"));
 
-        db_productService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
+        Optional<db_ProductDto> db_product = db_productDao.findAlreadyExistProductDto(name,brand);
 
-        resp.sendRedirect("/confirmNewProduct");
+        if(db_product.isEmpty()){
+            db_productService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
+            resp.sendRedirect("/confirmNewProduct");
+        }else{
+            printWriter.println("<script>\n" +
+                    "        alert(\"Mamy już taki produkt tego producenta!\")\n" +
+                    "  top.window.location = '/db_addProduct';" +
+                    "    </script>");
+        }
     }
 }

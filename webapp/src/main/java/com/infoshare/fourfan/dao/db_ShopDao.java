@@ -14,4 +14,6 @@ public interface db_ShopDao extends db_Dao<db_Shop> {
 
     Optional<db_ShopDto> findShopIdDto(Integer id);
 
+    Optional<db_ShopDto> findAlreadyExistShopDto(String name);
+
 }

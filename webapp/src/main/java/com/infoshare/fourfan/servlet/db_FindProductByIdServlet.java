@@ -60,6 +60,10 @@ public class db_FindProductByIdServlet extends HttpServlet {
             dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
+            printWriter.println("<script>\n" +
+                    "        alert(\"Niepoprawne ID produktu!\")\n" +
+                    "  top.window.location = '/db_editProduct';" +
+                    "    </script>");
         }
         try {
             template.process(dataModel, printWriter);

@@ -62,4 +62,18 @@ public class db_ShopDaoBean implements db_ShopDao {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<db_ShopDto> findAlreadyExistShopDto(String name) {
+        TypedQuery<db_ShopDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ShopDto(" +
+                "p.id, p.shop) FROM db_Shop p WHERE p.shop = :nameParm", db_ShopDto.class);
+
+        query.setParameter("nameParm", name);
+
+        try{
+            return Optional.of(query.getSingleResult());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
 }

@@ -1,12 +1,15 @@
 <#include "common/headerShort.ftlh">
-<body>
+
 <header class="jumbotron">
     <div class="container" style="height: 40px">
-        <h1 class="display-3" style="font-size: 40px">Wyszukaj produkt</h1>
+        <h1 class="display-3" style="font-size: 40px">Shopping list - Wyszukanie produktu</h1>
     </div>
-
-    <div class="col-md-6">
-        <div class="ANPform-style-2">
+    </br></br></br></br></br>
+    <main role="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="ANPform-style-2">
             <div class="ANPform-style-2-heading">Wyszukaj produkt po ID</div>
             <form method="get" action="db_findProductById" accept-charset="utf-8">
                 Id: <input type="text" class="ANPinput-field" name="id"/><br/><br/>
@@ -25,8 +28,9 @@
             </form>
         </div>
     </div>
-
+            </div>
+        </div>
+    </main>
 </header>
-</body>
+
 <#include "common/copyright-footer.ftlh">
-</html>

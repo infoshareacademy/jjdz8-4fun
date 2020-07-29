@@ -34,6 +34,7 @@
                                 <li><a href="/db_productList">Lista produktów</a></li>
                                 <li><a href="/db_addProduct">Dodaj produkt</a></li>
                                 <li><a href="/db_editProduct">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/db_addShopOrCategory">Dodaj sklep lub kategorie</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

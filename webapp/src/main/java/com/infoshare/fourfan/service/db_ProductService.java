@@ -5,6 +5,8 @@ import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dao.db_ShopDao;
 import com.infoshare.fourfan.dao.db_UserProductsDao;
 import com.infoshare.fourfan.domain.datatypes.db_Product;
+import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
+import com.infoshare.fourfan.domain.datatypes.db_Shop;
 import com.infoshare.fourfan.domain.datatypes.db_UserProducts;
 import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.dto.db_UserProductsDto;
@@ -98,4 +100,20 @@ public class db_ProductService {
         db_productCategoryDao.findById(category).ifPresent(c -> {db_product.setDb_productCategory(c); db_productDao.update(db_product);});
         });
     }
+
+    public void saveNewShop(String name)
+    {
+        db_Shop db_shop = new db_Shop();
+        db_shop.setShop(name);
+        db_shopDao.save(db_shop);
+
+    }
+
+    public void saveNewCategory(String name)
+    {
+        db_ProductCategory db_productCategory = new db_ProductCategory();
+        db_productCategory.setCategory(name);
+        db_productCategoryDao.save(db_productCategory);
+    }
+
 }

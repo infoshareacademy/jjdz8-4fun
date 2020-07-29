@@ -116,4 +116,33 @@ public class db_ProductService {
         db_productCategoryDao.save(db_productCategory);
     }
 
+    @Transactional
+    public void editShop(Integer id, String name)
+    {
+        db_shopDao.findById(id).ifPresent(shop -> {
+            shop.setShop(name);
+            db_shopDao.update(shop);
+        });
+    }
+
+    @Transactional
+    public void deleteShop(Integer id)
+    {
+        db_shopDao.findById(id).ifPresent(shop -> db_shopDao.delete(shop));
+    }
+
+    @Transactional
+    public void editCategory(Integer id, String name)
+    {
+        db_productCategoryDao.findById(id).ifPresent(productCategory -> {
+            productCategory.setCategory(name);
+        db_productCategoryDao.update(productCategory);
+        });
+    }
+
+    @Transactional
+    public void deleteCategory(Integer id)
+    {
+        db_productCategoryDao.findById(id).ifPresent(db_productCategory -> db_productCategoryDao.delete(db_productCategory));
+    }
 }

@@ -5,10 +5,11 @@ import com.infoshare.fourfan.dto.db_ShopDto;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Optional;
-
 
 @Stateless
 public class db_ShopDaoBean implements db_ShopDao {
@@ -45,5 +46,20 @@ public class db_ShopDaoBean implements db_ShopDao {
     public List<db_ShopDto> findAllDto() {
         return entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ShopDto("+
                 "p.id,p.shop) FROM db_Shop p", db_ShopDto.class).getResultList();
+    }
+
+    @Override
+    public Optional<db_ShopDto> findShopIdDto(Integer id) {
+        TypedQuery<db_ShopDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ShopDto(" +
+                "p.id, p.shop) FROM db_Shop p WHERE p.id = :idParm", db_ShopDto.class);
+
+        query.setParameter("idParm", id);
+
+        try{
+            return Optional.of(query.getSingleResult());
+
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
     }
 }

@@ -1,7 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
+import com.infoshare.fourfan.service.db_ProductService;
+import com.infoshare.fourfan.service.db_ShopServiceRobocze;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -16,31 +17,49 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/db_categoryList")
-public class db_CategoryListServlet extends HttpServlet {
+@WebServlet("/db_editShop")
+public class db_editShopServlet extends HttpServlet {
+
+    private static final Logger logger = Logger.getLogger(EditProductServlet.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_ProductService db_productService;
 
-    private static final Logger logger = Logger.getLogger(db_CategoryListServlet.class.getName());
+    @Inject
+    private db_ShopServiceRobocze db_shopServiceRobocze;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "db_categoryList.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "db_editShop.ftlh");
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
-
+        dataModel.put("shops", db_shopServiceRobocze.getShops());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.severe(e.getMessage());
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+
+        String idParam = req.getParameter("id");
+
+        Integer id = Integer.parseInt(idParam);
+        String name = req.getParameter("name");
+
+        db_productService.editShop(id,name);
+
+        resp.sendRedirect("/db_shopList");
     }
 }

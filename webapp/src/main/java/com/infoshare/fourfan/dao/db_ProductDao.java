@@ -18,9 +18,12 @@ public interface db_ProductDao extends db_Dao<db_Product> {
 
     Optional<List<db_ProductDto>> findProductCategoryDto(Integer category);
 
+    Optional<List<db_ProductDto>> findProductShopDto(Integer shop);
+
     Optional<List<db_ProductDto>> findProductCaloriesDto(Integer minCalories, Integer maxCalories);
 
     Optional<List<db_ProductDto>> filterByPrice(Integer priceMin, Integer priceMax);
 
     Optional<db_ProductDto> findAlreadyExistProductDto(String name,String brand);
+
 }

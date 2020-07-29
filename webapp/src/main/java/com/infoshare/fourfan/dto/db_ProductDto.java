@@ -9,8 +9,6 @@ public class db_ProductDto {
     private Integer calories;
     private String shop;
     private String productCategory;
-//    private Integer amount;
-
 
     public db_ProductDto(Integer id, String name, String brand, Integer price, Integer calories, String shop, String productCategory) {
         this.id = id;
@@ -20,7 +18,6 @@ public class db_ProductDto {
         this.calories = calories;
         this.shop = shop;
         this.productCategory = productCategory;
-//        this.amount = amount;
     }
 
     public Integer getId() {
@@ -78,13 +75,5 @@ public class db_ProductDto {
     public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
     }
-
-//    public Integer getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Integer amount) {
-//        this.amount = amount;
-//    }
 
 }

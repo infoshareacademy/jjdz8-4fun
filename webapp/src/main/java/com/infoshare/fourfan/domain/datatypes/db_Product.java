@@ -24,9 +24,6 @@ public class db_Product {
     @Basic
     private Integer calories;
 
-//    @Basic
-//    private Integer amount = 1;
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shop_id")
     private db_Shop db_shop;
@@ -35,10 +32,9 @@ public class db_Product {
     @JoinColumn(name = "category_id")
     private db_ProductCategory db_productCategory;
 
-    //-----
     @OneToMany(mappedBy = "db_product")
     private Set<db_UserProducts> userProducts = new HashSet<>();
-    //-----
+
 
     public Integer getId() {
         return id;
@@ -75,14 +71,6 @@ public class db_Product {
     public Integer getCalories() {
         return calories;
     }
-
-//    public Integer getAmount() {
-//        return amount;
-//    }
-//
-//    public void setAmount(Integer amount) {
-//        this.amount = amount;
-//    }
 
     public void setCalories(Integer calories) {
         this.calories = calories;

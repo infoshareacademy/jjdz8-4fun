@@ -2,8 +2,6 @@ package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user_products")
@@ -19,18 +17,13 @@ public class db_UserProducts {
     @Column(name = "timestamp")
     private Timestamp timestamp;
 
-
-//    @OneToMany(mappedBy = "db_shop")
-//    private Set<db_Product> products = new HashSet<>();
-
-    //-----
     @Column(name = "userid")
     private  Integer useridInt;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_id")
     private db_Product db_product;
-    //-----
+
 
     public Integer getId() {
         return id;

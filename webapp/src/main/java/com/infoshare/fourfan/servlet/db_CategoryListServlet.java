@@ -1,7 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
+import com.infoshare.fourfan.service.db_CategoryService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -23,7 +23,7 @@ public class db_CategoryListServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     private static final Logger logger = Logger.getLogger(db_CategoryListServlet.class.getName());
 
@@ -35,7 +35,7 @@ public class db_CategoryListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+        dataModel.put("categories", db_categoryService.getCategory());
 
         try {
             template.process(dataModel, printWriter);

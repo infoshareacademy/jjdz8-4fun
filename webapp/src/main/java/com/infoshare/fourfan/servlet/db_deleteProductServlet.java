@@ -43,8 +43,9 @@ public class db_deleteProductServlet extends HttpServlet {
         db_productService.deleteProduct(Integer.parseInt(idParam));
 
         printWriter.println("<script>\n" +
-                "        alert(\"Produkt został usunięty!\")\n" +
-                "    </script>");
+                "alert(\"Produkt został usunięty!\")\n" +
+                "top.window.location = '/db_addProduct';" +
+                "</script>");
 
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {

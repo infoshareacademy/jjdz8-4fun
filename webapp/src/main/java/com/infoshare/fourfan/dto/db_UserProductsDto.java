@@ -44,7 +44,7 @@ public class db_UserProductsDto {
         return productName;
     }
 
-    public void setProductName(String productCategory) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
@@ -95,5 +95,4 @@ public class db_UserProductsDto {
     public void setProductAmount(Integer productAmount) {
         this.productAmount = productAmount;
     }
-
 }

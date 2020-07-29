@@ -1,13 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.dao.db_UserProductsDao;
-import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.dto.db_UserProductsDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ShoppingListService;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
-import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -32,16 +28,13 @@ public class db_EditProductListServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private ShoppingListService shoppingListService;
-
-    @Inject
     private db_UserProductsDao db_userProductsDao;
 
     @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
+    private db_ShopService db_shopService;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     @Inject
     private db_ProductService db_productService;
@@ -65,8 +58,8 @@ public class db_EditProductListServlet extends HttpServlet {
         if (db_userProducts.isPresent()){
             dataModel.put("product", db_userProducts.get());
             dataModel.put("productId", db_userProducts.get().getId());
-            dataModel.put("shops", db_shopServiceRobocze.getShops());
-            dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+            dataModel.put("shops", db_shopService.getShops());
+            dataModel.put("categories", db_categoryService.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         }

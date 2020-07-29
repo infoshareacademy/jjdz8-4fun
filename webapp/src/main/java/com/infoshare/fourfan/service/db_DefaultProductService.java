@@ -1,12 +1,10 @@
 package com.infoshare.fourfan.service;
 
 import com.infoshare.fourfan.dao.db_ProductCategoryDao;
-import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dao.db_ShopDao;
 import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.db_Shop;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
@@ -20,10 +18,10 @@ public class db_DefaultProductService {
     db_ProductCategoryDao db_productCategoryDao;
 
     @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
+    private db_ShopService db_shopService;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     public void createDefaultProduct() {
 
@@ -43,12 +41,12 @@ public class db_DefaultProductService {
 //        db_product.setDb_productCategory(db_productCategory);
 
         // 2 testowy produkt
-        if (db_shopServiceRobocze.getShops().size() == 0) {
+        if (db_shopService.getShops().size() == 0) {
             db_Shop db_shop2 = new db_Shop();
             db_shop2.setShop("sklep2");
             db_shopDao.save(db_shop2);
         }
-        if (db_productCategoryServiceRobocze.getCategory().size() == 0) {
+        if (db_categoryService.getCategory().size() == 0) {
             db_ProductCategory db_productCategory2 = new db_ProductCategory();
             db_productCategory2.setCategory("kategoria2");
             db_productCategoryDao.save(db_productCategory2);

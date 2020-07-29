@@ -5,9 +5,7 @@ import com.infoshare.fourfan.dao.db_ShopDao;
 import com.infoshare.fourfan.dto.db_ProductCategoryDto;
 import com.infoshare.fourfan.dto.db_ShopDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
-import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -32,19 +30,16 @@ public class db_NewShopOrCategoryServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private db_ProductService db_productService;
+    private db_CategoryService db_categoryService;
+
+    @Inject
+    private db_ShopService db_shopService;
 
     @Inject
     private db_ProductCategoryDao db_productCategoryDao;
 
     @Inject
     private db_ShopDao db_shopDao;
-
-    @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
-
-    @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -53,8 +48,8 @@ public class db_NewShopOrCategoryServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "db_addShopOrCategory.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        dataModel.put("shops", db_shopServiceRobocze.getShops());
-        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+        dataModel.put("shops", db_shopService.getShops());
+        dataModel.put("categories", db_categoryService.getCategory());
 
         PrintWriter printWriter = resp.getWriter();
 
@@ -79,7 +74,7 @@ public class db_NewShopOrCategoryServlet extends HttpServlet {
             Optional<db_ProductCategoryDto> db_productCategory = db_productCategoryDao.findAlreadyExistProductCategoryDto(nameCategory);
 
             if(db_productCategory.isEmpty()){
-                db_productService.saveNewCategory(nameCategory);
+                db_categoryService.saveNewCategory(nameCategory);
                 resp.sendRedirect("/db_categoryList");
             }else{
                 printWriter.println("<script>\n" +
@@ -93,7 +88,7 @@ public class db_NewShopOrCategoryServlet extends HttpServlet {
             Optional<db_ShopDto> db_shop = db_shopDao.findAlreadyExistShopDto(nameShop);
 
             if(db_shop.isEmpty()){
-                db_productService.saveNewShop(nameShop);
+                db_shopService.saveNewShop(nameShop);
                 resp.sendRedirect("/db_shopList");
             }else{
                 printWriter.println("<script>\n" +

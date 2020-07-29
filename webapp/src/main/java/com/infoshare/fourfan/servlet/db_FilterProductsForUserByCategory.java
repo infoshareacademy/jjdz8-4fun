@@ -3,7 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
+import com.infoshare.fourfan.service.db_CategoryService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -27,7 +27,7 @@ public class db_FilterProductsForUserByCategory extends HttpServlet {
     private db_ProductDao db_productDao;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     private static final Logger logger = Logger.getLogger(db_FilterProductsForUserByCategory.class.getName());
 
@@ -43,7 +43,7 @@ public class db_FilterProductsForUserByCategory extends HttpServlet {
         String categoryParam = req.getParameter("category");
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+        dataModel.put("categories", db_categoryService.getCategory());
 
         if(categoryParam != null && !categoryParam.equals("Wybierz") ){
             Optional<List<db_ProductDto>> products = db_productDao.findProductCategoryDto(Integer.parseInt(categoryParam));

@@ -7,9 +7,9 @@ import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
 import com.infoshare.fourfan.domain.datatypes.db_Shop;
 import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
+import com.infoshare.fourfan.service.db_CategoryService;
 import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.db_ShopService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -46,10 +46,10 @@ public class db_NewProductAdminServlet extends HttpServlet {
     private db_ProductCategoryDao db_productCategoryDao;
 
     @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
+    private db_ShopService db_shopService;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -58,19 +58,19 @@ public class db_NewProductAdminServlet extends HttpServlet {
         Template template = templateProvider.getTemplate(getServletContext(), "db_addProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
 
-        if (db_shopServiceRobocze.getShops().size() == 0) {
+        if (db_shopService.getShops().size() == 0) {
             db_Shop db_shop2 = new db_Shop();
             db_shop2.setShop("sklep2");
             db_shopDao.save(db_shop2);
         }
-        if (db_productCategoryServiceRobocze.getCategory().size() == 0) {
+        if (db_categoryService.getCategory().size() == 0) {
             db_ProductCategory db_productCategory2 = new db_ProductCategory();
             db_productCategory2.setCategory("kategoria2");
             db_productCategoryDao.save(db_productCategory2);
         }
 
-        dataModel.put("shops", db_shopServiceRobocze.getShops());
-        dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+        dataModel.put("shops", db_shopService.getShops());
+        dataModel.put("categories", db_categoryService.getCategory());
 
         PrintWriter printWriter = resp.getWriter();
 
@@ -101,9 +101,9 @@ public class db_NewProductAdminServlet extends HttpServlet {
             resp.sendRedirect("/confirmNewProduct");
         }else{
             printWriter.println("<script>\n" +
-                    "        alert(\"Mamy już taki produkt tego producenta!\")\n" +
-                    "  top.window.location = '/db_addProduct';" +
-                    "    </script>");
+                    "alert(\"Mamy już taki produkt tego producenta!\")\n" +
+                    "top.window.location = '/db_addProduct';" +
+                    "</script>");
         }
     }
 }

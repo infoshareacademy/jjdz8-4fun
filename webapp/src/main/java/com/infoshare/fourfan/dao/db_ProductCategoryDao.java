@@ -2,6 +2,8 @@ package com.infoshare.fourfan.dao;
 
 import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
 import com.infoshare.fourfan.dto.db_ProductCategoryDto;
+import com.infoshare.fourfan.dto.db_ProductDto;
+import com.infoshare.fourfan.dto.db_UserProductsDto;
 
 import javax.ejb.Local;
 import java.util.List;

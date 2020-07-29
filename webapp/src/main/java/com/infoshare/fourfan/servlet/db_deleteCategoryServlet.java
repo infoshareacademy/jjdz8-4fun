@@ -1,8 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.dao.db_ProductDao;
+import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
-import com.infoshare.fourfan.service.db_ProductService;
+import com.infoshare.fourfan.service.db_CategoryService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -14,20 +15,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/db_deleteCategory")
 public class db_deleteCategoryServlet extends HttpServlet {
 
     @Inject
-    private db_ProductService db_productService;
+    private db_CategoryService db_categoryService;
+
+    @Inject
+    private db_ProductDao db_productDao;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
 
     private static final Logger logger = Logger.getLogger(db_deleteCategoryServlet.class.getName());
 
@@ -44,15 +48,26 @@ public class db_deleteCategoryServlet extends HttpServlet {
             return;
         }
 
-        db_productService.deleteCategory(Integer.parseInt(idParam));
+        Optional<List<db_ProductDto>> db_product = db_productDao.findProductCategoryDto(Integer.parseInt(idParam));
 
+
+        if(db_product.get().isEmpty()){
+
+        db_categoryService.deleteCategory(Integer.parseInt(idParam));
         printWriter.println("<script>\n" +
-                "        alert(\"Kategoria została usunięta!\")\n" +
-                "    </script>");
+                "alert(\"Kategoria została usunięta!\")\n" +
+                "top.window.location = '/db_categoryList';" +
+                "</script>");
+        }else{
+            printWriter.println("<script>\n" +
+                    "alert(\"Nie możemy usunąć kategorii! jest powiązana z produktem!\")\n" +
+                    "top.window.location = '/db_categoryList';" +
+                    "</script>");
+        }
 
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {
-            dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+            dataModel.put("categories", db_categoryService.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         } try {

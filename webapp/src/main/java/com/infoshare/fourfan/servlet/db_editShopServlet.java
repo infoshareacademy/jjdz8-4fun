@@ -1,8 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductService;
-import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.db_ShopService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -26,11 +25,7 @@ public class db_editShopServlet extends HttpServlet {
     private TemplateProvider templateProvider;
 
     @Inject
-    private db_ProductService db_productService;
-
-    @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
-
+    private db_ShopService db_shopService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -40,7 +35,7 @@ public class db_editShopServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("shops", db_shopServiceRobocze.getShops());
+        dataModel.put("shops", db_shopService.getShops());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
@@ -58,7 +53,7 @@ public class db_editShopServlet extends HttpServlet {
         Integer id = Integer.parseInt(idParam);
         String name = req.getParameter("name");
 
-        db_productService.editShop(id,name);
+        db_shopService.editShop(id,name);
 
         resp.sendRedirect("/db_shopList");
     }

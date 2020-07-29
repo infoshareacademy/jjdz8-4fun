@@ -2,6 +2,7 @@ package com.infoshare.fourfan.dao;
 
 import com.infoshare.fourfan.domain.datatypes.db_ProductCategory;
 import com.infoshare.fourfan.dto.db_ProductCategoryDto;
+import com.infoshare.fourfan.dto.db_UserProductsDto;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -76,4 +77,5 @@ public class db_ProductCategoryDaoBean implements db_ProductCategoryDao {
             return Optional.empty();
         }
     }
+
 }

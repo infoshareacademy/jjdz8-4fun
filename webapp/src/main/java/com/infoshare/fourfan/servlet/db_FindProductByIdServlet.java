@@ -3,8 +3,8 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.db_ProductDao;
 import com.infoshare.fourfan.dto.db_ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.db_ProductCategoryServiceRobocze;
-import com.infoshare.fourfan.service.db_ShopServiceRobocze;
+import com.infoshare.fourfan.service.db_CategoryService;
+import com.infoshare.fourfan.service.db_ShopService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -27,10 +27,10 @@ public class db_FindProductByIdServlet extends HttpServlet {
     private db_ProductDao db_productDao;
 
     @Inject
-    private db_ShopServiceRobocze db_shopServiceRobocze;
+    private db_ShopService db_shopService;
 
     @Inject
-    private db_ProductCategoryServiceRobocze db_productCategoryServiceRobocze;
+    private db_CategoryService db_categoryService;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -56,8 +56,8 @@ public class db_FindProductByIdServlet extends HttpServlet {
         if (db_product.isPresent()){
             dataModel.put("product", db_product.get());
             dataModel.put("productId", db_product.get().getId());
-            dataModel.put("shops", db_shopServiceRobocze.getShops());
-            dataModel.put("categories", db_productCategoryServiceRobocze.getCategory());
+            dataModel.put("shops", db_shopService.getShops());
+            dataModel.put("categories", db_categoryService.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
             printWriter.println("<script>\n" +

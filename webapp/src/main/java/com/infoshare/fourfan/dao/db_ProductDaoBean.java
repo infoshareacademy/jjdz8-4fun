@@ -92,6 +92,20 @@ public class db_ProductDaoBean implements db_ProductDao {
     }
 
     @Override
+    public Optional<List<db_ProductDto>> findProductShopDto(Integer shop) {
+        TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
+                "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.db_shop.id = :shopParm", db_ProductDto.class);
+
+        query.setParameter("shopParm", shop);
+
+        try{
+            return Optional.of(query.getResultList());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
+
+    @Override
     public Optional<List<db_ProductDto>> findProductCaloriesDto(Integer minCalories, Integer maxCalories) {
         TypedQuery<db_ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.db_ProductDto(" +
                 "p.id, p.name, p.brand, p.price, p.calories, p.db_shop.shop, p.db_productCategory.category) FROM db_Product p WHERE p.calories BETWEEN :minCaloriesParm and :maxCaloriesParm", db_ProductDto.class);

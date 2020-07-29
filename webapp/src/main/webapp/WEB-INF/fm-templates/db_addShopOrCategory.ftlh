@@ -17,7 +17,7 @@
                                                                       name="nameCategory" value=""
                                                                       required/></label>
                             <label><span> </span><input type="submit" style="background: #009961"
-                                                        value="Zapisz Produkt"/></label>
+                                                        value="Zapisz dane"/></label>
                         </form>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                                                   name="nameShop" value=""
                                                                   required/></label>
                             <label><span> </span><input type="submit" style="background: #009961"
-                                                        value="Zapisz Produkt"/></label>
+                                                        value="Zapisz dane"/></label>
                         </form>
                     </div>
                 </div>

@@ -12,13 +12,6 @@
                             sklepami po podanej cenie jako filtr
                         </div>
                         <form method="get" action="/db_filterByPriceAndShop" accept-charset="utf-8">
-<#--                            <label>-->
-<#--                                <span style="width: 800px"> Podaj maksymalną cenę po jakiej chcesz filtrować produkty </span>-->
-<#--                                <input id="price" type="range" name="price" min="0" max="10000" step="50" value="5000"/>-->
-<#--                                <span id="priceSpan"> Wybrana wartość: </span>-->
-<#--                            </label>-->
-<#--                            </br></br></br>-->
-<#--                            <input type="submit" style="background: #009961" value="Szukaj">-->
                             <label>
                                 <span style="width: 800px"> Podaj minimalną cenę po jakiej chcesz filtrować produkty </span>
                                 <input id="priceMin" type="range" name="priceMin" min="0" max="10000" step="10"

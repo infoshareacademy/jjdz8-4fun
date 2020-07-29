@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -32,8 +33,12 @@ public class AdminFindProductByIdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        String idParam = req.getParameter("id");
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
 
+        String idParam = req.getParameter("id");
         if (idParam == null || idParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
@@ -43,7 +48,6 @@ public class AdminFindProductByIdServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
-        Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null && product!= null){
             dataModel.put("product", product);
             dataModel.put("productId", idParam);

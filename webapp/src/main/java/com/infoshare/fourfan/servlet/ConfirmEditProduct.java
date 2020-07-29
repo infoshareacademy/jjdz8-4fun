@@ -4,6 +4,7 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -34,12 +35,15 @@ public class ConfirmEditProduct extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Long idParam = Long.parseLong(req.getParameter("id"));
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
 
+        Long idParam = Long.parseLong(req.getParameter("id"));
         Product product = adminService.findProductById(Math.toIntExact(idParam));
 
         Template template = templateProvider.getTemplate(getServletContext(), "confirmEditProduct.ftlh");
-        Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("product", product);
         PrintWriter printWriter = resp.getWriter();
         try {

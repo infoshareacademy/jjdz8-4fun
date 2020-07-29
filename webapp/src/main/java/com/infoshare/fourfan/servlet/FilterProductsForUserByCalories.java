@@ -2,6 +2,7 @@ package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -42,6 +43,9 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
             Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
             Map<String, Object> dataModel = new HashMap<>();
+            if (!UserContext.requireUserContext(req, resp, dataModel)) {
+                return;
+            }
             dataModel.put("firstRange", CaloriesRangeEnum.RANGE_0_150);
             dataModel.put("secondRange", CaloriesRangeEnum.RANGE_151_300);
             dataModel.put("thirdRange", CaloriesRangeEnum.RANGE_FROM_301);

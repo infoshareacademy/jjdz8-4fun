@@ -42,15 +42,18 @@ public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
         if (!UserContext.requireUserContext(req, resp, dataModel)) {
             return;
         }
-        String minPrice = req.getParameter("priceMin");
-        String maxPrice = req.getParameter("priceMax");
+        String priceMinAndShop = req.getParameter("priceMin");
+        String priceMaxAndShop = req.getParameter("priceMax");
 
-        if(maxPrice != null && !maxPrice.isEmpty()) {
-            Integer minpriceInt = Integer.parseInt(minPrice);
-            Integer maxpriceInt = Integer.parseInt(maxPrice);
-            Optional<List<ProductDto>> db_product = productDao.filterByPrice(minpriceInt, maxpriceInt);
+        if(priceMinAndShop != null && !priceMinAndShop.isEmpty() && priceMaxAndShop != null && !priceMaxAndShop.isEmpty()) {
+            Integer priceMinInt = Integer.parseInt(priceMinAndShop);
+            Integer priceMaxInt = Integer.parseInt(priceMaxAndShop);
+
+            Optional<List<ProductDto>> db_product = productDao.filterByPrice(priceMinInt, priceMaxInt);
 
             dataModel.put("products", db_product.get());
+            dataModel.put("priceMin", priceMinAndShop);
+            dataModel.put("priceMax", priceMaxAndShop);
         }
 
         try {

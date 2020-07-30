@@ -33,9 +33,6 @@ public class FilterProductsForUserByCalories extends HttpServlet {
     @Inject
     private ProductDao productDao;
 
-    @Inject
-    private ProductService productService;
-
     private static final Logger logger = Logger.getLogger(FilterProductsForUserByCalories.class.getName());
 
     @Inject

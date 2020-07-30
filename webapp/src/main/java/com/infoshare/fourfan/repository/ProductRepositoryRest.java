@@ -48,6 +48,7 @@ public class ProductRepositoryRest {
         productToReturn.setId(product.getId());
 
         return productToReturn;
+
     }
 
     public void removeProduct(Integer id) {

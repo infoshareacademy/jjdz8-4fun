@@ -17,7 +17,6 @@
         <th scope="col">Kalorie</th>
         <th scope="col">Sklep</th>
         <th scope="col">Kategoria</th>
-        <th scope="col">Ilość</th>
         <th scope="col">Dodaj do listy</th>
     </tr>
     </thead>
@@ -32,7 +31,6 @@
         <th>${product.calories}</th>
         <th>${product.shop}</th>
         <th>${(product.productCategory)}</th>
-        <th>${(product.amount)!}</th>
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">

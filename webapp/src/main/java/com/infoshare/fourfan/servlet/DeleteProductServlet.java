@@ -1,9 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -18,24 +16,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-find-product-by-id")
-public class AdminFindProductByIdServlet extends HttpServlet {
+@WebServlet("/deleteProduct")
+public class DeleteProductServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
 
     @Inject
-    private ProductServiceDb productServiceDb;
-
-    @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(DeleteProductServlet.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
+        Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
+        PrintWriter printWriter = resp.getWriter();
         String idParam = req.getParameter("id");
 
         if (idParam == null || idParam.isEmpty()) {
@@ -43,19 +40,19 @@ public class AdminFindProductByIdServlet extends HttpServlet {
             return;
         }
 
-//      Product product = productService.findProductById(Integer.valueOf(idParam));
-        Product product = productServiceDb.findById(Integer.valueOf(idParam));
-        PrintWriter printWriter = resp.getWriter();
+        productService.deleteProduct(Integer.parseInt(idParam));
 
-        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
+        printWriter.println("<script>\n" +
+                "alert(\"Produkt został usunięty!\")\n" +
+                "top.window.location = '/addProduct';" +
+                "</script>");
+
         Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null && product!= null){
-            dataModel.put("product", product);
-            dataModel.put("productId", idParam);
+        if (dataModel != null) {
+            dataModel.put("products", productService.getProducts());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
-        }
-        try {
+        } try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
             logger.severe(e.getMessage());

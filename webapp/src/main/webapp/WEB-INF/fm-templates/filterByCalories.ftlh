@@ -9,7 +9,6 @@
                 <div class="col-md-6">
                     <div class="ANPform-style-2">
                         <div class="ANPform-style-2-heading">Filtorwnie produktów po kaloryczności</div>
-
                         <form method="get" action="/filterUserProductsByCalories" accept-charset="utf-8">
                             <p>
                                 <span>Wybierz przedział: </span>

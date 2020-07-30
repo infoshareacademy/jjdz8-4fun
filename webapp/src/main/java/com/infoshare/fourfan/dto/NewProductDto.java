@@ -13,6 +13,7 @@ public class NewProductDto {
     @Size(min = 1, max = 15, message = "Brand's name cannot be shorter than 1 and longer than 15")
     private String brand;
 
+
     public String getName() {
         return name;
     }
@@ -28,5 +29,6 @@ public class NewProductDto {
     public void setBrand(String brand) {
         this.brand = brand;
     }
+
 
 }

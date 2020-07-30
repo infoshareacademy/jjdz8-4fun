@@ -1,10 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.dao.UserProductsDao;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ShoppingListService;
+import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -13,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/delete-fromShoppingList")
+@WebServlet("/deleteFromShoppingList")
 public class DeleteFromShoppingListServlet extends HttpServlet {
 
     @Inject
-    ShoppingListService shoppingListService;
+    private ProductService productService;
+
+    @Inject
+    private UserProductsDao userProductsDao;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -30,37 +30,38 @@ public class DeleteFromShoppingListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
 
-        Integer productId = Integer.valueOf(req.getParameter("id"));
-
-        Template template = templateProvider.getTemplate(getServletContext(), "shoppingList.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "showShoppingList.ftlh");
         PrintWriter printWriter = resp.getWriter();
+        String productId = req.getParameter("id");
+
         if (productId == null) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = shoppingListService.findProductSLById(productId);
-        shoppingListService.deleteProductFromJson(product);
+        Integer IDuzytkownika = 1;
+//        Optional<List<UserProductsDto>> userProducts = userProductsDao.findProductsUserIdDto(IDuzytkownika);
 
 
-        printWriter.println("<script>\n" +
-                "        alert(\"" + "produkt" + " został usunięty z listy zakupów!\")\n" +
-                "    </script>");
+        productService.deleteProductFromUserList(Integer.parseInt(productId));
 
-        Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null) {
-            dataModel.put("shoppingListproducts", shoppingListService.findAllJson());
+//        printWriter.println("<script>\n" +
+//                "        alert(\"" + "produkt" + " został usunięty z listy zakupów!\")\n" +
+//                "    </script>");
 
-        } else {
-            dataModel.put("errorMessage", "Product has not been found.");
-        } try {
-            template.process(dataModel, printWriter);
-        } catch (TemplateException e) {
-            logger.severe(e.getMessage());
-        }
+        resp.sendRedirect("/showShoppingList");
+//        Map<String, Object> dataModel = new HashMap<>();
+//        if (dataModel != null) {
+//            dataModel.put("userProducts", userProductsDao.findProductsUserIdDto(IDuzytkownika));
+//        } else {
+//            dataModel.put("errorMessage", "Product has not been found.");
+//        } try {
+//            template.process(dataModel, printWriter);
+//        } catch (TemplateException e) {
+//            logger.severe(e.getMessage());
+//        }
     }
 }
 

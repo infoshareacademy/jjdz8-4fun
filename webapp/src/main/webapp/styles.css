@@ -92,3 +92,14 @@ div.error {
     -webkit-font-smoothing: antialiased;
     font-weight: 400;
 }
+
+
+.nav {
+    display: block !important;
+    padding-left: 15px !important;
+}
+
+.logo {
+    margin-right: 25px !important;
+}
+

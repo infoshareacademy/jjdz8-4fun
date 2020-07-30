@@ -1,21 +1,18 @@
 package com.infoshare.fourfan.dto;
 
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
-
 public class ProductDto {
-    private Integer id;
+
+    public Integer id;
     private String name;
     private String brand;
     private Integer price;
     private Integer calories;
-    private Shop shop;
-    private ProductCategory productCategory;
+    private String shop;
+    private String productCategory;
     private Long created;
     private Long lastModified;
 
-
-    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory) {
+    public ProductDto(Integer id, String name, String brand, Integer price, Integer calories, String shop, String productCategory) {
         this.id = id;
         this.name = name;
         this.brand = brand;
@@ -28,9 +25,6 @@ public class ProductDto {
     public ProductDto() {
 
     }
-
-    //---------------------------- G & S -----------------------------------------
-
 
     public Integer getId() {
         return id;
@@ -72,30 +66,29 @@ public class ProductDto {
         this.calories = calories;
     }
 
-    public Shop getShop() {
+    public String getShop() {
         return shop;
     }
 
-    public void setShop(Shop shop) {
+    public void setShop(String shop) {
         this.shop = shop;
     }
 
-    public ProductCategory getProductCategory() {
+    public String getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    public void setProductCategory(String productCategory) {
         this.productCategory = productCategory;
-    }
-
-    public void setCreated(Long created) {
-        this.created = created;
     }
 
     public Long getCreated() {
         return created;
     }
 
+    public void setCreated(Long created) {
+        this.created = created;
+    }
 
     public Long getLastModified() {
         return lastModified;
@@ -103,9 +96,5 @@ public class ProductDto {
 
     public void setLastModified(Long lastModified) {
         this.lastModified = lastModified;
-    }
-
-    public void setId(String id) {
-        this.id = Integer.valueOf(id);
     }
 }

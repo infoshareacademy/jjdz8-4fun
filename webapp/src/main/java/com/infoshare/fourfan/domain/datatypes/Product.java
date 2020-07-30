@@ -1,12 +1,12 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
 public class Product {
-    private static Integer nextid = new ProductList().size();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,99 +16,33 @@ public class Product {
     @Basic
     private String brand;
     @Basic
-    private Integer price;      //Cena reprezentowana w groszach
+    private Integer price;
     @Basic
     private Integer calories;
-    @Basic
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "shop_id")
     private Shop shop;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "category_id")
+    private ProductCategory productCategory;
+
+    @OneToMany(mappedBy = "product")
+    private Set<UserProducts> userProducts = new HashSet<>();
+
     @Basic
     private Long created;
+
     @Basic
     private Long lastModified;
 
-
-    @Column(name = "product_category")
-    private ProductCategory productCategory;
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
-
-    @Basic
-    private Integer amount;
-
-    public Product(Integer id, String name, String brand, Integer price, Integer calories, Shop shop, ProductCategory productCategory, Integer amount) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
-        this.calories = calories;
-        this.shop = shop;
-        this.productCategory = productCategory;
-        this.amount = amount;
-    }
 
     public Product() {
 
     }
 
-    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam, Integer amountParam) {
-    }
-
-    public static Integer getNextid() {
-        return nextid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public Integer getCalories() {
-        return calories;
-    }
-
-    public Shop getShop() {
-        return shop;
-    }
-
-    public ProductCategory getProductCategory() {
-        return productCategory;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public void setCalories(Integer calories) {
-        this.calories = calories;
-    }
-
-    public void setShop(Shop shop) {
-        this.shop = shop;
-    }
-
-    public void setProductCategory(ProductCategory productCategory) {
-        this.productCategory = productCategory;
+    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
     }
 
     public Integer getId() {
@@ -119,45 +53,75 @@ public class Product {
         this.id = id;
     }
 
-    public Long getLastModified() {
-        return lastModified;
+    public String getName() {
+        return name;
     }
 
-    public void setLastModified(Long lastModified) {
-        this.lastModified = lastModified;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCreated(Long created) {
-        this.created = created;
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Integer getCalories() {
+        return calories;
+    }
+
+    public void setCalories(Integer calories) {
+        this.calories = calories;
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public ProductCategory getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public Set<UserProducts> getUserProducts() {
+        return userProducts;
+    }
+
+    public void setUserProducts(Set<UserProducts> userProducts) {
+        this.userProducts = userProducts;
     }
 
     public Long getCreated() {
         return created;
     }
 
-    public void setNextId() {
-        id = nextid;
-        nextid++;
+    public void setCreated(Long created) {
+        this.created = created;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(brand, product.brand) &&
-                Objects.equals(price, product.price) &&
-                Objects.equals(calories, product.calories) &&
-                shop == product.shop &&
-                Objects.equals(created, product.created) &&
-                Objects.equals(lastModified, product.lastModified) &&
-                productCategory == product.productCategory;
+    public Long getLastModified() {
+        return lastModified;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, brand, price, calories, shop, created, lastModified, productCategory);
+    public void setLastModified(Long lastModified) {
+        this.lastModified = lastModified;
     }
 }

@@ -1,9 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.service.CategoryService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -17,16 +17,19 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/filterUserProductsByCategory")
 public class FilterProductsForUserByCategory extends HttpServlet {
 
     @Inject
-    private ProductService productService;
+    private ProductDao productDao;
 
-    private static final Logger logger
-            = Logger.getLogger(FilterProductsForUserByCategory.class.getName());
+    @Inject
+    private CategoryService db_categoryService;
+
+    private static final Logger logger = Logger.getLogger(FilterProductsForUserByCategory.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
@@ -34,22 +37,22 @@ public class FilterProductsForUserByCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter printWriter = resp.getWriter();
-
-        String category = req.getParameter("category");
 
         Template template = templateProvider.getTemplate(getServletContext(), "filterByCategory.ftlh");
+        PrintWriter printWriter = resp.getWriter();
+        String categoryParam = req.getParameter("category");
+
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
-        dataModel.put("veggies", ProductCategory.WARZYWA.ordinal());
-        dataModel.put("fruits", ProductCategory.OWOCE.ordinal());
+        dataModel.put("categories", db_categoryService.getCategory());
 
-        if(category != null && !category.equals("Wybierz") ){
-            Integer categoryInt = Integer.parseInt(category);
-            List<Product> products = productService.filterByCategory(categoryInt);
-            dataModel.put("products", products);
+        if(categoryParam != null && !categoryParam.equals("Wybierz") ){
+            Optional<List<ProductDto>> products = productDao.findProductCategoryDto(Integer.parseInt(categoryParam));
+            if (products.isPresent()){
+                dataModel.put("products", products.get());
+            } else {
+                dataModel.put("errorMessage", "Product has not been found.");
+            }
         }
-
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

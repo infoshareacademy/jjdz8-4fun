@@ -18,8 +18,7 @@ import java.util.logging.Logger;
 @WebServlet("/confirmRemoveAllList")
 public class ConfirmRemoveAllShoppingList extends HttpServlet {
 
-    private static final Logger logger
-            = Logger.getLogger(ConfirmRemoveAllShoppingList.class.getName());
+    private static final Logger logger = Logger.getLogger(ConfirmRemoveAllShoppingList.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;

@@ -17,8 +17,6 @@ public interface Dao<T> {
 
     Optional<T> findById(Integer id);
 
-    Product findByName(String name);
-
     List<T> findAll();
 
 }

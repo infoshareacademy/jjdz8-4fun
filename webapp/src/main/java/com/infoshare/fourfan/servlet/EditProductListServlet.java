@@ -1,8 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.dao.UserProductsDao;
+import com.infoshare.fourfan.dto.UserProductsDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ShoppingListService;
+import com.infoshare.fourfan.service.*;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -15,39 +16,50 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/editProductList")
 public class EditProductListServlet extends HttpServlet {
 
-    private static final Logger logger
-            = Logger.getLogger(EditProductListServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(EditProductListServlet.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private ShoppingListService shoppingListService;
+    private UserProductsDao userProductsDao;
+
+    @Inject
+    private ShopService shopService;
+
+    @Inject
+    private CategoryService db_categoryService;
+
+    @Inject
+    private ProductService productService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
-        String idParam3 = req.getParameter("id");
 
-        if (idParam3 == null || idParam3.isEmpty()) {
+        Template template = templateProvider.getTemplate(getServletContext(), "editProductList.ftlh");
+        PrintWriter printWriter = resp.getWriter();
+        String idParam = req.getParameter("id");
+
+        if (idParam == null || idParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = shoppingListService.findProductSLById(Integer.valueOf(idParam3));
-        PrintWriter printWriter = resp.getWriter();
+        Optional<UserProductsDto> db_userProducts = userProductsDao.findOneProductUserIdDto(Integer.parseInt(idParam));
 
-        Template template = templateProvider.getTemplate(getServletContext(), "editProductList.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-        if (dataModel != null && product!= null){
-            dataModel.put("product", product);
-            dataModel.put("productId", idParam3);
+        if (db_userProducts.isPresent()){
+            dataModel.put("product", db_userProducts.get());
+            dataModel.put("productId", db_userProducts.get().getId());
+            dataModel.put("shops", shopService.getShops());
+            dataModel.put("categories", db_categoryService.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         }
@@ -58,22 +70,21 @@ public class EditProductListServlet extends HttpServlet {
         }
     }
 
-
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        Integer productId = Integer.valueOf(req.getParameter("id"));
-        Product oldProduct2 = shoppingListService.findProductSLById(productId);
+        String productId = req.getParameter("id");
 
-        oldProduct2.setName(req.getParameter("name"));
-        oldProduct2.setAmount(Integer.parseInt(req.getParameter("amount")));
+        Optional<UserProductsDto> db_userProductsNew = userProductsDao.findOneProductUserIdDto(Integer.parseInt(productId));
 
-        shoppingListService.editProductList(productId, oldProduct2);
+        Integer id = Integer.parseInt(productId);
+        Integer amount = Integer.parseInt(req.getParameter("amount"));
 
-        resp.sendRedirect("/confirmEditShoppingList?id=" + oldProduct2.getId());
+        productService.editProductFromUserList(id, amount);
+
+        resp.sendRedirect("/confirmEditShoppingList?id=" + db_userProductsNew.get().getId());
     }
 }
 

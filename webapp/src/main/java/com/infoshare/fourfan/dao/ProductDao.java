@@ -10,7 +10,6 @@ import java.util.Optional;
 @Local
 public interface ProductDao extends Dao<Product> {
 
-
     void save(Product product);
 
     void update(Product product);
@@ -21,11 +20,24 @@ public interface ProductDao extends Dao<Product> {
 
     Optional<Product> findById(Integer id);
 
-    Product findByName(String name);
+//    Product findByName(String name);
 
     List<Product> findAll();
 
     List<ProductDto> findAllDto();
 
+    Optional<ProductDto> findProductIdDto(Integer id);
+
+    Optional<ProductDto> findProductNameDto(String name);
+
+    Optional<List<ProductDto>> findProductCategoryDto(Integer category);
+
+    Optional<List<ProductDto>> findProductShopDto(Integer shop);
+
+    Optional<List<ProductDto>> findProductCaloriesDto(Integer minCalories, Integer maxCalories);
+
+    Optional<List<ProductDto>> filterByPrice(Integer priceMin, Integer priceMax);
+
+    Optional<ProductDto> findAlreadyExistProductDto(String name,String brand);
 
 }

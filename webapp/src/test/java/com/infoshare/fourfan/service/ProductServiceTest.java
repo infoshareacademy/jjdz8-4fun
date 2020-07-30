@@ -11,27 +11,27 @@ public class ProductServiceTest {
 
     private ProductRepositoryRest productRepositoryRest = new ProductRepositoryRest();
 
-    private ProductServiceRest productServiceRest = new ProductServiceRest(productRepositoryRest);
+//    private ProductServiceRest productServiceRest = new ProductServiceRest(productRepositoryRest);
 
 
-    @Test
-    void shouldCreateAccount() {
-        NewProductDto newProductDto = new NewProductDto();
-        newProductDto.setBrand("Milka");
-        newProductDto.setName("czekolada");
-
-        ProductDto productDto = productServiceRest.createProduct(newProductDto);
-
-        assertEquals(productDto.getName(), "czekolada");
-        assertEquals(productDto.getBrand(), "Milka");
-        assertNull(productDto.getPrice());
-        assertNull(productDto.getCalories());
-        assertNull(productDto.getShop());
-        assertNull(productDto.getProductCategory());
-        assertNotNull(productDto.getCreated());
-        assertNotNull(productDto.getId());
-        assertNull(productDto.getLastModified());
-    }
+//    @Test
+//    void shouldCreateAccount() {
+//        NewProductDto newProductDto = new NewProductDto();
+//        newProductDto.setBrand("Milka");
+//        newProductDto.setName("czekolada");
+//
+//        ProductDto productDto = productServiceRest.createProduct(newProductDto);
+//
+//        assertEquals(productDto.getName(), "czekolada");
+//        assertEquals(productDto.getBrand(), "Milka");
+//        assertNull(productDto.getPrice());
+//        assertNull(productDto.getCalories());
+//        assertNull(productDto.getShop());
+//        assertNull(productDto.getProductCategory());
+//        assertNotNull(productDto.getCreated());
+//        assertNotNull(productDto.getId());
+//        assertNull(productDto.getLastModified());
+//    }
 
 //    @Test
 //    void shouldReturnProduct() {

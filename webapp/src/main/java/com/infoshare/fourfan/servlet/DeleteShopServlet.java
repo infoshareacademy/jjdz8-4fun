@@ -1,10 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ProductServiceDb;
+import com.infoshare.fourfan.service.ShopService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -13,53 +12,61 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-delete-product")
-public class AdminDeleteProductServlet extends HttpServlet {
+@WebServlet("/deleteShop")
+public class DeleteShopServlet extends HttpServlet {
 
     @Inject
-    ProductService productService;
+    private ShopService shopService;
+
+    @Inject
+    private ProductDao productDao;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(AdminDeleteProductServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(DeleteShopServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "shopList.ftlh");
         PrintWriter printWriter = resp.getWriter();
-        String nameParam = req.getParameter("name");
+        String idParam = req.getParameter("id");
 
-        if (nameParam == null || nameParam.isEmpty()) {
+        if (idParam == null || idParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = productService.findProductByName(nameParam);
-        productService.deleteProductFromJson(product);
+        Optional<List<ProductDto>> db_product = productDao.findProductShopDto(Integer.parseInt(idParam));
 
-        printWriter.println("<script>\n" +
-                "        alert(\"" + product.getName() + " został usunięty!\")\n" +
-                "    </script>");
+
+        if(db_product.get().isEmpty()){
+
+            shopService.deleteShop(Integer.parseInt(idParam));
+            printWriter.println("<script>\n" +
+                    "alert(\"Kategoria została usunięta!\")\n" +
+                    "top.window.location = '/shopList';" +
+                    "</script>");
+        }else{
+            printWriter.println("<script>\n" +
+                    "alert(\"Nie możemy usunąć kategorii! jest powiązana z produktem!\")\n" +
+                    "top.window.location = '/shopList';" +
+                    "</script>");
+        }
 
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {
-            dataModel.put("products", productService.findAllJson());
-
+            dataModel.put("shops", shopService.getShops());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         } try {

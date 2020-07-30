@@ -2,7 +2,6 @@ package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ProductServiceDb;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -21,13 +20,10 @@ import java.util.logging.Logger;
 public class ProductListServlet extends HttpServlet {
 
     @Inject
-    private ProductService productService;
-
-    @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private ProductServiceDb productServiceDb;
+    private ProductService productService;
 
     private static final Logger logger = Logger.getLogger(ProductListServlet.class.getName());
 
@@ -39,9 +35,7 @@ public class ProductListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-//      dataModel.put("products", productService.findAllJson());
-        dataModel.put("products", productServiceDb.getProducts());
-
+        dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

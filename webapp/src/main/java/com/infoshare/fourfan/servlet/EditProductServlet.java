@@ -1,10 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.AdminService;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -18,34 +16,33 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/editProduct")
 public class EditProductServlet extends HttpServlet {
 
-    private static final Logger logger
-            = Logger.getLogger(EditProductServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(EditProductServlet.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private AdminService adminService;
+    private ProductService productService;
 
     @Inject
-    private ProductService productService;
+    private ProductDao productDao;
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-
-        Template template = templateProvider.getTemplate(getServletContext(), "admin-edit-product.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", productService.findAllJson());
-
+        dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
@@ -58,20 +55,21 @@ public class EditProductServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        Integer productId = Integer.valueOf(req.getParameter("id"));
-        Product oldProduct = productService.findProductById(productId);
+        String idParam = req.getParameter("id");
 
-        oldProduct.setName(req.getParameter("name"));
-        oldProduct.setBrand(req.getParameter("brand"));
-        oldProduct.setPrice(Integer.parseInt(req.getParameter("price")));
-        oldProduct.setCalories(Integer.parseInt(req.getParameter("calories")));
-        oldProduct.setShop(Shop.valueOf(req.getParameter("shop")));
-        oldProduct.setProductCategory(ProductCategory.valueOf(req.getParameter("category")));
+        Optional<ProductDto> db_oldProduct = productDao.findProductIdDto(Integer.parseInt(idParam));
 
-        adminService.editProduct(productId, oldProduct);
+        Integer id = Integer.parseInt(idParam);
+        String name = req.getParameter("name");
+        String brand = req.getParameter("brand");
+        Integer price = Integer.parseInt(req.getParameter("price"));
+        Integer calories = Integer.parseInt(req.getParameter("calories"));
+        Integer shop = Integer.parseInt(req.getParameter("shop"));
+        Integer productCategory = Integer.parseInt(req.getParameter("category"));
 
+        productService.editProduct(id,name,brand,price,calories,shop,productCategory);
 
-        resp.sendRedirect("/confirmEditProduct?id=" + oldProduct.getId());
+        resp.sendRedirect("/confirmEditProduct?id=" + db_oldProduct.get().getId());
     }
 }
 

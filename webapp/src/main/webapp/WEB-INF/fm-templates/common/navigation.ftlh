@@ -16,27 +16,27 @@
                         <li><a href="/about">Usługi</a></li>
                         <li class="drop-down"><a href="">Wyszukaj wszystkie produkty</a>
                             <ul>
-                                <li><a href="/db_filterUserProductsByCategory">Po kategorii</a> </li>
-                                <li><a href="/db_filterUserProductsByCalories">Po kaloryce</a> </li>
-                                <li><a href="/db_filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
+                                <li><a href="/filterUserProductsByCategory">Po kategorii</a> </li>
+                                <li><a href="/filterUserProductsByCalories">Po kaloryce</a> </li>
+                                <li><a href="/filterByPriceAndShop">Po cenie i pogrupuj po sklepie</a> </li>
                             </ul>
                         </li>
                         <li><a href="#portfolio">Portfolio</a></li>
                         <li class="drop-down"><a href="#pricing">Lista zakupow</a>
                             <ul>
-                                <li><a href="/db_addToShoppingList">Dodaj produkt do listy zakupów</a></li>
-                                <li><a href="/db_showShoppingList">Wyświetl listę zakupów</a></li>
+                                <li><a href="/addToShoppingList">Dodaj produkt do listy zakupów</a></li>
+                                <li><a href="/showShoppingList">Wyświetl listę zakupów</a></li>
                             </ul>
                         </li>
 
                         <li class="drop-down"><a href="">Produkty</a>
                             <ul>
-                                <li><a href="/db_productList">Lista produktów</a></li>
-                                <li><a href="/db_addProduct">Dodaj produkt</a></li>
-                                <li><a href="/db_editProduct">Wyszukaj i zedytuj produkt</a></li>
-                                <li><a href="/db_addShopOrCategory">Dodaj sklep lub kategorie</a></li>
-                                <li><a href="/db_shopList">Lista sklepów</a></li>
-                                <li><a href="/db_categoryList">Lista kategorii</a></li>
+                                <li><a href="/productList">Lista produktów</a></li>
+                                <li><a href="/addProduct">Dodaj produkt</a></li>
+                                <li><a href="/editProduct">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/addShopOrCategory">Dodaj sklep lub kategorie</a></li>
+                                <li><a href="/shopList">Lista sklepów</a></li>
+                                <li><a href="/categoryList">Lista kategorii</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

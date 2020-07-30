@@ -1,11 +1,10 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dao.UserProductsDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ShoppingListService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -18,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 
@@ -25,15 +25,18 @@ import java.util.logging.Logger;
 public class AddToShoppingListServlet extends HttpServlet {
 
     @Inject
+    private TemplateProvider templateProvider;
+
+    @Inject
     private ProductService productService;
 
     @Inject
-    private ShoppingListService shoppingListService;
+    private ProductDao productDao;
 
     @Inject
-    private TemplateProvider templateProvider;
+    private UserProductsDao userProductsDao;
 
-    private static final Logger logger = Logger.getLogger(ProductListServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AddToShoppingListServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -43,8 +46,7 @@ public class AddToShoppingListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
-        dataModel.put("products", productService.findAllJson());
-
+        dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
@@ -57,43 +59,23 @@ public class AddToShoppingListServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        Integer productId = Integer.valueOf(req.getParameter("id"));
-        Product oldProduct= productService.findProductById(productId);
+        String productIdParam = req.getParameter("id");
 
+        Optional<ProductDto> add_db_product = productDao.findProductIdDto(Integer.parseInt(productIdParam));
 
-        String name = oldProduct.getName();
+        Integer productId = add_db_product.get().getId();
+        String name = add_db_product.get().getName();
 
-        Integer id = productId;
-        String brand = oldProduct.getBrand();
-        Integer price = oldProduct.getPrice();
-        Integer calories = oldProduct.getCalories();
-        Shop shop = oldProduct.getShop();
-        ProductCategory category = oldProduct.getProductCategory();
-        Integer amount = 1;
-        try {
-            Product product222 = shoppingListService.findOnShoppingListByName(name);
-            amount = product222.getAmount()+1;
-            id = product222.getId();
-            shoppingListService.deleteProductFromJson(product222);
-
-
+        Integer userId = 1;
+        if(userProductsDao.findUserProductNameDto(name).isPresent()) {
+            Integer productIdInList = userProductsDao.findUserProductNameDto(name).get().getId();
+            Integer amount = userProductsDao.findUserProductNameDto(name).get().getProductAmount();
+            productService.editProductFromUserList(productIdInList,amount+1);
         }
-     catch (NullPointerException n) {
+        else {
+            productService.saveProductToUserList(userId,productId);
+        }
 
-     }
-
-
-
-         Product newShoppingListProduct = new Product(id, name, brand, price, calories, shop, category, amount);
-
-
-         shoppingListService.saveNewShoppingList(newShoppingListProduct);
-
-
-
-        resp.sendRedirect("/confirmNewShoppingList");
-
+        resp.sendRedirect("/showShoppingList");
     }
 }
-
-

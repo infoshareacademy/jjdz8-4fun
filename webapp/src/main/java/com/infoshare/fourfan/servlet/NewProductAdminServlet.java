@@ -70,19 +70,28 @@ public class NewProductAdminServlet extends HttpServlet {
         String brand = req.getParameter("brand");
         Integer price = Integer.parseInt(req.getParameter("price"));
         Integer calories = Integer.parseInt(req.getParameter("calories"));
-        Integer shop = Integer.parseInt(req.getParameter("shop"));
-        Integer productCategory = Integer.parseInt(req.getParameter("category"));
 
-        Optional<ProductDto> db_product = productDao.findAlreadyExistProductDto(name,brand);
-
-        if(db_product.isEmpty()){
-            productService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
-            resp.sendRedirect("/confirmNewProduct");
-        }else{
+        if(req.getParameter("shop") == null || req.getParameter("category") == null){
             printWriter.println("<script>\n" +
+                    "alert(\"Brak Sklepu lub Kategorii produktu, uzupełnij przed dodaniem nowego produktu!\")\n" +
+                    "top.window.location = '/addProduct';" +
+                    "</script>");
+        }else{
+            Integer shop = Integer.parseInt(req.getParameter("shop"));
+            Integer productCategory = Integer.parseInt(req.getParameter("category"));
+
+            Optional<ProductDto> db_product = productDao.findAlreadyExistProductDto(name,brand);
+
+            if(db_product.isEmpty()){
+                productService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
+                resp.sendRedirect("/confirmNewProduct");
+            }else{
+                printWriter.println("<script>\n" +
                     "alert(\"Mamy już taki produkt tego producenta!\")\n" +
                     "top.window.location = '/addProduct';" +
                     "</script>");
+            }
+
         }
     }
 }

@@ -95,4 +95,18 @@ public class UserProductsDaoBean implements UserProductsDao {
             return Optional.empty();
         }
     }
+
+    @Override
+    public Optional<List<UserProductsDto>> findUserProductIdProductDto(Integer id) {
+        TypedQuery<UserProductsDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.UserProductsDto(" +
+                "p.id, p.useridInt, p.product.name, p.product.brand, p.product.price, p.product.calories, p.product.shop.shop, p.product.productCategory.category, p.amount) FROM UserProducts p WHERE p.product.id = :idParm", UserProductsDto.class);
+
+        query.setParameter("idParm", id);
+
+        try{
+            return Optional.of(query.getResultList());
+        } catch(NoResultException e){
+            return Optional.empty();
+        }
+    }
 }

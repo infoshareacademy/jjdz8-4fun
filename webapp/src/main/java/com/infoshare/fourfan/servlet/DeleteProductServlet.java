@@ -1,5 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.dao.UserProductsDao;
+import com.infoshare.fourfan.dto.UserProductsDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
 import freemarker.template.Template;
@@ -13,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/deleteProduct")
@@ -21,6 +25,9 @@ public class DeleteProductServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
+
+    @Inject
+    private UserProductsDao userProductsDao;
 
     @Inject
     private TemplateProvider templateProvider;
@@ -40,12 +47,20 @@ public class DeleteProductServlet extends HttpServlet {
             return;
         }
 
-        productService.deleteProduct(Integer.parseInt(idParam));
+        Optional<List<UserProductsDto>> db_product = userProductsDao.findUserProductIdProductDto(Integer.parseInt(idParam));
 
+        if(db_product.get().isEmpty()){
+        productService.deleteProduct(Integer.parseInt(idParam));
         printWriter.println("<script>\n" +
                 "alert(\"Produkt został usunięty!\")\n" +
-                "top.window.location = '/addProduct';" +
+                "top.window.location = '/productList';" +
                 "</script>");
+        }else{
+        printWriter.println("<script>\n" +
+                "alert(\"Nie możemy usunąć produktu! jest powiązany z listą użytkownika!\")\n" +
+                "top.window.location = '/productList';" +
+                "</script>");
+        }
 
         Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {

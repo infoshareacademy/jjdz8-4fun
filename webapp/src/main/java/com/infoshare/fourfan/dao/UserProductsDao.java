@@ -16,6 +16,8 @@ public interface UserProductsDao extends Dao<UserProducts> {
 
     Optional<UserProductsDto> findOneProductUserIdDto(Integer id);
 
+    Optional<List<UserProductsDto>>findUserProductIdProductDto(Integer id);
+
     Optional<UserProductsDto> findUserProductNameDto(String name);
 
     void deleteAllUserShoppingList(Integer id);

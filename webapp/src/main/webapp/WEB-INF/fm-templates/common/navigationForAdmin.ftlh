@@ -20,6 +20,9 @@
                                 <li><a href="/productList">Lista produktów</a></li>
                                 <li><a href="/addProduct">Dodaj produkt</a></li>
                                 <li><a href="/editProduct">Wyszukaj i zedytuj produkt</a></li>
+                                <li><a href="/addShopOrCategory">Dodaj sklep lub kategorie</a></li>
+                                <li><a href="/shopList">Lista sklepów</a></li>
+                                <li><a href="/categoryList">Lista kategorii</a></li>
                             </ul>
                         </li>
                         <li><a href="#contact">Kontakt</a></li>

@@ -1,10 +1,11 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.dao.ProductDao;
-import com.infoshare.fourfan.dto.ProductDto;
+import com.infoshare.fourfan.dao.ProductCategoryDao;
+import com.infoshare.fourfan.dao.ShopDao;
+import com.infoshare.fourfan.dto.ProductCategoryDto;
+import com.infoshare.fourfan.dto.ShopDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.service.ShopService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
@@ -22,31 +23,31 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@WebServlet("/addProduct")
-public class NewProductAdminServlet extends HttpServlet {
+@WebServlet("/addShopOrCategory")
+public class NewShopOrCategoryServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(NewProductAdminServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(NewShopOrCategoryServlet.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private ProductService productService;
-
-    @Inject
-    private ProductDao productDao;
+    private CategoryService db_categoryService;
 
     @Inject
     private ShopService shopService;
 
     @Inject
-    private CategoryService db_categoryService;
+    private ProductCategoryDao productCategoryDao;
+
+    @Inject
+    private ShopDao shopDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "addShopOrCategory.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         if (!UserContext.requireAdminContext(req, resp, dataModel)) {
             return;
@@ -69,32 +70,36 @@ public class NewProductAdminServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter printWriter = resp.getWriter();
 
-        String name = req.getParameter("name");
-        String brand = req.getParameter("brand");
-        Integer price = Integer.parseInt(req.getParameter("price"));
-        Integer calories = Integer.parseInt(req.getParameter("calories"));
+        String nameCategory = req.getParameter("nameCategory");
+        String nameShop = req.getParameter("nameShop");
 
-        if(req.getParameter("shop") == null || req.getParameter("category") == null){
-            printWriter.println("<script>\n" +
-                    "alert(\"Brak Sklepu lub Kategorii produktu, uzupełnij przed dodaniem nowego produktu!\")\n" +
-                    "top.window.location = '/addProduct';" +
-                    "</script>");
-        }else{
-            Integer shop = Integer.parseInt(req.getParameter("shop"));
-            Integer productCategory = Integer.parseInt(req.getParameter("category"));
+        if (nameCategory != null) {
 
-            Optional<ProductDto> db_product = productDao.findAlreadyExistProductDto(name,brand);
+            Optional<ProductCategoryDto> db_productCategory = productCategoryDao.findAlreadyExistProductCategoryDto(nameCategory);
 
-            if(db_product.isEmpty()){
-                productService.saveNewProductDB(name,brand,price,calories,shop,productCategory);
-                resp.sendRedirect("/confirmNewProduct");
+            if(db_productCategory.isEmpty()){
+                db_categoryService.saveNewCategory(nameCategory);
+                resp.sendRedirect("/categoryList");
             }else{
                 printWriter.println("<script>\n" +
-                    "alert(\"Mamy już taki produkt tego producenta!\")\n" +
-                    "top.window.location = '/addProduct';" +
-                    "</script>");
+                        "        alert(\"Mamy już taką kategorie!\")\n" +
+                        "  top.window.location = '/addShopOrCategory';" +
+                        "    </script>");
             }
+        }
 
+        if (nameShop != null) {
+            Optional<ShopDto> db_shop = shopDao.findAlreadyExistShopDto(nameShop);
+
+            if(db_shop.isEmpty()){
+                shopService.saveNewShop(nameShop);
+                resp.sendRedirect("/shopList");
+            }else{
+                printWriter.println("<script>\n" +
+                        "        alert(\"Mamy już taki sklep!\")\n" +
+                        "  top.window.location = '/addShopOrCategory';" +
+                        "    </script>");
+            }
         }
     }
 }

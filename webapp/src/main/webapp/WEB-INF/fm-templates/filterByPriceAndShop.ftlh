@@ -42,14 +42,12 @@
                     <th scope="col">Kategoria</th>
                 </tr>
                 </thead>
-                <#if productsMap??>
+                <#if products??>
                     <tbody>
                     <ul>
                         <p>Wynik wyszukiwania:</p>
-                        <#list productsMap as shop, products>
-                            <td colspan="6" class="tdGreen"><strong> Produkty sklepu ${shop} </strong>:
+                            <#list products as product>
                                 <ol>
-                                    <#list products as product>
                                         <tr>
                                             <td> ${product.getName()} </td>
                                             <td> ${product.getBrand()} </td>
@@ -58,18 +56,13 @@
                                             <td> ${product.getShop()}</td>
                                             <td> ${product.getProductCategory()}</td>
                                         </tr>
-                                    </#list>
                                 </ol>
-                            </td>
-                        </#list>
+                            </#list>
+                        </td>
                     </ul>
                     </tbody>
                 </#if>
             </table>
-            <#if productsMap??>
-            <#else>
-                <p class="emptyResults"> Brak produktów </p>
-            </#if>
         </div>
     </main>
 </header>

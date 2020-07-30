@@ -2,7 +2,6 @@ package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ProductServiceDb;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -22,13 +21,10 @@ import java.util.logging.Logger;
 public class ProductListServlet extends HttpServlet {
 
     @Inject
-    private ProductService productService;
-
-    @Inject
     private TemplateProvider templateProvider;
 
     @Inject
-    private ProductServiceDb productServiceDb;
+    private ProductService productService;
 
     private static final Logger logger = Logger.getLogger(ProductListServlet.class.getName());
 
@@ -36,17 +32,14 @@ public class ProductListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
+        Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
+        PrintWriter printWriter = resp.getWriter();
+
         Map<String, Object> dataModel = new HashMap<>();
         if (!UserContext.requireAdminContext(req, resp, dataModel)) {
             return;
         }
-
-        Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
-        PrintWriter printWriter = resp.getWriter();
-
-//      dataModel.put("products", productService.findAllJson());
-        dataModel.put("products", productServiceDb.getProducts());
-
+        dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

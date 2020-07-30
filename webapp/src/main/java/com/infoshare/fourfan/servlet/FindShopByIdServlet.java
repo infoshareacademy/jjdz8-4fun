@@ -1,8 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.dao.ShopDao;
+import com.infoshare.fourfan.dto.ShopDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,41 +16,42 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
-@WebServlet("/admin-find-product-by-id")
-public class AdminFindProductByIdServlet extends HttpServlet {
+@WebServlet("/findShopById")
+public class FindShopByIdServlet extends HttpServlet {
 
     @Inject
-    private ProductService productService;
+    private ShopDao shopDao;
 
     @Inject
     private TemplateProvider templateProvider;
 
-    private static final Logger logger = Logger.getLogger(AdminFindProductByIdServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(FindShopByIdServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Map<String, Object> dataModel = new HashMap<>();
-        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
-            return;
-        }
-
+        Template template = templateProvider.getTemplate(getServletContext(), "findShopById.ftlh");
+        PrintWriter printWriter = resp.getWriter();
         String idParam = req.getParameter("id");
+
         if (idParam == null || idParam.isEmpty()) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        Product product = productService.findProductById(Integer.valueOf(idParam));
-        PrintWriter printWriter = resp.getWriter();
+        Optional<ShopDto> db_shop = shopDao.findShopIdDto(Integer.parseInt(idParam));
 
-        Template template = templateProvider.getTemplate(getServletContext(), "editProduct.ftlh");
-        if (dataModel != null && product!= null){
-            dataModel.put("product", product);
-            dataModel.put("productId", idParam);
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
+        if (db_shop.isPresent()){
+            dataModel.put("shop", db_shop.get());
+            dataModel.put("shopId", db_shop.get().getId());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
         }

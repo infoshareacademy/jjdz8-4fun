@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.service.ShopService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,26 +17,30 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-@WebServlet("/confirmNewShoppingList")
-public class ConfirmNewShoppingList extends HttpServlet {
-
-    private static final Logger logger
-            = Logger.getLogger(ConfirmNewShoppingList.class.getName());
+@WebServlet("/shopList")
+public class ShopListServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
+
+    @Inject
+    private ShopService shopService;
+
+    private static final Logger logger = Logger.getLogger(ShopListServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
+        Template template = templateProvider.getTemplate(getServletContext(), "shopList.ftlh");
+        PrintWriter printWriter = resp.getWriter();
+
         Map<String, Object> dataModel = new HashMap<>();
-        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
             return;
         }
+        dataModel.put("shops", shopService.getShops());
 
-        Template template = templateProvider.getTemplate(getServletContext(), "confirmNewShoppingList.ftlh");
-        PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

@@ -1,6 +1,6 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.service.ShoppingListService;
+import com.infoshare.fourfan.dao.UserProductsDao;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +13,15 @@ import java.io.IOException;
 public class DeleteAllShoppingListServlet extends HttpServlet {
 
     @Inject
-    ShoppingListService shoppingListService;
+    UserProductsDao userProductsDao;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
         resp.setContentType("text/html;charset=UTF-8");
-        shoppingListService.deleteAllShoppingList();
+        String idParam = req.getParameter("id");
+
+        userProductsDao.deleteAllUserShoppingList(idParam);
+
         resp.sendRedirect("/confirmRemoveAllList");
 
     }

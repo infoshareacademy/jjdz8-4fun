@@ -3,14 +3,15 @@
 <header class="jumbotron">
     <div class="container" style="height: 40px">
         <div class="row justify-content-center">
-        <h1 class="display-3" style="font-size: 40px">Lista zakupów</h1>
-    </div>
+            <h1 class="display-3" style="font-size: 40px">Lista zakupów</h1>
+        </div>
     </div>
 </header>
 <table class="table table-striped table-green">
     <thead>
     <tr>
         <th scope="col">Id</th>
+        <th scope="col">User</th>
         <th scope="col">Nazwa</th>
         <th scope="col">Firma</th>
         <th scope="col">Cena</th>
@@ -25,23 +26,24 @@
     </thead>
     <tbody>
     <tr>
-        <#list shoppingListproducts as product>
+        <#list userProducts as userProduct>
     <tr>
-        <th scope="row">${(product.id)!}</th>
-        <th>${product.name}</th>
-        <th>${product.brand}</th>
-        <th>${product.price}</th>
-        <th>${product.calories}</th>
-        <th>${product.shop}</th>
-        <th>${(product.productCategory)!}</th>
-        <th>${(product.amount)}</th>
+        <th scope="row">${(userProduct.id)!}</th>
+        <th>${userProduct.useridInt}</th>
+        <th>${userProduct.productName}</th>
+        <th>${userProduct.productBrand}</th>
+        <th>${userProduct.productPrice}</th>
+        <th>${userProduct.productCalories}</th>
+        <th>${userProduct.productShop}</th>
+        <th>${(userProduct.productCategory)!}</th>
+        <th>${(userProduct.productAmount)}</th>
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">
-                    <form method="get" action="/editProductList?id=${product.id}">
+                    <form method="get" action="/editProductList?id=${userProduct.id}">
                         <button type="submit" name="id"
                                 style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
-                                value="${product.id}">Edytuj
+                                value="${userProduct.id}">Edytuj
                         </button>
                     </form>
                 </div>
@@ -50,10 +52,10 @@
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">
-                    <form method="post" action="delete-fromShoppingList?name=${product.name}">
+                    <form method="post" action="deleteFromShoppingList?id=${userProduct.id}">
                         <button type="submit" name="id"
                                 style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
-                                value="${product.id}">Usuń
+                                value="${userProduct.id}">Usuń
                         </button>
                     </form>
                 </div>
@@ -65,7 +67,7 @@
                     <form method="post" action="/deleteAllShoppingList">
                         <button type="submit" name="id"
                                 style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
-                                value="${product.id}">Usuń całą listę
+                                value="${userProduct.useridInt}">Usuń całą listę
                         </button>
                     </form>
                 </div>

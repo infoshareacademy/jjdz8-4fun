@@ -82,7 +82,6 @@ public class AddToShoppingListServlet extends HttpServlet {
         else {
             productService.saveProductToUserList(loggedUser,productId);
         }
-
         resp.sendRedirect("/showShoppingList");
     }
 }

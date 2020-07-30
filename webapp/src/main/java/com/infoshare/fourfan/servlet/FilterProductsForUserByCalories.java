@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -31,6 +32,9 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
     @Inject
     private ProductDao productDao;
+
+    @Inject
+    private ProductService productService;
 
     private static final Logger logger = Logger.getLogger(FilterProductsForUserByCalories.class.getName());
 
@@ -64,6 +68,19 @@ public class FilterProductsForUserByCalories extends HttpServlet {
 
             if (db_product.isPresent()){
                 dataModel.put("products", db_product.get());
+                switch (caloriesRangeEnum) {
+                    case RANGE_0_150:
+                        dataModel.put("firstChoiceSelected", "checked");
+                        break;
+
+                    case RANGE_151_300:
+                        dataModel.put("secondChoiceSelected", "checked");
+                        break;
+
+                    case RANGE_FROM_301:
+                        dataModel.put("thirdChoiceSelected", "checked");
+                        break;
+                }
             } else {
                 dataModel.put("errorMessage", "Product has not been found.");
             }

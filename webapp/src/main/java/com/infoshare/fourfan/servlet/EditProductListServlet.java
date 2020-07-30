@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ShoppingListService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -33,6 +34,12 @@ public class EditProductListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         resp.setContentType("text/html;charset=UTF-8");
+
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
+
         String idParam3 = req.getParameter("id");
 
         if (idParam3 == null || idParam3.isEmpty()) {
@@ -44,7 +51,6 @@ public class EditProductListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Template template = templateProvider.getTemplate(getServletContext(), "editProductList.ftlh");
-        Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null && product!= null){
             dataModel.put("product", product);
             dataModel.put("productId", idParam3);

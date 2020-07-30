@@ -4,6 +4,7 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -39,6 +40,9 @@ public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "filterByPriceAndShop.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
 
         String priceMinAndShop = req.getParameter("priceMin");
         String priceMaxAndShop = req.getParameter("priceMax");

@@ -2,6 +2,7 @@
 
  import com.infoshare.fourfan.freemarker.TemplateProvider;
  import com.infoshare.fourfan.service.ShoppingListService;
+ import com.infoshare.fourfan.utils.UserContext;
  import freemarker.template.Template;
  import freemarker.template.TemplateException;
 
@@ -31,10 +32,14 @@
      protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
          resp.setContentType("text/html;charset=UTF-8");
 
+         Map<String, Object> dataModel = new HashMap<>();
+         if (!UserContext.requireUserContext(req, resp, dataModel)) {
+             return;
+         }
+
          Template template = templateProvider.getTemplate(getServletContext(), "shoppingList.ftlh");
          PrintWriter printWriter = resp.getWriter();
 
-         Map<String, Object> dataModel = new HashMap<>();
          dataModel.put("shoppingListproducts", shoppingListService.findAllJson());
 
          try {

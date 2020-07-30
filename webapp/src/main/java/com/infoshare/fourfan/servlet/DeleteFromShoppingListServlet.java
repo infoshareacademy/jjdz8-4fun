@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ShoppingListService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -33,6 +34,11 @@ public class DeleteFromShoppingListServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
 
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
+
         Integer productId = Integer.valueOf(req.getParameter("id"));
 
         Template template = templateProvider.getTemplate(getServletContext(), "shoppingList.ftlh");
@@ -50,7 +56,6 @@ public class DeleteFromShoppingListServlet extends HttpServlet {
                 "        alert(\"" + "produkt" + " został usunięty z listy zakupów!\")\n" +
                 "    </script>");
 
-        Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {
             dataModel.put("shoppingListproducts", shoppingListService.findAllJson());
 

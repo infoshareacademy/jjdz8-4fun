@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -33,6 +34,11 @@ public class AdminDeleteProductServlet extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
 
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
+
         Template template = templateProvider.getTemplate(getServletContext(), "productList.ftlh");
         PrintWriter printWriter = resp.getWriter();
         String nameParam = req.getParameter("name");
@@ -49,7 +55,6 @@ public class AdminDeleteProductServlet extends HttpServlet {
                 "        alert(\"" + product.getName() + " został usunięty!\")\n" +
                 "    </script>");
 
-        Map<String, Object> dataModel = new HashMap<>();
         if (dataModel != null) {
             dataModel.put("products", productService.findAllJson());
 

@@ -4,6 +4,7 @@ import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.ProductCategory;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -40,6 +41,9 @@ public class FilterProductsForUserByCategory extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "filterByCategory.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         dataModel.put("dairy", ProductCategory.NABIAŁ.ordinal());
         dataModel.put("veggies", ProductCategory.WARZYWA.ordinal());
         dataModel.put("fruits", ProductCategory.OWOCE.ordinal());

@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -28,8 +29,10 @@ public class HomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "index.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+        UserContext.setUserContext(req, dataModel);
+
+        Template template = templateProvider.getTemplate(getServletContext(), "index.ftlh");
         PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);

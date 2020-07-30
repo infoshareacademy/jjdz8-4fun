@@ -24,6 +24,6 @@ public interface ProductDao extends Dao<Product> {
 
     Optional<List<ProductDto>> filterByPrice(Integer priceMin, Integer priceMax);
 
-    Optional<ProductDto> findAlreadyExistProductDto(String name,String brand);
+    Optional<ProductDto> findAlreadyExistProductDto(String name, String brand);
 
 }

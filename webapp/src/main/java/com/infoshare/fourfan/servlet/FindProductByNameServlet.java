@@ -5,6 +5,7 @@ import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
 import com.infoshare.fourfan.service.ShopService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -53,6 +54,9 @@ public class FindProductByNameServlet extends HttpServlet {
         Optional<ProductDto> db_product = productDao.findProductNameDto(nameParam);
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
         if (db_product.isPresent()){
             dataModel.put("product", db_product.get());
             dataModel.put("productId", db_product.get().getId());

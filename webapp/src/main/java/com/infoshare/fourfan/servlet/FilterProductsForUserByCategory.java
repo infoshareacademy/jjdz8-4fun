@@ -4,6 +4,7 @@ import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -43,6 +44,9 @@ public class FilterProductsForUserByCategory extends HttpServlet {
         String categoryParam = req.getParameter("category");
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         dataModel.put("categories", db_categoryService.getCategory());
 
         if(categoryParam != null && !categoryParam.equals("Wybierz") ){

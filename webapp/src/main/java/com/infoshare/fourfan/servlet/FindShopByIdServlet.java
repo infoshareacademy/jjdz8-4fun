@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.ShopDao;
 import com.infoshare.fourfan.dto.ShopDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -45,6 +46,9 @@ public class FindShopByIdServlet extends HttpServlet {
         Optional<ShopDto> db_shop = shopDao.findShopIdDto(Integer.parseInt(idParam));
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
         if (db_shop.isPresent()){
             dataModel.put("shop", db_shop.get());
             dataModel.put("shopId", db_shop.get().getId());

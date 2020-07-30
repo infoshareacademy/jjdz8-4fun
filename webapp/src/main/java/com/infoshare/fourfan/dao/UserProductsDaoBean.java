@@ -47,7 +47,7 @@ public class UserProductsDaoBean implements UserProductsDao {
     }
 
     @Override
-    public Optional<List<UserProductsDto>> findProductsUserIdDto(Integer id) {
+    public Optional<List<UserProductsDto>> findProductsUserIdDto(String id) {
         TypedQuery<UserProductsDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.UserProductsDto(" +
                 "p.id,p.useridInt,p.product.name, p.product.brand, p.product.price, p.product.calories, p.product.shop.shop, p.product.productCategory.category, p.amount) FROM UserProducts p WHERE p.useridInt = :idParm", UserProductsDto.class);
 
@@ -77,7 +77,7 @@ public class UserProductsDaoBean implements UserProductsDao {
     }
 
     @Override
-    public void deleteAllUserShoppingList(Integer id) {
+    public void deleteAllUserShoppingList(String id) {
         Query query = entityManager.createQuery("DELETE FROM UserProducts u WHERE u.useridInt = :idParm");
         query.setParameter("idParm", id).executeUpdate();
     }

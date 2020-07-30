@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -29,6 +30,9 @@ public class ConfirmRemoveAllShoppingList extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "confirmRemoveAllList.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);

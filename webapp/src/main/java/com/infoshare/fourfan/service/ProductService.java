@@ -50,7 +50,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void saveProductToUserList(Integer userId, Integer productId)
+    public void saveProductToUserList(String userId, Integer productId)
     {
         UserProducts userProducts = new UserProducts();
         userProducts.setUseridInt(userId);

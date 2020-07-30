@@ -52,10 +52,10 @@
         <th>
             <div class="col-md-6">
                 <div class="ANPform-style-2">
-                    <form method="post" action="deleteFromShoppingList?id=${userProduct.useridInt}">
+                    <form method="post" action="deleteFromShoppingList?id=${userProduct.id}">
                         <button type="submit" name="id"
                                 style="background: #575C60; color: white; padding: 8px 15px 8px 15px; border: none; border-radius: 3px; margin-top: 0; margin-bottom: 0;"
-                                value="${userProduct.useridInt}">Usuń
+                                value="${userProduct.id}">Usuń
                         </button>
                     </form>
                 </div>

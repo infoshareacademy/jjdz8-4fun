@@ -136,7 +136,7 @@ public class ProductDaoBean implements ProductDao {
     }
 
     @Override
-    public Optional<ProductDto> findAlreadyExistProductDto(String name,String brand) {
+    public Optional<ProductDto> findAlreadyExistProductDto(String name, String brand) {
         TypedQuery<ProductDto> query = entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.ProductDto(" +
                 "p.id, p.name, p.brand, p.price, p.calories, p.shop.shop, p.productCategory.category) FROM Product p WHERE p.name = :nameParm and p.brand = :brandParm", ProductDto.class);
 

@@ -41,27 +41,9 @@ public class DeleteFromShoppingListServlet extends HttpServlet {
             return;
         }
 
-        Integer IDuzytkownika = 1;
-//        Optional<List<UserProductsDto>> userProducts = userProductsDao.findProductsUserIdDto(IDuzytkownika);
-
-
         productService.deleteProductFromUserList(Integer.parseInt(productId));
 
-//        printWriter.println("<script>\n" +
-//                "        alert(\"" + "produkt" + " został usunięty z listy zakupów!\")\n" +
-//                "    </script>");
-
         resp.sendRedirect("/showShoppingList");
-//        Map<String, Object> dataModel = new HashMap<>();
-//        if (dataModel != null) {
-//            dataModel.put("userProducts", userProductsDao.findProductsUserIdDto(IDuzytkownika));
-//        } else {
-//            dataModel.put("errorMessage", "Product has not been found.");
-//        } try {
-//            template.process(dataModel, printWriter);
-//        } catch (TemplateException e) {
-//            logger.severe(e.getMessage());
-//        }
     }
 }
 

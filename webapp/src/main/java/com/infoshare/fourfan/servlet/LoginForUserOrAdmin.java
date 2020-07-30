@@ -55,7 +55,6 @@ public class LoginForUserOrAdmin extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         HashMap<String, Object> dataModel = new HashMap<>();
-        Template template;
 
         Optional<User> userLoginInput = userServiceJson.findByEmailAndPassword(email, password);
 
@@ -63,26 +62,9 @@ public class LoginForUserOrAdmin extends HttpServlet {
             resp.sendRedirect("/loginUser");
             return;
         }
-        session.setAttribute("name", userLoginInput.get().getName());
-        session.setAttribute("surName", userLoginInput.get().getSurName());
-        session.setAttribute("email", userLoginInput.get().getEmail());
-        session.setAttribute("phoneNumber", userLoginInput.get().getPhoneNumber());
-        session.setAttribute("password", userLoginInput.get().getPassword());
+        session.setAttribute("email", email);
+        session.setAttribute("isAdmin", userLoginInput.get().isAdmin());
 
-        if (!userLoginInput.get().isAdmin()) {
-            //TODO: podać przekierowanie na poprawny template dla usera
-            dataModel.put("name", userLoginInput.get().getName());
-            template = templateProvider.getTemplate(getServletContext(), "about.ftlh");
-        } else {
-            //TODO: podać przekierowanie na poprawny template dla admina
-            dataModel.put("name", userLoginInput.get().getName());
-            template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
-        }
-        try {
-            template.process(dataModel, printWriter);
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-
+        resp.sendRedirect("/about");
     }
 }

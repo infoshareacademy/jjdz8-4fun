@@ -18,7 +18,7 @@ public class UserProducts {
     private Timestamp timestamp;
 
     @Column(name = "userid")
-    private  Integer useridInt;
+    private  String useridInt;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_id")
@@ -49,11 +49,11 @@ public class UserProducts {
         this.timestamp = timestamp;
     }
 
-    public Integer getUseridInt() {
+    public String getUseridInt() {
         return useridInt;
     }
 
-    public void setUseridInt(Integer useridInt) {
+    public void setUseridInt(String useridInt) {
         this.useridInt = useridInt;
     }
 

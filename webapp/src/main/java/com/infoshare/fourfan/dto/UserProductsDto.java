@@ -3,7 +3,7 @@ package com.infoshare.fourfan.dto;
 public class UserProductsDto {
 
     public Integer id;
-    private Integer useridInt;
+    private String useridInt;
     private String productName;
     private String productBrand;
     private Integer productPrice;
@@ -12,7 +12,7 @@ public class UserProductsDto {
     private String productCategory;
     private Integer productAmount;
 
-    public UserProductsDto(Integer id, Integer useridInt, String productName, String productBrand, Integer productPrice, Integer productCalories, String productShop, String productCategory, Integer productAmount) {
+    public UserProductsDto(Integer id, String useridInt, String productName, String productBrand, Integer productPrice, Integer productCalories, String productShop, String productCategory, Integer productAmount) {
         this.id = id;
         this.useridInt = useridInt;
         this.productName = productName;
@@ -32,11 +32,11 @@ public class UserProductsDto {
         this.id = id;
     }
 
-    public Integer getUseridInt() {
+    public String getUseridInt() {
         return useridInt;
     }
 
-    public void setUseridInt(Integer useridInt) {
+    public void setUseridInt(String useridInt) {
         this.useridInt = useridInt;
     }
 

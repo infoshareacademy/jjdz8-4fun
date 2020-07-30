@@ -6,6 +6,7 @@ import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
 import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.service.ShopService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -47,7 +48,9 @@ public class NewProductAdminServlet extends HttpServlet {
 
         Template template = templateProvider.getTemplate(getServletContext(), "addProduct.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
-
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
+            return;
+        }
         dataModel.put("shops", shopService.getShops());
         dataModel.put("categories", db_categoryService.getCategory());
 

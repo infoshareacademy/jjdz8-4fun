@@ -3,6 +3,7 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.ProductCategoryDao;
 import com.infoshare.fourfan.dto.ProductCategoryDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -45,6 +46,9 @@ public class FindCategoryByIdServlet extends HttpServlet {
         Optional<ProductCategoryDto> db_productCategory = productCategoryDao.findCategoryIdDto(Integer.parseInt(idParam));
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         if (db_productCategory.isPresent()){
             dataModel.put("category", db_productCategory.get());
             dataModel.put("categoryId", db_productCategory.get().getId());

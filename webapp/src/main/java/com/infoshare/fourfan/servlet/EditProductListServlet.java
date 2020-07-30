@@ -3,7 +3,10 @@ package com.infoshare.fourfan.servlet;
 import com.infoshare.fourfan.dao.UserProductsDao;
 import com.infoshare.fourfan.dto.UserProductsDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.*;
+import com.infoshare.fourfan.service.CategoryService;
+import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.service.ShopService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -55,6 +58,9 @@ public class EditProductListServlet extends HttpServlet {
         Optional<UserProductsDto> db_userProducts = userProductsDao.findOneProductUserIdDto(Integer.parseInt(idParam));
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         if (db_userProducts.isPresent()){
             dataModel.put("product", db_userProducts.get());
             dataModel.put("productId", db_userProducts.get().getId());

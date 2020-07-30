@@ -5,6 +5,7 @@ import com.infoshare.fourfan.dao.UserProductsDao;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
+import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -46,6 +48,9 @@ public class AddToShoppingListServlet extends HttpServlet {
         PrintWriter printWriter = resp.getWriter();
 
         Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
         dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
@@ -59,6 +64,9 @@ public class AddToShoppingListServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
+        HttpSession session = req.getSession();
+        String loggedUser = (String) session.getAttribute("email");
+
         String productIdParam = req.getParameter("id");
 
         Optional<ProductDto> add_db_product = productDao.findProductIdDto(Integer.parseInt(productIdParam));
@@ -66,14 +74,13 @@ public class AddToShoppingListServlet extends HttpServlet {
         Integer productId = add_db_product.get().getId();
         String name = add_db_product.get().getName();
 
-        Integer userId = 1;
         if(userProductsDao.findUserProductNameDto(name).isPresent()) {
             Integer productIdInList = userProductsDao.findUserProductNameDto(name).get().getId();
             Integer amount = userProductsDao.findUserProductNameDto(name).get().getProductAmount();
             productService.editProductFromUserList(productIdInList,amount+1);
         }
         else {
-            productService.saveProductToUserList(userId,productId);
+            productService.saveProductToUserList(loggedUser,productId);
         }
 
         resp.sendRedirect("/showShoppingList");

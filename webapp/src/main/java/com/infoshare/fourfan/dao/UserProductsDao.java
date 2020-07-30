@@ -12,7 +12,7 @@ public interface UserProductsDao extends Dao<UserProducts> {
 
     List<UserProductsDto> findAllDto();
 
-    Optional<List<UserProductsDto>> findProductsUserIdDto(Integer id);
+    Optional<List<UserProductsDto>> findProductsUserIdDto(String id);
 
     Optional<UserProductsDto> findOneProductUserIdDto(Integer id);
 
@@ -20,6 +20,6 @@ public interface UserProductsDao extends Dao<UserProducts> {
 
     Optional<UserProductsDto> findUserProductNameDto(String name);
 
-    void deleteAllUserShoppingList(Integer id);
+    void deleteAllUserShoppingList(String id);
 
 }

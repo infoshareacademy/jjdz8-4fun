@@ -20,7 +20,7 @@ public class DeleteAllShoppingListServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         String idParam = req.getParameter("id");
 
-        userProductsDao.deleteAllUserShoppingList(Integer.parseInt(idParam));
+        userProductsDao.deleteAllUserShoppingList(idParam);
 
         resp.sendRedirect("/confirmRemoveAllList");
 

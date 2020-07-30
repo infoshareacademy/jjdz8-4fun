@@ -74,7 +74,7 @@ public class AddToShoppingListServlet extends HttpServlet {
         Integer productId = add_db_product.get().getId();
         String name = add_db_product.get().getName();
 
-        if(userProductsDao.findUserProductNameDto(name).isPresent()) {
+        if(userProductsDao.findUserProductNameInUserDto(name,loggedUser).isPresent()) {
             Integer productIdInList = userProductsDao.findUserProductNameDto(name).get().getId();
             Integer amount = userProductsDao.findUserProductNameDto(name).get().getProductAmount();
             productService.editProductFromUserList(productIdInList,amount+1);

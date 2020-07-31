@@ -1,7 +1,7 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,8 +16,9 @@ public class ProductCategory {
     @Basic
     private String category;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timestamp")
-    private Timestamp timestamp;
+    private Date timestamp;
 
     @OneToMany(mappedBy = "productCategory")
     private Set<Product> products = new HashSet<>();
@@ -38,11 +39,11 @@ public class ProductCategory {
         this.category = category;
     }
 
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

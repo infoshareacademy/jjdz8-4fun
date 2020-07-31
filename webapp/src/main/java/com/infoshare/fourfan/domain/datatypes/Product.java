@@ -1,6 +1,7 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +24,10 @@ public class Product {
 
     @Basic
     private Integer calories;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "timestamp")
+    private Date timestamp;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "shop_id")
@@ -90,5 +95,21 @@ public class Product {
 
     public void setProductCategory(ProductCategory productCategory) {
         this.productCategory = productCategory;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Set<UserProducts> getUserProducts() {
+        return userProducts;
+    }
+
+    public void setUserProducts(Set<UserProducts> userProducts) {
+        this.userProducts = userProducts;
     }
 }

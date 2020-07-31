@@ -19,8 +19,7 @@ import java.util.logging.Logger;
 @WebServlet("/confirmEditShoppingList")
 public class ConfirmEditShoppingList extends HttpServlet {
 
-    private static final Logger logger
-            = Logger.getLogger(ConfirmNewShoppingList.class.getName());
+    private static final Logger logger = Logger.getLogger(ConfirmEditShoppingList.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
@@ -29,12 +28,11 @@ public class ConfirmEditShoppingList extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
+        Template template = templateProvider.getTemplate(getServletContext(), "confirmEditShoppingList.ftlh");
         Map<String, Object> dataModel = new HashMap<>();
         if (!UserContext.requireUserContext(req, resp, dataModel)) {
             return;
         }
-
-        Template template = templateProvider.getTemplate(getServletContext(), "confirmEditShoppingList.ftlh");
         PrintWriter printWriter = resp.getWriter();
         try {
             template.process(dataModel, printWriter);

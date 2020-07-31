@@ -1,9 +1,8 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -19,16 +18,16 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/filterByPriceAndShop")
 public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
 
     @Inject
-    private ProductService productService;
+    private ProductDao productDao;
 
-    private static final Logger logger
-            = Logger.getLogger(FilterProductsForUserByPriceAndShowShop.class.getName());
+    private static final Logger logger = Logger.getLogger(FilterProductsForUserByPriceAndShowShop.class.getName());
 
     @Inject
     private TemplateProvider templateProvider;
@@ -43,18 +42,18 @@ public class FilterProductsForUserByPriceAndShowShop extends HttpServlet {
         if (!UserContext.requireUserContext(req, resp, dataModel)) {
             return;
         }
-
         String priceMinAndShop = req.getParameter("priceMin");
         String priceMaxAndShop = req.getParameter("priceMax");
 
         if(priceMinAndShop != null && !priceMinAndShop.isEmpty() && priceMaxAndShop != null && !priceMaxAndShop.isEmpty()) {
             Integer priceMinInt = Integer.parseInt(priceMinAndShop);
             Integer priceMaxInt = Integer.parseInt(priceMaxAndShop);
-            Map<Shop, List<Product>> productMap = productService.filterByPriceAndGroupByShop(priceMinInt, priceMaxInt);
-            dataModel.put("productsMap", productMap);
+
+            Optional<List<ProductDto>> db_product = productDao.filterByPrice(priceMinInt, priceMaxInt);
+
+            dataModel.put("products", db_product.get());
             dataModel.put("priceMin", priceMinAndShop);
             dataModel.put("priceMax", priceMaxAndShop);
-
         }
 
         try {

@@ -1,5 +1,7 @@
 package com.infoshare.fourfan.servlet;
 
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.utils.UserContext;
@@ -14,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @WebServlet("/filterUserProductsByCalories")
@@ -25,37 +29,42 @@ public class FilterProductsForUserByCalories extends HttpServlet {
         RANGE_151_300,
         RANGE_FROM_301;
     }
-        @Inject
-        private ProductService productService;
 
-        private static final Logger logger
-                = Logger.getLogger(FilterProductsForUserByCalories.class.getName());
+    @Inject
+    private ProductDao productDao;
 
-        @Inject
-        private TemplateProvider templateProvider;
+    private static final Logger logger = Logger.getLogger(FilterProductsForUserByCalories.class.getName());
 
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-            resp.setContentType("text/html;charset=UTF-8");
-            PrintWriter printWriter = resp.getWriter();
+    @Inject
+    private TemplateProvider templateProvider;
 
-            String calories = req.getParameter("calories");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter printWriter = resp.getWriter();
 
-            Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
-            Map<String, Object> dataModel = new HashMap<>();
-            if (!UserContext.requireUserContext(req, resp, dataModel)) {
-                return;
-            }
-            dataModel.put("firstRange", CaloriesRangeEnum.RANGE_0_150);
-            dataModel.put("secondRange", CaloriesRangeEnum.RANGE_151_300);
-            dataModel.put("thirdRange", CaloriesRangeEnum.RANGE_FROM_301);
+        String calories = req.getParameter("calories");
 
-            if(calories != null && !calories.equals("Przedzial") ) {
-                CaloriesRangeEnum caloriesRangeEnum = CaloriesRangeEnum.valueOf(calories);
-                CaloriesRange caloriesRange = new CaloriesRange(caloriesRangeEnum).invoke();
-                int productMin = caloriesRange.getProductMin();
-                long productMax = caloriesRange.getProductMax();
-                dataModel.put("products", productService.filterByCalories(productMin, productMax));
+
+        Template template = templateProvider.getTemplate(getServletContext(), "filterByCalories.ftlh");
+        Map<String, Object> dataModel = new HashMap<>();
+        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+            return;
+        }
+        dataModel.put("firstRange", CaloriesRangeEnum.RANGE_0_150);
+        dataModel.put("secondRange", CaloriesRangeEnum.RANGE_151_300);
+        dataModel.put("thirdRange", CaloriesRangeEnum.RANGE_FROM_301);
+
+        if(calories != null && !calories.equals("Przedzial") ) {
+            CaloriesRangeEnum caloriesRangeEnum = CaloriesRangeEnum.valueOf(calories);
+            CaloriesRange caloriesRange = new CaloriesRange(caloriesRangeEnum).invoke();
+            int productMin = caloriesRange.getProductMin();
+            int productMax = caloriesRange.getProductMax();
+
+            Optional<List<ProductDto>> db_product = productDao.findProductCaloriesDto(productMin,productMax);
+
+            if (db_product.isPresent()){
+                dataModel.put("products", db_product.get());
                 switch (caloriesRangeEnum) {
                     case RANGE_0_150:
                         dataModel.put("firstChoiceSelected", "checked");
@@ -69,19 +78,22 @@ public class FilterProductsForUserByCalories extends HttpServlet {
                         dataModel.put("thirdChoiceSelected", "checked");
                         break;
                 }
-            }
-
-            try {
-                template.process(dataModel, printWriter);
-            } catch (TemplateException e) {
-                logger.severe(e.getMessage());
+            } else {
+                dataModel.put("errorMessage", "Product has not been found.");
             }
         }
+
+        try {
+            template.process(dataModel, printWriter);
+        } catch (TemplateException e) {
+            logger.severe(e.getMessage());
+        }
+    }
 
     private static class CaloriesRange {
         private CaloriesRangeEnum caloriesRange;
         private int productMin;
-        private long productMax;
+        private int productMax;
 
         public CaloriesRange(CaloriesRangeEnum caloriesRange) {
             this.caloriesRange = caloriesRange;
@@ -91,7 +103,7 @@ public class FilterProductsForUserByCalories extends HttpServlet {
             return productMin;
         }
 
-        public long getProductMax() {
+        public int getProductMax() {
             return productMax;
         }
 
@@ -117,3 +129,4 @@ public class FilterProductsForUserByCalories extends HttpServlet {
         }
     }
 }
+

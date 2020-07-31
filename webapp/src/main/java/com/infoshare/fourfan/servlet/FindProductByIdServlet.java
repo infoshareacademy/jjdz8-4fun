@@ -1,10 +1,9 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.dao.UserProductsDao;
-import com.infoshare.fourfan.dto.UserProductsDto;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
-import com.infoshare.fourfan.service.ProductService;
 import com.infoshare.fourfan.service.ShopService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
@@ -22,16 +21,11 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@WebServlet("/editProductList")
-public class EditProductListServlet extends HttpServlet {
-
-    private static final Logger logger = Logger.getLogger(EditProductListServlet.class.getName());
+@WebServlet("/findProductById")
+public class FindProductByIdServlet extends HttpServlet {
 
     @Inject
-    private TemplateProvider templateProvider;
-
-    @Inject
-    private UserProductsDao userProductsDao;
+    private ProductDao productDao;
 
     @Inject
     private ShopService shopService;
@@ -40,13 +34,15 @@ public class EditProductListServlet extends HttpServlet {
     private CategoryService db_categoryService;
 
     @Inject
-    private ProductService productService;
+    private TemplateProvider templateProvider;
+
+    private static final Logger logger = Logger.getLogger(FindProductByIdServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html;charset=UTF-8");
 
-        Template template = templateProvider.getTemplate(getServletContext(), "editProductList.ftlh");
+        Template template = templateProvider.getTemplate(getServletContext(), "findProductById.ftlh");
         PrintWriter printWriter = resp.getWriter();
         String idParam = req.getParameter("id");
 
@@ -55,19 +51,23 @@ public class EditProductListServlet extends HttpServlet {
             return;
         }
 
-        Optional<UserProductsDto> db_userProducts = userProductsDao.findOneProductUserIdDto(Integer.parseInt(idParam));
+        Optional<ProductDto> db_product = productDao.findProductIdDto(Integer.parseInt(idParam));
 
         Map<String, Object> dataModel = new HashMap<>();
-        if (!UserContext.requireUserContext(req, resp, dataModel)) {
+        if (!UserContext.requireAdminContext(req, resp, dataModel)) {
             return;
         }
-        if (db_userProducts.isPresent()){
-            dataModel.put("product", db_userProducts.get());
-            dataModel.put("productId", db_userProducts.get().getId());
+        if (db_product.isPresent()){
+            dataModel.put("product", db_product.get());
+            dataModel.put("productId", db_product.get().getId());
             dataModel.put("shops", shopService.getShops());
             dataModel.put("categories", db_categoryService.getCategory());
         } else {
             dataModel.put("errorMessage", "Product has not been found.");
+            printWriter.println("<script>\n" +
+                    "        alert(\"Niepoprawne ID produktu!\")\n" +
+                    "  top.window.location = '/editProduct';" +
+                    "    </script>");
         }
         try {
             template.process(dataModel, printWriter);
@@ -75,23 +75,4 @@ public class EditProductListServlet extends HttpServlet {
             logger.severe(e.getMessage());
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        req.setCharacterEncoding("UTF-8");
-        resp.setContentType("text/html;charset=UTF-8");
-
-        String productId = req.getParameter("id");
-
-        Optional<UserProductsDto> db_userProductsNew = userProductsDao.findOneProductUserIdDto(Integer.parseInt(productId));
-
-        Integer id = Integer.parseInt(productId);
-        Integer amount = Integer.parseInt(req.getParameter("amount"));
-
-        productService.editProductFromUserList(id, amount);
-
-        resp.sendRedirect("/confirmEditShoppingList?id=" + db_userProductsNew.get().getId());
-    }
 }
-
-

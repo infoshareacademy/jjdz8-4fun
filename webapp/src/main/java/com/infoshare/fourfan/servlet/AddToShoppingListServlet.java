@@ -1,11 +1,10 @@
 package com.infoshare.fourfan.servlet;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
-import com.infoshare.fourfan.domain.datatypes.ProductCategory;
-import com.infoshare.fourfan.domain.datatypes.Shop;
+import com.infoshare.fourfan.dao.ProductDao;
+import com.infoshare.fourfan.dao.UserProductsDao;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ShoppingListService;
 import com.infoshare.fourfan.utils.UserContext;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -15,10 +14,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 
@@ -26,15 +27,18 @@ import java.util.logging.Logger;
 public class AddToShoppingListServlet extends HttpServlet {
 
     @Inject
+    private TemplateProvider templateProvider;
+
+    @Inject
     private ProductService productService;
 
     @Inject
-    private ShoppingListService shoppingListService;
+    private ProductDao productDao;
 
     @Inject
-    private TemplateProvider templateProvider;
+    private UserProductsDao userProductsDao;
 
-    private static final Logger logger = Logger.getLogger(ProductListServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(AddToShoppingListServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -47,8 +51,7 @@ public class AddToShoppingListServlet extends HttpServlet {
         if (!UserContext.requireUserContext(req, resp, dataModel)) {
             return;
         }
-        dataModel.put("products", productService.findAllJson());
-
+        dataModel.put("products", productService.getProducts());
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {
@@ -61,43 +64,24 @@ public class AddToShoppingListServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        Integer productId = Integer.valueOf(req.getParameter("id"));
-        Product oldProduct= productService.findProductById(productId);
+        HttpSession session = req.getSession();
+        String loggedUser = (String) session.getAttribute("email");
 
+        String productIdParam = req.getParameter("id");
 
-        String name = oldProduct.getName();
+        Optional<ProductDto> add_db_product = productDao.findProductIdDto(Integer.parseInt(productIdParam));
 
-        Integer id = productId;
-        String brand = oldProduct.getBrand();
-        Integer price = oldProduct.getPrice();
-        Integer calories = oldProduct.getCalories();
-        Shop shop = oldProduct.getShop();
-        ProductCategory category = oldProduct.getProductCategory();
-        Integer amount = 1;
-        try {
-            Product product222 = shoppingListService.findOnShoppingListByName(name);
-            amount = product222.getAmount()+1;
-            id = product222.getId();
-            shoppingListService.deleteProductFromJson(product222);
+        Integer productId = add_db_product.get().getId();
+        String name = add_db_product.get().getName();
 
-
+        if(userProductsDao.findUserProductNameInUserDto(name,loggedUser).isPresent()) {
+            Integer productIdInList = userProductsDao.findUserProductNameDto(name).get().getId();
+            Integer amount = userProductsDao.findUserProductNameDto(name).get().getProductAmount();
+            productService.editProductFromUserList(productIdInList,amount+1);
         }
-     catch (NullPointerException n) {
-
-     }
-
-
-
-         Product newShoppingListProduct = new Product(id, name, brand, price, calories, shop, category, amount);
-
-
-         shoppingListService.saveNewShoppingList(newShoppingListProduct);
-
-
-
-        resp.sendRedirect("/confirmNewShoppingList");
-
+        else {
+            productService.saveProductToUserList(loggedUser,productId);
+        }
+        resp.sendRedirect("/showShoppingList");
     }
 }
-
-

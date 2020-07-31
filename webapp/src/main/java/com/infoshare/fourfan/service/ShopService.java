@@ -7,6 +7,7 @@ import com.infoshare.fourfan.dto.ShopDto;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @RequestScoped
@@ -24,6 +25,7 @@ public class ShopService {
     {
         Shop shop = new Shop();
         shop.setShop(name);
+        shop.setTimestamp(new Date());
         shopDao.save(shop);
 
     }

@@ -7,6 +7,7 @@ import com.infoshare.fourfan.dto.ProductCategoryDto;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @RequestScoped
@@ -23,6 +24,7 @@ public class CategoryService {
     {
         ProductCategory productCategory = new ProductCategory();
         productCategory.setCategory(name);
+        productCategory.setTimestamp(new Date());
         productCategoryDao.save(productCategory);
     }
 

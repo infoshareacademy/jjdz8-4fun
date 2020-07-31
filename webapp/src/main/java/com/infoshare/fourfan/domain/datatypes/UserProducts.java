@@ -1,7 +1,7 @@
 package com.infoshare.fourfan.domain.datatypes;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_products")
@@ -14,8 +14,9 @@ public class UserProducts {
     @Basic
     private Integer amount = 1;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timestamp")
-    private Timestamp timestamp;
+    private Date timestamp;
 
     @Column(name = "userid")
     private  String useridInt;
@@ -41,11 +42,11 @@ public class UserProducts {
         this.amount = amount;
     }
 
-    public Timestamp getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Timestamp timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

@@ -11,6 +11,7 @@ import com.infoshare.fourfan.dto.ProductDto;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @RequestScoped
@@ -41,6 +42,7 @@ public class ProductService {
         product.setCalories(calories);
         product.setName(name);
         product.setPrice(price);
+        product.setTimestamp(new Date());
         productDao.save(product);
 
         shopDao.findById(shop).ifPresent(s -> {
@@ -54,6 +56,7 @@ public class ProductService {
     {
         UserProducts userProducts = new UserProducts();
         userProducts.setUseridInt(userId);
+        userProducts.setTimestamp(new Date());
         userProductsDao.save(userProducts);
 
         productDao.findById(productId).ifPresent(s -> {

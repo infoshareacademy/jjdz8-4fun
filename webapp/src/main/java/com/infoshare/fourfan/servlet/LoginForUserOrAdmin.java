@@ -83,6 +83,5 @@ public class LoginForUserOrAdmin extends HttpServlet {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
-
     }
 }

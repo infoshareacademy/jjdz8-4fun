@@ -1,12 +1,10 @@
 package com.infoshare.fourfan.servlet;
 
 import com.infoshare.fourfan.dao.ProductDao;
-import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.freemarker.TemplateProvider;
 import com.infoshare.fourfan.service.CategoryService;
 import com.infoshare.fourfan.service.ProductService;
-import com.infoshare.fourfan.service.ProductServiceRest;
 import com.infoshare.fourfan.service.ShopService;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -33,9 +31,6 @@ public class NewProductAdminServlet extends HttpServlet {
 
     @Inject
     private ProductService productService;
-
-    @Inject
-    private ProductServiceRest productServiceRest;
 
     @Inject
     private ProductDao productDao;

@@ -41,11 +41,7 @@ public class ShowShoppingListServlet extends HttpServlet {
         Optional<List<UserProductsDto>> db_userProducts = userProductsDao.findProductsUserIdDto(IDuzytkownika);
 
         Map<String, Object> dataModel = new HashMap<>();
-//        if (db_userProducts.isPresent()){
             dataModel.put("userProducts", db_userProducts.get());
-//        } else {
-//            dataModel.put("errorMessage", "Product has not been found.");
-//        }
         try {
             template.process(dataModel, printWriter);
         } catch (TemplateException e) {

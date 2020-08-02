@@ -6,9 +6,7 @@ import com.infoshare.fourfan.dao.ShopDao;
 import com.infoshare.fourfan.dao.UserProductsDao;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.UserProducts;
-import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
-import com.infoshare.fourfan.repository.ProductRepositoryRest;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -30,13 +28,11 @@ public class ProductService {
     @EJB
     private ProductCategoryDao productCategoryDao;
 
-    @EJB
-    private ProductRepositoryRest productRepositoryRest;
-
-
-    public List<ProductDto> getProducts(){
+    public List<ProductDto> getProducts() {
         return productDao.findAllDto();
-    };
+    }
+
+    ;
 
     public void saveProduct(Product product) {
 
@@ -52,8 +48,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void saveNewProductDB(String name, String brand, Integer price, Integer calories, Integer shop, Integer category)
-    {
+    public void saveNewProductDB(String name, String brand, Integer price, Integer calories, Integer shop, Integer category) {
         Product product = new Product();
         product.setBrand(brand);
         product.setCalories(calories);
@@ -63,26 +58,30 @@ public class ProductService {
 
 
         shopDao.findById(shop).ifPresent(s -> {
-            product.setShop(s); productDao.update(product);});
+            product.setShop(s);
+            productDao.update(product);
+        });
         productCategoryDao.findById(category).ifPresent(c -> {
-            product.setProductCategory(c); productDao.update(product);});
+            product.setProductCategory(c);
+            productDao.update(product);
+        });
     }
 
     @Transactional
-    public void saveProductToUserList(Integer userId, Integer productId)
-    {
+    public void saveProductToUserList(Integer userId, Integer productId) {
         UserProducts userProducts = new UserProducts();
         userProducts.setUseridInt(userId);
         userProductsDao.save(userProducts);
 
         productDao.findById(productId).ifPresent(s -> {
-            userProducts.setProduct(s); userProductsDao.update(userProducts);});
+            userProducts.setProduct(s);
+            userProductsDao.update(userProducts);
+        });
 
     }
 
     @Transactional
-    public void editProductFromUserList(Integer id, Integer amount)
-    {
+    public void editProductFromUserList(Integer id, Integer amount) {
         userProductsDao.findById(id).ifPresent(userProducts -> {
             userProducts.setAmount(amount);
             userProductsDao.update(userProducts);
@@ -90,20 +89,17 @@ public class ProductService {
     }
 
     @Transactional
-    public void deleteProductFromUserList(Integer id)
-    {
+    public void deleteProductFromUserList(Integer id) {
         userProductsDao.findById(id).ifPresent(db_product -> userProductsDao.delete(db_product));
     }
 
     @Transactional
-    public void deleteProduct(Integer id)
-    {
+    public void deleteProduct(Integer id) {
         productDao.findById(id).ifPresent(db_product -> productDao.delete(db_product));
     }
 
     @Transactional
-    public void editProduct(Integer id, String name, String brand, Integer price, Integer calories, Integer shop, Integer category)
-    {
+    public void editProduct(Integer id, String name, String brand, Integer price, Integer calories, Integer shop, Integer category) {
         productDao.findById(id).ifPresent(db_product -> {
             db_product.setName(name);
             db_product.setBrand(brand);
@@ -111,8 +107,14 @@ public class ProductService {
             db_product.setCalories(calories);
             productDao.update(db_product);
 
-        shopDao.findById(shop).ifPresent(s -> {db_product.setShop(s); productDao.update(db_product);});
-        productCategoryDao.findById(category).ifPresent(c -> {db_product.setProductCategory(c); productDao.update(db_product);});
+            shopDao.findById(shop).ifPresent(s -> {
+                db_product.setShop(s);
+                productDao.update(db_product);
+            });
+            productCategoryDao.findById(category).ifPresent(c -> {
+                db_product.setProductCategory(c);
+                productDao.update(db_product);
+            });
         });
     }
 
@@ -120,23 +122,16 @@ public class ProductService {
         return productDao.findById(id).orElseThrow();
     }
 
-    public void createProductRest(NewProductDto newProductDto) {
-        Integer id = productDao.findAllDto().size() + 1;
-        Long timestamp = System.currentTimeMillis();
-        Product product = new Product();
-        product.setName(newProductDto.getName());
-        product.setBrand(newProductDto.getBrand());
-        product.setCreated(timestamp);
-        product.setId(id);
-        productDao.save(product);
-//
-//        ProductDto productDto = new ProductDto();
-//        productDto.setName(newProductDto.getName());
-//        productDto.setBrand(newProductDto.getBrand());
-//        productDto.setCreated(timestamp);
-//        productDto.setId(id);
-//
-//        return productDto;
-    }
+    public ProductDto getProductById(Integer id) {
+        Product product = findById(id);
 
+        ProductDto productDto = new ProductDto();
+        productDto.setName(product.getName());
+        productDto.setBrand(product.getBrand());
+        productDto.setLastModified(product.getLastModified());
+        productDto.setCreated(product.getCreated());
+        productDto.setId(product.getId());
+
+        return productDto;
+    }
 }

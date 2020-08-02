@@ -49,8 +49,7 @@ public class ProductDaoBean implements ProductDao {
 
     @Override
     public List<ProductDto> findAllDto() {
-        return entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.ProductDto("+
-                "p.id, p.name, p.brand, p.price, p.calories, p.shop.shop, p.productCategory.category) FROM Product p", ProductDto.class).getResultList();
+        return entityManager.createQuery("SELECT new com.infoshare.fourfan.dto.ProductDto(p.id, p.name, p.brand, p.price, p.calories, p.shop.shop, p.productCategory.category) FROM Product p", ProductDto.class).getResultList();
     }
 
     @Override

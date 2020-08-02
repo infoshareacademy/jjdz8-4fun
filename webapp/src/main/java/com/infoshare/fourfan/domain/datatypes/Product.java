@@ -42,9 +42,6 @@ public class Product {
 
     }
 
-    public Product(String nameParam, String brandParam, Integer priceParam, Integer calParam, Shop shopParam, ProductCategory catParam) {
-    }
-
     public Integer getId() {
         return id;
     }

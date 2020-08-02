@@ -49,8 +49,7 @@ public class ProductServiceRest {
     }
 
     public List<ProductDto> getProducts() {
-        return productRepositoryRest
-                .getProducts()
+        return productDao.findAllDto()
                 .stream()
                 .map(product -> {
                     ProductDto productDto = new ProductDto();

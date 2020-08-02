@@ -1,5 +1,6 @@
 package com.infoshare.fourfan.service;
 
+import com.infoshare.fourfan.dao.ProductDao;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
@@ -15,6 +16,9 @@ public class ProductServiceRest {
 
     @EJB
     private ProductRepositoryRest productRepositoryRest;
+
+    @EJB
+    private ProductDao productDao;
 
 
     public ProductServiceRest(ProductRepositoryRest productRepositoryRest) {
@@ -33,8 +37,7 @@ public class ProductServiceRest {
         product.setBrand(newProductDto.getBrand());
         product.setCreated(timestamp);
         product.setId(id);
-
-        productRepositoryRest.saveProduct(product);
+        productDao.save(product);
 
         ProductDto productDto = new ProductDto();
         productDto.setName(newProductDto.getName());

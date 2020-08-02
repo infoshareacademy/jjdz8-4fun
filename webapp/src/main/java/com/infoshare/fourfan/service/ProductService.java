@@ -6,6 +6,7 @@ import com.infoshare.fourfan.dao.ShopDao;
 import com.infoshare.fourfan.dao.UserProductsDao;
 import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.UserProducts;
+import com.infoshare.fourfan.dto.NewProductDto;
 import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.repository.ProductRepositoryRest;
 
@@ -113,6 +114,29 @@ public class ProductService {
         shopDao.findById(shop).ifPresent(s -> {db_product.setShop(s); productDao.update(db_product);});
         productCategoryDao.findById(category).ifPresent(c -> {db_product.setProductCategory(c); productDao.update(db_product);});
         });
+    }
+
+    public Product findById(Integer id) {
+        return productDao.findById(id).orElseThrow();
+    }
+
+    public void createProductRest(NewProductDto newProductDto) {
+        Integer id = productDao.findAllDto().size() + 1;
+        Long timestamp = System.currentTimeMillis();
+        Product product = new Product();
+        product.setName(newProductDto.getName());
+        product.setBrand(newProductDto.getBrand());
+        product.setCreated(timestamp);
+        product.setId(id);
+        productDao.save(product);
+//
+//        ProductDto productDto = new ProductDto();
+//        productDto.setName(newProductDto.getName());
+//        productDto.setBrand(newProductDto.getBrand());
+//        productDto.setCreated(timestamp);
+//        productDto.setId(id);
+//
+//        return productDto;
     }
 
 }

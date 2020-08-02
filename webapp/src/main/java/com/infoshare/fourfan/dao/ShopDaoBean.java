@@ -1,6 +1,5 @@
 package com.infoshare.fourfan.dao;
 
-import com.infoshare.fourfan.domain.datatypes.Product;
 import com.infoshare.fourfan.domain.datatypes.Shop;
 import com.infoshare.fourfan.dto.ShopDto;
 
@@ -35,7 +34,7 @@ public class ShopDaoBean implements ShopDao {
 
     @Override
     public Optional<Shop> findById(Integer id) {
-        return Optional.of(entityManager.find(Shop.class, id));
+        return Optional.ofNullable(entityManager.find(Shop.class, id));
     }
 
     @Override
@@ -78,3 +77,4 @@ public class ShopDaoBean implements ShopDao {
         }
     }
 }
+

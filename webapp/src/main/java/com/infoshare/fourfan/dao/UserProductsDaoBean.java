@@ -32,7 +32,7 @@ public class UserProductsDaoBean implements UserProductsDao {
 
     @Override
     public Optional<UserProducts> findById(Integer id) {
-        return Optional.of(entityManager.find(UserProducts.class, id));
+        return Optional.ofNullable(entityManager.find(UserProducts.class, id));
     }
 
     @Override

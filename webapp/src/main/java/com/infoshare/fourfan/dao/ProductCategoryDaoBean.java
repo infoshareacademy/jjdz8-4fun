@@ -34,7 +34,7 @@ public class ProductCategoryDaoBean implements ProductCategoryDao {
 
     @Override
     public Optional<ProductCategory> findById(Integer id) {
-        return Optional.of(entityManager.find(ProductCategory.class, id));
+        return Optional.ofNullable(entityManager.find(ProductCategory.class, id));
     }
 
     @Override

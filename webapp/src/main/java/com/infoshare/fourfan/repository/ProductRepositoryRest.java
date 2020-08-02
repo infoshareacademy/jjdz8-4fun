@@ -1,10 +1,12 @@
 package com.infoshare.fourfan.repository;
 
 import com.infoshare.fourfan.domain.datatypes.Product;
+import com.infoshare.fourfan.dto.ProductDto;
 import com.infoshare.fourfan.exception.ProductNotFoundException;
+import com.infoshare.fourfan.service.ProductService;
 
 import javax.ejb.Stateless;
-import java.util.ArrayList;
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,14 +14,17 @@ import java.util.Map;
 @Stateless
 public class ProductRepositoryRest {
 
+    @Inject
+    private ProductService productService;
+
     private final Map<Integer, Product> products;
 
     public ProductRepositoryRest() {
-        this.products = new HashMap<>();
+        this.products = new HashMap<Integer, Product>();
     }
 
-    public List<Product> getProducts() {
-        return new ArrayList<>(products.values());
+    public List<ProductDto> getProducts() {
+        return productService.getProducts();
     }
 
     public void saveProduct(Product product) {
